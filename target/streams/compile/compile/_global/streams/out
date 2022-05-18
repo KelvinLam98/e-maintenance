@@ -1,0 +1,16 @@
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\controllers\HomeController.scala:31:17: not found: value SecuredAction[0m
+[0m[[0m[31merror[0m] [0m[0m  def index() = SecuredAction(UserRole.ADMIN) { implicit request =>[0m
+[0m[[0m[31merror[0m] [0m[0m                ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\controllers\HomeController.scala:33:24: An implicit Messages instance was not found.  Please see https://www.playframework.com/documentation/latest/ScalaI18N[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.index())[0m
+[0m[[0m[31merror[0m] [0m[0m                       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\controllers\Users.scala:19:18: not found: value SecuredAction[0m
+[0m[[0m[31merror[0m] [0m[0m  def userList = SecuredAction(UserRole.ADMIN) { implicit request =>[0m
+[0m[[0m[31merror[0m] [0m[0m                 ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\controllers\Users.scala:20:33: An implicit Messages instance was not found.  Please see https://www.playframework.com/documentation/latest/ScalaI18N[0m
+[0m[[0m[31merror[0m] [0m[0m    Ok(views.html.users.listUser())[0m
+[0m[[0m[31merror[0m] [0m[0m                                ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\controllers\Users.scala:23:22: not found: value SecuredAction[0m
+[0m[[0m[31merror[0m] [0m[0m  def listUserJson = SecuredAction(UserRole.ADMIN) { implicit request =>[0m
+[0m[[0m[31merror[0m] [0m[0m                     ^[0m
+[0m[[0m[31merror[0m] [0m[0m5 errors found[0m

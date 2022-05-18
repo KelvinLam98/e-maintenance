@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="sbt: org.eclipse.birt.runtime:org.eclipse.core.contenttype:3.4.200.v20120523-2004:jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/AppData/Local/Coursier/cache/v1/https/repo1.maven.org/maven2/org/eclipse/birt/runtime/org.eclipse.core.contenttype/3.4.200.v20120523-2004/org.eclipse.core.contenttype-3.4.200.v20120523-2004.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/AppData/Local/Coursier/cache/v1/https/repo1.maven.org/maven2/org/eclipse/birt/runtime/org.eclipse.core.contenttype/3.4.200.v20120523-2004/org.eclipse.core.contenttype-3.4.200.v20120523-2004-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/AppData/Local/Coursier/cache/v1/https/repo1.maven.org/maven2/org/eclipse/birt/runtime/org.eclipse.core.contenttype/3.4.200.v20120523-2004/org.eclipse.core.contenttype-3.4.200.v20120523-2004-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="sbt: org.eclipse.birt.runtime:org.eclipse.equinox.registry:3.5.200.v20120522-1841:jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/AppData/Local/Coursier/cache/v1/https/repo1.maven.org/maven2/org/eclipse/birt/runtime/org.eclipse.equinox.registry/3.5.200.v20120522-1841/org.eclipse.equinox.registry-3.5.200.v20120522-1841.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/AppData/Local/Coursier/cache/v1/https/repo1.maven.org/maven2/org/eclipse/birt/runtime/org.eclipse.equinox.registry/3.5.200.v20120522-1841/org.eclipse.equinox.registry-3.5.200.v20120522-1841-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/AppData/Local/Coursier/cache/v1/https/repo1.maven.org/maven2/org/eclipse/birt/runtime/org.eclipse.equinox.registry/3.5.200.v20120522-1841/org.eclipse.equinox.registry-3.5.200.v20120522-1841-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
