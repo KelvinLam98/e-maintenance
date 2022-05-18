@@ -10,5 +10,8 @@ GET     /                                   controllers.HomeController.index()
 GET     /assets/*file                       controllers.Assets.versioned(path="/public", file: Asset)
 
 #users
-GET     /users                               controllers.Users.userList
-GET     /users/list.json                     controllers.Users.listUserJson
+GET     /user/login                          controllers.HomeController.login()
++ nocsrf
+POST    /user/post/login                     controllers.HomeController.postLoginData
+GET     /user                                controllers.Users.listUser
+GET     /user/list.json                      controllers.Users.listUserJson

@@ -27,6 +27,26 @@ package controllers.javascript {
       """
     )
   
+    // @LINE:13
+    def login: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.login",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user/login"})
+        }
+      """
+    )
+  
+    // @LINE:15
+    def postLoginData: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.postLoginData",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "user/post/login"})
+        }
+      """
+    )
+  
   }
 
   // @LINE:10
@@ -49,7 +69,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:13
+  // @LINE:16
   class ReverseUsers(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -57,22 +77,22 @@ package controllers.javascript {
     }
 
   
-    // @LINE:13
-    def userList: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.Users.userList",
+    // @LINE:16
+    def listUser: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Users.listUser",
       """
         function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "users"})
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user"})
         }
       """
     )
   
-    // @LINE:14
+    // @LINE:17
     def listUserJson: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Users.listUserJson",
       """
         function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "users/list.json"})
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user/list.json"})
         }
       """
     )

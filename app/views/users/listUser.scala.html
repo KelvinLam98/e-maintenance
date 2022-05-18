@@ -8,7 +8,11 @@
             "serverSide": true,
             "ajax": "/users/list.json",
             columns: [
-                { data: 'username'},
+                { data: 'username',
+                    "render": function(data, type, full, meta){
+                        return '<a href="detail/' + full.id + '" class="link">' + data + '</a>';
+                    }
+                },
                 { data: 'name' },
                 { data: 'ic_number' },
                 { data: 'role' },

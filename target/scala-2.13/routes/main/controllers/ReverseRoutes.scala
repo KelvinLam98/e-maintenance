@@ -22,6 +22,18 @@ package controllers {
       Call("GET", _prefix)
     }
   
+    // @LINE:13
+    def login(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "user/login")
+    }
+  
+    // @LINE:15
+    def postLoginData: Call = {
+      
+      Call("POST", _prefix + { _defaultPrefix } + "user/post/login")
+    }
+  
   }
 
   // @LINE:10
@@ -39,23 +51,23 @@ package controllers {
   
   }
 
-  // @LINE:13
+  // @LINE:16
   class ReverseUsers(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:13
-    def userList: Call = {
+    // @LINE:16
+    def listUser: Call = {
       
-      Call("GET", _prefix + { _defaultPrefix } + "users")
+      Call("GET", _prefix + { _defaultPrefix } + "user")
     }
   
-    // @LINE:14
+    // @LINE:17
     def listUserJson: Call = {
       
-      Call("GET", _prefix + { _defaultPrefix } + "users/list.json")
+      Call("GET", _prefix + { _defaultPrefix } + "user/list.json")
     }
   
   }

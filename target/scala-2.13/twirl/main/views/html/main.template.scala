@@ -71,7 +71,7 @@ Seq[Any](format.raw/*7.32*/("""
                     <a href=""""),_display_(/*47.31*/routes/*47.37*/.HomeController.index()),format.raw/*47.60*/("""" ><i class="fa fa-desktop "></i>Dashboard</a>
                 </li>
                 <li>
-                    <a href=""""),_display_(/*50.31*/routes/*50.37*/.Users.userList),format.raw/*50.52*/(""""><i class="fa fa-group"></i>Users</a>
+                    <a href=""""),_display_(/*50.31*/routes/*50.37*/.Users.listUser),format.raw/*50.52*/(""""><i class="fa fa-group"></i>Users</a>
                 </li>
                 <li>
                     <a href=#><i class="fa fa-wrench"></i>Maintenance</a>
@@ -102,7 +102,7 @@ Seq[Any](format.raw/*7.32*/("""
             <div class="row text-center pad-top">
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
                     <div class="div-square">
-                        <a href=""""),_display_(/*81.35*/routes/*81.41*/.Users.userList),format.raw/*81.56*/("""">
+                        <a href=""""),_display_(/*81.35*/routes/*81.41*/.Users.listUser),format.raw/*81.56*/("""">
                             <i class="fa fa-group fa-5x"></i>
                             <h4>Check Users</h4>
                         </a>
@@ -162,7 +162,7 @@ Seq[Any](format.raw/*7.32*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/main.scala.html
-                  HASH: 955be2b9ea0ab774638ffc0c2d377ab3e4905631
+                  HASH: d242869c142b66bf102c471e0675c254735d3c0e
                   MATRIX: 992->266|1117->296|1147->300|2610->1736|2625->1742|2669->1765|2819->1888|2834->1894|2870->1909|3642->2654|3670->2661|3716->2679|3996->2932|4011->2938|4047->2953
                   LINES: 26->7|31->7|33->9|71->47|71->47|71->47|74->50|74->50|74->50|98->74|98->74|99->75|105->81|105->81|105->81
                   -- GENERATED --

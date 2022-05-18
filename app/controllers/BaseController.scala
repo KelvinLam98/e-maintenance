@@ -21,28 +21,28 @@ class BaseController(mcc: MessagesControllerComponents, db: Database, cache: Syn
       }
     }
 
-//  case class SecuredAction(accessLevel: Int) extends ActionBuilder[RequestWithUser, AnyContent] {
-//
-//    override protected def executionContext: ExecutionContext = mcc.executionContext
-//    override def parser: BodyParser[AnyContent] = mcc.parsers.defaultBodyParser
-//
-//    def invokeBlock[A](request: Request[A],
-//                       block: (RequestWithUser[A]) => Future[Result]): Future[Result] = {
-//      getUser(request) match {
-//        case Some(user) =>
-//
-//          val userAccessLevel = if (user.role == "admin") 1 else 0
-//          if (userAccessLevel >= accessLevel)
-//            block(RequestWithUser(user, request))
-//          else
-//          //Future.successful(Unauthorized(views.html.responseMessage("You are not authorized to view this page.")))
-//            Future.successful(Ok("You are not authorized to view this page."))
-//        case None =>
-//          //Future.successful(Redirect(routes.Users.login()))
-//          Future.successful(Redirect(routes.HomeController.index()))
-//      }
-//    }
-//  }
+  case class SecuredAction(accessLevel: Int) extends ActionBuilder[RequestWithUser, AnyContent] {
+
+    override protected def executionContext: ExecutionContext = mcc.executionContext
+    override def parser: BodyParser[AnyContent] = mcc.parsers.defaultBodyParser
+
+    def invokeBlock[A](request: Request[A],
+                       block: (RequestWithUser[A]) => Future[Result]): Future[Result] = {
+      getUser(request) match {
+        case Some(user) =>
+
+          val userAccessLevel = if (user.role == "admin") 1 else 0
+          if (userAccessLevel >= accessLevel)
+            block(RequestWithUser(user, request))
+          else
+          //Future.successful(Unauthorized(views.html.responseMessage("You are not authorized to view this page.")))
+            Future.successful(Ok("You are not authorized to view this page."))
+        case None =>
+          //Future.successful(Redirect(routes.Users.login()))
+          Future.successful(Redirect(routes.HomeController.index()))
+      }
+    }
+  }
 
   implicit def request2Messages(implicit request : play.api.mvc.RequestHeader) : play.api.i18n.Messages = {
     request.session.get("amaseng-language") match {

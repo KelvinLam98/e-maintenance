@@ -16,7 +16,7 @@ class Users @Inject()(
                        userStore: UserStore
                      ) extends BaseController(mcc, db, cache, userStore) {
 
-  def userList = Action { implicit request =>
+  def listUser = Action { implicit request =>
     Ok(views.html.users.listUser())
   }
 
