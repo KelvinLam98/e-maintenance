@@ -15,15 +15,15 @@ import play.api.templates.PlayMagic._
 import play.api.mvc._
 import play.api.data._
 
-object login extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template2[Form[LoginForm],Array[String],play.twirl.api.HtmlFormat.Appendable] {
+object login extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template3[Form[LoginForm],Array[String],Messages,play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*1.2*/(form: Form[LoginForm], errors: Array[String]):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/(form: Form[LoginForm], errors: Array[String])(implicit messages: Messages):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
 
-Seq[Any](format.raw/*1.48*/("""
+Seq[Any](format.raw/*1.77*/("""
 
 """),format.raw/*3.1*/("""<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -32,19 +32,19 @@ Seq[Any](format.raw/*1.48*/("""
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>E-Maintenance</title>
     <!-- BOOTSTRAP STYLES-->
-    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <link href='"""),_display_(/*10.18*/routes/*10.24*/.Assets.versioned("css/bootstrap.css")),format.raw/*10.62*/("""' rel="stylesheet" />
     <!-- FONTAWESOME STYLES-->
-    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href='"""),_display_(/*12.18*/routes/*12.24*/.Assets.versioned("css/font-awesome.css")),format.raw/*12.65*/("""' rel="stylesheet" />
     <!-- CUSTOM STYLES-->
-    <link href="assets/css/custom.css" rel="stylesheet" />
+    <link href='"""),_display_(/*14.18*/routes/*14.24*/.Assets.versioned("css/custom.css")),format.raw/*14.59*/("""' rel="stylesheet" />
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
 <body>
-
+<div id="wrapper">
 <div class="container">
     <div class="row">
-        <div class="col-md-4 col-md-offset-4">
+        <div class="col-md-6 col-md-offset-3">
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Login</h3>
@@ -91,6 +91,7 @@ Seq[Any](format.raw/*1.48*/("""
 </div>
 </div>
 </div>
+</div>
 
 </body>
 
@@ -100,9 +101,9 @@ Seq[Any](format.raw/*1.48*/("""
     }
   }
 
-  def render(form:Form[LoginForm],errors:Array[String]): play.twirl.api.HtmlFormat.Appendable = apply(form,errors)
+  def render(form:Form[LoginForm],errors:Array[String],messages:Messages): play.twirl.api.HtmlFormat.Appendable = apply(form,errors)(messages)
 
-  def f:((Form[LoginForm],Array[String]) => play.twirl.api.HtmlFormat.Appendable) = (form,errors) => apply(form,errors)
+  def f:((Form[LoginForm],Array[String]) => (Messages) => play.twirl.api.HtmlFormat.Appendable) = (form,errors) => (messages) => apply(form,errors)(messages)
 
   def ref: this.type = this
 
@@ -112,9 +113,9 @@ Seq[Any](format.raw/*1.48*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/login.scala.html
-                  HASH: 03f1e29a4083dda052b3ba5c5d4ba5f2ec40e4a4
-                  MATRIX: 752->1|893->47|923->51|1945->1046|1960->1052|2010->1081|2120->1164|2179->1214|2218->1215|2276->1245|2509->1447|2567->1478|2611->1513|2650->1514|2708->1544|2925->1730|2983->1761|3048->1817|3087->1818|3145->1848|3386->2058|3444->2089|3509->2145|3548->2146|3606->2176|3860->2399|3918->2430|3968->2471|4007->2472|4065->2502|4297->2703|4355->2733|4407->2758|4447->2789|4486->2790|4515->2791|4557->2802|4704->2921|4730->2937|4758->2943|4864->3022|4904->3053|4943->3054|4972->3055|5014->3066|5167->3191|5193->3207|5221->3213
-                  LINES: 21->1|26->1|28->3|53->28|53->28|53->28|55->30|55->30|55->30|56->31|59->34|60->35|60->35|60->35|61->36|64->39|65->40|65->40|65->40|66->41|69->44|70->45|70->45|70->45|71->46|74->49|75->50|75->50|75->50|76->51|79->54|80->55|80->55|80->55|80->55|80->55|80->55|81->56|81->56|81->56|83->58|83->58|83->58|83->58|83->58|84->59|84->59|84->59
+                  HASH: 0dc7fea94502c19843678e58d8b3ea80ce9462df
+                  MATRIX: 761->1|931->76|961->80|1247->339|1262->345|1321->383|1420->455|1435->461|1497->502|1591->569|1606->575|1662->610|2235->1156|2250->1162|2300->1191|2410->1274|2469->1324|2508->1325|2566->1355|2799->1557|2857->1588|2901->1623|2940->1624|2998->1654|3215->1840|3273->1871|3338->1927|3377->1928|3435->1958|3676->2168|3734->2199|3799->2255|3838->2256|3896->2286|4150->2509|4208->2540|4258->2581|4297->2582|4355->2612|4587->2813|4645->2843|4697->2868|4737->2899|4776->2900|4805->2901|4847->2912|4994->3031|5020->3047|5048->3053|5154->3132|5194->3163|5233->3164|5262->3165|5304->3176|5457->3301|5483->3317|5511->3323
+                  LINES: 21->1|26->1|28->3|35->10|35->10|35->10|37->12|37->12|37->12|39->14|39->14|39->14|53->28|53->28|53->28|55->30|55->30|55->30|56->31|59->34|60->35|60->35|60->35|61->36|64->39|65->40|65->40|65->40|66->41|69->44|70->45|70->45|70->45|71->46|74->49|75->50|75->50|75->50|76->51|79->54|80->55|80->55|80->55|80->55|80->55|80->55|81->56|81->56|81->56|83->58|83->58|83->58|83->58|83->58|84->59|84->59|84->59
                   -- GENERATED --
               */
           

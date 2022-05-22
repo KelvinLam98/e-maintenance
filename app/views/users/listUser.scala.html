@@ -1,4 +1,4 @@
-@()
+@()(implicit request: models.RequestWithUser[_])
 
 @main("E-Maintenance") {
     <script>
@@ -6,7 +6,7 @@
         $('#dataTables').DataTable({
             "processing": true,
             "serverSide": true,
-            "ajax": "/users/list.json",
+            "ajax": "/user/list.json",
             columns: [
                 { data: 'username',
                     "render": function(data, type, full, meta){
@@ -30,7 +30,6 @@
                     Create
                 </button></a>
             </h1>
-        <p>This is a list page. </p>
         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
             <thead>
             <tr>

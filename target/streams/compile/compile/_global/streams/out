@@ -1,4 +1,6 @@
-[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\views\login.scala.html:28:49: value postLoginData is not a member of controllers.ReverseUsers[0m
-[0m[[0m[31merror[0m] [0m[0m                    <form action="@routes.Users.postLoginData" method="post">[0m
-[0m[[0m[31merror[0m] [0m[0m                                                ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\controllers\HomeController.scala:86:52: Auto-application to `()` is deprecated. Supply the empty argument list `()` explicitly to invoke method index,[0m
+[0m[[0m[31merror[0m] [0m[0mor remove the empty argument list from its definition (Java-defined methods are exempt).[0m
+[0m[[0m[31merror[0m] [0m[0mIn Scala 3, an unapplied method like this will be eta-expanded into a function.[0m
+[0m[[0m[31merror[0m] [0m[0m                    Redirect(routes.HomeController.index).withSession("amaseng-userId" -> user.username)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                   ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m

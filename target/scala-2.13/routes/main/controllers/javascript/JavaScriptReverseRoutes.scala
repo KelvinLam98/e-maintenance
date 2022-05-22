@@ -82,7 +82,7 @@ package controllers.javascript {
       "controllers.Users.listUser",
       """
         function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user"})
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user/list"})
         }
       """
     )

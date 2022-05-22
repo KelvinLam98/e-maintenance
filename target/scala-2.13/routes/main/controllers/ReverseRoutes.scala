@@ -61,7 +61,7 @@ package controllers {
     // @LINE:16
     def listUser: Call = {
       
-      Call("GET", _prefix + { _defaultPrefix } + "user")
+      Call("GET", _prefix + { _defaultPrefix } + "user/list")
     }
   
     // @LINE:17

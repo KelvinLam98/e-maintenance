@@ -13,5 +13,5 @@ GET     /assets/*file                       controllers.Assets.versioned(path="/
 GET     /user/login                          controllers.HomeController.login()
 + nocsrf
 POST    /user/post/login                     controllers.HomeController.postLoginData
-GET     /user                                controllers.Users.listUser
+GET     /user/list                           controllers.Users.listUser
 GET     /user/list.json                      controllers.Users.listUserJson

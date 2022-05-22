@@ -37,7 +37,6 @@ class HomeController @Inject()(
   }
 
   def login() = Action { implicit request =>
-    if (request.session.get("username").isEmpty) {
       val (form, errors) =
         request.flash.get("errors") match {
           case Some(errorsStr) =>
@@ -46,10 +45,7 @@ class HomeController @Inject()(
             (loginDataForm, Array.empty[String])
         }
       Ok(views.html.login(form, errors))
-    } else {
-      Redirect(routes.HomeController.index())
     }
-  }
 
   private val loginDataForm: Form[LoginForm] = Form(
     mapping(
@@ -61,23 +57,48 @@ class HomeController @Inject()(
   def postLoginData = Action { implicit request =>
     loginDataForm.bindFromRequest().fold(
       hasErrors = { form =>
+        println("hasError")
         Redirect(routes.HomeController.login())
           .flashing(Flash(form.data) +
             ("errors" -> form.errors.map(_.key).mkString(",")))
       },
       success = { data =>
         db.withConnection { implicit conn =>
+          println("userStore.findByUserName(data.username)" + userStore.findByUserName(data.username))
           userStore.findByUserName(data.username) match {
             case Some(user) =>
               if (data.password == user.password) {
-                println("if" + data.username)
-                Redirect(routes.Users.listUser).withSession("username"-> user.username)
+                user.role match {
+                  case UserRole.Admin_String =>
+                    println("case userrole")
+                    val userDetail = userStore.findById(user.id.get)
+                    userDetail.headOption match {
+                      case Some(u) =>
+                        if(userDetail.size == 1){
+                          println("if login success")
+                          Redirect(routes.Users.listUser).withSession("amaseng-userId" -> user.username)
+                        }else{
+                          println("else login success")
+                          Redirect(routes.Users.listUser).withSession("amaseng-userId" -> user.username)
+                        }
+                      case None =>
+                        println("case none")
+                        Redirect(routes.HomeController.login())
+                          .flashing(Flash(loginDataForm.fill(data).data) +
+                            ("errors" -> "userNotFound"))
+                    }
+                  case _ =>
+                    Redirect(routes.HomeController.index()).withSession("amaseng-userId" -> user.username)
+                }
               } else {
-                println("else" + data.username)
-                Redirect(routes.HomeController.index())
+                Redirect(routes.HomeController.login())
+                  .flashing(Flash(loginDataForm.fill(data).data) +
+                    ("errors" -> "incorrectPasswordOrUsername"))
               }
-            case _ =>
-              Ok("Success")
+            case None =>
+              Redirect(routes.HomeController.login())
+                .flashing(Flash(loginDataForm.fill(data).data) +
+                  ("errors" -> "incorrectPasswordOrUsername"))
           }
         }
       })

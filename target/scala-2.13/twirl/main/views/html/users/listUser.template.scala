@@ -15,15 +15,17 @@ import play.api.templates.PlayMagic._
 import play.api.mvc._
 import play.api.data._
 
-object listUser extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template0[play.twirl.api.HtmlFormat.Appendable] {
+object listUser extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template1[models.RequestWithUser[_$1] forSome { 
+   type _$1
+},play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*1.2*/():play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/()(implicit request: models.RequestWithUser[_]):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
 
-Seq[Any](format.raw/*1.4*/("""
+Seq[Any](format.raw/*1.49*/("""
 
 """),_display_(/*3.2*/main("E-Maintenance")/*3.23*/ {_display_(Seq[Any](format.raw/*3.25*/("""
     """),format.raw/*4.5*/("""<script>
@@ -31,7 +33,7 @@ Seq[Any](format.raw/*1.4*/("""
         """),format.raw/*6.9*/("""$('#dataTables').DataTable("""),format.raw/*6.36*/("""{"""),format.raw/*6.37*/("""
             """),format.raw/*7.13*/(""""processing": true,
             "serverSide": true,
-            "ajax": "/users/list.json",
+            "ajax": "/user/list.json",
             columns: [
                 """),format.raw/*11.17*/("""{"""),format.raw/*11.18*/(""" """),format.raw/*11.19*/("""data: 'username',
                     "render": function(data, type, full, meta)"""),format.raw/*12.63*/("""{"""),format.raw/*12.64*/("""
@@ -55,7 +57,6 @@ Seq[Any](format.raw/*1.4*/("""
                     Create
                 </button></a>
             </h1>
-        <p>This is a list page. </p>
         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
             <thead>
             <tr>
@@ -74,9 +75,13 @@ Seq[Any](format.raw/*1.4*/("""
     }
   }
 
-  def render(): play.twirl.api.HtmlFormat.Appendable = apply()
+  def render(request:models.RequestWithUser[_$1] forSome { 
+   type _$1
+}): play.twirl.api.HtmlFormat.Appendable = apply()(request)
 
-  def f:(() => play.twirl.api.HtmlFormat.Appendable) = () => apply()
+  def f:(() => (models.RequestWithUser[_$1] forSome { 
+   type _$1
+}) => play.twirl.api.HtmlFormat.Appendable) = () => (request) => apply()(request)
 
   def ref: this.type = this
 
@@ -86,9 +91,9 @@ Seq[Any](format.raw/*1.4*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/users/listUser.scala.html
-                  HASH: d09c7029e878c039e305b36923ad0ca54159e811
-                  MATRIX: 731->1|827->3|857->8|886->29|925->31|957->37|1027->80|1055->81|1091->91|1145->118|1173->119|1214->133|1377->268|1406->269|1435->270|1544->351|1573->352|1627->378|1749->472|1778->473|1824->491|1853->492|1900->511|1929->512|1958->513|1999->526|2028->527|2075->546|2104->547|2133->548|2179->566|2208->567|2255->586|2284->587|2313->588|2354->601|2383->602|2467->659|2496->660|2531->668|2559->669
-                  LINES: 21->1|26->1|28->3|28->3|28->3|29->4|30->5|30->5|31->6|31->6|31->6|32->7|36->11|36->11|36->11|37->12|37->12|38->13|39->14|39->14|40->15|40->15|41->16|41->16|41->16|41->16|41->16|42->17|42->17|42->17|42->17|42->17|43->18|43->18|43->18|43->18|43->18|46->21|46->21|47->22|47->22
+                  HASH: 628f7994acda5ee89967a0c6336cfc65a48aaa29
+                  MATRIX: 786->1|928->48|958->53|987->74|1026->76|1058->82|1128->125|1156->126|1192->136|1246->163|1274->164|1315->178|1477->312|1506->313|1535->314|1644->395|1673->396|1727->422|1849->516|1878->517|1924->535|1953->536|2000->555|2029->556|2058->557|2099->570|2128->571|2175->590|2204->591|2233->592|2279->610|2308->611|2355->630|2384->631|2413->632|2454->645|2483->646|2567->703|2596->704|2631->712|2659->713
+                  LINES: 23->1|28->1|30->3|30->3|30->3|31->4|32->5|32->5|33->6|33->6|33->6|34->7|38->11|38->11|38->11|39->12|39->12|40->13|41->14|41->14|42->15|42->15|43->16|43->16|43->16|43->16|43->16|44->17|44->17|44->17|44->17|44->17|45->18|45->18|45->18|45->18|45->18|48->21|48->21|49->22|49->22
                   -- GENERATED --
               */
           

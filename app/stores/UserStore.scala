@@ -26,7 +26,7 @@ class UserStore @Inject()() {
       if (searchText.isEmpty)
         ""
       else
-        "where (name like {searchText} or username like {searchText})"
+        "where (username like {searchText})"
     SQL("select count(*) as count from users " + searchCriteria).on(
       "searchText" -> ("%" + searchText + "%")
     ).as(SqlParser.long("count").single)
@@ -37,7 +37,7 @@ class UserStore @Inject()() {
       if (searchText.isEmpty)
         ""
       else
-        "where (name like {searchText} or username like {searchText})"
+        "where (username like {searchText})"
     SQL("select * from users " + searchCriteria + " order by name Asc limit {start}, {count}").on(
       "start" -> start,
       "count" -> count,
