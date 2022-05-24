@@ -48,6 +48,7 @@ class Routes(
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/post/login""", """controllers.HomeController.postLoginData"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/list""", """controllers.Users.listUser"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/list.json""", """controllers.Users.listUserJson"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/detail/""" + "$" + """id<[^/]+>""", """controllers.Users.detail(id:Long)"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
     case r @ (_,_,_) => s :+ r.asInstanceOf[(String,String,String)]
@@ -163,6 +164,24 @@ class Routes(
     )
   )
 
+  // @LINE:18
+  private[this] lazy val controllers_Users_detail6_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("user/detail/"), DynamicPart("id", """[^/]+""",true)))
+  )
+  private[this] lazy val controllers_Users_detail6_invoker = createInvoker(
+    Users_2.detail(fakeValue[Long]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.Users",
+      "detail",
+      Seq(classOf[Long]),
+      "GET",
+      this.prefix + """user/detail/""" + "$" + """id<[^/]+>""",
+      """""",
+      Seq()
+    )
+  )
+
 
   def routes: PartialFunction[RequestHeader, Handler] = {
   
@@ -200,6 +219,12 @@ class Routes(
     case controllers_Users_listUserJson5_route(params@_) =>
       call { 
         controllers_Users_listUserJson5_invoker.call(Users_2.listUserJson)
+      }
+  
+    // @LINE:18
+    case controllers_Users_detail6_route(params@_) =>
+      call(params.fromPath[Long]("id", None)) { (id) =>
+        controllers_Users_detail6_invoker.call(Users_2.detail(id))
       }
   }
 }

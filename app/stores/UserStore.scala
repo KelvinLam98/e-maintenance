@@ -68,4 +68,6 @@ class UserStore @Inject()() {
       "id" -> id
     ).executeUpdate()
   }
+
+
 }

@@ -97,6 +97,16 @@ package controllers.javascript {
       """
     )
   
+    // @LINE:18
+    def detail: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Users.detail",
+      """
+        function(id0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
+        }
+      """
+    )
+  
   }
 
 

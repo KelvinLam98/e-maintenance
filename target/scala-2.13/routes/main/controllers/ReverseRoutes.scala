@@ -70,6 +70,12 @@ package controllers {
       Call("GET", _prefix + { _defaultPrefix } + "user/list.json")
     }
   
+    // @LINE:18
+    def detail(id:Long): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "user/detail/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)))
+    }
+  
   }
 
 

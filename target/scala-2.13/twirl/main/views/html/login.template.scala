@@ -62,26 +62,21 @@ Seq[Any](format.raw/*1.77*/("""
                                 <label class="control-label">User Not Found</label>
                             </div>
                             """)))}),format.raw/*39.30*/("""
-                            """),_display_(/*40.30*/if(errors.contains("accountDisabledPleaseContactAdmin"))/*40.86*/{_display_(Seq[Any](format.raw/*40.87*/("""
-                            """),format.raw/*41.29*/("""<div class="form-group has-error">
-                                <label class="control-label">Account Disabled. Please Contact Admin</label>
-                            </div>
-                            """)))}),format.raw/*44.30*/("""
-                            """),_display_(/*45.30*/if(errors.contains("post-forgot-password-data-success"))/*45.86*/{_display_(Seq[Any](format.raw/*45.87*/("""
-                            """),format.raw/*46.29*/("""<div class="form-group has-success">
+                            """),_display_(/*40.30*/if(errors.contains("post-forgot-password-data-success"))/*40.86*/{_display_(Seq[Any](format.raw/*40.87*/("""
+                            """),format.raw/*41.29*/("""<div class="form-group has-success">
                                 <label class="control-label">Reset Password Requested. Please Check Your Email</label>
                             </div>
-                            """)))}),format.raw/*49.30*/("""
-                            """),_display_(/*50.30*/if(errors.contains("successfully reset"))/*50.71*/{_display_(Seq[Any](format.raw/*50.72*/("""
-                            """),format.raw/*51.29*/("""<div class="form-group has-success">
+                            """)))}),format.raw/*44.30*/("""
+                            """),_display_(/*45.30*/if(errors.contains("successfully reset"))/*45.71*/{_display_(Seq[Any](format.raw/*45.72*/("""
+                            """),format.raw/*46.29*/("""<div class="form-group has-success">
                                 <label class="control-label">Password Reset Successfully</label>
                             </div>
-                            """)))}),format.raw/*54.30*/("""
-                            """),format.raw/*55.29*/("""<div class="form-group" """),_display_(/*55.54*/if(errors.contains("username"))/*55.85*/{_display_(Seq[Any](format.raw/*55.86*/(""" """),format.raw/*55.87*/("""has-error """)))}),format.raw/*55.98*/("""">
-                            <input type="text" class="form-control" placeholder="Username" name="username" value=""""),_display_(/*56.116*/form("username")/*56.132*/.value),format.raw/*56.138*/("""" autofocus>
+                            """)))}),format.raw/*49.30*/("""
+                            """),format.raw/*50.29*/("""<div class="form-group" """),_display_(/*50.54*/if(errors.contains("username"))/*50.85*/{_display_(Seq[Any](format.raw/*50.86*/(""" """),format.raw/*50.87*/("""has-error """)))}),format.raw/*50.98*/("""">
+                            <input type="text" class="form-control" placeholder="Username" name="username" value=""""),_display_(/*51.116*/form("username")/*51.132*/.value),format.raw/*51.138*/("""" autofocus>
                 </div>
-                <div class="form-group" """),_display_(/*58.42*/if(errors.contains("password"))/*58.73*/{_display_(Seq[Any](format.raw/*58.74*/(""" """),format.raw/*58.75*/("""has-error """)))}),format.raw/*58.86*/("""">
-                <input type="password" class="form-control" placeholder="Password" id="password" name="password" value=""""),_display_(/*59.122*/form("password")/*59.138*/.value),format.raw/*59.144*/("""" autofocus>
+                <div class="form-group" """),_display_(/*53.42*/if(errors.contains("password"))/*53.73*/{_display_(Seq[Any](format.raw/*53.74*/(""" """),format.raw/*53.75*/("""has-error """)))}),format.raw/*53.86*/("""">
+                <input type="password" class="form-control" placeholder="Password" id="password" name="password" value=""""),_display_(/*54.122*/form("password")/*54.138*/.value),format.raw/*54.144*/("""" autofocus>
             </div>
             <button type="submit" class="btn btn-lg btn-success btn-block">Login</button>
             </fieldset>
@@ -113,9 +108,9 @@ Seq[Any](format.raw/*1.77*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/login.scala.html
-                  HASH: 0dc7fea94502c19843678e58d8b3ea80ce9462df
-                  MATRIX: 761->1|931->76|961->80|1247->339|1262->345|1321->383|1420->455|1435->461|1497->502|1591->569|1606->575|1662->610|2235->1156|2250->1162|2300->1191|2410->1274|2469->1324|2508->1325|2566->1355|2799->1557|2857->1588|2901->1623|2940->1624|2998->1654|3215->1840|3273->1871|3338->1927|3377->1928|3435->1958|3676->2168|3734->2199|3799->2255|3838->2256|3896->2286|4150->2509|4208->2540|4258->2581|4297->2582|4355->2612|4587->2813|4645->2843|4697->2868|4737->2899|4776->2900|4805->2901|4847->2912|4994->3031|5020->3047|5048->3053|5154->3132|5194->3163|5233->3164|5262->3165|5304->3176|5457->3301|5483->3317|5511->3323
-                  LINES: 21->1|26->1|28->3|35->10|35->10|35->10|37->12|37->12|37->12|39->14|39->14|39->14|53->28|53->28|53->28|55->30|55->30|55->30|56->31|59->34|60->35|60->35|60->35|61->36|64->39|65->40|65->40|65->40|66->41|69->44|70->45|70->45|70->45|71->46|74->49|75->50|75->50|75->50|76->51|79->54|80->55|80->55|80->55|80->55|80->55|80->55|81->56|81->56|81->56|83->58|83->58|83->58|83->58|83->58|84->59|84->59|84->59
+                  HASH: 83854ad1cad67f079b1f6257b5706c7d87f9a366
+                  MATRIX: 761->1|931->76|961->80|1247->339|1262->345|1321->383|1420->455|1435->461|1497->502|1591->569|1606->575|1662->610|2235->1156|2250->1162|2300->1191|2410->1274|2469->1324|2508->1325|2566->1355|2799->1557|2857->1588|2901->1623|2940->1624|2998->1654|3215->1840|3273->1871|3338->1927|3377->1928|3435->1958|3689->2181|3747->2212|3797->2253|3836->2254|3894->2284|4126->2485|4184->2515|4236->2540|4276->2571|4315->2572|4344->2573|4386->2584|4533->2703|4559->2719|4587->2725|4693->2804|4733->2835|4772->2836|4801->2837|4843->2848|4996->2973|5022->2989|5050->2995
+                  LINES: 21->1|26->1|28->3|35->10|35->10|35->10|37->12|37->12|37->12|39->14|39->14|39->14|53->28|53->28|53->28|55->30|55->30|55->30|56->31|59->34|60->35|60->35|60->35|61->36|64->39|65->40|65->40|65->40|66->41|69->44|70->45|70->45|70->45|71->46|74->49|75->50|75->50|75->50|75->50|75->50|75->50|76->51|76->51|76->51|78->53|78->53|78->53|78->53|78->53|79->54|79->54|79->54
                   -- GENERATED --
               */
           
