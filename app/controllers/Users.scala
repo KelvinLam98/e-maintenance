@@ -90,7 +90,7 @@ class Users @Inject()(
           println("if: " + form.errors)
           Redirect(routes.Users.create)
             .flashing(Flash(form.data) +
-              ("errors" -> "invalidData"))
+              ("errors" -> form.errors.map(_.key).mkString(",")))
         } else { println("else: " + form.errors)
           Redirect(routes.Users.create).flashing(Flash(form.data) +
           ("errors" -> "invalidData")) }

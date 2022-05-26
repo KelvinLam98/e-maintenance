@@ -34,34 +34,34 @@ Seq[Any](format.raw/*7.77*/("""
 
 """),format.raw/*9.1*/("""<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>E-Maintenance</title>
     <!-- BOOTSTRAP STYLES-->
-    <link href='"""),_display_(/*16.18*/routes/*16.24*/.Assets.versioned("css/bootstrap.css")),format.raw/*16.62*/("""' rel="stylesheet" />
+    <link href='"""),_display_(/*17.18*/routes/*17.24*/.Assets.versioned("css/bootstrap.css")),format.raw/*17.62*/("""' rel="stylesheet" />
     <!-- FONTAWESOME STYLES-->
-    <link href='"""),_display_(/*18.18*/routes/*18.24*/.Assets.versioned("css/font-awesome.css")),format.raw/*18.65*/("""' rel="stylesheet" />
+    <link href='"""),_display_(/*19.18*/routes/*19.24*/.Assets.versioned("css/font-awesome.css")),format.raw/*19.65*/("""' rel="stylesheet" />
     <!-- CUSTOM STYLES-->
-    <link href='"""),_display_(/*20.18*/routes/*20.24*/.Assets.versioned("css/custom.css")),format.raw/*20.59*/("""' rel="stylesheet" />
+    <link href='"""),_display_(/*21.18*/routes/*21.24*/.Assets.versioned("css/custom.css")),format.raw/*21.59*/("""' rel="stylesheet" />
     <!-- jQuery -->
-    <script src='"""),_display_(/*22.19*/routes/*22.25*/.Assets.versioned("jquery/jquery.min.js")),format.raw/*22.66*/("""'></script>
+    <script src='"""),_display_(/*23.19*/routes/*23.25*/.Assets.versioned("jquery/jquery.min.js")),format.raw/*23.66*/("""'></script>
     <!-- DataTables JavaScript -->
-    <script src='"""),_display_(/*24.19*/routes/*24.25*/.Assets.versioned("datatables/js/jquery.dataTables.min.js")),format.raw/*24.84*/("""'></script>
-    <script src='"""),_display_(/*25.19*/routes/*25.25*/.Assets.versioned("datatables-plugins/dataTables.bootstrap.min.js")),format.raw/*25.92*/("""'></script>
-    <script src='"""),_display_(/*26.19*/routes/*26.25*/.Assets.versioned("datatables-responsive/dataTables.responsive.js")),format.raw/*26.92*/("""'></script>
-    <script type="text/javascript" src='"""),_display_(/*27.42*/routes/*27.48*/.Assets.versioned("javascripts/moment.min.js")),format.raw/*27.94*/("""'></script>
+    <script src='"""),_display_(/*25.19*/routes/*25.25*/.Assets.versioned("datatables/js/jquery.dataTables.min.js")),format.raw/*25.84*/("""'></script>
+    <script src='"""),_display_(/*26.19*/routes/*26.25*/.Assets.versioned("datatables-plugins/dataTables.bootstrap.min.js")),format.raw/*26.92*/("""'></script>
+    <script src='"""),_display_(/*27.19*/routes/*27.25*/.Assets.versioned("datatables-responsive/dataTables.responsive.js")),format.raw/*27.92*/("""'></script>
+    <script type="text/javascript" src='"""),_display_(/*28.42*/routes/*28.48*/.Assets.versioned("javascripts/moment.min.js")),format.raw/*28.94*/("""'></script>
     <!-- DataTables CSS -->
-    <link href='"""),_display_(/*29.18*/routes/*29.24*/.Assets.versioned("vendor/datatables-plugins/dataTables.bootstrap.css")),format.raw/*29.95*/("""' rel="stylesheet">
+    <link href='"""),_display_(/*30.18*/routes/*30.24*/.Assets.versioned("vendor/datatables-plugins/dataTables.bootstrap.css")),format.raw/*30.95*/("""' rel="stylesheet">
     <!-- DataTables Responsive CSS -->
-    <link href='"""),_display_(/*31.18*/routes/*31.24*/.Assets.versioned("vendor/datatables-responsive/dataTables.responsive.css")),format.raw/*31.99*/("""' rel="stylesheet">
+    <link href='"""),_display_(/*32.18*/routes/*32.24*/.Assets.versioned("vendor/datatables-responsive/dataTables.responsive.css")),format.raw/*32.99*/("""' rel="stylesheet">
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <script>
+</script>
 </head>
 <body>
-
-
-
 <div id="wrapper">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="adjust-nav">
@@ -72,7 +72,7 @@ Seq[Any](format.raw/*7.77*/("""
             </div>
             <span class="navbar-brand"><h2 style="color: white">E-Maintenance</h2></span>
             <span class="logout-spn" >
-                  <a href="#" style="color:#fff;">LOGOUT</a>
+                  <a href=""""),_display_(/*49.29*/routes/*49.35*/.HomeController.index()),format.raw/*49.58*/("""" style="color:#fff;">LOGOUT</a>
             </span>
         </div>
     </div>
@@ -80,17 +80,17 @@ Seq[Any](format.raw/*7.77*/("""
     <nav class="navbar-default navbar-side" role="navigation">
         <div class="sidebar-collapse">
             <ul class="nav" id="main-menu">
-                <li class="active-link">
-                    <a href=""""),_display_(/*58.31*/routes/*58.37*/.HomeController.index()),format.raw/*58.60*/("""" ><i class="fa fa-desktop "></i>Dashboard</a>
+                <li>
+                    <a id="dashboard" href=# ><i class="fa fa-desktop "></i>Dashboard</a>
                 </li>
                 <li>
-                    <a href=""""),_display_(/*61.31*/routes/*61.37*/.Users.listUser),format.raw/*61.52*/(""""><i class="fa fa-group"></i>Users</a>
+                    <a id="users" href=""""),_display_(/*61.42*/routes/*61.48*/.Users.listUser),format.raw/*61.63*/(""""><i class="fa fa-group"></i>Users</a>
                 </li>
                 <li>
-                    <a href=#><i class="fa fa-wrench"></i>Maintenance</a>
+                    <a id="maintenance" href=#><i class="fa fa-wrench"></i>Maintenance</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-briefcase"></i>Work Orders</a>
+                    <a id="workOrders" href="#"><i class="fa fa-briefcase"></i>Work Orders</a>
                 </li>
             </ul>
         </div>
@@ -120,13 +120,6 @@ Seq[Any](format.raw/*7.77*/("""
 <div class="footer">
 </div>
 <!-- /. WRAPPER  -->
-<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
-<!-- JQUERY SCRIPTS -->
-<script src="assets/js/jquery-1.10.2.js"></script>
-<!-- BOOTSTRAP SCRIPTS -->
-<script src="assets/js/bootstrap.min.js"></script>
-<!-- CUSTOM SCRIPTS -->
-<script src="assets/js/custom.js"></script>
 </body>
 </html>
 """))
@@ -150,9 +143,9 @@ Seq[Any](format.raw/*7.77*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/main.scala.html
-                  HASH: 165c4e96712e94c269e144a86c380dd7857ca0ec
-                  MATRIX: 1047->266|1217->341|1247->345|1533->604|1548->610|1607->648|1706->720|1721->726|1783->767|1877->834|1892->840|1948->875|2037->937|2052->943|2114->984|2208->1051|2223->1057|2303->1116|2361->1147|2376->1153|2464->1220|2522->1251|2537->1257|2625->1324|2706->1378|2721->1384|2788->1430|2874->1489|2889->1495|2981->1566|3086->1644|3101->1650|3197->1725|3632->2133|3647->2139|3702->2173|4269->2713|4284->2719|4328->2742|4478->2865|4493->2871|4529->2886|5301->3631|5329->3638|5375->3656
-                  LINES: 28->7|33->7|35->9|42->16|42->16|42->16|44->18|44->18|44->18|46->20|46->20|46->20|48->22|48->22|48->22|50->24|50->24|50->24|51->25|51->25|51->25|52->26|52->26|52->26|53->27|53->27|53->27|55->29|55->29|55->29|57->31|57->31|57->31|70->44|70->44|70->44|84->58|84->58|84->58|87->61|87->61|87->61|111->85|111->85|112->86
+                  HASH: 2ee579cb963afaff0ee45878e21d349f9d577884
+                  MATRIX: 1047->266|1217->341|1247->345|1535->606|1550->612|1609->650|1708->722|1723->728|1785->769|1879->836|1894->842|1950->877|2039->939|2054->945|2116->986|2210->1053|2225->1059|2305->1118|2363->1149|2378->1155|2466->1222|2524->1253|2539->1259|2627->1326|2708->1380|2723->1386|2790->1432|2876->1491|2891->1497|2983->1568|3088->1646|3103->1652|3199->1727|3653->2154|3668->2160|3723->2194|3957->2401|3972->2407|4016->2430|4503->2890|4518->2896|4554->2911|5359->3689|5387->3696|5433->3714
+                  LINES: 28->7|33->7|35->9|43->17|43->17|43->17|45->19|45->19|45->19|47->21|47->21|47->21|49->23|49->23|49->23|51->25|51->25|51->25|52->26|52->26|52->26|53->27|53->27|53->27|54->28|54->28|54->28|56->30|56->30|56->30|58->32|58->32|58->32|70->44|70->44|70->44|75->49|75->49|75->49|87->61|87->61|87->61|111->85|111->85|112->86
                   -- GENERATED --
               */
           

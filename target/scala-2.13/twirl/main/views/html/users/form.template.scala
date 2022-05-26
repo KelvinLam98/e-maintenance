@@ -41,69 +41,81 @@ Seq[Any](format.raw/*1.144*/("""
         """),format.raw/*14.9*/("""}"""),format.raw/*14.10*/("""
     """),format.raw/*15.5*/("""}"""),format.raw/*15.6*/(""");
 
-    $(document).on('keypress', 'input,select', function (e) """),format.raw/*17.61*/("""{"""),format.raw/*17.62*/("""
-        """),format.raw/*18.9*/("""if (e.which == 13) """),format.raw/*18.28*/("""{"""),format.raw/*18.29*/("""
-            """),format.raw/*19.13*/("""e.preventDefault();
+    $(document).ready(function() """),format.raw/*17.34*/("""{"""),format.raw/*17.35*/("""
+        """),format.raw/*18.9*/("""var message = $('#email-msg')
+        message.hide()
+        """),_display_(/*20.10*/if(errors.contains("email"))/*20.38*/{_display_(Seq[Any](format.raw/*20.39*/("""
+            """),format.raw/*21.13*/("""message.css('display', 'block').addClass('form-group has-error')
+            message.find('.control-label').html('Please enter a valid email.')
+        """)))}),format.raw/*23.10*/("""
+    """),format.raw/*24.5*/("""}"""),format.raw/*24.6*/(""");
+
+    $(document).on('keypress', 'input,select', function (e) """),format.raw/*26.61*/("""{"""),format.raw/*26.62*/("""
+        """),format.raw/*27.9*/("""if (e.which == 13) """),format.raw/*27.28*/("""{"""),format.raw/*27.29*/("""
+            """),format.raw/*28.13*/("""e.preventDefault();
             var $canfocus = $(':focusable');
             var index = $canfocus.index(this) + 1;
             if (index >= $canfocus.length) index = 0;
             $canfocus.eq(index).focus();
-        """),format.raw/*24.9*/("""}"""),format.raw/*24.10*/("""
-    """),format.raw/*25.5*/("""}"""),format.raw/*25.6*/(""");
+        """),format.raw/*33.9*/("""}"""),format.raw/*33.10*/("""
+    """),format.raw/*34.5*/("""}"""),format.raw/*34.6*/(""");
 </script>
 
         <div class="col-lg-12">
-            <h1 class="page-header">User - """),_display_(/*29.45*/formType),format.raw/*29.53*/("""</h1>
+            <h1 class="page-header">User - """),_display_(/*38.45*/formType),format.raw/*38.53*/("""</h1>
         </div>
         <div id="msg">
             <label class="control-label"></label>
         </div>
-        <form action=""""),_display_(/*34.24*/routes/*34.30*/.Users.postUserDb),format.raw/*34.47*/("""" method="post">
-            <input type="hidden" id="id " name="id" value='"""),_display_(/*35.61*/form("id")/*35.71*/.value),format.raw/*35.77*/("""' class="form-control" placeholder="Required">
-            <input type="hidden" id="password" name="password" value='"""),_display_(/*36.72*/form("password")/*36.88*/.value),format.raw/*36.94*/("""' class="form-control" placeholder="Required">
+        <form action=""""),_display_(/*43.24*/routes/*43.30*/.Users.postUserDb),format.raw/*43.47*/("""" method="post">
+            <input type="hidden" id="id " name="id" value='"""),_display_(/*44.61*/form("id")/*44.71*/.value),format.raw/*44.77*/("""' class="form-control" placeholder="Required">
+            <input type="hidden" id="password" name="password" value='"""),_display_(/*45.72*/form("password")/*45.88*/.value),format.raw/*45.94*/("""' class="form-control" placeholder="Required">
 
-            <div class='form-group """),_display_(/*38.37*/if(errors.contains("username"))/*38.68*/{_display_(Seq[Any](format.raw/*38.69*/(""" """),format.raw/*38.70*/("""has-error """)))}),format.raw/*38.81*/("""'>
+            <div class='form-group """),_display_(/*47.37*/if(errors.contains("username"))/*47.68*/{_display_(Seq[Any](format.raw/*47.69*/(""" """),format.raw/*47.70*/("""has-error """)))}),format.raw/*47.81*/("""'>
                 <label>Username</label>
-                <input id="username " name="username" value='"""),_display_(/*40.63*/form("username")/*40.79*/.value),format.raw/*40.85*/("""' class="form-control" placeholder="Required">
+                <input id="username " name="username" value='"""),_display_(/*49.63*/form("username")/*49.79*/.value),format.raw/*49.85*/("""' class="form-control" placeholder="Required">
             </div>
             
-            <div class='form-group """),_display_(/*43.37*/if(errors.contains("name"))/*43.64*/{_display_(Seq[Any](format.raw/*43.65*/(""" """),format.raw/*43.66*/("""has-error """)))}),format.raw/*43.77*/("""'>
+            <div class='form-group """),_display_(/*52.37*/if(errors.contains("name"))/*52.64*/{_display_(Seq[Any](format.raw/*52.65*/(""" """),format.raw/*52.66*/("""has-error """)))}),format.raw/*52.77*/("""'>
                 <label>Name</label>
-                <input id="name" name="name" value='"""),_display_(/*45.54*/form("name")/*45.66*/.value),format.raw/*45.72*/("""' class="form-control" placeholder="Required">
+                <input id="name" name="name" value='"""),_display_(/*54.54*/form("name")/*54.66*/.value),format.raw/*54.72*/("""' class="form-control" placeholder="Required">
             </div>
 
-            <div class='form-group """),_display_(/*48.37*/if(errors.contains("ic_number"))/*48.69*/{_display_(Seq[Any](format.raw/*48.70*/(""" """),format.raw/*48.71*/("""has-error """)))}),format.raw/*48.82*/("""'>
+            <div class='form-group """),_display_(/*57.37*/if(errors.contains("ic_number"))/*57.69*/{_display_(Seq[Any](format.raw/*57.70*/(""" """),format.raw/*57.71*/("""has-error """)))}),format.raw/*57.82*/("""'>
                 <label>IC Number</label>
-                <input id="ic_number" name="ic_number" value='"""),_display_(/*50.64*/form("ic_number")/*50.81*/.value),format.raw/*50.87*/("""' class="form-control" placeholder="Required">
+                <input id="ic_number" name="ic_number" value='"""),_display_(/*59.64*/form("ic_number")/*59.81*/.value),format.raw/*59.87*/("""' class="form-control" placeholder="Required">
             </div>
 
-            <div class='form-group """),_display_(/*53.37*/if(errors.contains("contact_number"))/*53.74*/{_display_(Seq[Any](format.raw/*53.75*/(""" """),format.raw/*53.76*/("""has-error """)))}),format.raw/*53.87*/("""'>
+            <div class='form-group """),_display_(/*62.37*/if(errors.contains("contact_number"))/*62.74*/{_display_(Seq[Any](format.raw/*62.75*/(""" """),format.raw/*62.76*/("""has-error """)))}),format.raw/*62.87*/("""'>
                 <label>Contact Number</label>
-                <input id="contact_number" name="contact_number" value='"""),_display_(/*55.74*/form("contact_number")/*55.96*/.value),format.raw/*55.102*/("""' class="form-control" placeholder="Required">
+                <input id="contact_number" name="contact_number" value='"""),_display_(/*64.74*/form("contact_number")/*64.96*/.value),format.raw/*64.102*/("""' class="form-control" placeholder="Required">
             </div>
 
-            <div class='form-group """),_display_(/*58.37*/if(errors.contains("address"))/*58.67*/{_display_(Seq[Any](format.raw/*58.68*/(""" """),format.raw/*58.69*/("""has-error """)))}),format.raw/*58.80*/("""'>
+            <div class='form-group """),_display_(/*67.37*/if(errors.contains("address"))/*67.67*/{_display_(Seq[Any](format.raw/*67.68*/(""" """),format.raw/*67.69*/("""has-error """)))}),format.raw/*67.80*/("""'>
                 <label>Address</label>
-                <input id="address" name="address" value='"""),_display_(/*60.60*/form("address")/*60.75*/.value),format.raw/*60.81*/("""' class="form-control" placeholder="Required">
+                <input id="address" name="address" value='"""),_display_(/*69.60*/form("address")/*69.75*/.value),format.raw/*69.81*/("""' class="form-control" placeholder="Required">
             </div>
 
-            <div class='form-group """),_display_(/*63.37*/if(errors.contains("email"))/*63.65*/{_display_(Seq[Any](format.raw/*63.66*/(""" """),format.raw/*63.67*/("""has-error """)))}),format.raw/*63.78*/("""'>
+            <div class='form-group """),_display_(/*72.37*/if(errors.contains("email"))/*72.65*/{_display_(Seq[Any](format.raw/*72.66*/(""" """),format.raw/*72.67*/("""has-error """)))}),format.raw/*72.78*/("""'>
                 <label>Email</label>
-                <input id="email" name="email" value='"""),_display_(/*65.56*/form("email")/*65.69*/.value),format.raw/*65.75*/("""' class="form-control" placeholder="Required">
+                <input id="email" name="email" value='"""),_display_(/*74.56*/form("email")/*74.69*/.value),format.raw/*74.75*/("""' class="form-control" placeholder="Required">
+            </div>
+            <div id="email-msg">
+                <label class="control-label"></label>
             </div>
 
             <div>
                 <label>Role</label>
                 <select name="role" class="form-control">
-                    <option """),_display_(/*71.30*/if(form("role").value.get == "admin")/*71.67*/{_display_(Seq[Any](format.raw/*71.68*/(""" """),format.raw/*71.69*/("""selected """)))}),format.raw/*71.79*/(""" """),format.raw/*71.80*/("""value="admin">Admin</option>
-                    <option """),_display_(/*72.30*/if(form("role").value.get == "user")/*72.66*/{_display_(Seq[Any](format.raw/*72.67*/(""" """),format.raw/*72.68*/("""selected """)))}),format.raw/*72.78*/(""" """),format.raw/*72.79*/("""value="user">User</option>
+                    <option """),_display_(/*83.30*/if(form("role").value.get == "admin")/*83.67*/{_display_(Seq[Any](format.raw/*83.68*/(""" """),format.raw/*83.69*/("""selected """)))}),format.raw/*83.79*/(""" """),format.raw/*83.80*/("""value="admin">Admin</option>
+                    <option """),_display_(/*84.30*/if(form("role").value.get == "user")/*84.66*/{_display_(Seq[Any](format.raw/*84.67*/(""" """),format.raw/*84.68*/("""selected """)))}),format.raw/*84.78*/(""" """),format.raw/*84.79*/("""value="user">User</option>
                 </select>
             </div>
             <br>
-                <button type="submit" class="btn btn-primary ">"""),_display_(/*76.65*/formType),format.raw/*76.73*/("""</button>
+                <button type="submit" class="btn btn-primary ">"""),_display_(/*88.65*/formType),format.raw/*88.73*/("""</button>
             </form>
 
-""")))}),format.raw/*79.2*/("""
+""")))}),format.raw/*91.2*/("""
 """))
       }
     }
@@ -125,9 +137,9 @@ Seq[Any](format.raw/*1.144*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/users/form.scala.html
-                  HASH: 529a260d5b565855ca43c808e3fe98f6d8431a0f
-                  MATRIX: 833->1|1071->143|1099->146|1128->167|1167->169|1195->171|1265->214|1293->215|1329->225|1417->287|1430->292|1464->306|1518->333|1546->334|1587->348|1768->502|1797->503|1834->513|1866->518|1880->523|1915->537|1971->565|2000->566|2042->580|2254->765|2283->766|2316->772|2344->773|2438->839|2467->840|2504->850|2551->869|2580->870|2622->884|2873->1108|2902->1109|2935->1115|2963->1116|3084->1210|3113->1218|3277->1355|3292->1361|3330->1378|3435->1456|3454->1466|3481->1472|3627->1591|3652->1607|3679->1613|3792->1699|3832->1730|3871->1731|3900->1732|3942->1743|4076->1850|4101->1866|4128->1872|4273->1990|4309->2017|4348->2018|4377->2019|4419->2030|4540->2124|4561->2136|4588->2142|4721->2248|4762->2280|4801->2281|4830->2282|4872->2293|5008->2402|5034->2419|5061->2425|5194->2531|5240->2568|5279->2569|5308->2570|5350->2581|5501->2705|5532->2727|5560->2733|5693->2839|5732->2869|5771->2870|5800->2871|5842->2882|5972->2985|5996->3000|6023->3006|6156->3112|6193->3140|6232->3141|6261->3142|6303->3153|6427->3250|6449->3263|6476->3269|6717->3483|6763->3520|6802->3521|6831->3522|6872->3532|6901->3533|6987->3592|7032->3628|7071->3629|7100->3630|7141->3640|7170->3641|7354->3798|7383->3806|7448->3841
-                  LINES: 23->1|28->1|29->2|29->2|29->2|30->3|31->4|31->4|32->5|34->7|34->7|34->7|34->7|34->7|35->8|37->10|37->10|38->11|38->11|38->11|38->11|38->11|38->11|39->12|41->14|41->14|42->15|42->15|44->17|44->17|45->18|45->18|45->18|46->19|51->24|51->24|52->25|52->25|56->29|56->29|61->34|61->34|61->34|62->35|62->35|62->35|63->36|63->36|63->36|65->38|65->38|65->38|65->38|65->38|67->40|67->40|67->40|70->43|70->43|70->43|70->43|70->43|72->45|72->45|72->45|75->48|75->48|75->48|75->48|75->48|77->50|77->50|77->50|80->53|80->53|80->53|80->53|80->53|82->55|82->55|82->55|85->58|85->58|85->58|85->58|85->58|87->60|87->60|87->60|90->63|90->63|90->63|90->63|90->63|92->65|92->65|92->65|98->71|98->71|98->71|98->71|98->71|98->71|99->72|99->72|99->72|99->72|99->72|99->72|103->76|103->76|106->79
+                  HASH: bbd31d4ecc11c0ee9289927b31446490c5bc968a
+                  MATRIX: 833->1|1071->143|1099->146|1128->167|1167->169|1195->171|1265->214|1293->215|1329->225|1417->287|1430->292|1464->306|1518->333|1546->334|1587->348|1768->502|1797->503|1834->513|1866->518|1880->523|1915->537|1971->565|2000->566|2042->580|2254->765|2283->766|2316->772|2344->773|2411->812|2440->813|2477->823|2568->887|2605->915|2644->916|2686->930|2872->1085|2905->1091|2933->1092|3027->1158|3056->1159|3093->1169|3140->1188|3169->1189|3211->1203|3462->1427|3491->1428|3524->1434|3552->1435|3673->1529|3702->1537|3866->1674|3881->1680|3919->1697|4024->1775|4043->1785|4070->1791|4216->1910|4241->1926|4268->1932|4381->2018|4421->2049|4460->2050|4489->2051|4531->2062|4665->2169|4690->2185|4717->2191|4862->2309|4898->2336|4937->2337|4966->2338|5008->2349|5129->2443|5150->2455|5177->2461|5310->2567|5351->2599|5390->2600|5419->2601|5461->2612|5597->2721|5623->2738|5650->2744|5783->2850|5829->2887|5868->2888|5897->2889|5939->2900|6090->3024|6121->3046|6149->3052|6282->3158|6321->3188|6360->3189|6389->3190|6431->3201|6561->3304|6585->3319|6612->3325|6745->3431|6782->3459|6821->3460|6850->3461|6892->3472|7016->3569|7038->3582|7065->3588|7415->3911|7461->3948|7500->3949|7529->3950|7570->3960|7599->3961|7685->4020|7730->4056|7769->4057|7798->4058|7839->4068|7868->4069|8052->4226|8081->4234|8146->4269
+                  LINES: 23->1|28->1|29->2|29->2|29->2|30->3|31->4|31->4|32->5|34->7|34->7|34->7|34->7|34->7|35->8|37->10|37->10|38->11|38->11|38->11|38->11|38->11|38->11|39->12|41->14|41->14|42->15|42->15|44->17|44->17|45->18|47->20|47->20|47->20|48->21|50->23|51->24|51->24|53->26|53->26|54->27|54->27|54->27|55->28|60->33|60->33|61->34|61->34|65->38|65->38|70->43|70->43|70->43|71->44|71->44|71->44|72->45|72->45|72->45|74->47|74->47|74->47|74->47|74->47|76->49|76->49|76->49|79->52|79->52|79->52|79->52|79->52|81->54|81->54|81->54|84->57|84->57|84->57|84->57|84->57|86->59|86->59|86->59|89->62|89->62|89->62|89->62|89->62|91->64|91->64|91->64|94->67|94->67|94->67|94->67|94->67|96->69|96->69|96->69|99->72|99->72|99->72|99->72|99->72|101->74|101->74|101->74|110->83|110->83|110->83|110->83|110->83|110->83|111->84|111->84|111->84|111->84|111->84|111->84|115->88|115->88|118->91
                   -- GENERATED --
               */
           

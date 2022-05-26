@@ -14,6 +14,15 @@
         }
     });
 
+    $(document).ready(function() {
+        var message = $('#email-msg')
+        message.hide()
+        @if(errors.contains("email")){
+            message.css('display', 'block').addClass('form-group has-error')
+            message.find('.control-label').html('Please enter a valid email.')
+        }
+    });
+
     $(document).on('keypress', 'input,select', function (e) {
         if (e.which == 13) {
             e.preventDefault();
@@ -63,6 +72,9 @@
             <div class='form-group @if(errors.contains("email")){ has-error }'>
                 <label>Email</label>
                 <input id="email" name="email" value='@form("email").value' class="form-control" placeholder="Required">
+            </div>
+            <div id="email-msg">
+                <label class="control-label"></label>
             </div>
 
             <div>

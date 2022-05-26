@@ -8,6 +8,7 @@
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -31,11 +32,10 @@
     <link href='@routes.Assets.versioned("vendor/datatables-responsive/dataTables.responsive.css")' rel="stylesheet">
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <script>
+</script>
 </head>
 <body>
-
-
-
 <div id="wrapper">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="adjust-nav">
@@ -46,7 +46,7 @@
             </div>
             <span class="navbar-brand"><h2 style="color: white">E-Maintenance</h2></span>
             <span class="logout-spn" >
-                  <a href="#" style="color:#fff;">LOGOUT</a>
+                  <a href="@routes.HomeController.index()" style="color:#fff;">LOGOUT</a>
             </span>
         </div>
     </div>
@@ -54,17 +54,17 @@
     <nav class="navbar-default navbar-side" role="navigation">
         <div class="sidebar-collapse">
             <ul class="nav" id="main-menu">
-                <li class="active-link">
-                    <a href="@routes.HomeController.index()" ><i class="fa fa-desktop "></i>Dashboard</a>
+                <li>
+                    <a id="dashboard" href=# ><i class="fa fa-desktop "></i>Dashboard</a>
                 </li>
                 <li>
-                    <a href="@routes.Users.listUser"><i class="fa fa-group"></i>Users</a>
+                    <a id="users" href="@routes.Users.listUser"><i class="fa fa-group"></i>Users</a>
                 </li>
                 <li>
-                    <a href=#><i class="fa fa-wrench"></i>Maintenance</a>
+                    <a id="maintenance" href=#><i class="fa fa-wrench"></i>Maintenance</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-briefcase"></i>Work Orders</a>
+                    <a id="workOrders" href="#"><i class="fa fa-briefcase"></i>Work Orders</a>
                 </li>
             </ul>
         </div>
@@ -94,12 +94,5 @@
 <div class="footer">
 </div>
 <!-- /. WRAPPER  -->
-<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
-<!-- JQUERY SCRIPTS -->
-<script src="assets/js/jquery-1.10.2.js"></script>
-<!-- BOOTSTRAP SCRIPTS -->
-<script src="assets/js/bootstrap.min.js"></script>
-<!-- CUSTOM SCRIPTS -->
-<script src="assets/js/custom.js"></script>
 </body>
 </html>
