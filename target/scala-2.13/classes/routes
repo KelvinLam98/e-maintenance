@@ -18,6 +18,7 @@ GET     /user/list.json                      controllers.Users.listUserJson
 GET     /user/detail/:id                     controllers.Users.detail(id: Long)
 GET     /user/create                         controllers.Users.create
 GET     /user/detail/:id/update              controllers.Users.update(id:Long)
+GET     /user/detail/:id/delete              controllers.Users.delete(id: Long)
 
 + nocsrf
 POST    /user/create/post                    controllers.Users.postUserDb

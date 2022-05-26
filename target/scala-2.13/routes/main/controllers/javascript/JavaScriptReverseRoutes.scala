@@ -77,6 +77,16 @@ package controllers.javascript {
     }
 
   
+    // @LINE:21
+    def delete: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Users.delete",
+      """
+        function(id0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0)) + "/delete"})
+        }
+      """
+    )
+  
     // @LINE:17
     def listUserJson: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Users.listUserJson",
@@ -117,7 +127,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:23
+    // @LINE:24
     def postUserDb: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Users.postUserDb",
       """

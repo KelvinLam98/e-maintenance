@@ -15,17 +15,17 @@ import play.api.templates.PlayMagic._
 import play.api.mvc._
 import play.api.data._
 
-object listUser extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template1[models.RequestWithUser[_$1] forSome { 
+object listUser extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template3[Flash,Messages,models.RequestWithUser[_$1] forSome { 
    type _$1
 },play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*1.2*/()(implicit request: models.RequestWithUser[_]):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/()(implicit flash: Flash, messages: Messages, request: models.RequestWithUser[_]):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
 
-Seq[Any](format.raw/*1.49*/("""
+Seq[Any](format.raw/*1.83*/("""
 
 """),_display_(/*3.2*/main("E-Maintenance")/*3.23*/ {_display_(Seq[Any](format.raw/*3.25*/("""
     """),format.raw/*4.5*/("""<script>
@@ -47,12 +47,21 @@ Seq[Any](format.raw/*1.49*/("""
             responsive: true
         """),format.raw/*21.9*/("""}"""),format.raw/*21.10*/(""");
     """),format.raw/*22.5*/("""}"""),format.raw/*22.6*/(""");
+
+      $(document).ready(function() """),format.raw/*24.36*/("""{"""),format.raw/*24.37*/("""
+      """),format.raw/*25.7*/("""var message = $('#msg')
+          message.hide()
+          if(""""),_display_(/*27.16*/flash/*27.21*/.get("success")),format.raw/*27.36*/("""" == "successfullyDeleted")"""),format.raw/*27.63*/("""{"""),format.raw/*27.64*/("""
+              """),format.raw/*28.15*/("""message.css('display', 'block').addClass('form-group has-success')
+              message.find('.control-label').html('User has been deleted.')
+          """),format.raw/*30.11*/("""}"""),format.raw/*30.12*/("""
+      """),format.raw/*31.7*/("""}"""),format.raw/*31.8*/(""");
     </script>
 
         <div class="col-lg-12">
             <h1 class="page-header">
                 Users
-                <a href=""""),_display_(/*28.27*/routes/*28.33*/.Users.create),format.raw/*28.46*/("""">
+                <a href=""""),_display_(/*37.27*/routes/*37.33*/.Users.create),format.raw/*37.46*/("""">
                     <button type="button" class="btn btn-primary badge">
                     Create
                     </button>
@@ -75,13 +84,13 @@ Seq[Any](format.raw/*1.49*/("""
     }
   }
 
-  def render(request:models.RequestWithUser[_$1] forSome { 
+  def render(flash:Flash,messages:Messages,request:models.RequestWithUser[_$1] forSome { 
    type _$1
-}): play.twirl.api.HtmlFormat.Appendable = apply()(request)
+}): play.twirl.api.HtmlFormat.Appendable = apply()(flash,messages,request)
 
-  def f:(() => (models.RequestWithUser[_$1] forSome { 
+  def f:(() => (Flash,Messages,models.RequestWithUser[_$1] forSome { 
    type _$1
-}) => play.twirl.api.HtmlFormat.Appendable) = () => (request) => apply()(request)
+}) => play.twirl.api.HtmlFormat.Appendable) = () => (flash,messages,request) => apply()(flash,messages,request)
 
   def ref: this.type = this
 
@@ -91,9 +100,9 @@ Seq[Any](format.raw/*1.49*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/users/listUser.scala.html
-                  HASH: 68d5a4b0a51d33e4b0f5ba10d5f29ac2cb8d037e
-                  MATRIX: 786->1|928->48|958->53|987->74|1026->76|1058->82|1128->125|1156->126|1192->136|1246->163|1274->164|1315->178|1477->312|1506->313|1535->314|1644->395|1673->396|1727->422|1849->516|1878->517|1924->535|1953->536|2000->555|2029->556|2058->557|2099->570|2128->571|2175->590|2204->591|2233->592|2279->610|2308->611|2355->630|2384->631|2413->632|2454->645|2483->646|2567->703|2596->704|2631->712|2659->713|2827->854|2842->860|2876->873
-                  LINES: 23->1|28->1|30->3|30->3|30->3|31->4|32->5|32->5|33->6|33->6|33->6|34->7|38->11|38->11|38->11|39->12|39->12|40->13|41->14|41->14|42->15|42->15|43->16|43->16|43->16|43->16|43->16|44->17|44->17|44->17|44->17|44->17|45->18|45->18|45->18|45->18|45->18|48->21|48->21|49->22|49->22|55->28|55->28|55->28
+                  HASH: 0b187c7c23524248c4593128e0044e58db9bbc1d
+                  MATRIX: 801->1|977->82|1007->87|1036->108|1075->110|1107->116|1177->159|1205->160|1241->170|1295->197|1323->198|1364->212|1526->346|1555->347|1584->348|1693->429|1722->430|1776->456|1898->550|1927->551|1973->569|2002->570|2049->589|2078->590|2107->591|2148->604|2177->605|2224->624|2253->625|2282->626|2328->644|2357->645|2404->664|2433->665|2462->666|2503->679|2532->680|2616->737|2645->738|2680->746|2708->747|2777->788|2806->789|2841->797|2934->863|2948->868|2984->883|3039->910|3068->911|3112->927|3295->1082|3324->1083|3359->1091|3387->1092|3555->1233|3570->1239|3604->1252
+                  LINES: 23->1|28->1|30->3|30->3|30->3|31->4|32->5|32->5|33->6|33->6|33->6|34->7|38->11|38->11|38->11|39->12|39->12|40->13|41->14|41->14|42->15|42->15|43->16|43->16|43->16|43->16|43->16|44->17|44->17|44->17|44->17|44->17|45->18|45->18|45->18|45->18|45->18|48->21|48->21|49->22|49->22|51->24|51->24|52->25|54->27|54->27|54->27|54->27|54->27|55->28|57->30|57->30|58->31|58->31|64->37|64->37|64->37
                   -- GENERATED --
               */
           

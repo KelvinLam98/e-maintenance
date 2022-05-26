@@ -110,7 +110,7 @@ class Users @Inject()(
       }
     )
   }
-  /* TODO */
+
   def update(id: Long) = SecuredAction(UserRole.USER) { implicit request =>
     db.withConnection { implicit conn =>
         userStore.findById(id).map { user =>
@@ -125,6 +125,15 @@ class Users @Inject()(
         }.getOrElse(NotFound)
       }
     }
+
+  def delete(id: Long) = Action { implicit request =>
+    db.withTransaction { implicit conn =>
+      userStore.delete(id)
+      Redirect(routes.Users.listUser)
+        .flashing(("success" -> "successfullyDeleted"))
+    }
+  }
+  /* TODO */
 
   /* do not edit below this line */
 }

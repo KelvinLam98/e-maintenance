@@ -1,4 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\controllers\Users.scala:3:8: object UserCreateForm is not a member of package models[0m
-[0m[[0m[31merror[0m] [0m[0mimport models.{UserCreateForm, _}[0m
-[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\views\users\detail.scala.html:37:60: value delete is not a member of controllers.ReverseUsers[0m
+[0m[[0m[31merror[0m] [0m[0m                    <a id="deleteUser" href="@routes.Users.delete(user.id.get)">[0m
+[0m[[0m[31merror[0m] [0m[0m                                                           ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m

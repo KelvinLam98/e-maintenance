@@ -1,4 +1,4 @@
-@()(implicit request: models.RequestWithUser[_])
+@()(implicit flash: Flash, messages: Messages, request: models.RequestWithUser[_])
 
 @main("E-Maintenance") {
     <script>
@@ -20,6 +20,15 @@
             responsive: true
         });
     });
+
+      $(document).ready(function() {
+      var message = $('#msg')
+          message.hide()
+          if("@flash.get("success")" == "successfullyDeleted"){
+              message.css('display', 'block').addClass('form-group has-success')
+              message.find('.control-label').html('User has been deleted.')
+          }
+      });
     </script>
 
         <div class="col-lg-12">

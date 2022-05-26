@@ -58,6 +58,12 @@ package controllers {
     }
 
   
+    // @LINE:21
+    def delete(id:Long): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "user/detail/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)) + "/delete")
+    }
+  
     // @LINE:17
     def listUserJson: Call = {
       
@@ -82,7 +88,7 @@ package controllers {
       Call("GET", _prefix + { _defaultPrefix } + "user/detail/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)) + "/update")
     }
   
-    // @LINE:23
+    // @LINE:24
     def postUserDb: Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "user/create/post")
