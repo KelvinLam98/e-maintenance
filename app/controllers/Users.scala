@@ -1,12 +1,17 @@
 package controllers
 
-import models.UserRole
+import models._
+import stores._
 import play.api.cache.SyncCacheApi
+import play.api.data.Form
+import play.api.data.Forms.{date, email, longNumber, mapping, nonEmptyText, optional}
+import play.api.data.validation.Constraints.emailAddress
 import play.api.db.Database
 import play.api.libs.json.Json
-import play.api.mvc.{AnyContent, MessagesControllerComponents, Request}
+import play.api.mvc.{AnyContent, Flash, MessagesControllerComponents, Request}
 import stores.UserStore
 
+import java.util.Date
 import javax.inject.Inject
 
 class Users @Inject()(
@@ -42,7 +47,7 @@ class Users @Inject()(
     }
   }
 
-  def detail(id: Long) = SecuredAction(UserRole.USER) { implicit request =>
+  def detail(id: Long) = SecuredAction(UserRole.ADMIN) { implicit request =>
     db.withConnection { implicit conn =>
         userStore.findInfoById(id).map { user =>
           Ok(views.html.users.detail(user))
@@ -50,4 +55,55 @@ class Users @Inject()(
       }
     }
 
+  private val userForm: Form[UserForm] = Form(
+    mapping(
+      "id" -> optional(longNumber),
+      "username" -> nonEmptyText,
+      "password" -> nonEmptyText,
+      "name" -> nonEmptyText,
+      "ic_number" -> nonEmptyText,
+      "contact_number" -> nonEmptyText,
+      "address" -> nonEmptyText,
+      "email" -> email.verifying( emailAddress ),
+      "role" -> nonEmptyText
+    )(UserForm.apply)(UserForm.unapply)
+  )
+
+  def create = SecuredAction(UserRole.ADMIN) { implicit request =>
+    db.withConnection { implicit conn =>
+      val (form, errors) =
+        request.flash.get("errors") match {
+          case Some(errorsStr) =>
+            (userForm.bind(request.flash.data), errorsStr.split(","))
+          case None =>
+            (userForm.fill(UserForm(None, "-", "-", "-", "-", "-", "-", "-", "user")), Array.empty[String])
+        }
+      Ok(views.html.users.form(form, errors, "Create"))
+    }
+  }
+
+  def postUserDb = SecuredAction(UserRole.ADMIN) { implicit request =>
+    userForm.bindFromRequest().fold(
+      hasErrors = { form =>
+        val id = form.data.getOrElse("id", "")
+        if (id == "") {
+          println("if: " + form.errors)
+          Redirect(routes.Users.create)
+            .flashing(Flash(form.data) +
+              ("errors" -> "invalidData"))
+        } else { println("else: " + form.errors)
+          Redirect(routes.Users.create).flashing(Flash(form.data) +
+          ("errors" -> "invalidData")) }
+      },
+      success = { data =>
+        db.withTransaction { implicit conn =>
+          val id:Long = userStore.insert(User
+            (None, data.username, data.password, data.name, data.ic_number, data.contact_number, data.address, data.email, data.role, new Date, new Date)
+          )
+          Redirect(routes.Users.detail(id))
+            .flashing(("success" -> "successfullyCreated"))
+        }
+      }
+    )
+  }
 }

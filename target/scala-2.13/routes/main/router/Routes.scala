@@ -49,6 +49,8 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/list""", """controllers.Users.listUser"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/list.json""", """controllers.Users.listUserJson"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/detail/""" + "$" + """id<[^/]+>""", """controllers.Users.detail(id:Long)"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/create""", """controllers.Users.create"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/create/post""", """controllers.Users.postUserDb"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
     case r @ (_,_,_) => s :+ r.asInstanceOf[(String,String,String)]
@@ -182,6 +184,42 @@ class Routes(
     )
   )
 
+  // @LINE:19
+  private[this] lazy val controllers_Users_create7_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("user/create")))
+  )
+  private[this] lazy val controllers_Users_create7_invoker = createInvoker(
+    Users_2.create,
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.Users",
+      "create",
+      Nil,
+      "GET",
+      this.prefix + """user/create""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:22
+  private[this] lazy val controllers_Users_postUserDb8_route = Route("POST",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("user/create/post")))
+  )
+  private[this] lazy val controllers_Users_postUserDb8_invoker = createInvoker(
+    Users_2.postUserDb,
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.Users",
+      "postUserDb",
+      Nil,
+      "POST",
+      this.prefix + """user/create/post""",
+      """""",
+      Seq("""nocsrf""")
+    )
+  )
+
 
   def routes: PartialFunction[RequestHeader, Handler] = {
   
@@ -225,6 +263,18 @@ class Routes(
     case controllers_Users_detail6_route(params@_) =>
       call(params.fromPath[Long]("id", None)) { (id) =>
         controllers_Users_detail6_invoker.call(Users_2.detail(id))
+      }
+  
+    // @LINE:19
+    case controllers_Users_create7_route(params@_) =>
+      call { 
+        controllers_Users_create7_invoker.call(Users_2.create)
+      }
+  
+    // @LINE:22
+    case controllers_Users_postUserDb8_route(params@_) =>
+      call { 
+        controllers_Users_postUserDb8_invoker.call(Users_2.postUserDb)
       }
   }
 }

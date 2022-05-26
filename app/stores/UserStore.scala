@@ -69,5 +69,19 @@ class UserStore @Inject()() {
     ).executeUpdate()
   }
 
-
+  def insert(user: User)(implicit conn: Connection): Long = {
+    SQL("insert into users (username, password, name, ic_number, contact_number, address, email, role, created, modified) " +
+      "values ({username}, {password}, {name}, {ic_number}, {contact_number}, {address}, {email}, {role}, {created}, {modified})").on(
+      "username" -> user.username,
+      "password" -> user.password,
+      "name" -> user.name,
+      "ic_number" -> user.ic_number,
+      "contact_number" -> user.contact_number,
+      "address" -> user.address,
+      "email" -> user.email,
+      "role" -> user.role,
+      "created" -> user.created,
+      "modified" -> user.modified
+    ).executeInsert().get
+  }
 }

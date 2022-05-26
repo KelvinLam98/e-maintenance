@@ -58,12 +58,6 @@ package controllers {
     }
 
   
-    // @LINE:16
-    def listUser: Call = {
-      
-      Call("GET", _prefix + { _defaultPrefix } + "user/list")
-    }
-  
     // @LINE:17
     def listUserJson: Call = {
       
@@ -74,6 +68,24 @@ package controllers {
     def detail(id:Long): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "user/detail/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)))
+    }
+  
+    // @LINE:19
+    def create: Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "user/create")
+    }
+  
+    // @LINE:22
+    def postUserDb: Call = {
+      
+      Call("POST", _prefix + { _defaultPrefix } + "user/create/post")
+    }
+  
+    // @LINE:16
+    def listUser: Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "user/list")
     }
   
   }

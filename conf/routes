@@ -16,3 +16,7 @@ POST    /user/post/login                     controllers.HomeController.postLogi
 GET     /user/list                           controllers.Users.listUser
 GET     /user/list.json                      controllers.Users.listUserJson
 GET     /user/detail/:id                     controllers.Users.detail(id: Long)
+GET     /user/create                         controllers.Users.create
+
++ nocsrf
+POST    /user/create/post                    controllers.Users.postUserDb

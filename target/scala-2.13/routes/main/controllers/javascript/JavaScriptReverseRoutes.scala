@@ -77,16 +77,6 @@ package controllers.javascript {
     }
 
   
-    // @LINE:16
-    def listUser: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.Users.listUser",
-      """
-        function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user/list"})
-        }
-      """
-    )
-  
     // @LINE:17
     def listUserJson: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Users.listUserJson",
@@ -103,6 +93,36 @@ package controllers.javascript {
       """
         function(id0) {
           return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
+        }
+      """
+    )
+  
+    // @LINE:19
+    def create: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Users.create",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user/create"})
+        }
+      """
+    )
+  
+    // @LINE:22
+    def postUserDb: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Users.postUserDb",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "user/create/post"})
+        }
+      """
+    )
+  
+    // @LINE:16
+    def listUser: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Users.listUser",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user/list"})
         }
       """
     )

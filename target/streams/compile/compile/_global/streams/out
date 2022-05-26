@@ -1,10 +1,7 @@
-[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\views\users\detail.scala.html:1:1: not found: type UserInfo[0m
-[0m[[0m[31merror[0m] [0m[0m@(user: UserInfo)(implicit flash: Flash, messages: Messages, request: models.RequestWithUser[_])[0m
-[0m[[0m[31merror[0m] [0m[0m^[0m
-[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\views\users\detail.scala.html:1:9: not found: type UserInfo[0m
-[0m[[0m[31merror[0m] [0m[0m@(user: UserInfo)(implicit flash: Flash, messages: Messages, request: models.RequestWithUser[_])[0m
-[0m[[0m[31merror[0m] [0m[0m        ^[0m
-[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\views\users\detail.scala.html:81:2: not found: type UserInfo[0m
-[0m[[0m[31merror[0m] [0m[0m}[0m
-[0m[[0m[31merror[0m] [0m[0m ^[0m
-[0m[[0m[31merror[0m] [0m[0mthree errors found[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\views\users\detail.scala.html:87:51: value DateTimeFormatter is not a member of java.util.Date[0m
+[0m[[0m[31merror[0m] [0m[0m                                <td>@user.created.DateTimeFormatter.ofPattern("MMM dd, yyyy h:mm a")</td>[0m
+[0m[[0m[31merror[0m] [0m[0m                                                  ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\views\users\detail.scala.html:91:52: value DateTimeFormatter is not a member of java.util.Date[0m
+[0m[[0m[31merror[0m] [0m[0m                                <td>@user.modified.DateTimeFormatter.ofPattern("MMM dd, yyyy h:mm a")</td>[0m
+[0m[[0m[31merror[0m] [0m[0m                                                   ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
