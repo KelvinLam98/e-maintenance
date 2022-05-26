@@ -1,0 +1,95 @@
+@(user: User)(implicit flash: Flash, messages: Messages, request: models.RequestWithUser[_])
+@main("E-Maintenance") {
+<script>
+    $(document).ready(function() {
+
+      var message = $('#msg')
+          message.hide()
+          if("@flash.get("success")" == "successfullyUpdated"){
+              message.css('display', 'block').addClass('form-group has-success')
+              message.find('.control-label').html('The User has been successfully updated.')
+          }
+          if("@flash.get("success")" == "successfullyCreated"){
+              message.css('display', 'block').addClass('form-group has-success')
+              message.find('.control-label').html('The User has been successfully created.')
+          }
+           if("@flash.get("success")" == "accessmentSuccessfullyUpdated"){
+              message.css('display', 'block').addClass('form-group has-success')
+              message.find('.control-label').html('User accessment has been updated successfully.')
+          }}
+    </script>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">User</h1>
+            <div id="msg">
+                <label class="control-label"></label>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a id="updateUser" href="@routes.Users.update(user.id.get)">
+                        <button type="button" class="btn btn-primary badge">
+                            Update
+                        </button>
+                    </a>
+                    <a id="deleteUser" href="@routes.Users.delete(user.id.get)">
+                        <button type="button" class="btn btn-danger badge" onclick="">
+                            Delete
+                        </button>
+                    </a>
+                    <a id="adminResetUser" href=#>
+                        <button type="button" class="btn btn-primary badge">
+                            Reset Password
+                        </button>
+                    </a>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <tbody>
+                            <tr>
+                                <th style="width:20%">Username</th>
+                                <td>@user.username</td>
+                            </tr>
+                            <tr>
+                                <th>Name</th>
+                                <td>@user.name</td>
+                            </tr>
+                            <tr>
+                                <th>IC Number</th>
+                                <td>@user.ic_number</td>
+                            </tr>
+                            <tr>
+                                <th>Contact Number</th>
+                                <td>@user.contact_number</td>
+                            </tr>
+                            <tr>
+                                <th>Address</th>
+                                <td>@user.address</td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td>@user.email</td>
+                            </tr>
+                            <tr>
+                                <th>Role</th>
+                                <td>@user.role</td>
+                            </tr>
+                            <tr>
+                                <th>Created Date</th>
+                                <td>@user.created</td>
+                            </tr>
+                            <tr>
+                                <th>Modified Date</th>
+                                <td>@user.modified</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -27,6 +27,26 @@ package controllers.javascript {
       """
     )
   
+    // @LINE:13
+    def login: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.login",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user/login"})
+        }
+      """
+    )
+  
+    // @LINE:15
+    def postLoginData: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.postLoginData",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "user/post/login"})
+        }
+      """
+    )
+  
   }
 
   // @LINE:10
@@ -41,15 +61,15 @@ package controllers.javascript {
     def versioned: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Assets.versioned",
       """
-        function(file1) {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "assets/" + (""" + implicitly[play.api.mvc.PathBindable[Asset]].javascriptUnbind + """)("file", file1)})
+        function(file0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "assets/" + (""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("file", file0)})
         }
       """
     )
   
   }
 
-  // @LINE:13
+  // @LINE:16
   class ReverseUsers(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -57,22 +77,72 @@ package controllers.javascript {
     }
 
   
-    // @LINE:13
-    def userList: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.Users.userList",
+    // @LINE:21
+    def delete: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Users.delete",
       """
-        function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "users"})
+        function(id0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0)) + "/delete"})
         }
       """
     )
   
-    // @LINE:14
+    // @LINE:17
     def listUserJson: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Users.listUserJson",
       """
         function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "users/list.json"})
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user/list.json"})
+        }
+      """
+    )
+  
+    // @LINE:18
+    def detail: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Users.detail",
+      """
+        function(id0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
+        }
+      """
+    )
+  
+    // @LINE:19
+    def create: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Users.create",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user/create"})
+        }
+      """
+    )
+  
+    // @LINE:20
+    def update: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Users.update",
+      """
+        function(id0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0)) + "/update"})
+        }
+      """
+    )
+  
+    // @LINE:24
+    def postUserDb: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Users.postUserDb",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "user/create/post"})
+        }
+      """
+    )
+  
+    // @LINE:16
+    def listUser: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Users.listUser",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user/list"})
         }
       """
     )

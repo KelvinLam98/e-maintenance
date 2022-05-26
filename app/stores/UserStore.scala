@@ -26,7 +26,7 @@ class UserStore @Inject()() {
       if (searchText.isEmpty)
         ""
       else
-        "where (name like {searchText} or username like {searchText})"
+        "where (username like {searchText})"
     SQL("select count(*) as count from users " + searchCriteria).on(
       "searchText" -> ("%" + searchText + "%")
     ).as(SqlParser.long("count").single)
@@ -37,7 +37,7 @@ class UserStore @Inject()() {
       if (searchText.isEmpty)
         ""
       else
-        "where (name like {searchText} or username like {searchText})"
+        "where (username like {searchText})"
     SQL("select * from users " + searchCriteria + " order by name Asc limit {start}, {count}").on(
       "start" -> start,
       "count" -> count,
@@ -66,6 +66,39 @@ class UserStore @Inject()() {
   def delete(id: Long)(implicit conn: Connection): Int = {
     SQL("delete from users where id = {id}").on(
       "id" -> id
+    ).executeUpdate()
+  }
+
+  def insert(user: User)(implicit conn: Connection): Long = {
+    SQL("insert into users (username, password, name, ic_number, contact_number, address, email, role, created, modified) " +
+      "values ({username}, {password}, {name}, {ic_number}, {contact_number}, {address}, {email}, {role}, {created}, {modified})").on(
+      "username" -> user.username,
+      "password" -> user.password,
+      "name" -> user.name,
+      "ic_number" -> user.ic_number,
+      "contact_number" -> user.contact_number,
+      "address" -> user.address,
+      "email" -> user.email,
+      "role" -> user.role,
+      "created" -> user.created,
+      "modified" -> user.modified
+    ).executeInsert().get
+  }
+
+  def update(user: User)(implicit conn: Connection) = {
+    SQL("update users set username={username}, password={password}, name={name}, ic_number={ic_number}, contact_number={contact_number}, address={address}, email={email}, role={role}, created={created}, modified={modified}" +
+      "where id={id}").on(
+      "id" -> user.id,
+      "username" -> user.username,
+      "password" -> user.password,
+      "name" -> user.name,
+      "ic_number" -> user.ic_number,
+      "contact_number" -> user.contact_number,
+      "address" -> user.address,
+      "email" -> user.email,
+      "role" -> user.role,
+      "created" -> user.created,
+      "modified" -> user.modified
     ).executeUpdate()
   }
 }

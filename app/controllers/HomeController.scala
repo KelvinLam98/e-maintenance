@@ -1,11 +1,14 @@
 package controllers
 
-import models.UserRole
+import anorm.Macro.Placeholder.Parser.success
+import models.{LoginForm, UserRole}
 import play.api.cache.SyncCacheApi
+import play.api.data.Form
+import play.api.data.Forms.{mapping, nonEmptyText}
 import play.api.db.Database
 
 import javax.inject._
-import play.api.mvc.{AnyContent, MessagesControllerComponents, Request}
+import play.api.mvc.{AnyContent, Flash, MessagesControllerComponents, Request}
 import stores.UserStore
 
 /**
@@ -30,7 +33,74 @@ class HomeController @Inject()(
    */
   def index() = Action { implicit request =>
     println("here")
-    Ok(views.html.index())
+    Redirect(routes.HomeController.login())
   }
 
+  def login() = Action { implicit request =>
+      val (form, errors) =
+        request.flash.get("errors") match {
+          case Some(errorsStr) =>
+            (loginDataForm.bind(request.flash.data), errorsStr.split(","))
+          case None =>
+            (loginDataForm, Array.empty[String])
+        }
+      Ok(views.html.login(form, errors))
+    }
+
+  private val loginDataForm: Form[LoginForm] = Form(
+    mapping(
+      "username" -> nonEmptyText,
+      "password" -> nonEmptyText
+    )(LoginForm.apply)(LoginForm.unapply)
+  )
+
+  def postLoginData = Action { implicit request =>
+    loginDataForm.bindFromRequest().fold(
+      hasErrors = { form =>
+        println("hasError")
+        Redirect(routes.HomeController.login())
+          .flashing(Flash(form.data) +
+            ("errors" -> form.errors.map(_.key).mkString(",")))
+      },
+      success = { data =>
+        db.withConnection { implicit conn =>
+          println("userStore.findByUserName(data.username)" + userStore.findByUserName(data.username))
+          userStore.findByUserName(data.username) match {
+            case Some(user) =>
+              if (data.password == user.password) {
+                user.role match {
+                  case UserRole.Admin_String =>
+                    println("case userrole")
+                    val userDetail = userStore.findById(user.id.get)
+                    userDetail.headOption match {
+                      case Some(u) =>
+                        if(userDetail.size == 1){
+                          println("if login success")
+                          Redirect(routes.Users.listUser).withSession("amaseng-userId" -> user.username)
+                        }else{
+                          println("else login success")
+                          Redirect(routes.Users.listUser).withSession("amaseng-userId" -> user.username)
+                        }
+                      case None =>
+                        println("case none")
+                        Redirect(routes.HomeController.login())
+                          .flashing(Flash(loginDataForm.fill(data).data) +
+                            ("errors" -> "userNotFound"))
+                    }
+                  case _ =>
+                    Redirect(routes.HomeController.index()).withSession("amaseng-userId" -> user.username)
+                }
+              } else {
+                Redirect(routes.HomeController.login())
+                  .flashing(Flash(loginDataForm.fill(data).data) +
+                    ("errors" -> "incorrectPasswordOrUsername"))
+              }
+            case None =>
+              Redirect(routes.HomeController.login())
+                .flashing(Flash(loginDataForm.fill(data).data) +
+                  ("errors" -> "incorrectPasswordOrUsername"))
+          }
+        }
+      })
+  }
 }

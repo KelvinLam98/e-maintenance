@@ -22,6 +22,18 @@ package controllers {
       Call("GET", _prefix)
     }
   
+    // @LINE:13
+    def login(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "user/login")
+    }
+  
+    // @LINE:15
+    def postLoginData: Call = {
+      
+      Call("POST", _prefix + { _defaultPrefix } + "user/post/login")
+    }
+  
   }
 
   // @LINE:10
@@ -32,30 +44,60 @@ package controllers {
 
   
     // @LINE:10
-    def versioned(file:Asset): Call = {
-      implicit lazy val _rrc = new play.core.routing.ReverseRouteContext(Map(("path", "/public"))); _rrc
-      Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[play.api.mvc.PathBindable[Asset]].unbind("file", file))
+    def versioned(file:String): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[play.api.mvc.PathBindable[String]].unbind("file", file))
     }
   
   }
 
-  // @LINE:13
+  // @LINE:16
   class ReverseUsers(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:13
-    def userList: Call = {
+    // @LINE:21
+    def delete(id:Long): Call = {
       
-      Call("GET", _prefix + { _defaultPrefix } + "users")
+      Call("GET", _prefix + { _defaultPrefix } + "user/detail/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)) + "/delete")
     }
   
-    // @LINE:14
+    // @LINE:17
     def listUserJson: Call = {
       
-      Call("GET", _prefix + { _defaultPrefix } + "users/list.json")
+      Call("GET", _prefix + { _defaultPrefix } + "user/list.json")
+    }
+  
+    // @LINE:18
+    def detail(id:Long): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "user/detail/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)))
+    }
+  
+    // @LINE:19
+    def create: Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "user/create")
+    }
+  
+    // @LINE:20
+    def update(id:Long): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "user/detail/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)) + "/update")
+    }
+  
+    // @LINE:24
+    def postUserDb: Call = {
+      
+      Call("POST", _prefix + { _defaultPrefix } + "user/create/post")
+    }
+  
+    // @LINE:16
+    def listUser: Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "user/list")
     }
   
   }
