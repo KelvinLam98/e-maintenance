@@ -107,7 +107,17 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:22
+    // @LINE:20
+    def update: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Users.update",
+      """
+        function(id0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0)) + "/update"})
+        }
+      """
+    )
+  
+    // @LINE:23
     def postUserDb: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Users.postUserDb",
       """

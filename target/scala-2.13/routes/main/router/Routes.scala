@@ -50,6 +50,7 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/list.json""", """controllers.Users.listUserJson"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/detail/""" + "$" + """id<[^/]+>""", """controllers.Users.detail(id:Long)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/create""", """controllers.Users.create"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/detail/""" + "$" + """id<[^/]+>/update""", """controllers.Users.update(id:Long)"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/create/post""", """controllers.Users.postUserDb"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
@@ -202,11 +203,29 @@ class Routes(
     )
   )
 
-  // @LINE:22
-  private[this] lazy val controllers_Users_postUserDb8_route = Route("POST",
+  // @LINE:20
+  private[this] lazy val controllers_Users_update8_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("user/detail/"), DynamicPart("id", """[^/]+""",true), StaticPart("/update")))
+  )
+  private[this] lazy val controllers_Users_update8_invoker = createInvoker(
+    Users_2.update(fakeValue[Long]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.Users",
+      "update",
+      Seq(classOf[Long]),
+      "GET",
+      this.prefix + """user/detail/""" + "$" + """id<[^/]+>/update""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:23
+  private[this] lazy val controllers_Users_postUserDb9_route = Route("POST",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("user/create/post")))
   )
-  private[this] lazy val controllers_Users_postUserDb8_invoker = createInvoker(
+  private[this] lazy val controllers_Users_postUserDb9_invoker = createInvoker(
     Users_2.postUserDb,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -271,10 +290,16 @@ class Routes(
         controllers_Users_create7_invoker.call(Users_2.create)
       }
   
-    // @LINE:22
-    case controllers_Users_postUserDb8_route(params@_) =>
+    // @LINE:20
+    case controllers_Users_update8_route(params@_) =>
+      call(params.fromPath[Long]("id", None)) { (id) =>
+        controllers_Users_update8_invoker.call(Users_2.update(id))
+      }
+  
+    // @LINE:23
+    case controllers_Users_postUserDb9_route(params@_) =>
       call { 
-        controllers_Users_postUserDb8_invoker.call(Users_2.postUserDb)
+        controllers_Users_postUserDb9_invoker.call(Users_2.postUserDb)
       }
   }
 }

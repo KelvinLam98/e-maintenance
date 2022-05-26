@@ -9,7 +9,6 @@ import play.api.data.validation.Constraints.emailAddress
 import play.api.db.Database
 import play.api.libs.json.Json
 import play.api.mvc.{AnyContent, Flash, MessagesControllerComponents, Request}
-import stores.UserStore
 
 import java.util.Date
 import javax.inject.Inject
@@ -97,13 +96,35 @@ class Users @Inject()(
       },
       success = { data =>
         db.withTransaction { implicit conn =>
-          val id:Long = userStore.insert(User
-            (None, data.username, data.password, data.name, data.ic_number, data.contact_number, data.address, data.email, data.role, new Date, new Date)
-          )
-          Redirect(routes.Users.detail(id))
-            .flashing(("success" -> "successfullyCreated"))
+          userStore.findById(data.id.getOrElse(-1)) match {
+            case Some(user) =>
+              userStore.update(User(data.id, data.username, data.password, data.name, data.ic_number, data.contact_number, data.address, data.email, data.role, user.created, new Date))
+              Redirect(routes.Users.detail(user.id.get))
+                .flashing(("success" -> "successfullyUpdated"))
+            case None =>
+              val id: Long = userStore.insert(User(None, data.username, data.password, data.name, data.ic_number, data.contact_number, data.address, data.email, data.role, new Date, new Date))
+              Redirect(routes.Users.detail(id))
+                .flashing(("success" -> "successfullyCreated"))
+          }
         }
       }
     )
   }
+  /* TODO */
+  def update(id: Long) = SecuredAction(UserRole.USER) { implicit request =>
+    db.withConnection { implicit conn =>
+        userStore.findById(id).map { user =>
+          val (form, errors) =
+            request.flash.get("errors") match {
+              case Some(errorsStr) =>
+                (userForm.bind(request.flash.data), errorsStr.split(","))
+              case None =>
+                (userForm.fill(UserForm(user.id, user.username, user.password, user.name, user.ic_number, user.contact_number, user.address, user.email, user.role)), Array.empty[String])
+            }
+          Ok(views.html.users.form(form, errors, "Update"))
+        }.getOrElse(NotFound)
+      }
+    }
+
+  /* do not edit below this line */
 }

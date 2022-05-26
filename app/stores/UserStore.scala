@@ -84,4 +84,21 @@ class UserStore @Inject()() {
       "modified" -> user.modified
     ).executeInsert().get
   }
+
+  def update(user: User)(implicit conn: Connection) = {
+    SQL("update users set username={username}, password={password}, name={name}, ic_number={ic_number}, contact_number={contact_number}, address={address}, email={email}, role={role}, created={created}, modified={modified}" +
+      "where id={id}").on(
+      "id" -> user.id,
+      "username" -> user.username,
+      "password" -> user.password,
+      "name" -> user.name,
+      "ic_number" -> user.ic_number,
+      "contact_number" -> user.contact_number,
+      "address" -> user.address,
+      "email" -> user.email,
+      "role" -> user.role,
+      "created" -> user.created,
+      "modified" -> user.modified
+    ).executeUpdate()
+  }
 }
