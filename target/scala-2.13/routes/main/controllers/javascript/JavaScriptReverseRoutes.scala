@@ -127,7 +127,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:24
+    // @LINE:23
     def postUserDb: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Users.postUserDb",
       """
@@ -143,6 +143,86 @@ package controllers.javascript {
       """
         function() {
           return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user/list"})
+        }
+      """
+    )
+  
+  }
+
+  // @LINE:26
+  class ReverseMaintenanceItems(_prefix: => String) {
+
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:31
+    def delete: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.MaintenanceItems.delete",
+      """
+        function(id0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "maintenanceItems/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0)) + "/delete"})
+        }
+      """
+    )
+  
+    // @LINE:28
+    def detail: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.MaintenanceItems.detail",
+      """
+        function(id0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "maintenanceItems/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
+        }
+      """
+    )
+  
+    // @LINE:29
+    def create: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.MaintenanceItems.create",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "maintenanceItems/create"})
+        }
+      """
+    )
+  
+    // @LINE:30
+    def update: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.MaintenanceItems.update",
+      """
+        function(id0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "maintenanceItems/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0)) + "/update"})
+        }
+      """
+    )
+  
+    // @LINE:26
+    def list: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.MaintenanceItems.list",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "maintenanceItems/list"})
+        }
+      """
+    )
+  
+    // @LINE:33
+    def postMaintenanceItemsDb: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.MaintenanceItems.postMaintenanceItemsDb",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "maintenanceItems/create/post"})
+        }
+      """
+    )
+  
+    // @LINE:27
+    def listMaintenanceItemsJson: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.MaintenanceItems.listMaintenanceItemsJson",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "maintenanceItems/list.json"})
         }
       """
     )

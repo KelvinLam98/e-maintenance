@@ -19,6 +19,15 @@ GET     /user/detail/:id                     controllers.Users.detail(id: Long)
 GET     /user/create                         controllers.Users.create
 GET     /user/detail/:id/update              controllers.Users.update(id:Long)
 GET     /user/detail/:id/delete              controllers.Users.delete(id: Long)
-
 + nocsrf
 POST    /user/create/post                    controllers.Users.postUserDb
+
+#maintenance items
+GET     /maintenanceItems/list                        controllers.MaintenanceItems.list
+GET     /maintenanceItems/list.json                   controllers.MaintenanceItems.listMaintenanceItemsJson
+GET     /maintenanceItems/detail/:id                  controllers.MaintenanceItems.detail(id: Long)
+GET     /maintenanceItems/create                      controllers.MaintenanceItems.create
+GET     /maintenanceItems/detail/:id/update           controllers.MaintenanceItems.update(id:Long)
+GET     /maintenanceItems/detail/:id/delete           controllers.MaintenanceItems.delete(id: Long)
++ nocsrf
+POST    /maintenanceItems/create/post                 controllers.MaintenanceItems.postMaintenanceItemsDb
