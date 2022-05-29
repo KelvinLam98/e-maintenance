@@ -31,3 +31,13 @@ GET     /maintenanceItems/detail/:id/update           controllers.MaintenanceIte
 GET     /maintenanceItems/detail/:id/delete           controllers.MaintenanceItems.delete(id: Long)
 + nocsrf
 POST    /maintenanceItems/create/post                 controllers.MaintenanceItems.postMaintenanceItemsDb
+
+#work orders
+GET     /workOrders/list                             controllers.WorkOrders.list
+GET     /workOrders/list.json                        controllers.WorkOrders.listWorkOrderJson
+GET     /workOrders/detail/:id                       controllers.WorkOrders.detail(id: Long)
+GET     /workOrders/create                           controllers.WorkOrders.create
+GET     /workOrders/detail/:id/update                controllers.WorkOrders.update(id:Long)
+GET     /workOrders/detail/:id/delete                controllers.WorkOrders.delete(id: Long)
++ nocsrf
+POST    /workOrders/create/post                      controllers.WorkOrders.postWorkOrdersDb

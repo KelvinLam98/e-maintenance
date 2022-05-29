@@ -1,3 +1,10 @@
-[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\conf\routes:26:1: value list is not a member of controllers.MaintenanceItems[0m
-[0m[[0m[31merror[0m] [0m[0mGET     /maintenanceItems/list                        controllers.MaintenanceItems.list[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\views\users\detail.scala.html:82:69: unclosed character literal (or use " not ' for string literal)[0m
+[0m[[0m[31merror[0m] [0m[0m                                <td>@user.created.format('DD/MM/YYYY')</td>[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\views\users\detail.scala.html:95:2: ')' expected but '}' found.[0m
+[0m[[0m[31merror[0m] [0m[0m}[0m
+[0m[[0m[31merror[0m] [0m[0m ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\views\users\detail.scala.html:82:58: symbol literal is deprecated; use Symbol("DD") instead[0m
+[0m[[0m[31merror[0m] [0m[0m                                <td>@user.created.format('DD/MM/YYYY')</td>[0m
+[0m[[0m[31merror[0m] [0m[0m                                                         ^[0m
+[0m[[0m[31merror[0m] [0m[0mthree errors found[0m

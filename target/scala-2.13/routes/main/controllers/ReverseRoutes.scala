@@ -9,33 +9,6 @@ import _root_.controllers.Assets.Asset
 // @LINE:7
 package controllers {
 
-  // @LINE:7
-  class ReverseHomeController(_prefix: => String) {
-    def _defaultPrefix: String = {
-      if (_prefix.endsWith("/")) "" else "/"
-    }
-
-  
-    // @LINE:7
-    def index(): Call = {
-      
-      Call("GET", _prefix)
-    }
-  
-    // @LINE:13
-    def login(): Call = {
-      
-      Call("GET", _prefix + { _defaultPrefix } + "user/login")
-    }
-  
-    // @LINE:15
-    def postLoginData: Call = {
-      
-      Call("POST", _prefix + { _defaultPrefix } + "user/post/login")
-    }
-  
-  }
-
   // @LINE:10
   class ReverseAssets(_prefix: => String) {
     def _defaultPrefix: String = {
@@ -47,6 +20,57 @@ package controllers {
     def versioned(file:String): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[play.api.mvc.PathBindable[String]].unbind("file", file))
+    }
+  
+  }
+
+  // @LINE:36
+  class ReverseWorkOrders(_prefix: => String) {
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:41
+    def delete(id:Long): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "workOrders/detail/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)) + "/delete")
+    }
+  
+    // @LINE:38
+    def detail(id:Long): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "workOrders/detail/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)))
+    }
+  
+    // @LINE:39
+    def create: Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "workOrders/create")
+    }
+  
+    // @LINE:43
+    def postWorkOrdersDb: Call = {
+      
+      Call("POST", _prefix + { _defaultPrefix } + "workOrders/create/post")
+    }
+  
+    // @LINE:40
+    def update(id:Long): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "workOrders/detail/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)) + "/update")
+    }
+  
+    // @LINE:36
+    def list: Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "workOrders/list")
+    }
+  
+    // @LINE:37
+    def listWorkOrderJson: Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "workOrders/list.json")
     }
   
   }
@@ -98,6 +122,33 @@ package controllers {
     def listUser: Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "user/list")
+    }
+  
+  }
+
+  // @LINE:7
+  class ReverseHomeController(_prefix: => String) {
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:7
+    def index(): Call = {
+      
+      Call("GET", _prefix)
+    }
+  
+    // @LINE:13
+    def login(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "user/login")
+    }
+  
+    // @LINE:15
+    def postLoginData: Call = {
+      
+      Call("POST", _prefix + { _defaultPrefix } + "user/post/login")
     }
   
   }
