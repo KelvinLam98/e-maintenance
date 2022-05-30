@@ -1,10 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\views\users\detail.scala.html:82:69: unclosed character literal (or use " not ' for string literal)[0m
-[0m[[0m[31merror[0m] [0m[0m                                <td>@user.created.format('DD/MM/YYYY')</td>[0m
-[0m[[0m[31merror[0m] [0m[0m                                                                    ^[0m
-[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\views\users\detail.scala.html:95:2: ')' expected but '}' found.[0m
-[0m[[0m[31merror[0m] [0m[0m}[0m
-[0m[[0m[31merror[0m] [0m[0m ^[0m
-[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\views\users\detail.scala.html:82:58: symbol literal is deprecated; use Symbol("DD") instead[0m
-[0m[[0m[31merror[0m] [0m[0m                                <td>@user.created.format('DD/MM/YYYY')</td>[0m
-[0m[[0m[31merror[0m] [0m[0m                                                         ^[0m
-[0m[[0m[31merror[0m] [0m[0mthree errors found[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\views\workOrders\form.scala.html:13:150: value item_name is not a member of String[0m
+[0m[[0m[31merror[0m] [0m[0m            <option value='@if(workOrderForm("maintenance_name").value.get == "maintenance_name"){ selected } value="maintenance_name"'>@itemOptions.item_name</option>[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                                                                                     ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

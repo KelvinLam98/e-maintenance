@@ -1,6 +1,6 @@
 package controllers
 
-import models.{WorkOrder, _}
+import models._
 import stores._
 import play.api.cache.SyncCacheApi
 import play.api.data.Form
@@ -17,7 +17,8 @@ class WorkOrders @Inject()(
                                   db: Database,
                                   cache: SyncCacheApi,
                                   userStore: UserStore,
-                                  workOrderStore: WorkOrderStore
+                                  workOrderStore: WorkOrderStore,
+                                  maintenanceItemStore: MaintenanceItemStore
                                 ) extends BaseController(mcc, db, cache, userStore) {
 
   def list = SecuredAction(UserRole.USER) { implicit request =>
@@ -57,7 +58,7 @@ class WorkOrders @Inject()(
   private val workOrdersForm: Form[WorkOrder] = Form(
     mapping(
       "id" -> optional(longNumber),
-      "maintenance_id" -> longNumber,
+      "maintenance_name" -> nonEmptyText,
       "maintenance_date" -> date,
     )(WorkOrder.apply)(WorkOrder.unapply)
   )
@@ -69,9 +70,9 @@ class WorkOrders @Inject()(
           case Some(errorsStr) =>
             (workOrdersForm.bind(request.flash.data), errorsStr.split(","))
           case None =>
-            (workOrdersForm.fill(WorkOrder(None, 0, new Date)), Array.empty[String])
+            (workOrdersForm.fill(WorkOrder(None, "", new Date)), Array.empty[String])
         }
-      Ok(views.html.workOrders.form(form, errors, "Create"))
+      Ok(views.html.workOrders.form(form, errors, "Create", maintenanceItemStore.options))
     }
   }
 
@@ -89,14 +90,15 @@ class WorkOrders @Inject()(
             ("errors" -> "invalidData")) }
       },
       success = { data =>
+        println("debug#####################" + data.maintenance_name)
         db.withTransaction { implicit conn =>
           workOrderStore.findById(data.id.getOrElse(-1)) match {
             case Some(wo) =>
-              workOrderStore.update(WorkOrder(data.id, data.maintenance_id, data.maintenance_date))
+              workOrderStore.update(WorkOrder(data.id, data.maintenance_name, data.maintenance_date))
               Redirect(routes.WorkOrders.detail(wo.id.get))
                 .flashing(("success" -> "successfullyUpdated"))
             case None =>
-              val id: Long = workOrderStore.insert(WorkOrder(None, data.maintenance_id, data.maintenance_date))
+              val id: Long = workOrderStore.insert(WorkOrder(None, data.maintenance_name, data.maintenance_date))
               Redirect(routes.WorkOrders.detail(id))
                 .flashing(("success" -> "successfullyCreated"))
           }
@@ -113,9 +115,9 @@ class WorkOrders @Inject()(
             case Some(errorsStr) =>
               (workOrdersForm.bind(request.flash.data), errorsStr.split(","))
             case None =>
-              (workOrdersForm.fill(WorkOrder(wo.id, wo.maintenance_id, wo.maintenance_date)), Array.empty[String])
+              (workOrdersForm.fill(WorkOrder(wo.id, wo.maintenance_name, wo.maintenance_date)), Array.empty[String])
           }
-        Ok(views.html.workOrders.form(form, errors, "Update"))
+        Ok(views.html.workOrders.form(form, errors, "Update", maintenanceItemStore.options))
       }.getOrElse(NotFound)
     }
   }

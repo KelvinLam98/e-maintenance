@@ -1,21 +1,17 @@
 package stores
 
 import java.sql.Connection
-
 import javax.inject.Inject
 import models._
 import anorm._
+
 import java.io._
 import java.util.Date
-import anorm.SqlParser.scalar
+import anorm.SqlParser.{list, scalar}
 
 class MaintenanceItemStore @Inject()() {
 
   val parser: RowParser[MaintenanceItem] = Macro.namedParser[MaintenanceItem]
-
-  def findAll(implicit conn: Connection): Seq[MaintenanceItem] = {
-    SQL("select * from maintenance_item").on().as(parser.*)
-  }
 
   def countAll(implicit conn: Connection): Long = {
     SQL("select count(*) as count from maintenance_item").as(SqlParser.long("count").single)
@@ -78,5 +74,20 @@ class MaintenanceItemStore @Inject()() {
       "item_code" -> maintenanceItem.item_code,
       "item_name" -> maintenanceItem.item_name,
     ).executeUpdate()
+  }
+
+  def toModel(row: Row): MaintenanceItem =
+    MaintenanceItem(
+      Some(row[Long]("id")),
+      row[String]("item_code"),
+      row[String]("item_name")
+    )
+
+  def findAll()(implicit conn: Connection): Seq[MaintenanceItem] = {
+    SQL("select * from maintenance_item").as(parser.*)
+  }
+
+  def options(implicit conn: Connection): Seq[String] = {
+    findAll().map(item => (item.item_name))
   }
 }

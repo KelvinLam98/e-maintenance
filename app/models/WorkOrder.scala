@@ -7,7 +7,7 @@ import java.sql.Connection
 
 case class WorkOrder(
                             id : Option[Long],
-                            maintenance_id: Long,
+                            maintenance_name: String,
                             maintenance_date: Date
                           )
 

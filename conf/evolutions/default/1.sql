@@ -23,10 +23,11 @@ create table `maintenance_item` (
 
 create table `work_order` (
   `id` bigint(20) not null auto_increment,
-  `maintenance_id` bigint(20) not null,
+  `person_in_charge` varchar(100) not null,
+  `maintenance_name` varchar(100) not null,
   `maintenance_date` date not null,
-  primary key (`id`),
-  foreign key (`maintenance_id`) references maintenance_item (`id`)
+  `status` varchar(100) not null,
+  primary key (`id`)
 );
 
 # --- !Downs
