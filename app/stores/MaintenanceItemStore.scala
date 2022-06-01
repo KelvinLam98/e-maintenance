@@ -76,13 +76,6 @@ class MaintenanceItemStore @Inject()() {
     ).executeUpdate()
   }
 
-  def toModel(row: Row): MaintenanceItem =
-    MaintenanceItem(
-      Some(row[Long]("id")),
-      row[String]("item_code"),
-      row[String]("item_name")
-    )
-
   def findAll()(implicit conn: Connection): Seq[MaintenanceItem] = {
     SQL("select * from maintenance_item").as(parser.*)
   }

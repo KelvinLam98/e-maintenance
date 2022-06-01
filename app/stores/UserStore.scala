@@ -13,10 +13,6 @@ class UserStore @Inject()() {
 
   val parser: RowParser[User] = Macro.namedParser[User]
 
-  def findAll(implicit conn: Connection): Seq[User] = {
-    SQL("select * from users").on().as(parser.*)
-  }
-
   def countAll(implicit conn: Connection): Long = {
     SQL("select count(*) as count from users").as(SqlParser.long("count").single)
   }
@@ -43,12 +39,6 @@ class UserStore @Inject()() {
       "count" -> count,
       "searchText" -> ("%" + searchText + "%")
     ).as(parser.*)
-  }
-
-  def findInfoById(id: Long)(implicit conn: Connection): Option[User] = {
-    SQL("select * from users where id = {id}").on(
-      "id" -> id
-    ).as(parser.singleOpt)
   }
 
   def findById(id: Long)(implicit conn: Connection): Option[User] = {
@@ -101,4 +91,15 @@ class UserStore @Inject()() {
       "modified" -> user.modified
     ).executeUpdate()
   }
+
+  def findAll()(implicit conn: Connection): Seq[User] = {
+    SQL("select * from users where role = {role}").on(
+      "role" -> "user"
+    ).as(parser.*)
+  }
+
+  def options(implicit conn: Connection): Seq[String] = {
+    findAll().map(user => (user.name))
+  }
+
 }

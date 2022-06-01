@@ -61,19 +61,23 @@ class WorkOrderStore @Inject()() {
   }
 
   def insert(workOrder: WorkOrder)(implicit conn: Connection): Long = {
-    SQL("insert into work_order (maintenance_name, maintenance_date) " +
-      "values ({maintenance_name}, {maintenance_date})").on(
+    SQL("insert into work_order (maintenance_name, person_in_charge, maintenance_date, status) " +
+      "values ({maintenance_name}, {person_in_charge}, {maintenance_date}, {status})").on(
       "maintenance_name" -> workOrder.maintenance_name,
+      "person_in_charge" -> workOrder.person_in_charge,
       "maintenance_date" -> workOrder.maintenance_date,
+      "status" -> workOrder.status,
     ).executeInsert().get
   }
 
   def update(workOrder: WorkOrder)(implicit conn: Connection) = {
-    SQL("update work_order set maintenance_name={maintenance_name}, maintenance_date={maintenance_date}" +
+    SQL("update work_order set maintenance_name={maintenance_name}, person_in_charge={person_in_charge}, maintenance_date={maintenance_date}, status = {status}" +
       "where id={id}").on(
       "id" -> workOrder.id,
       "maintenance_name" -> workOrder.maintenance_name,
+      "person_in_charge" -> workOrder.person_in_charge,
       "maintenance_date" -> workOrder.maintenance_date,
+      "status" -> workOrder.status,
     ).executeUpdate()
   }
 

@@ -48,7 +48,7 @@ class Users @Inject()(
 
   def detail(id: Long) = SecuredAction(UserRole.ADMIN) { implicit request =>
     db.withConnection { implicit conn =>
-        userStore.findInfoById(id).map { user =>
+        userStore.findById(id).map { user =>
           Ok(views.html.users.detail(user))
         }.getOrElse(NotFound)
       }

@@ -9,6 +9,7 @@ import play.api.db.Database
 import play.api.libs.json.Json
 import play.api.mvc.{AnyContent, Flash, MessagesControllerComponents, Request}
 
+import java.text.SimpleDateFormat
 import java.util.Date
 import javax.inject.Inject
 
@@ -59,7 +60,9 @@ class WorkOrders @Inject()(
     mapping(
       "id" -> optional(longNumber),
       "maintenance_name" -> nonEmptyText,
+      "person_in_charge" -> nonEmptyText,
       "maintenance_date" -> date,
+      "status" -> nonEmptyText,
     )(WorkOrder.apply)(WorkOrder.unapply)
   )
 
@@ -70,9 +73,9 @@ class WorkOrders @Inject()(
           case Some(errorsStr) =>
             (workOrdersForm.bind(request.flash.data), errorsStr.split(","))
           case None =>
-            (workOrdersForm.fill(WorkOrder(None, "", new Date)), Array.empty[String])
+            (workOrdersForm.fill(WorkOrder(None, "", "", new Date, "")), Array.empty[String])
         }
-      Ok(views.html.workOrders.form(form, errors, "Create", maintenanceItemStore.options))
+      Ok(views.html.workOrders.form(form, errors, "Create", maintenanceItemStore.options, userStore.options))
     }
   }
 
@@ -94,17 +97,22 @@ class WorkOrders @Inject()(
         db.withTransaction { implicit conn =>
           workOrderStore.findById(data.id.getOrElse(-1)) match {
             case Some(wo) =>
-              workOrderStore.update(WorkOrder(data.id, data.maintenance_name, data.maintenance_date))
+              workOrderStore.update(WorkOrder(data.id, data.maintenance_name, data.person_in_charge, data.maintenance_date, data.status))
               Redirect(routes.WorkOrders.detail(wo.id.get))
                 .flashing(("success" -> "successfullyUpdated"))
             case None =>
-              val id: Long = workOrderStore.insert(WorkOrder(None, data.maintenance_name, data.maintenance_date))
+              val id: Long = workOrderStore.insert(WorkOrder(None, data.maintenance_name, data.person_in_charge, data.maintenance_date, data.status))
               Redirect(routes.WorkOrders.detail(id))
                 .flashing(("success" -> "successfullyCreated"))
           }
         }
       }
     )
+  }
+
+  val dateFormatter = new SimpleDateFormat(("dd/MM/yyyy"))
+  def toDateFormat(date: Date): Date = {
+    (new SimpleDateFormat("dd/MM/yyyy")).parse(dateFormatter.format(date))
   }
 
   def update(id: Long) = SecuredAction(UserRole.USER) { implicit request =>
@@ -115,9 +123,10 @@ class WorkOrders @Inject()(
             case Some(errorsStr) =>
               (workOrdersForm.bind(request.flash.data), errorsStr.split(","))
             case None =>
-              (workOrdersForm.fill(WorkOrder(wo.id, wo.maintenance_name, wo.maintenance_date)), Array.empty[String])
+              println("debug: "+wo)
+              (workOrdersForm.fill(WorkOrder(wo.id, wo.maintenance_name, wo.person_in_charge, toDateFormat(wo.maintenance_date), wo.status)), Array.empty[String])
           }
-        Ok(views.html.workOrders.form(form, errors, "Update", maintenanceItemStore.options))
+        Ok(views.html.workOrders.form(form, errors, "Update", maintenanceItemStore.options, userStore.options))
       }.getOrElse(NotFound)
     }
   }

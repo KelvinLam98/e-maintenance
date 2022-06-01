@@ -8,16 +8,18 @@
             "serverSide": true,
             "ajax": "/workOrders/list.json",
             columns: [
-                { data: 'maintenance_id',
+                { data: 'maintenance_name',
                     "render": function(data, type, full, meta){
                         return '<a href="detail/' + full.id + '" class="link">' + data + '</a>';
                     }
                 },
+                { data: 'person_in_charge'},
                 { data: 'maintenance_date',
                     "render": function(data, type, full, meta){
                             return moment(data).format('YYYY-MM-DD');
                     }
                 },
+                { data: 'status'}
             ],
             responsive: true
         });
@@ -45,8 +47,10 @@
     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
         <thead>
         <tr>
-            <th width="20%">Maintenance Item</th>
-            <th>Date</th>
+            <th width="25%">Maintenance Item</th>
+            <th width="25%">Person In Charge</th>
+            <th width="25%">Date</th>
+            <th>Status</th>
         </tr>
         </thead>
     </table>
