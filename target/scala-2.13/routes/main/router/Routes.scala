@@ -13,28 +13,36 @@ import _root_.controllers.Assets.Asset
 class Routes(
   override val errorHandler: play.api.http.HttpErrorHandler, 
   // @LINE:7
-  HomeController_0: controllers.HomeController,
+  HomeController_4: controllers.HomeController,
   // @LINE:10
-  Assets_1: controllers.Assets,
+  Assets_3: controllers.Assets,
   // @LINE:16
-  Users_2: controllers.Users,
+  Users_0: controllers.Users,
+  // @LINE:26
+  MaintenanceItems_2: controllers.MaintenanceItems,
+  // @LINE:36
+  WorkOrders_1: controllers.WorkOrders,
   val prefix: String
 ) extends GeneratedRouter {
 
    @javax.inject.Inject()
    def this(errorHandler: play.api.http.HttpErrorHandler,
     // @LINE:7
-    HomeController_0: controllers.HomeController,
+    HomeController_4: controllers.HomeController,
     // @LINE:10
-    Assets_1: controllers.Assets,
+    Assets_3: controllers.Assets,
     // @LINE:16
-    Users_2: controllers.Users
-  ) = this(errorHandler, HomeController_0, Assets_1, Users_2, "/")
+    Users_0: controllers.Users,
+    // @LINE:26
+    MaintenanceItems_2: controllers.MaintenanceItems,
+    // @LINE:36
+    WorkOrders_1: controllers.WorkOrders
+  ) = this(errorHandler, HomeController_4, Assets_3, Users_0, MaintenanceItems_2, WorkOrders_1, "/")
 
   def withPrefix(addPrefix: String): Routes = {
     val prefix = play.api.routing.Router.concatPrefix(addPrefix, this.prefix)
     router.RoutesPrefix.setPrefix(prefix)
-    new Routes(errorHandler, HomeController_0, Assets_1, Users_2, prefix)
+    new Routes(errorHandler, HomeController_4, Assets_3, Users_0, MaintenanceItems_2, WorkOrders_1, prefix)
   }
 
   private[this] val defaultPrefix: String = {
@@ -53,6 +61,20 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/detail/""" + "$" + """id<[^/]+>/update""", """controllers.Users.update(id:Long)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/detail/""" + "$" + """id<[^/]+>/delete""", """controllers.Users.delete(id:Long)"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/create/post""", """controllers.Users.postUserDb"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """maintenanceItems/list""", """controllers.MaintenanceItems.list"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """maintenanceItems/list.json""", """controllers.MaintenanceItems.listMaintenanceItemsJson"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """maintenanceItems/detail/""" + "$" + """id<[^/]+>""", """controllers.MaintenanceItems.detail(id:Long)"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """maintenanceItems/create""", """controllers.MaintenanceItems.create"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """maintenanceItems/detail/""" + "$" + """id<[^/]+>/update""", """controllers.MaintenanceItems.update(id:Long)"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """maintenanceItems/detail/""" + "$" + """id<[^/]+>/delete""", """controllers.MaintenanceItems.delete(id:Long)"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """maintenanceItems/create/post""", """controllers.MaintenanceItems.postMaintenanceItemsDb"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """workOrders/list""", """controllers.WorkOrders.list"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """workOrders/list.json""", """controllers.WorkOrders.listWorkOrderJson"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """workOrders/detail/""" + "$" + """id<[^/]+>""", """controllers.WorkOrders.detail(id:Long)"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """workOrders/create""", """controllers.WorkOrders.create"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """workOrders/detail/""" + "$" + """id<[^/]+>/update""", """controllers.WorkOrders.update(id:Long)"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """workOrders/detail/""" + "$" + """id<[^/]+>/delete""", """controllers.WorkOrders.delete(id:Long)"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """workOrders/create/post""", """controllers.WorkOrders.postWorkOrdersDb"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
     case r @ (_,_,_) => s :+ r.asInstanceOf[(String,String,String)]
@@ -65,7 +87,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix)))
   )
   private[this] lazy val controllers_HomeController_index0_invoker = createInvoker(
-    HomeController_0.index(),
+    HomeController_4.index(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.HomeController",
@@ -83,7 +105,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("assets/"), DynamicPart("file", """.+""",false)))
   )
   private[this] lazy val controllers_Assets_versioned1_invoker = createInvoker(
-    Assets_1.versioned(fakeValue[String]),
+    Assets_3.versioned(fakeValue[String]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.Assets",
@@ -101,7 +123,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("user/login")))
   )
   private[this] lazy val controllers_HomeController_login2_invoker = createInvoker(
-    HomeController_0.login(),
+    HomeController_4.login(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.HomeController",
@@ -119,7 +141,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("user/post/login")))
   )
   private[this] lazy val controllers_HomeController_postLoginData3_invoker = createInvoker(
-    HomeController_0.postLoginData,
+    HomeController_4.postLoginData,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.HomeController",
@@ -137,7 +159,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("user/list")))
   )
   private[this] lazy val controllers_Users_listUser4_invoker = createInvoker(
-    Users_2.listUser,
+    Users_0.listUser,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.Users",
@@ -155,7 +177,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("user/list.json")))
   )
   private[this] lazy val controllers_Users_listUserJson5_invoker = createInvoker(
-    Users_2.listUserJson,
+    Users_0.listUserJson,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.Users",
@@ -173,7 +195,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("user/detail/"), DynamicPart("id", """[^/]+""",true)))
   )
   private[this] lazy val controllers_Users_detail6_invoker = createInvoker(
-    Users_2.detail(fakeValue[Long]),
+    Users_0.detail(fakeValue[Long]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.Users",
@@ -191,7 +213,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("user/create")))
   )
   private[this] lazy val controllers_Users_create7_invoker = createInvoker(
-    Users_2.create,
+    Users_0.create,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.Users",
@@ -209,7 +231,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("user/detail/"), DynamicPart("id", """[^/]+""",true), StaticPart("/update")))
   )
   private[this] lazy val controllers_Users_update8_invoker = createInvoker(
-    Users_2.update(fakeValue[Long]),
+    Users_0.update(fakeValue[Long]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.Users",
@@ -227,7 +249,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("user/detail/"), DynamicPart("id", """[^/]+""",true), StaticPart("/delete")))
   )
   private[this] lazy val controllers_Users_delete9_invoker = createInvoker(
-    Users_2.delete(fakeValue[Long]),
+    Users_0.delete(fakeValue[Long]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.Users",
@@ -240,12 +262,12 @@ class Routes(
     )
   )
 
-  // @LINE:24
+  // @LINE:23
   private[this] lazy val controllers_Users_postUserDb10_route = Route("POST",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("user/create/post")))
   )
   private[this] lazy val controllers_Users_postUserDb10_invoker = createInvoker(
-    Users_2.postUserDb,
+    Users_0.postUserDb,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.Users",
@@ -258,73 +280,409 @@ class Routes(
     )
   )
 
+  // @LINE:26
+  private[this] lazy val controllers_MaintenanceItems_list11_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("maintenanceItems/list")))
+  )
+  private[this] lazy val controllers_MaintenanceItems_list11_invoker = createInvoker(
+    MaintenanceItems_2.list,
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.MaintenanceItems",
+      "list",
+      Nil,
+      "GET",
+      this.prefix + """maintenanceItems/list""",
+      """maintenance items""",
+      Seq()
+    )
+  )
+
+  // @LINE:27
+  private[this] lazy val controllers_MaintenanceItems_listMaintenanceItemsJson12_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("maintenanceItems/list.json")))
+  )
+  private[this] lazy val controllers_MaintenanceItems_listMaintenanceItemsJson12_invoker = createInvoker(
+    MaintenanceItems_2.listMaintenanceItemsJson,
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.MaintenanceItems",
+      "listMaintenanceItemsJson",
+      Nil,
+      "GET",
+      this.prefix + """maintenanceItems/list.json""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:28
+  private[this] lazy val controllers_MaintenanceItems_detail13_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("maintenanceItems/detail/"), DynamicPart("id", """[^/]+""",true)))
+  )
+  private[this] lazy val controllers_MaintenanceItems_detail13_invoker = createInvoker(
+    MaintenanceItems_2.detail(fakeValue[Long]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.MaintenanceItems",
+      "detail",
+      Seq(classOf[Long]),
+      "GET",
+      this.prefix + """maintenanceItems/detail/""" + "$" + """id<[^/]+>""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:29
+  private[this] lazy val controllers_MaintenanceItems_create14_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("maintenanceItems/create")))
+  )
+  private[this] lazy val controllers_MaintenanceItems_create14_invoker = createInvoker(
+    MaintenanceItems_2.create,
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.MaintenanceItems",
+      "create",
+      Nil,
+      "GET",
+      this.prefix + """maintenanceItems/create""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:30
+  private[this] lazy val controllers_MaintenanceItems_update15_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("maintenanceItems/detail/"), DynamicPart("id", """[^/]+""",true), StaticPart("/update")))
+  )
+  private[this] lazy val controllers_MaintenanceItems_update15_invoker = createInvoker(
+    MaintenanceItems_2.update(fakeValue[Long]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.MaintenanceItems",
+      "update",
+      Seq(classOf[Long]),
+      "GET",
+      this.prefix + """maintenanceItems/detail/""" + "$" + """id<[^/]+>/update""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:31
+  private[this] lazy val controllers_MaintenanceItems_delete16_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("maintenanceItems/detail/"), DynamicPart("id", """[^/]+""",true), StaticPart("/delete")))
+  )
+  private[this] lazy val controllers_MaintenanceItems_delete16_invoker = createInvoker(
+    MaintenanceItems_2.delete(fakeValue[Long]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.MaintenanceItems",
+      "delete",
+      Seq(classOf[Long]),
+      "GET",
+      this.prefix + """maintenanceItems/detail/""" + "$" + """id<[^/]+>/delete""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:33
+  private[this] lazy val controllers_MaintenanceItems_postMaintenanceItemsDb17_route = Route("POST",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("maintenanceItems/create/post")))
+  )
+  private[this] lazy val controllers_MaintenanceItems_postMaintenanceItemsDb17_invoker = createInvoker(
+    MaintenanceItems_2.postMaintenanceItemsDb,
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.MaintenanceItems",
+      "postMaintenanceItemsDb",
+      Nil,
+      "POST",
+      this.prefix + """maintenanceItems/create/post""",
+      """""",
+      Seq("""nocsrf""")
+    )
+  )
+
+  // @LINE:36
+  private[this] lazy val controllers_WorkOrders_list18_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("workOrders/list")))
+  )
+  private[this] lazy val controllers_WorkOrders_list18_invoker = createInvoker(
+    WorkOrders_1.list,
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.WorkOrders",
+      "list",
+      Nil,
+      "GET",
+      this.prefix + """workOrders/list""",
+      """work orders""",
+      Seq()
+    )
+  )
+
+  // @LINE:37
+  private[this] lazy val controllers_WorkOrders_listWorkOrderJson19_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("workOrders/list.json")))
+  )
+  private[this] lazy val controllers_WorkOrders_listWorkOrderJson19_invoker = createInvoker(
+    WorkOrders_1.listWorkOrderJson,
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.WorkOrders",
+      "listWorkOrderJson",
+      Nil,
+      "GET",
+      this.prefix + """workOrders/list.json""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:38
+  private[this] lazy val controllers_WorkOrders_detail20_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("workOrders/detail/"), DynamicPart("id", """[^/]+""",true)))
+  )
+  private[this] lazy val controllers_WorkOrders_detail20_invoker = createInvoker(
+    WorkOrders_1.detail(fakeValue[Long]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.WorkOrders",
+      "detail",
+      Seq(classOf[Long]),
+      "GET",
+      this.prefix + """workOrders/detail/""" + "$" + """id<[^/]+>""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:39
+  private[this] lazy val controllers_WorkOrders_create21_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("workOrders/create")))
+  )
+  private[this] lazy val controllers_WorkOrders_create21_invoker = createInvoker(
+    WorkOrders_1.create,
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.WorkOrders",
+      "create",
+      Nil,
+      "GET",
+      this.prefix + """workOrders/create""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:40
+  private[this] lazy val controllers_WorkOrders_update22_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("workOrders/detail/"), DynamicPart("id", """[^/]+""",true), StaticPart("/update")))
+  )
+  private[this] lazy val controllers_WorkOrders_update22_invoker = createInvoker(
+    WorkOrders_1.update(fakeValue[Long]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.WorkOrders",
+      "update",
+      Seq(classOf[Long]),
+      "GET",
+      this.prefix + """workOrders/detail/""" + "$" + """id<[^/]+>/update""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:41
+  private[this] lazy val controllers_WorkOrders_delete23_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("workOrders/detail/"), DynamicPart("id", """[^/]+""",true), StaticPart("/delete")))
+  )
+  private[this] lazy val controllers_WorkOrders_delete23_invoker = createInvoker(
+    WorkOrders_1.delete(fakeValue[Long]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.WorkOrders",
+      "delete",
+      Seq(classOf[Long]),
+      "GET",
+      this.prefix + """workOrders/detail/""" + "$" + """id<[^/]+>/delete""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:43
+  private[this] lazy val controllers_WorkOrders_postWorkOrdersDb24_route = Route("POST",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("workOrders/create/post")))
+  )
+  private[this] lazy val controllers_WorkOrders_postWorkOrdersDb24_invoker = createInvoker(
+    WorkOrders_1.postWorkOrdersDb,
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.WorkOrders",
+      "postWorkOrdersDb",
+      Nil,
+      "POST",
+      this.prefix + """workOrders/create/post""",
+      """""",
+      Seq("""nocsrf""")
+    )
+  )
+
 
   def routes: PartialFunction[RequestHeader, Handler] = {
   
     // @LINE:7
     case controllers_HomeController_index0_route(params@_) =>
       call { 
-        controllers_HomeController_index0_invoker.call(HomeController_0.index())
+        controllers_HomeController_index0_invoker.call(HomeController_4.index())
       }
   
     // @LINE:10
     case controllers_Assets_versioned1_route(params@_) =>
       call(params.fromPath[String]("file", None)) { (file) =>
-        controllers_Assets_versioned1_invoker.call(Assets_1.versioned(file))
+        controllers_Assets_versioned1_invoker.call(Assets_3.versioned(file))
       }
   
     // @LINE:13
     case controllers_HomeController_login2_route(params@_) =>
       call { 
-        controllers_HomeController_login2_invoker.call(HomeController_0.login())
+        controllers_HomeController_login2_invoker.call(HomeController_4.login())
       }
   
     // @LINE:15
     case controllers_HomeController_postLoginData3_route(params@_) =>
       call { 
-        controllers_HomeController_postLoginData3_invoker.call(HomeController_0.postLoginData)
+        controllers_HomeController_postLoginData3_invoker.call(HomeController_4.postLoginData)
       }
   
     // @LINE:16
     case controllers_Users_listUser4_route(params@_) =>
       call { 
-        controllers_Users_listUser4_invoker.call(Users_2.listUser)
+        controllers_Users_listUser4_invoker.call(Users_0.listUser)
       }
   
     // @LINE:17
     case controllers_Users_listUserJson5_route(params@_) =>
       call { 
-        controllers_Users_listUserJson5_invoker.call(Users_2.listUserJson)
+        controllers_Users_listUserJson5_invoker.call(Users_0.listUserJson)
       }
   
     // @LINE:18
     case controllers_Users_detail6_route(params@_) =>
       call(params.fromPath[Long]("id", None)) { (id) =>
-        controllers_Users_detail6_invoker.call(Users_2.detail(id))
+        controllers_Users_detail6_invoker.call(Users_0.detail(id))
       }
   
     // @LINE:19
     case controllers_Users_create7_route(params@_) =>
       call { 
-        controllers_Users_create7_invoker.call(Users_2.create)
+        controllers_Users_create7_invoker.call(Users_0.create)
       }
   
     // @LINE:20
     case controllers_Users_update8_route(params@_) =>
       call(params.fromPath[Long]("id", None)) { (id) =>
-        controllers_Users_update8_invoker.call(Users_2.update(id))
+        controllers_Users_update8_invoker.call(Users_0.update(id))
       }
   
     // @LINE:21
     case controllers_Users_delete9_route(params@_) =>
       call(params.fromPath[Long]("id", None)) { (id) =>
-        controllers_Users_delete9_invoker.call(Users_2.delete(id))
+        controllers_Users_delete9_invoker.call(Users_0.delete(id))
       }
   
-    // @LINE:24
+    // @LINE:23
     case controllers_Users_postUserDb10_route(params@_) =>
       call { 
-        controllers_Users_postUserDb10_invoker.call(Users_2.postUserDb)
+        controllers_Users_postUserDb10_invoker.call(Users_0.postUserDb)
+      }
+  
+    // @LINE:26
+    case controllers_MaintenanceItems_list11_route(params@_) =>
+      call { 
+        controllers_MaintenanceItems_list11_invoker.call(MaintenanceItems_2.list)
+      }
+  
+    // @LINE:27
+    case controllers_MaintenanceItems_listMaintenanceItemsJson12_route(params@_) =>
+      call { 
+        controllers_MaintenanceItems_listMaintenanceItemsJson12_invoker.call(MaintenanceItems_2.listMaintenanceItemsJson)
+      }
+  
+    // @LINE:28
+    case controllers_MaintenanceItems_detail13_route(params@_) =>
+      call(params.fromPath[Long]("id", None)) { (id) =>
+        controllers_MaintenanceItems_detail13_invoker.call(MaintenanceItems_2.detail(id))
+      }
+  
+    // @LINE:29
+    case controllers_MaintenanceItems_create14_route(params@_) =>
+      call { 
+        controllers_MaintenanceItems_create14_invoker.call(MaintenanceItems_2.create)
+      }
+  
+    // @LINE:30
+    case controllers_MaintenanceItems_update15_route(params@_) =>
+      call(params.fromPath[Long]("id", None)) { (id) =>
+        controllers_MaintenanceItems_update15_invoker.call(MaintenanceItems_2.update(id))
+      }
+  
+    // @LINE:31
+    case controllers_MaintenanceItems_delete16_route(params@_) =>
+      call(params.fromPath[Long]("id", None)) { (id) =>
+        controllers_MaintenanceItems_delete16_invoker.call(MaintenanceItems_2.delete(id))
+      }
+  
+    // @LINE:33
+    case controllers_MaintenanceItems_postMaintenanceItemsDb17_route(params@_) =>
+      call { 
+        controllers_MaintenanceItems_postMaintenanceItemsDb17_invoker.call(MaintenanceItems_2.postMaintenanceItemsDb)
+      }
+  
+    // @LINE:36
+    case controllers_WorkOrders_list18_route(params@_) =>
+      call { 
+        controllers_WorkOrders_list18_invoker.call(WorkOrders_1.list)
+      }
+  
+    // @LINE:37
+    case controllers_WorkOrders_listWorkOrderJson19_route(params@_) =>
+      call { 
+        controllers_WorkOrders_listWorkOrderJson19_invoker.call(WorkOrders_1.listWorkOrderJson)
+      }
+  
+    // @LINE:38
+    case controllers_WorkOrders_detail20_route(params@_) =>
+      call(params.fromPath[Long]("id", None)) { (id) =>
+        controllers_WorkOrders_detail20_invoker.call(WorkOrders_1.detail(id))
+      }
+  
+    // @LINE:39
+    case controllers_WorkOrders_create21_route(params@_) =>
+      call { 
+        controllers_WorkOrders_create21_invoker.call(WorkOrders_1.create)
+      }
+  
+    // @LINE:40
+    case controllers_WorkOrders_update22_route(params@_) =>
+      call(params.fromPath[Long]("id", None)) { (id) =>
+        controllers_WorkOrders_update22_invoker.call(WorkOrders_1.update(id))
+      }
+  
+    // @LINE:41
+    case controllers_WorkOrders_delete23_route(params@_) =>
+      call(params.fromPath[Long]("id", None)) { (id) =>
+        controllers_WorkOrders_delete23_invoker.call(WorkOrders_1.delete(id))
+      }
+  
+    // @LINE:43
+    case controllers_WorkOrders_postWorkOrdersDb24_route(params@_) =>
+      call { 
+        controllers_WorkOrders_postWorkOrdersDb24_invoker.call(WorkOrders_1.postWorkOrdersDb)
       }
   }
 }

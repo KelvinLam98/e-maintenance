@@ -1,0 +1,14 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(compile, Some(73267bed-342f-457f-b505-bf88c5e57b10), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Compile / compile[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to C:\Users\hylam\Desktop\Projects\fyp\target\scala-2.13\classes ...[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\views\workOrders\form.scala.html:12:32: not found: value workOrdersForm[0m
+[0m[[0m[31merror[0m] [0m[0m        @helper.select(field = workOrdersForm("maintenance_id"), options = itemOptions, 'class -> "form-control")[0m
+[0m[[0m[31merror[0m] [0m[0m                               ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\views\workOrders\form.scala.html:12:89: symbol literal is deprecated; use Symbol("class") instead[0m
+[0m[[0m[31merror[0m] [0m[0m        @helper.select(field = workOrdersForm("maintenance_id"), options = itemOptions, 'class -> "form-control")[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                        ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Compilation failed[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 0 s, completed May 29, 2022 5:19:27 PM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m

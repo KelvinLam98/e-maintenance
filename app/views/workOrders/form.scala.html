@@ -1,0 +1,42 @@
+@(workOrderForm: Form[WorkOrder], errors: Array[String], formType: String, itemOptions: Seq[String], userOptions: Seq[String])(implicit flash: Flash, messages: Messages, request: models.RequestWithUser[_])
+@main("E-Maintenance") {
+
+<div class="col-lg-12">
+    <h1 class="page-header">Work Order - @formType</h1>
+</div>
+<form action="@routes.WorkOrders.postWorkOrdersDb" method="post">
+    <input type="hidden" id="id " name="id" value='@workOrderForm("id").value'>
+    <div>
+        <label>Maintenance Item</label>
+        <select id="maintenance_name" name="maintenance_name" class="form-control">
+            @for(itemOption <- itemOptions){
+            <option @if(workOrderForm("maintenance_name").value.get == "@itemOption"){ selected } value="@itemOption">@itemOption</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label>Person In Charge</label>
+        <select id="person_in_charge" name="person_in_charge" class="form-control">
+            @for(userOption <- userOptions){
+            <option @if(workOrderForm("person_in_charge").value.get == "@userOption"){ selected } value="@userOption">@userOption</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label>Status</label>
+        <select id="status" name="status" class="form-control">
+            <option @if(workOrderForm("status").value.get == "Created"){ selected } value="Created">Created</option>
+            <option @if(workOrderForm("status").value.get == "In Progress"){ selected } value="In Progress">In Progress</option>
+            <option @if(workOrderForm("status").value.get == "Completed"){ selected } value="Completed">Completed</option>
+        </select>
+    </div>
+
+    <div class='form-group @if(errors.contains("maintenance_date")){ has-error }'>
+        <label>Date</label>
+        <input id="maintenance_date" name="maintenance_date" value='@workOrderForm("maintenance_date").value' class="form-control" type="date">
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary ">@formType</button>
+</form>
+
+}

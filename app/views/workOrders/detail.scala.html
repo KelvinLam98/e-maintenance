@@ -1,0 +1,50 @@
+@(workOrder: WorkOrder)(implicit flash: Flash, messages: Messages, request: models.RequestWithUser[_])
+@main("E-Maintenance") {
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Work Orders</h1>
+        <div id="msg">
+            <label class="control-label"></label>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a id="updateUser" href="@routes.WorkOrders.update(workOrder.id.get)">
+                    <button type="button" class="btn btn-primary badge">
+                        Update
+                    </button>
+                </a>
+                <a id="deleteUser" href="@routes.WorkOrders.delete(workOrder.id.get)">
+                    <button type="button" class="btn btn-danger badge" onclick="">
+                        Delete
+                    </button>
+                </a>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                        <tr>
+                            <th style="width:20%">Maintenance Item</th>
+                            <td>@workOrder.maintenance_name</td>
+                        </tr>
+                        <tr>
+                            <th>Person In Charge</th>
+                            <td>@workOrder.person_in_charge</td>
+                        </tr>
+                        <tr>
+                            <th>Maintenance Date</th>
+                            <td>@workOrder.maintenance_date</td>
+                        </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td>@workOrder.status</td>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}

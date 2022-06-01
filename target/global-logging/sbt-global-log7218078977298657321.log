@@ -1,0 +1,20 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(compile, Some(0337c3a0-4c7c-49e7-993d-707f99da64d9), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Compile / compile[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to C:\Users\hylam\Desktop\Projects\fyp\target\scala-2.13\classes ...[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\views\workOrders\form.scala.html:9:53: not found: value workOrdersForm[0m
+[0m[[0m[31merror[0m] [0m[0m    <input type="hidden" id="id " name="id" value='@workOrdersForm("id").value' class="form-control" placeholder="Required">[0m
+[0m[[0m[31merror[0m] [0m[0m                                                    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\views\workOrders\form.scala.html:12:32: not found: value workOrdersForm[0m
+[0m[[0m[31merror[0m] [0m[0m        @helper.select(field = workOrdersForm("maintenance_id"), options = itemOptions, 'class -> "form-control")[0m
+[0m[[0m[31merror[0m] [0m[0m                               ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\views\workOrders\form.scala.html:18:70: not found: value workOrdersForm[0m
+[0m[[0m[31merror[0m] [0m[0m        <input id="maintenance_date" name="maintenance_date" value='@workOrdersForm("maintenance_date").value' class="form-control" placeholder="Required" type="date">[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                     ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\views\workOrders\form.scala.html:12:89: symbol literal is deprecated; use Symbol("class") instead[0m
+[0m[[0m[31merror[0m] [0m[0m        @helper.select(field = workOrdersForm("maintenance_id"), options = itemOptions, 'class -> "form-control")[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                        ^[0m
+[0m[[0m[31merror[0m] [0m[0mfour errors found[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Compilation failed[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 0 s, completed May 29, 2022 5:19:12 PM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m
