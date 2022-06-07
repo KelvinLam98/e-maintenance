@@ -1,3 +1,5 @@
+import sbt.Keys.libraryDependencies
+
 lazy val root = (project in file("."))
   .enablePlugins(PlayScala)
   .settings(
@@ -18,7 +20,9 @@ lazy val root = (project in file("."))
       "com.typesafe.play" %% "play-mailer" % "7.0.1",
       "com.typesafe.play" %% "play-mailer-guice" % "7.0.1",
       "org.playframework.anorm" %% "anorm" % "2.6.10",
-      "org.eclipse.birt.runtime" % "org.eclipse.birt.runtime" % "4.2.2" exclude ("milyn", "flute")
+      "org.eclipse.birt.runtime" % "org.eclipse.birt.runtime" % "4.2.2" exclude ("milyn", "flute"),
+      "com.github.jwt-scala" %% "jwt-play" % "9.0.2",
+      "com.github.jwt-scala" %% "jwt-play-json" % "9.0.2",
     ),
     scalacOptions ++= Seq(
       "-feature",

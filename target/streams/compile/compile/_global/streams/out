@@ -1,19 +1,10 @@
-[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\controllers\WorkOrders.scala:63:17: missing argument list for method apply in object WorkOrder[0m
-[0m[[0m[31merror[0m] [0m[0mUnapplied methods are only converted to functions when a function type is expected.[0m
-[0m[[0m[31merror[0m] [0m[0mYou can make this conversion explicit by writing `apply _` or `apply(_,_,_,_,_)` instead of `apply`.[0m
-[0m[[0m[31merror[0m] [0m[0m    )(WorkOrder.apply)(WorkOrder.unapply)[0m
-[0m[[0m[31merror[0m] [0m[0m                ^[0m
-[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\controllers\WorkOrders.scala:63:34: missing argument list for method unapply in object WorkOrder[0m
-[0m[[0m[31merror[0m] [0m[0mUnapplied methods are only converted to functions when a function type is expected.[0m
-[0m[[0m[31merror[0m] [0m[0mYou can make this conversion explicit by writing `unapply _` or `unapply(_)` instead of `unapply`.[0m
-[0m[[0m[31merror[0m] [0m[0m    )(WorkOrder.apply)(WorkOrder.unapply)[0m
-[0m[[0m[31merror[0m] [0m[0m                                 ^[0m
-[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\controllers\WorkOrders.scala:97:46: not enough arguments for method apply: (id: Option[Long], maintenance_name: String, person_in_charge: String, maintenance_date: java.util.Date, status: String): models.WorkOrder in object WorkOrder.[0m
-[0m[[0m[31merror[0m] [0m[0mUnspecified value parameters maintenance_date, status.[0m
-[0m[[0m[31merror[0m] [0m[0m              workOrderStore.update(WorkOrder(data.id, data.maintenance_name, data.maintenance_date))[0m
-[0m[[0m[31merror[0m] [0m[0m                                             ^[0m
-[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\fyp\app\controllers\WorkOrders.scala:101:61: not enough arguments for method apply: (id: Option[Long], maintenance_name: String, person_in_charge: String, maintenance_date: java.util.Date, status: String): models.WorkOrder in object WorkOrder.[0m
-[0m[[0m[31merror[0m] [0m[0mUnspecified value parameters maintenance_date, status.[0m
-[0m[[0m[31merror[0m] [0m[0m              val id: Long = workOrderStore.insert(WorkOrder(None, data.maintenance_name, data.maintenance_date))[0m
-[0m[[0m[31merror[0m] [0m[0m                                                            ^[0m
-[0m[[0m[31merror[0m] [0m[0mfour errors found[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\e-maintenance\app\appcontrollers\Users.scala:14:8: not found: object services[0m
+[0m[[0m[31merror[0m] [0m[0mimport services._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\e-maintenance\app\helpers\LoginHelper.scala:4:8: object LoginInfo is not a member of package models[0m
+[0m[[0m[31merror[0m] [0m[0mimport models.{LoginInfo, LoginResponse, LoginSession, User, UserInfo}[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\e-maintenance\app\helpers\LoginHelper.scala:3:8: object DateHelper is not a member of package helpers[0m
+[0m[[0m[31merror[0m] [0m[0mimport helpers.{CryptoHelper, DateHelper}[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0mthree errors found[0m
