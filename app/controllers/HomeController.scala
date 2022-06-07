@@ -32,7 +32,6 @@ class HomeController @Inject()(
    * a path of `/`.
    */
   def index() = Action { implicit request =>
-    println("here")
     Redirect(routes.HomeController.login())
   }
 
@@ -57,32 +56,26 @@ class HomeController @Inject()(
   def postLoginData = Action { implicit request =>
     loginDataForm.bindFromRequest().fold(
       hasErrors = { form =>
-        println("hasError")
         Redirect(routes.HomeController.login())
           .flashing(Flash(form.data) +
             ("errors" -> form.errors.map(_.key).mkString(",")))
       },
       success = { data =>
         db.withConnection { implicit conn =>
-          println("userStore.findByUserName(data.username)" + userStore.findByUserName(data.username))
           userStore.findByUserName(data.username) match {
             case Some(user) =>
               if (data.password == user.password) {
                 user.role match {
                   case UserRole.Admin_String =>
-                    println("case userrole")
                     val userDetail = userStore.findById(user.id.get)
                     userDetail.headOption match {
                       case Some(u) =>
                         if(userDetail.size == 1){
-                          println("if login success")
                           Redirect(routes.Users.listUser).withSession("amaseng-userId" -> user.username)
                         }else{
-                          println("else login success")
                           Redirect(routes.Users.listUser).withSession("amaseng-userId" -> user.username)
                         }
                       case None =>
-                        println("case none")
                         Redirect(routes.HomeController.login())
                           .flashing(Flash(loginDataForm.fill(data).data) +
                             ("errors" -> "userNotFound"))

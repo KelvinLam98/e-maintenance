@@ -21,19 +21,16 @@ class Users @Inject()(
                      ) extends BaseController(mcc, db, cache, userStore) {
 
   def listUser = SecuredAction(UserRole.USER) { implicit request =>
-    println("list user#####################")
     Ok(views.html.users.listUser())
   }
 
   def listUserJson = SecuredAction(UserRole.USER) { implicit request =>
-    println("json request#####################")
-    val start = request.getQueryString("start").map(_.toLong).getOrElse(0L)
+   val start = request.getQueryString("start").map(_.toLong).getOrElse(0L)
     val length = request.getQueryString("length").map(_.toLong).getOrElse(10L)
     val draw: Int = request.getQueryString("draw").map(_.toInt).getOrElse(0)
     val searchText = request.getQueryString("search[value]").getOrElse("")
 
     db.withConnection { implicit conn =>
-      println("json db conn######################")
       val total = userStore.countAll
       val filtered = userStore.countFiltered(searchText)
       val data = userStore.search(start, length, searchText)
@@ -86,11 +83,10 @@ class Users @Inject()(
       hasErrors = { form =>
         val id = form.data.getOrElse("id", "")
         if (id == "") {
-          println("if: " + form.errors)
           Redirect(routes.Users.create)
             .flashing(Flash(form.data) +
               ("errors" -> form.errors.map(_.key).mkString(",")))
-        } else { println("else: " + form.errors)
+        } else {
           Redirect(routes.Users.create).flashing(Flash(form.data) +
           ("errors" -> "invalidData")) }
       },

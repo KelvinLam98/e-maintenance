@@ -22,19 +22,16 @@ class MaintenanceItems @Inject()(
                      ) extends BaseController(mcc, db, cache, userStore) {
 
   def list = SecuredAction(UserRole.USER) { implicit request =>
-    println("list maintenanceItems#####################")
     Ok(views.html.maintenanceItems.list())
   }
 
   def listMaintenanceItemsJson = SecuredAction(UserRole.USER) { implicit request =>
-    println("json request maintenanceItems#####################")
     val start = request.getQueryString("start").map(_.toLong).getOrElse(0L)
     val length = request.getQueryString("length").map(_.toLong).getOrElse(10L)
     val draw: Int = request.getQueryString("draw").map(_.toInt).getOrElse(0)
     val searchText = request.getQueryString("search[value]").getOrElse("")
 
     db.withConnection { implicit conn =>
-      println("json db conn maintenanceItems######################")
       val total = maintenanceItemStore.countAll
       val filtered = maintenanceItemStore.countFiltered(searchText)
       val data = maintenanceItemStore.search(start, length, searchText)
@@ -81,11 +78,10 @@ class MaintenanceItems @Inject()(
       hasErrors = { form =>
         val id = form.data.getOrElse("id", "")
         if (id == "") {
-          println("if: " + form.errors)
           Redirect(routes.MaintenanceItems.create)
             .flashing(Flash(form.data) +
               ("errors" -> form.errors.map(_.key).mkString(",")))
-        } else { println("else: " + form.errors)
+        } else {
           Redirect(routes.MaintenanceItems.create).flashing(Flash(form.data) +
             ("errors" -> "invalidData")) }
       },

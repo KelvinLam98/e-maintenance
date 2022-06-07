@@ -64,7 +64,7 @@ class Bases(mcc: MessagesControllerComponents, db: Database, userStore: UserStor
       url.getProtocol + "://" + url.getHost + ":" + url.getPort
     else
       url.getProtocol + "://" + url.getHost
-  }.getOrElse("https://www.ebuildex.com")
+  }.getOrElse("")
 
   object ApiAction extends ActionBuilder[Request, AnyContent] {
     override protected def executionContext: ExecutionContext = mcc.executionContext
