@@ -24,5 +24,20 @@ package appcontrollers {
   
   }
 
+  // @LINE:49
+  class ReverseWorkOrders(_prefix: => String) {
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:49
+    def workOrderList: Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "api/workOrder")
+    }
+  
+  }
+
 
 }

@@ -46,3 +46,4 @@ POST    /workOrders/create/post                      controllers.WorkOrders.post
 #login
 +nocsrf
 POST     /api/login                                  appcontrollers.Users.loginApi
+GET      /api/workOrder                              appcontrollers.WorkOrders.workOrderList

@@ -18,5 +18,10 @@ case class WorkOrder(
 object WorkOrder {
   implicit val writes: Writes[WorkOrder] = Json.writes[WorkOrder]
   implicit val reads: Reads[WorkOrder] = Json.reads[WorkOrder]
+
+  val sortableCols: Seq[String] =
+    Vector(
+      "maintenance_date"
+    )
 }
 

@@ -29,5 +29,25 @@ package appcontrollers.javascript {
   
   }
 
+  // @LINE:49
+  class ReverseWorkOrders(_prefix: => String) {
+
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:49
+    def workOrderList: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "appcontrollers.WorkOrders.workOrderList",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "api/workOrder"})
+        }
+      """
+    )
+  
+  }
+
 
 }
