@@ -81,5 +81,17 @@ class WorkOrderStore @Inject()() {
     ).executeUpdate()
   }
 
-
+  def searchById(searchText: String, limit: Option[LimitClause], orderBy: Option[OrderByClause])(implicit conn: Connection): Seq[WorkOrder] = {
+    val orderCriteria = orderBy.map(_.value).getOrElse("")
+    val searchCriteria =
+      if(searchText.isEmpty)
+        orderCriteria
+      else
+        "where (maintenance_date like {searchText}) " + orderCriteria
+    val namedParams: Seq[NamedParameter] =
+      Vector[NamedParameter](
+        "searchText" -> ("%" + searchText + "%")
+      ) ++ limit.map(_.namedParameters).getOrElse(Seq.empty[NamedParameter])
+    SQL("select * from work_order " + searchCriteria + limit.map(_.value).getOrElse("")).on(namedParams: _*).as(parser.*)
+  }
 }

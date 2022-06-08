@@ -53,6 +53,12 @@ class UserStore @Inject()() {
     ).as(parser.singleOpt)
   }
 
+  def findByEmail(email: String)(implicit conn: Connection): Option[User] = {
+    SQL("select * from users where email = {email}").on(
+      "email" -> email
+    ).as(parser.singleOpt)
+  }
+
   def delete(id: Long)(implicit conn: Connection): Int = {
     SQL("delete from users where id = {id}").on(
       "id" -> id

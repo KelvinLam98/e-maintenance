@@ -1,8 +1,10 @@
 package models
 
 import anorm.{Macro, RowParser, SQL, SqlParser}
+
 import java.util.Date
-import play.api.libs.json.{Json, Writes}
+import play.api.libs.json.{Json, Reads, Writes}
+
 import java.sql.Connection
 
 case class User(
@@ -21,5 +23,6 @@ case class User(
 
 object User {
   implicit val writes: Writes[User] = Json.writes[User]
+  implicit val reads: Reads[User] = Json.reads[User]
 }
 

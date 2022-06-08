@@ -41,3 +41,9 @@ GET     /workOrders/detail/:id/update                controllers.WorkOrders.upda
 GET     /workOrders/detail/:id/delete                controllers.WorkOrders.delete(id: Long)
 + nocsrf
 POST    /workOrders/create/post                      controllers.WorkOrders.postWorkOrdersDb
+
+#APP ROUTES
+#login
++nocsrf
+POST     /api/login                                  appcontrollers.Users.loginApi
+GET      /api/workOrder                              appcontrollers.WorkOrders.workOrderList
