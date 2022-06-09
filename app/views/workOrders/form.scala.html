@@ -15,7 +15,7 @@
         </select>
     </div>
     <div>
-        <label>Person In Charge</label>
+        <label>Staff In Charge</label>
         <select id="person_in_charge" name="person_in_charge" class="form-control">
             @for(userOption <- userOptions){
             <option @if(workOrderForm("person_in_charge").value.get == "@userOption"){ selected } value="@userOption">@userOption</option>

@@ -23,7 +23,7 @@ class WorkOrderStore @Inject()() {
       if (searchText.isEmpty)
         ""
       else
-        "where (maintenance_date like {searchText})"
+        "where (maintenance_date like {searchText} or person_in_charge like {searchText} or maintenance_name like {searchText})"
     SQL("select count(*) as count from work_order " + searchCriteria).on(
       "searchText" -> ("%" + searchText + "%")
     ).as(SqlParser.long("count").single)
@@ -34,7 +34,7 @@ class WorkOrderStore @Inject()() {
       if (searchText.isEmpty)
         ""
       else
-        "where (maintenance_date like {searchText})"
+        "where (maintenance_date like {searchText} or person_in_charge like {searchText} or maintenance_name like {searchText})"
     SQL("select * from work_order " + searchCriteria + " order by maintenance_date Asc limit {start}, {count}").on(
       "start" -> start,
       "count" -> count,
