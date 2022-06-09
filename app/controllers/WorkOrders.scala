@@ -4,12 +4,14 @@ import models._
 import stores._
 import play.api.cache.SyncCacheApi
 import play.api.data.Form
-import play.api.data.Forms.{date, email, longNumber, mapping, nonEmptyText, optional}
+import play.api.data.Forms.{date, email, localDateTime, localTime, longNumber, mapping, nonEmptyText, optional, sqlTimestamp}
 import play.api.db.Database
 import play.api.libs.json.Json
 import play.api.mvc.{AnyContent, Flash, MessagesControllerComponents, Request}
 
+import java.sql.Time
 import java.text.SimpleDateFormat
+import java.time.LocalTime
 import java.util.Date
 import javax.inject.Inject
 
@@ -19,7 +21,8 @@ class WorkOrders @Inject()(
                                   cache: SyncCacheApi,
                                   userStore: UserStore,
                                   workOrderStore: WorkOrderStore,
-                                  maintenanceItemStore: MaintenanceItemStore
+                                  maintenanceItemStore: MaintenanceItemStore,
+                                  technicianStore: TechnicianStore
                                 ) extends BaseController(mcc, db, cache, userStore) {
 
   def list = SecuredAction(UserRole.USER) { implicit request =>
@@ -58,7 +61,9 @@ class WorkOrders @Inject()(
       "id" -> optional(longNumber),
       "maintenance_name" -> nonEmptyText,
       "person_in_charge" -> nonEmptyText,
+      "technician_id" -> longNumber,
       "maintenance_date" -> date,
+      "maintenance_time" -> nonEmptyText,
       "status" -> nonEmptyText,
     )(WorkOrder.apply)(WorkOrder.unapply)
   )
@@ -70,9 +75,9 @@ class WorkOrders @Inject()(
           case Some(errorsStr) =>
             (workOrdersForm.bind(request.flash.data), errorsStr.split(","))
           case None =>
-            (workOrdersForm.fill(WorkOrder(None, "", "", new Date, "")), Array.empty[String])
+            (workOrdersForm.fill(WorkOrder(None, "", "", 0, new Date(), "", "")), Array.empty[String])
         }
-      Ok(views.html.workOrders.form(form, errors, "Create", maintenanceItemStore.options, userStore.options))
+      Ok(views.html.workOrders.form(form, errors, "Create", maintenanceItemStore.options, userStore.options, technicianStore.options))
     }
   }
 
@@ -80,6 +85,7 @@ class WorkOrders @Inject()(
     workOrdersForm.bindFromRequest().fold(
       hasErrors = { form =>
         val id = form.data.getOrElse("id", "")
+        println("debuging: " + form.errors)
         if (id == "") {
           Redirect(routes.WorkOrders.create)
             .flashing(Flash(form.data) +
@@ -92,11 +98,11 @@ class WorkOrders @Inject()(
         db.withTransaction { implicit conn =>
           workOrderStore.findById(data.id.getOrElse(-1)) match {
             case Some(wo) =>
-              workOrderStore.update(WorkOrder(data.id, data.maintenance_name, data.person_in_charge, data.maintenance_date, data.status))
+              workOrderStore.update(WorkOrder(data.id, data.maintenance_name, data.person_in_charge, data.technician_id, data.maintenance_date, data.maintenance_time, data.status))
               Redirect(routes.WorkOrders.detail(wo.id.get))
                 .flashing(("success" -> "successfullyUpdated"))
             case None =>
-              val id: Long = workOrderStore.insert(WorkOrder(None, data.maintenance_name, data.person_in_charge, data.maintenance_date, data.status))
+              val id: Long = workOrderStore.insert(WorkOrder(None, data.maintenance_name, data.person_in_charge, data.technician_id, data.maintenance_date, data.maintenance_time, data.status))
               Redirect(routes.WorkOrders.detail(id))
                 .flashing(("success" -> "successfullyCreated"))
           }
@@ -113,14 +119,15 @@ class WorkOrders @Inject()(
   def update(id: Long) = SecuredAction(UserRole.USER) { implicit request =>
     db.withConnection { implicit conn =>
       workOrderStore.findById(id).map { wo =>
-        val (form, errors) =
+        val (form, errors) = {
           request.flash.get("errors") match {
             case Some(errorsStr) =>
               (workOrdersForm.bind(request.flash.data), errorsStr.split(","))
             case None =>
-              (workOrdersForm.fill(WorkOrder(wo.id, wo.maintenance_name, wo.person_in_charge, toDateFormat(wo.maintenance_date), wo.status)), Array.empty[String])
+              (workOrdersForm.fill(WorkOrder(wo.id, wo.maintenance_name, wo.person_in_charge, wo.technician_id, toDateFormat(wo.maintenance_date), wo.maintenance_time, wo.status)), Array.empty[String])
           }
-        Ok(views.html.workOrders.form(form, errors, "Update", maintenanceItemStore.options, userStore.options))
+        }
+        Ok(views.html.workOrders.form(form, errors, "Update", maintenanceItemStore.options, userStore.options, technicianStore.options))
       }.getOrElse(NotFound)
     }
   }

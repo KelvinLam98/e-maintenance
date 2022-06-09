@@ -1,0 +1,34 @@
+@(form: Form[Technician], errors: Array[String], formType: String)(implicit flash: Flash, messages: Messages, request: models.RequestWithUser[_])
+@main("E-Maintenance") {
+<script>
+    $(document).on('keypress', 'input,select', function (e) {
+        if (e.which == 13) {
+            e.preventDefault();
+            var $canfocus = $(':focusable');
+            var index = $canfocus.index(this) + 1;
+            if (index >= $canfocus.length) index = 0;
+            $canfocus.eq(index).focus();
+        }
+    });
+</script>
+
+<div class="col-lg-12">
+    <h1 class="page-header">Technician - @formType</h1>
+</div>
+<form action="@routes.Technicians.postTechniciansDb" method="post">
+    <input type="hidden" id="id " name="id" value='@form("id").value' class="form-control" placeholder="Required">
+
+    <div class='form-group @if(errors.contains("name")){ has-error }'>
+        <label>Name</label>
+        <input id="name" name="name" value='@form("name").value' class="form-control" placeholder="Required">
+    </div>
+
+    <div class='form-group @if(errors.contains("contact_number")){ has-error }'>
+        <label>Contact Number</label>
+        <input id="contact_number" name="contact_number" value='@form("contact_number").value' class="form-control" placeholder="Required">
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary ">@formType</button>
+</form>
+
+}

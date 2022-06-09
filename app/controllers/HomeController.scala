@@ -56,6 +56,8 @@ class HomeController @Inject()(
   def postLoginData = Action { implicit request =>
     loginDataForm.bindFromRequest().fold(
       hasErrors = { form =>
+        println(form.data)
+        println(form.errors)
         Redirect(routes.HomeController.login())
           .flashing(Flash(form.data) +
             ("errors" -> form.errors.map(_.key).mkString(",")))
@@ -68,7 +70,7 @@ class HomeController @Inject()(
                 user.role match {
                   case UserRole.Admin_String =>
                     val userDetail = userStore.findById(user.id.get)
-                    userDetail.headOption match {
+                    userDetail match {
                       case Some(u) =>
                         if(userDetail.size == 1){
                           Redirect(routes.Users.listUser).withSession("amaseng-userId" -> user.username)
@@ -81,6 +83,7 @@ class HomeController @Inject()(
                             ("errors" -> "userNotFound"))
                     }
                   case _ =>
+                    println("case _")
                     Redirect(routes.HomeController.index()).withSession("amaseng-userId" -> user.username)
                 }
               } else {

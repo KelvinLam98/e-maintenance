@@ -42,6 +42,16 @@ GET     /workOrders/detail/:id/delete                controllers.WorkOrders.dele
 + nocsrf
 POST    /workOrders/create/post                      controllers.WorkOrders.postWorkOrdersDb
 
+#technicians
+GET     /technicians/list                             controllers.Technicians.list
+GET     /technicians/list.json                        controllers.Technicians.listTechniciansJson
+GET     /technicians/detail/:id                       controllers.Technicians.detail(id: Long)
+GET     /technicians/create                           controllers.Technicians.create
+GET     /technicians/detail/:id/update                controllers.Technicians.update(id:Long)
+GET     /technicians/detail/:id/delete                controllers.Technicians.delete(id: Long)
++ nocsrf
+POST    /technicians/create/post                      controllers.Technicians.postTechniciansDb
+
 #APP ROUTES
 #login
 +nocsrf

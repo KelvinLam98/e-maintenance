@@ -1,4 +1,4 @@
-@(workOrderForm: Form[WorkOrder], errors: Array[String], formType: String, itemOptions: Seq[String], userOptions: Seq[String])(implicit flash: Flash, messages: Messages, request: models.RequestWithUser[_])
+@(workOrderForm: Form[WorkOrder], errors: Array[String], formType: String, itemOptions: Seq[String], userOptions: Seq[String], techOptions: Seq[(Long,String)])(implicit flash: Flash, messages: Messages, request: models.RequestWithUser[_])
 @main("E-Maintenance") {
 
 <div class="col-lg-12">
@@ -22,6 +22,16 @@
             }
         </select>
     </div>
+
+    <div>
+        <label>Technician</label>
+        <select id="technician_id" name="technician_id" class="form-control">
+            @for(techOption <- techOptions){
+            <option @if(workOrderForm("technician_id").value.get == "@techOption._1"){ selected } value="@techOption._1">@techOption._2</option>
+            }
+        </select>
+    </div>
+
     <div>
         <label>Status</label>
         <select id="status" name="status" class="form-control">
@@ -34,6 +44,11 @@
     <div class='form-group @if(errors.contains("maintenance_date")){ has-error }'>
         <label>Date</label>
         <input id="maintenance_date" name="maintenance_date" value='@workOrderForm("maintenance_date").value' class="form-control" type="date">
+    </div>
+
+    <div class='form-group @if(errors.contains("maintenance_time")){ has-error }'>
+        <label>Time</label>
+        <input id="maintenance_time" name="maintenance_time" value='@workOrderForm("maintenance_time").value' class="form-control" type="time">
     </div>
     <br>
     <button type="submit" class="btn btn-primary ">@formType</button>

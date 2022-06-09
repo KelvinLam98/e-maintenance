@@ -309,5 +309,85 @@ package controllers.javascript {
   
   }
 
+  // @LINE:46
+  class ReverseTechnicians(_prefix: => String) {
+
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:47
+    def listTechniciansJson: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Technicians.listTechniciansJson",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "technicians/list.json"})
+        }
+      """
+    )
+  
+    // @LINE:51
+    def delete: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Technicians.delete",
+      """
+        function(id0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "technicians/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0)) + "/delete"})
+        }
+      """
+    )
+  
+    // @LINE:48
+    def detail: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Technicians.detail",
+      """
+        function(id0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "technicians/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
+        }
+      """
+    )
+  
+    // @LINE:49
+    def create: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Technicians.create",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "technicians/create"})
+        }
+      """
+    )
+  
+    // @LINE:50
+    def update: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Technicians.update",
+      """
+        function(id0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "technicians/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0)) + "/update"})
+        }
+      """
+    )
+  
+    // @LINE:46
+    def list: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Technicians.list",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "technicians/list"})
+        }
+      """
+    )
+  
+    // @LINE:53
+    def postTechniciansDb: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Technicians.postTechniciansDb",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "technicians/create/post"})
+        }
+      """
+    )
+  
+  }
+
 
 }
