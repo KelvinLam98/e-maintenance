@@ -73,9 +73,9 @@ class HomeController @Inject()(
                     userDetail match {
                       case Some(u) =>
                         if(userDetail.size == 1){
-                          Redirect(routes.Users.listUser).withSession("amaseng-userId" -> user.username)
+                          Redirect(routes.Users.listUser).withSession("emaint-userId" -> user.username)
                         }else{
-                          Redirect(routes.Users.listUser).withSession("amaseng-userId" -> user.username)
+                          Redirect(routes.Users.listUser).withSession("emaint-userId" -> user.username)
                         }
                       case None =>
                         Redirect(routes.HomeController.login())
@@ -84,7 +84,7 @@ class HomeController @Inject()(
                     }
                   case _ =>
                     println("case _")
-                    Redirect(routes.HomeController.index()).withSession("amaseng-userId" -> user.username)
+                    Redirect(routes.HomeController.index()).withSession("emaint-userId" -> user.username)
                 }
               } else {
                 Redirect(routes.HomeController.login())
