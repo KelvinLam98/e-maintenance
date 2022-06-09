@@ -80,7 +80,7 @@ class MaintenanceItemStore @Inject()() {
     SQL("select * from maintenance_item").as(parser.*)
   }
 
-  def options(implicit conn: Connection): Seq[String] = {
-    findAll().map(item => (item.item_name))
+  def options(implicit conn: Connection): Seq[(Long,String)] = {
+    findAll().map(item => (item.id.get, item.item_name))
   }
 }

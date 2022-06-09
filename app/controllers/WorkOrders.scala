@@ -59,8 +59,8 @@ class WorkOrders @Inject()(
   private val workOrdersForm: Form[WorkOrder] = Form(
     mapping(
       "id" -> optional(longNumber),
-      "maintenance_name" -> nonEmptyText,
-      "person_in_charge" -> nonEmptyText,
+      "maintenance_id" -> longNumber,
+      "user_id" -> longNumber,
       "technician_id" -> longNumber,
       "maintenance_date" -> date,
       "maintenance_time" -> nonEmptyText,
@@ -75,7 +75,7 @@ class WorkOrders @Inject()(
           case Some(errorsStr) =>
             (workOrdersForm.bind(request.flash.data), errorsStr.split(","))
           case None =>
-            (workOrdersForm.fill(WorkOrder(None, "", "", 0, new Date(), "", "")), Array.empty[String])
+            (workOrdersForm.fill(WorkOrder(None, 0, 0, 0, new Date(), "", "")), Array.empty[String])
         }
       Ok(views.html.workOrders.form(form, errors, "Create", maintenanceItemStore.options, userStore.options, technicianStore.options))
     }
@@ -98,11 +98,11 @@ class WorkOrders @Inject()(
         db.withTransaction { implicit conn =>
           workOrderStore.findById(data.id.getOrElse(-1)) match {
             case Some(wo) =>
-              workOrderStore.update(WorkOrder(data.id, data.maintenance_name, data.person_in_charge, data.technician_id, data.maintenance_date, data.maintenance_time, data.status))
+              workOrderStore.update(WorkOrder(data.id, data.maintenance_id, data.user_id, data.technician_id, data.maintenance_date, data.maintenance_time, data.status))
               Redirect(routes.WorkOrders.detail(wo.id.get))
                 .flashing(("success" -> "successfullyUpdated"))
             case None =>
-              val id: Long = workOrderStore.insert(WorkOrder(None, data.maintenance_name, data.person_in_charge, data.technician_id, data.maintenance_date, data.maintenance_time, data.status))
+              val id: Long = workOrderStore.insert(WorkOrder(None, data.maintenance_id, data.user_id, data.technician_id, data.maintenance_date, data.maintenance_time, data.status))
               Redirect(routes.WorkOrders.detail(id))
                 .flashing(("success" -> "successfullyCreated"))
           }
@@ -124,7 +124,7 @@ class WorkOrders @Inject()(
             case Some(errorsStr) =>
               (workOrdersForm.bind(request.flash.data), errorsStr.split(","))
             case None =>
-              (workOrdersForm.fill(WorkOrder(wo.id, wo.maintenance_name, wo.person_in_charge, wo.technician_id, toDateFormat(wo.maintenance_date), wo.maintenance_time, wo.status)), Array.empty[String])
+              (workOrdersForm.fill(WorkOrder(wo.id, wo.maintenance_id, wo.user_id, wo.technician_id, toDateFormat(wo.maintenance_date), wo.maintenance_time, wo.status)), Array.empty[String])
           }
         }
         Ok(views.html.workOrders.form(form, errors, "Update", maintenanceItemStore.options, userStore.options, technicianStore.options))

@@ -15,17 +15,17 @@ import play.api.templates.PlayMagic._
 import play.api.mvc._
 import play.api.data._
 
-object form extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template9[Form[WorkOrder],Array[String],String,Seq[String],Seq[String],Seq[scala.Tuple2[Long, String]],Flash,Messages,models.RequestWithUser[_$1] forSome { 
+object form extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template9[Form[WorkOrder],Array[String],String,Seq[scala.Tuple2[Long, String]],Seq[scala.Tuple2[Long, String]],Seq[scala.Tuple2[Long, String]],Flash,Messages,models.RequestWithUser[_$1] forSome { 
    type _$1
 },play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*1.2*/(workOrderForm: Form[WorkOrder], errors: Array[String], formType: String, itemOptions: Seq[String], userOptions: Seq[String], techOptions: Seq[(Long,String)])(implicit flash: Flash, messages: Messages, request: models.RequestWithUser[_]):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/(workOrderForm: Form[WorkOrder], errors: Array[String], formType: String, itemOptions: Seq[(Long,String)], userOptions: Seq[(Long,String)], techOptions: Seq[(Long,String)])(implicit flash: Flash, messages: Messages, request: models.RequestWithUser[_]):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
 
-Seq[Any](format.raw/*1.239*/("""
+Seq[Any](format.raw/*1.253*/("""
 """),_display_(/*2.2*/main("E-Maintenance")/*2.23*/ {_display_(Seq[Any](format.raw/*2.25*/("""
 
 """),format.raw/*4.1*/("""<div class="col-lg-12">
@@ -35,17 +35,17 @@ Seq[Any](format.raw/*1.239*/("""
     <input type="hidden" id="id " name="id" value='"""),_display_(/*8.53*/workOrderForm("id")/*8.72*/.value),format.raw/*8.78*/("""'>
     <div>
         <label>Maintenance Item</label>
-        <select id="maintenance_name" name="maintenance_name" class="form-control">
+        <select id="maintenance_id" name="maintenance_id" class="form-control">
             """),_display_(/*12.14*/for(itemOption <- itemOptions) yield /*12.44*/{_display_(Seq[Any](format.raw/*12.45*/("""
-            """),format.raw/*13.13*/("""<option """),_display_(/*13.22*/if(workOrderForm("maintenance_name").value.get == "@itemOption")/*13.86*/{_display_(Seq[Any](format.raw/*13.87*/(""" """),format.raw/*13.88*/("""selected """)))}),format.raw/*13.98*/(""" """),format.raw/*13.99*/("""value=""""),_display_(/*13.107*/itemOption),format.raw/*13.117*/("""">"""),_display_(/*13.120*/itemOption),format.raw/*13.130*/("""</option>
+            """),format.raw/*13.13*/("""<option """),_display_(/*13.22*/if(workOrderForm("maintenance_id").value.get == "@itemOption._1")/*13.87*/{_display_(Seq[Any](format.raw/*13.88*/(""" """),format.raw/*13.89*/("""selected """)))}),format.raw/*13.99*/(""" """),format.raw/*13.100*/("""value=""""),_display_(/*13.108*/itemOption/*13.118*/._1),format.raw/*13.121*/("""">"""),_display_(/*13.124*/itemOption/*13.134*/._2),format.raw/*13.137*/("""</option>
             """)))}),format.raw/*14.14*/("""
         """),format.raw/*15.9*/("""</select>
     </div>
     <div>
         <label>Staff In Charge</label>
-        <select id="person_in_charge" name="person_in_charge" class="form-control">
+        <select id="user_id" name="user_id" class="form-control">
             """),_display_(/*20.14*/for(userOption <- userOptions) yield /*20.44*/{_display_(Seq[Any](format.raw/*20.45*/("""
-            """),format.raw/*21.13*/("""<option """),_display_(/*21.22*/if(workOrderForm("person_in_charge").value.get == "@userOption")/*21.86*/{_display_(Seq[Any](format.raw/*21.87*/(""" """),format.raw/*21.88*/("""selected """)))}),format.raw/*21.98*/(""" """),format.raw/*21.99*/("""value=""""),_display_(/*21.107*/userOption),format.raw/*21.117*/("""">"""),_display_(/*21.120*/userOption),format.raw/*21.130*/("""</option>
+            """),format.raw/*21.13*/("""<option """),_display_(/*21.22*/if(workOrderForm("user_id").value.get == "@userOption._1")/*21.80*/{_display_(Seq[Any](format.raw/*21.81*/(""" """),format.raw/*21.82*/("""selected """)))}),format.raw/*21.92*/(""" """),format.raw/*21.93*/("""value=""""),_display_(/*21.101*/userOption/*21.111*/._1),format.raw/*21.114*/("""">"""),_display_(/*21.117*/userOption/*21.127*/._2),format.raw/*21.130*/("""</option>
             """)))}),format.raw/*22.14*/("""
         """),format.raw/*23.9*/("""</select>
     </div>
@@ -75,7 +75,7 @@ Seq[Any](format.raw/*1.239*/("""
 
     <div class='form-group """),_display_(/*49.29*/if(errors.contains("maintenance_time"))/*49.68*/{_display_(Seq[Any](format.raw/*49.69*/(""" """),format.raw/*49.70*/("""has-error """)))}),format.raw/*49.81*/("""'>
         <label>Time</label>
-        <input id="maintenance_time" name="maintenance_time" value='"""),_display_(/*51.70*/workOrderForm("maintenance_time")/*51.103*/.value.toString()),format.raw/*51.120*/("""' class="form-control" type="time">
+        <input id="maintenance_time" name="maintenance_time" value='"""),_display_(/*51.70*/workOrderForm("maintenance_time")/*51.103*/.value),format.raw/*51.109*/("""' class="form-control" type="time">
     </div>
     <br>
     <button type="submit" class="btn btn-primary ">"""),_display_(/*54.53*/formType),format.raw/*54.61*/("""</button>
@@ -87,11 +87,11 @@ Seq[Any](format.raw/*1.239*/("""
     }
   }
 
-  def render(workOrderForm:Form[WorkOrder],errors:Array[String],formType:String,itemOptions:Seq[String],userOptions:Seq[String],techOptions:Seq[scala.Tuple2[Long, String]],flash:Flash,messages:Messages,request:models.RequestWithUser[_$1] forSome { 
+  def render(workOrderForm:Form[WorkOrder],errors:Array[String],formType:String,itemOptions:Seq[scala.Tuple2[Long, String]],userOptions:Seq[scala.Tuple2[Long, String]],techOptions:Seq[scala.Tuple2[Long, String]],flash:Flash,messages:Messages,request:models.RequestWithUser[_$1] forSome { 
    type _$1
 }): play.twirl.api.HtmlFormat.Appendable = apply(workOrderForm,errors,formType,itemOptions,userOptions,techOptions)(flash,messages,request)
 
-  def f:((Form[WorkOrder],Array[String],String,Seq[String],Seq[String],Seq[scala.Tuple2[Long, String]]) => (Flash,Messages,models.RequestWithUser[_$1] forSome { 
+  def f:((Form[WorkOrder],Array[String],String,Seq[scala.Tuple2[Long, String]],Seq[scala.Tuple2[Long, String]],Seq[scala.Tuple2[Long, String]]) => (Flash,Messages,models.RequestWithUser[_$1] forSome { 
    type _$1
 }) => play.twirl.api.HtmlFormat.Appendable) = (workOrderForm,errors,formType,itemOptions,userOptions,techOptions) => (flash,messages,request) => apply(workOrderForm,errors,formType,itemOptions,userOptions,techOptions)(flash,messages,request)
 
@@ -103,9 +103,9 @@ Seq[Any](format.raw/*1.239*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/workOrders/form.scala.html
-                  HASH: 2a7fcf2aa664827d67c60bc13c9200c486d7fa1d
-                  MATRIX: 895->1|1228->238|1256->241|1285->262|1324->264|1354->268|1447->335|1475->343|1531->373|1545->379|1593->407|1689->477|1716->496|1742->502|1923->656|1969->686|2008->687|2050->701|2086->710|2159->774|2198->775|2227->776|2268->786|2297->787|2333->795|2365->805|2396->808|2428->818|2483->842|2520->852|2719->1024|2765->1054|2804->1055|2846->1069|2882->1078|2955->1142|2994->1143|3023->1144|3064->1154|3093->1155|3129->1163|3161->1173|3192->1176|3224->1186|3279->1210|3316->1220|3506->1383|3552->1413|3591->1414|3633->1428|3669->1437|3742->1501|3781->1502|3810->1503|3851->1513|3880->1514|3916->1522|3936->1532|3961->1535|3992->1538|4012->1548|4037->1551|4092->1575|4129->1585|4309->1738|4368->1788|4407->1789|4436->1790|4477->1800|4506->1801|4588->1856|4651->1910|4690->1911|4719->1912|4760->1922|4789->1923|4879->1986|4940->2038|4979->2039|5008->2040|5049->2050|5078->2051|5204->2150|5252->2189|5291->2190|5320->2191|5362->2202|5491->2304|5534->2337|5562->2343|5668->2422|5716->2461|5755->2462|5784->2463|5826->2474|5955->2576|5998->2609|6037->2626|6175->2737|6204->2745|6257->2768
-                  LINES: 23->1|28->1|29->2|29->2|29->2|31->4|32->5|32->5|34->7|34->7|34->7|35->8|35->8|35->8|39->12|39->12|39->12|40->13|40->13|40->13|40->13|40->13|40->13|40->13|40->13|40->13|40->13|40->13|41->14|42->15|47->20|47->20|47->20|48->21|48->21|48->21|48->21|48->21|48->21|48->21|48->21|48->21|48->21|48->21|49->22|50->23|56->29|56->29|56->29|57->30|57->30|57->30|57->30|57->30|57->30|57->30|57->30|57->30|57->30|57->30|57->30|57->30|58->31|59->32|65->38|65->38|65->38|65->38|65->38|65->38|66->39|66->39|66->39|66->39|66->39|66->39|67->40|67->40|67->40|67->40|67->40|67->40|71->44|71->44|71->44|71->44|71->44|73->46|73->46|73->46|76->49|76->49|76->49|76->49|76->49|78->51|78->51|78->51|81->54|81->54|84->57
+                  HASH: f400f0b4559309d48d2d39cd9ea8de43b41f30ff
+                  MATRIX: 935->1|1282->252|1310->255|1339->276|1378->278|1408->282|1501->349|1529->357|1585->387|1599->393|1647->421|1743->491|1770->510|1796->516|1973->666|2019->696|2058->697|2100->711|2136->720|2210->785|2249->786|2278->787|2319->797|2349->798|2385->806|2405->816|2430->819|2461->822|2481->832|2506->835|2561->859|2598->869|2779->1023|2825->1053|2864->1054|2906->1068|2942->1077|3009->1135|3048->1136|3077->1137|3118->1147|3147->1148|3183->1156|3203->1166|3228->1169|3259->1172|3279->1182|3304->1185|3359->1209|3396->1219|3586->1382|3632->1412|3671->1413|3713->1427|3749->1436|3822->1500|3861->1501|3890->1502|3931->1512|3960->1513|3996->1521|4016->1531|4041->1534|4072->1537|4092->1547|4117->1550|4172->1574|4209->1584|4389->1737|4448->1787|4487->1788|4516->1789|4557->1799|4586->1800|4668->1855|4731->1909|4770->1910|4799->1911|4840->1921|4869->1922|4959->1985|5020->2037|5059->2038|5088->2039|5129->2049|5158->2050|5284->2149|5332->2188|5371->2189|5400->2190|5442->2201|5571->2303|5614->2336|5642->2342|5748->2421|5796->2460|5835->2461|5864->2462|5906->2473|6035->2575|6078->2608|6106->2614|6244->2725|6273->2733|6326->2756
+                  LINES: 23->1|28->1|29->2|29->2|29->2|31->4|32->5|32->5|34->7|34->7|34->7|35->8|35->8|35->8|39->12|39->12|39->12|40->13|40->13|40->13|40->13|40->13|40->13|40->13|40->13|40->13|40->13|40->13|40->13|40->13|41->14|42->15|47->20|47->20|47->20|48->21|48->21|48->21|48->21|48->21|48->21|48->21|48->21|48->21|48->21|48->21|48->21|48->21|49->22|50->23|56->29|56->29|56->29|57->30|57->30|57->30|57->30|57->30|57->30|57->30|57->30|57->30|57->30|57->30|57->30|57->30|58->31|59->32|65->38|65->38|65->38|65->38|65->38|65->38|66->39|66->39|66->39|66->39|66->39|66->39|67->40|67->40|67->40|67->40|67->40|67->40|71->44|71->44|71->44|71->44|71->44|73->46|73->46|73->46|76->49|76->49|76->49|76->49|76->49|78->51|78->51|78->51|81->54|81->54|84->57
                   -- GENERATED --
               */
           

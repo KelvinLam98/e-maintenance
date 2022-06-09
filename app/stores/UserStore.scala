@@ -104,8 +104,8 @@ class UserStore @Inject()() {
     ).as(parser.*)
   }
 
-  def options(implicit conn: Connection): Seq[String] = {
-    findAll().map(user => (user.name))
+  def options(implicit conn: Connection): Seq[(Long,String)] = {
+    findAll().map(user => (user.id.get, user.name))
   }
 
 }

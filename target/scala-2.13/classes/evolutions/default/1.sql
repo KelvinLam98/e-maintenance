@@ -13,6 +13,8 @@ create table `users` (
   `modified` datetime not null,
   primary key (`id`)
 );
+insert into users (id, username, password, name, ic_number, contact_number, address, email, role, created, modified)
+values (1, "admin", "admin", "admin", "901225015528", "0128877888", "address", "admin@gmail.com", "admin", now(), now());
 
 create table `maintenance_item` (
   `id` bigint(20) not null auto_increment,
@@ -23,11 +25,11 @@ create table `maintenance_item` (
 
 create table `work_order` (
   `id` bigint(20) not null auto_increment,
-  `person_in_charge` varchar(100) not null,
+  `maintenance_id` bigint(20) not null,
   `technician_id` bigint(20) not null,
-  `maintenance_name` varchar(100) not null,
+  `user_id` bigint(20) not null,
   `maintenance_date` date not null,
-  `maintenance_time` time not null,
+  `maintenance_time` varchar(100) not null,
   `status` varchar(100) not null,
   primary key (`id`)
 );
@@ -42,16 +44,22 @@ create table `technician` (
 create view `work_order_view` as
 select
 wo.id,
-wo.person_in_charge,
-wo.maintenance_name,
+wo.user_id,
+wo.maintenance_id,
 wo.maintenance_date,
 wo.maintenance_time,
 wo.status,
 wo.technician_id,
-t.name,
-t.contact_number
+t.name as technician_name,
+t.contact_number as technician_contact,
+mi.item_code,
+mi.item_name,
+u.name as user_name,
+u.contact_number as user_contact
 from work_order wo
-inner join technician t on (t.id = wo.technician_id);
+inner join technician t on (t.id = wo.technician_id)
+inner join maintenance_item mi on (mi.id = wo.maintenance_id)
+inner join users u on (u.id = wo.maintenance_id);
 
 # --- !Downs
 drop view `work_order_view`;

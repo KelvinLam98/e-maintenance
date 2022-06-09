@@ -8,12 +8,12 @@
             "serverSide": true,
             "ajax": "/workOrders/list.json",
             columns: [
-                { data: 'maintenance_name',
+                { data: 'maintenance_id',
                     "render": function(data, type, full, meta){
                         return '<a href="detail/' + full.id + '" class="link">' + data + '</a>';
                     }
                 },
-                { data: 'person_in_charge'},
+                { data: 'user_id'},
                 { data: 'maintenance_date',
                     "render": function(data, type, full, meta){
                             return moment(data).format('YYYY-MM-DD');
