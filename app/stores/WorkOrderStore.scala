@@ -9,13 +9,14 @@ import anorm._
 class WorkOrderStore @Inject()() {
 
   val parser: RowParser[WorkOrder] = Macro.namedParser[WorkOrder]
+  val viewParser: RowParser[WorkOrderView] = Macro.namedParser[WorkOrderView]
 
   def findAll(implicit conn: Connection): Seq[WorkOrder] = {
     SQL("select * from work_order").on().as(parser.*)
   }
 
   def countAll(implicit conn: Connection): Long = {
-    SQL("select count(*) as count from work_order").as(SqlParser.long("count").single)
+    SQL("select count(*) as count from work_order_view where (maintenance_date - CURDATE() >= 0 )").as(SqlParser.long("count").single)
   }
 
   def countFiltered(searchText: String)(implicit conn: Connection): Long = {
@@ -23,29 +24,29 @@ class WorkOrderStore @Inject()() {
       if (searchText.isEmpty)
         ""
       else
-        "where (maintenance_date like {searchText} or user_id like {searchText} or maintenance_id like {searchText})"
-    SQL("select count(*) as count from work_order " + searchCriteria).on(
+        "and (maintenance_date like {searchText} or user_name like {searchText} or item_name like {searchText})"
+    SQL("select count(*) as count from work_order_view where (maintenance_date - CURDATE() >= 0 )" + searchCriteria ).on(
       "searchText" -> ("%" + searchText + "%")
     ).as(SqlParser.long("count").single)
   }
 
-  def search(start: Long, count: Long, searchText: String)(implicit conn: Connection): Seq[WorkOrder] = {
+  def search(start: Long, count: Long, searchText: String)(implicit conn: Connection): Seq[WorkOrderView] = {
     val searchCriteria =
       if (searchText.isEmpty)
         ""
       else
-        "where (maintenance_date like {searchText} or user_id like {searchText} or maintenance_id like {searchText})"
-    SQL("select * from work_order " + searchCriteria + " order by maintenance_date Asc limit {start}, {count}").on(
+        "and (maintenance_date like {searchText} or user_name like {searchText} or item_name like {searchText})"
+    SQL("select * from work_order_view where (maintenance_date - CURDATE() >= 0 )" + searchCriteria + " order by maintenance_date Asc limit {start}, {count}").on(
       "start" -> start,
       "count" -> count,
       "searchText" -> ("%" + searchText + "%")
-    ).as(parser.*)
+    ).as(viewParser.*)
   }
 
-  def findInfoById(id: Long)(implicit conn: Connection): Option[WorkOrder] = {
-    SQL("select * from work_order where id = {id}").on(
+  def findViewById(id: Long)(implicit conn: Connection): Option[WorkOrderView] = {
+    SQL("select * from work_order_view where id = {id}").on(
       "id" -> id
-    ).as(parser.singleOpt)
+    ).as(viewParser.singleOpt)
   }
 
   def findById(id: Long)(implicit conn: Connection): Option[WorkOrder] = {

@@ -15,17 +15,17 @@ import play.api.templates.PlayMagic._
 import play.api.mvc._
 import play.api.data._
 
-object detail extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template4[WorkOrder,Flash,Messages,models.RequestWithUser[_$1] forSome { 
+object detail extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template4[WorkOrderView,Flash,Messages,models.RequestWithUser[_$1] forSome { 
    type _$1
 },play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*1.2*/(workOrder: WorkOrder)(implicit flash: Flash, messages: Messages, request: models.RequestWithUser[_]):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/(workOrder: WorkOrderView)(implicit flash: Flash, messages: Messages, request: models.RequestWithUser[_]):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
 
-Seq[Any](format.raw/*1.103*/("""
+Seq[Any](format.raw/*1.107*/("""
 """),_display_(/*2.2*/main("E-Maintenance")/*2.23*/ {_display_(Seq[Any](format.raw/*2.25*/("""
 """),format.raw/*3.1*/("""<div class="row">
     <div class="col-lg-12">
@@ -53,24 +53,40 @@ Seq[Any](format.raw/*1.103*/("""
                     <table class="table table-bordered table-striped">
                         <tbody>
                         <tr>
+                            <th style="width:20%">Maintenance Code</th>
+                            <td>"""),_display_(/*30.34*/workOrder/*30.43*/.item_code),format.raw/*30.53*/("""</td>
+                        </tr>
+                        <tr>
                             <th style="width:20%">Maintenance Item</th>
-                            <td>"""),_display_(/*30.34*/workOrder/*30.43*/.maintenance_id),format.raw/*30.58*/("""</td>
+                            <td>"""),_display_(/*34.34*/workOrder/*34.43*/.item_name),format.raw/*34.53*/("""</td>
                         </tr>
                         <tr>
                             <th>Staff In Charge</th>
-                            <td>"""),_display_(/*34.34*/workOrder/*34.43*/.user_id),format.raw/*34.51*/("""</td>
+                            <td>"""),_display_(/*38.34*/workOrder/*38.43*/.user_name),format.raw/*38.53*/("""</td>
+                        </tr>
+                        <tr>
+                            <th>Staff In Charge Contact</th>
+                            <td>"""),_display_(/*42.34*/workOrder/*42.43*/.user_contact),format.raw/*42.56*/("""</td>
+                        </tr>
+                        <tr>
+                            <th>Technician</th>
+                            <td>"""),_display_(/*46.34*/workOrder/*46.43*/.technician_name),format.raw/*46.59*/("""</td>
+                        </tr>
+                        <tr>
+                            <th>Technician Contact</th>
+                            <td>"""),_display_(/*50.34*/workOrder/*50.43*/.technician_contact),format.raw/*50.62*/("""</td>
                         </tr>
                         <tr>
                             <th>Maintenance Date</th>
-                            <td>"""),_display_(/*38.34*/workOrder/*38.43*/.maintenance_date),format.raw/*38.60*/("""</td>
+                            <td>"""),_display_(/*54.34*/workOrder/*54.43*/.maintenance_date),format.raw/*54.60*/("""</td>
                         </tr>
                         <tr>
                             <th>Maintenance Time</th>
-                            <td>"""),_display_(/*42.34*/workOrder/*42.43*/.maintenance_time),format.raw/*42.60*/("""</td>
+                            <td>"""),_display_(/*58.34*/workOrder/*58.43*/.maintenance_time),format.raw/*58.60*/("""</td>
                         </tr>
                         <tr>
                             <th>Status</th>
-                            <td>"""),_display_(/*46.34*/workOrder/*46.43*/.status),format.raw/*46.50*/("""</td>
+                            <td>"""),_display_(/*62.34*/workOrder/*62.43*/.status),format.raw/*62.50*/("""</td>
                         </tbody>
                     </table>
                 </div>
@@ -83,11 +99,11 @@ Seq[Any](format.raw/*1.103*/("""
     }
   }
 
-  def render(workOrder:WorkOrder,flash:Flash,messages:Messages,request:models.RequestWithUser[_$1] forSome { 
+  def render(workOrder:WorkOrderView,flash:Flash,messages:Messages,request:models.RequestWithUser[_$1] forSome { 
    type _$1
 }): play.twirl.api.HtmlFormat.Appendable = apply(workOrder)(flash,messages,request)
 
-  def f:((WorkOrder) => (Flash,Messages,models.RequestWithUser[_$1] forSome { 
+  def f:((WorkOrderView) => (Flash,Messages,models.RequestWithUser[_$1] forSome { 
    type _$1
 }) => play.twirl.api.HtmlFormat.Appendable) = (workOrder) => (flash,messages,request) => apply(workOrder)(flash,messages,request)
 
@@ -99,9 +115,9 @@ Seq[Any](format.raw/*1.103*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/workOrders/detail.scala.html
-                  HASH: c90b6bc65752f7cdcfd442943cfaf44aa3f641f5
-                  MATRIX: 814->1|1011->102|1039->105|1068->126|1107->128|1135->130|1518->486|1533->492|1590->528|1822->733|1837->739|1894->775|2441->1295|2459->1304|2495->1319|2677->1474|2695->1483|2724->1491|2907->1647|2925->1656|2963->1673|3146->1829|3164->1838|3202->1855|3375->2001|3393->2010|3421->2017
-                  LINES: 23->1|28->1|29->2|29->2|29->2|30->3|40->13|40->13|40->13|45->18|45->18|45->18|57->30|57->30|57->30|61->34|61->34|61->34|65->38|65->38|65->38|69->42|69->42|69->42|73->46|73->46|73->46
+                  HASH: 35e53dc376bb722893f4041e73c93c5b988a3eaf
+                  MATRIX: 818->1|1019->106|1047->109|1076->130|1115->132|1143->134|1526->490|1541->496|1598->532|1830->737|1845->743|1902->779|2449->1299|2467->1308|2498->1318|2699->1492|2717->1501|2748->1511|2930->1666|2948->1675|2979->1685|3169->1848|3187->1857|3221->1870|3398->2020|3416->2029|3453->2045|3638->2203|3656->2212|3696->2231|3879->2387|3897->2396|3935->2413|4118->2569|4136->2578|4174->2595|4347->2741|4365->2750|4393->2757
+                  LINES: 23->1|28->1|29->2|29->2|29->2|30->3|40->13|40->13|40->13|45->18|45->18|45->18|57->30|57->30|57->30|61->34|61->34|61->34|65->38|65->38|65->38|69->42|69->42|69->42|73->46|73->46|73->46|77->50|77->50|77->50|81->54|81->54|81->54|85->58|85->58|85->58|89->62|89->62|89->62
                   -- GENERATED --
               */
           

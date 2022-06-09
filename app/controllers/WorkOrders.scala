@@ -50,7 +50,7 @@ class WorkOrders @Inject()(
 
   def detail(id: Long) = SecuredAction(UserRole.ADMIN) { implicit request =>
     db.withConnection { implicit conn =>
-      workOrderStore.findInfoById(id).map { item =>
+      workOrderStore.findViewById(id).map { item =>
         Ok(views.html.workOrders.detail(item))
       }.getOrElse(NotFound)
     }

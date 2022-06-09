@@ -1,16 +1,6 @@
-[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\e-maintenance\app\controllers\WorkOrders.scala:68:17: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : (Option[Long], Long, Long, Long, java.util.Date, String, String) => models.WorkOrder[0m
-[0m[[0m[31merror[0m] [0m[0m required: (Option[Long], Long, String, Long, java.util.Date, String, String) => ?[0m
-[0m[[0m[31merror[0m] [0m[0m    )(WorkOrder.apply)(WorkOrder.unapply)[0m
-[0m[[0m[31merror[0m] [0m[0m                ^[0m
-[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\e-maintenance\app\controllers\WorkOrders.scala:68:34: missing argument list for method unapply in object WorkOrder[0m
-[0m[[0m[31merror[0m] [0m[0mUnapplied methods are only converted to functions when a function type is expected.[0m
-[0m[[0m[31merror[0m] [0m[0mYou can make this conversion explicit by writing `unapply _` or `unapply(_)` instead of `unapply`.[0m
-[0m[[0m[31merror[0m] [0m[0m    )(WorkOrder.apply)(WorkOrder.unapply)[0m
-[0m[[0m[31merror[0m] [0m[0m                                 ^[0m
-[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\e-maintenance\app\controllers\WorkOrders.scala:78:53: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : String("")[0m
-[0m[[0m[31merror[0m] [0m[0m required: Long[0m
-[0m[[0m[31merror[0m] [0m[0m            (workOrdersForm.fill(WorkOrder(None, 0, "", 0, new Date(), "", "")), Array.empty[String])[0m
-[0m[[0m[31merror[0m] [0m[0m                                                    ^[0m
-[0m[[0m[31merror[0m] [0m[0mthree errors found[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\e-maintenance\app\controllers\WorkOrders.scala:54:41: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : models.WorkOrder[0m
+[0m[[0m[31merror[0m] [0m[0m required: models.WorkOrderView[0m
+[0m[[0m[31merror[0m] [0m[0m        Ok(views.html.workOrders.detail(item))[0m
+[0m[[0m[31merror[0m] [0m[0m                                        ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
