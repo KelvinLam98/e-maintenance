@@ -29,6 +29,10 @@ class WorkOrders @Inject()(
     Ok(views.html.workOrders.list())
   }
 
+  def historyList = SecuredAction(UserRole.USER) { implicit request =>
+    Ok(views.html.workOrders.historyList())
+  }
+
   def listWorkOrderJson = SecuredAction(UserRole.USER) { implicit request =>
     val start = request.getQueryString("start").map(_.toLong).getOrElse(0L)
     val length = request.getQueryString("length").map(_.toLong).getOrElse(10L)
@@ -39,6 +43,25 @@ class WorkOrders @Inject()(
       val total = workOrderStore.countAll
       val filtered = workOrderStore.countFiltered(searchText)
       val data = workOrderStore.search(start, length, searchText)
+      Ok(Json.obj(
+        "draw" -> draw,
+        "recordsTotal" -> total,
+        "recordsFiltered" -> filtered,
+        "data" -> data
+      ))
+    }
+  }
+
+  def historyListWorkOrderJson = SecuredAction(UserRole.USER) { implicit request =>
+    val start = request.getQueryString("start").map(_.toLong).getOrElse(0L)
+    val length = request.getQueryString("length").map(_.toLong).getOrElse(10L)
+    val draw: Int = request.getQueryString("draw").map(_.toInt).getOrElse(0)
+    val searchText = request.getQueryString("search[value]").getOrElse("")
+
+    db.withConnection { implicit conn =>
+      val total = workOrderStore.countAllHistory
+      val filtered = workOrderStore.countFilteredHistory(searchText)
+      val data = workOrderStore.searchHistory(start, length, searchText)
       Ok(Json.obj(
         "draw" -> draw,
         "recordsTotal" -> total,

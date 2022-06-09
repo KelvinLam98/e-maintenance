@@ -6,17 +6,17 @@ import play.api.mvc.Call
 
 import _root_.controllers.Assets.Asset
 
-// @LINE:58
+// @LINE:61
 package appcontrollers {
 
-  // @LINE:58
+  // @LINE:61
   class ReverseUsers(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:58
+    // @LINE:61
     def loginApi: Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "api/login")
@@ -24,14 +24,14 @@ package appcontrollers {
   
   }
 
-  // @LINE:59
+  // @LINE:62
   class ReverseWorkOrders(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:59
+    // @LINE:62
     def workOrderList: Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "api/workOrder")

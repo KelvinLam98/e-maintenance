@@ -6,10 +6,10 @@ import play.api.routing.JavaScriptReverseRoute
 
 import _root_.controllers.Assets.Asset
 
-// @LINE:58
+// @LINE:61
 package appcontrollers.javascript {
 
-  // @LINE:58
+  // @LINE:61
   class ReverseUsers(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -17,7 +17,7 @@ package appcontrollers.javascript {
     }
 
   
-    // @LINE:58
+    // @LINE:61
     def loginApi: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.Users.loginApi",
       """
@@ -29,7 +29,7 @@ package appcontrollers.javascript {
   
   }
 
-  // @LINE:59
+  // @LINE:62
   class ReverseWorkOrders(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -37,7 +37,7 @@ package appcontrollers.javascript {
     }
 
   
-    // @LINE:59
+    // @LINE:62
     def workOrderList: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.workOrderList",
       """

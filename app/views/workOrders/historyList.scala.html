@@ -6,7 +6,7 @@
         $('#dataTables').DataTable({
             "processing": true,
             "serverSide": true,
-            "ajax": "/workOrders/list.json",
+            "ajax": "/workOrders/history/list.json",
             columns: [
                 { data: 'item_name',
                     "render": function(data, type, full, meta){
@@ -39,14 +39,9 @@
 <div class="col-lg-12">
     <h1 class="page-header">
         Work Orders
-        <a href="@routes.WorkOrders.create">
+        <a href="@routes.WorkOrders.list">
             <button type="button" class="btn btn-primary badge">
-                Create
-            </button>
-        </a>
-        <a href="@routes.WorkOrders.historyList">
-            <button type="button" class="btn btn-primary badge">
-                History
+                Back
             </button>
         </a>
     </h1>

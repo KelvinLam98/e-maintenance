@@ -34,8 +34,11 @@ POST    /maintenanceItems/create/post                 controllers.MaintenanceIte
 
 #work orders
 GET     /workOrders/list                             controllers.WorkOrders.list
+GET     /workOrders/history/list                     controllers.WorkOrders.historyList
 GET     /workOrders/list.json                        controllers.WorkOrders.listWorkOrderJson
+GET     /workOrders/history/list.json                controllers.WorkOrders.historyListWorkOrderJson
 GET     /workOrders/detail/:id                       controllers.WorkOrders.detail(id: Long)
+GET     /workOrders/history/detail/:id               controllers.WorkOrders.detail(id: Long)
 GET     /workOrders/create                           controllers.WorkOrders.create
 GET     /workOrders/detail/:id/update                controllers.WorkOrders.update(id:Long)
 GET     /workOrders/detail/:id/delete                controllers.WorkOrders.delete(id: Long)

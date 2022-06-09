@@ -37,7 +37,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:41
+    // @LINE:44
     def delete: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.WorkOrders.delete",
       """
@@ -47,17 +47,21 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:38
+    // @LINE:40
     def detail: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.WorkOrders.detail",
       """
         function(id0) {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "workOrders/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
+        
+          if (true) {
+            return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "workOrders/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
+          }
+        
         }
       """
     )
   
-    // @LINE:39
+    // @LINE:42
     def create: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.WorkOrders.create",
       """
@@ -67,7 +71,17 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:43
+    // @LINE:39
+    def historyListWorkOrderJson: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.WorkOrders.historyListWorkOrderJson",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "workOrders/history/list.json"})
+        }
+      """
+    )
+  
+    // @LINE:46
     def postWorkOrdersDb: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.WorkOrders.postWorkOrdersDb",
       """
@@ -77,12 +91,22 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:40
+    // @LINE:43
     def update: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.WorkOrders.update",
       """
         function(id0) {
           return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "workOrders/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0)) + "/update"})
+        }
+      """
+    )
+  
+    // @LINE:37
+    def historyList: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.WorkOrders.historyList",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "workOrders/history/list"})
         }
       """
     )
@@ -97,7 +121,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:37
+    // @LINE:38
     def listWorkOrderJson: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.WorkOrders.listWorkOrderJson",
       """
@@ -309,7 +333,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:46
+  // @LINE:49
   class ReverseTechnicians(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -317,7 +341,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:47
+    // @LINE:50
     def listTechniciansJson: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Technicians.listTechniciansJson",
       """
@@ -327,7 +351,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:51
+    // @LINE:54
     def delete: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Technicians.delete",
       """
@@ -337,7 +361,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:48
+    // @LINE:51
     def detail: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Technicians.detail",
       """
@@ -347,7 +371,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:49
+    // @LINE:52
     def create: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Technicians.create",
       """
@@ -357,7 +381,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:50
+    // @LINE:53
     def update: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Technicians.update",
       """
@@ -367,7 +391,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:46
+    // @LINE:49
     def list: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Technicians.list",
       """
@@ -377,7 +401,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:53
+    // @LINE:56
     def postTechniciansDb: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Technicians.postTechniciansDb",
       """
