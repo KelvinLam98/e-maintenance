@@ -1,0 +1,16 @@
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\e-maintenance\app\appcontrollers\Users.scala:56:35: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : String[0m
+[0m[[0m[31merror[0m] [0m[0m required: Long[0m
+[0m[[0m[31merror[0m] [0m[0m      val data = userStore.search(searchText, limit, orderBy)[0m
+[0m[[0m[31merror[0m] [0m[0m                                  ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\e-maintenance\app\appcontrollers\Users.scala:56:47: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : Option[models.LimitClause][0m
+[0m[[0m[31merror[0m] [0m[0m required: Long[0m
+[0m[[0m[31merror[0m] [0m[0m      val data = userStore.search(searchText, limit, orderBy)[0m
+[0m[[0m[31merror[0m] [0m[0m                                              ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\e-maintenance\app\appcontrollers\Users.scala:56:54: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : Option[models.OrderByClause][0m
+[0m[[0m[31merror[0m] [0m[0m required: String[0m
+[0m[[0m[31merror[0m] [0m[0m      val data = userStore.search(searchText, limit, orderBy)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                     ^[0m
+[0m[[0m[31merror[0m] [0m[0mthree errors found[0m
