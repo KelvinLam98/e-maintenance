@@ -47,6 +47,11 @@ Seq[Any](format.raw/*1.105*/("""
                         Delete
                     </button>
                 </a>
+                <a id="back" href=""""),_display_(/*23.37*/routes/*23.43*/.Technicians.list),format.raw/*23.60*/("""">
+                    <button type="button" class="btn btn-primary badge" onclick="">
+                        Back
+                    </button>
+                </a>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
@@ -54,11 +59,11 @@ Seq[Any](format.raw/*1.105*/("""
                         <tbody>
                         <tr>
                             <th style="width:20%">Name</th>
-                            <td>"""),_display_(/*30.34*/technician/*30.44*/.name),format.raw/*30.49*/("""</td>
+                            <td>"""),_display_(/*35.34*/technician/*35.44*/.name),format.raw/*35.49*/("""</td>
                         </tr>
                         <tr>
                             <th>Contact_Number</th>
-                            <td>"""),_display_(/*34.34*/technician/*34.44*/.contact_number),format.raw/*34.59*/("""</td>
+                            <td>"""),_display_(/*39.34*/technician/*39.44*/.contact_number),format.raw/*39.59*/("""</td>
                         </tbody>
                     </table>
                 </div>
@@ -87,9 +92,9 @@ Seq[Any](format.raw/*1.105*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/technicians/detail.scala.html
-                  HASH: b98950125ed5f75cbfdc7fb3d805c579de5f4fc1
-                  MATRIX: 816->1|1015->104|1043->107|1072->128|1111->130|1139->132|1522->488|1537->494|1596->532|1828->737|1843->743|1902->781|2437->1289|2456->1299|2482->1304|2663->1458|2682->1468|2718->1483
-                  LINES: 23->1|28->1|29->2|29->2|29->2|30->3|40->13|40->13|40->13|45->18|45->18|45->18|57->30|57->30|57->30|61->34|61->34|61->34
+                  HASH: b25e451c27087d64edd16d7b090fe26772902bb3
+                  MATRIX: 816->1|1015->104|1043->107|1072->128|1111->130|1139->132|1522->488|1537->494|1596->532|1828->737|1843->743|1902->781|2138->990|2153->996|2191->1013|2725->1520|2744->1530|2770->1535|2951->1689|2970->1699|3006->1714
+                  LINES: 23->1|28->1|29->2|29->2|29->2|30->3|40->13|40->13|40->13|45->18|45->18|45->18|50->23|50->23|50->23|62->35|62->35|62->35|66->39|66->39|66->39
                   -- GENERATED --
               */
           

@@ -11,11 +11,15 @@ GET     /assets/*file                       controllers.Assets.versioned(file)
 
 #users
 GET     /user/login                          controllers.HomeController.login()
+GET     /user/logout                         controllers.HomeController.logout()
 + nocsrf
 POST    /user/post/login                     controllers.HomeController.postLoginData
 GET     /user/list                           controllers.Users.listUser
 GET     /user/list.json                      controllers.Users.listUserJson
 GET     /user/detail/:id                     controllers.Users.detail(id: Long)
+GET     /user/detail/:id/resetPassword       controllers.HomeController.resetPasswords(id: Long)
++ nocsrf
+POST    /user/detail/resetPassword/post      controllers.HomeController.postResetPassword
 GET     /user/create                         controllers.Users.create
 GET     /user/detail/:id/update              controllers.Users.update(id:Long)
 GET     /user/detail/:id/delete              controllers.Users.delete(id: Long)

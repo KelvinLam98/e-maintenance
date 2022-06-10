@@ -1,6 +1,8 @@
-[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\e-maintenance\app\controllers\WorkOrders.scala:54:41: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : models.WorkOrder[0m
-[0m[[0m[31merror[0m] [0m[0m required: models.WorkOrderView[0m
-[0m[[0m[31merror[0m] [0m[0m        Ok(views.html.workOrders.detail(item))[0m
-[0m[[0m[31merror[0m] [0m[0m                                        ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\e-maintenance\app\controllers\HomeController.scala:136:12: value flashing is not a member of play.api.mvc.Call[0m
+[0m[[0m[31merror[0m] [0m[0mpossible cause: maybe a semicolon is missing before `value flashing`?[0m
+[0m[[0m[31merror[0m] [0m[0m          .flashing(Flash(form.data) +[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\e-maintenance\app\views\users\detail.scala.html:49:54: value list is not a member of controllers.ReverseUsers[0m
+[0m[[0m[31merror[0m] [0m[0m                    <a id="back" href="@routes.Users.list">[0m
+[0m[[0m[31merror[0m] [0m[0m                                                     ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m

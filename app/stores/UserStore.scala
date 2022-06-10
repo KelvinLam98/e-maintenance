@@ -108,4 +108,12 @@ class UserStore @Inject()() {
     findAll().map(user => (user.id.get, user.name))
   }
 
+  def updatePasswordByEmail(id: Long, newPassword: String, modified: Date)(implicit conn: Connection) = {
+    SQL("update users set password = {newPassword}, modified = {modified} where id = {id}").on(
+      "id" -> id,
+      "newPassword" -> newPassword,
+      "modified" -> modified,
+    ).executeUpdate()
+  }
+
 }
