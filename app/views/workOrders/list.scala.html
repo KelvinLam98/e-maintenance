@@ -8,12 +8,13 @@
             "serverSide": true,
             "ajax": "/workOrders/list.json",
             columns: [
-                { data: 'maintenance_name',
+                { data: 'item_name',
                     "render": function(data, type, full, meta){
                         return '<a href="detail/' + full.id + '" class="link">' + data + '</a>';
                     }
                 },
-                { data: 'person_in_charge'},
+                { data: 'user_name'},
+                { data: 'technician_name'},
                 { data: 'maintenance_date',
                     "render": function(data, type, full, meta){
                             return moment(data).format('YYYY-MM-DD');
@@ -43,13 +44,19 @@
                 Create
             </button>
         </a>
+        <a href="@routes.WorkOrders.historyList">
+            <button type="button" class="btn btn-primary badge">
+                History
+            </button>
+        </a>
     </h1>
     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
         <thead>
         <tr>
-            <th width="25%">Maintenance Item</th>
-            <th width="25%">Person In Charge</th>
-            <th width="25%">Date</th>
+            <th width="20%">Maintenance Item</th>
+            <th width="20%">Staff In Charge</th>
+            <th width="20%">Technician</th>
+            <th width="20%">Date</th>
             <th>Status</th>
         </tr>
         </thead>

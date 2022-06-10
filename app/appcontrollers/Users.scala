@@ -43,4 +43,21 @@ class Users @Inject()(
       )
     }
   }
+
+  def userList = ApiAction { implicit request =>
+    val draw: Int = request.getQueryString("draw").map(_.toInt).getOrElse(0)
+    val searchText = request.getQueryString("searchText").getOrElse("")
+
+    db.withConnection { implicit conn =>
+      val total = userStore.countAll
+      val filtered = userStore.countFiltered(searchText)
+      val data = userStore.findById(searchText.toLong)
+      Ok(Json.obj(
+        "draw" -> draw,
+        "recordsTotal" -> total,
+        "recordsFiltered" -> filtered,
+        "data" -> data
+      ))
+    }
+  }
 }

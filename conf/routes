@@ -11,11 +11,15 @@ GET     /assets/*file                       controllers.Assets.versioned(file)
 
 #users
 GET     /user/login                          controllers.HomeController.login()
+GET     /user/logout                         controllers.HomeController.logout()
 + nocsrf
 POST    /user/post/login                     controllers.HomeController.postLoginData
 GET     /user/list                           controllers.Users.listUser
 GET     /user/list.json                      controllers.Users.listUserJson
 GET     /user/detail/:id                     controllers.Users.detail(id: Long)
+GET     /user/detail/:id/resetPassword       controllers.HomeController.resetPasswords(id: Long)
++ nocsrf
+POST    /user/detail/resetPassword/post      controllers.HomeController.postResetPassword
 GET     /user/create                         controllers.Users.create
 GET     /user/detail/:id/update              controllers.Users.update(id:Long)
 GET     /user/detail/:id/delete              controllers.Users.delete(id: Long)
@@ -34,13 +38,26 @@ POST    /maintenanceItems/create/post                 controllers.MaintenanceIte
 
 #work orders
 GET     /workOrders/list                             controllers.WorkOrders.list
+GET     /workOrders/history/list                     controllers.WorkOrders.historyList
 GET     /workOrders/list.json                        controllers.WorkOrders.listWorkOrderJson
+GET     /workOrders/history/list.json                controllers.WorkOrders.historyListWorkOrderJson
 GET     /workOrders/detail/:id                       controllers.WorkOrders.detail(id: Long)
+GET     /workOrders/history/detail/:id               controllers.WorkOrders.detail(id: Long)
 GET     /workOrders/create                           controllers.WorkOrders.create
 GET     /workOrders/detail/:id/update                controllers.WorkOrders.update(id:Long)
 GET     /workOrders/detail/:id/delete                controllers.WorkOrders.delete(id: Long)
 + nocsrf
 POST    /workOrders/create/post                      controllers.WorkOrders.postWorkOrdersDb
+
+#technicians
+GET     /technicians/list                             controllers.Technicians.list
+GET     /technicians/list.json                        controllers.Technicians.listTechniciansJson
+GET     /technicians/detail/:id                       controllers.Technicians.detail(id: Long)
+GET     /technicians/create                           controllers.Technicians.create
+GET     /technicians/detail/:id/update                controllers.Technicians.update(id:Long)
+GET     /technicians/detail/:id/delete                controllers.Technicians.delete(id: Long)
++ nocsrf
+POST    /technicians/create/post                      controllers.Technicians.postTechniciansDb
 
 #APP ROUTES
 #login

@@ -15,7 +15,7 @@ import scala.concurrent.{ExecutionContext, Future}
 class BaseController(mcc: MessagesControllerComponents, db: Database, cache: SyncCacheApi, userStore: UserStore) extends MessagesAbstractController(mcc) {
 
   protected def getUser[A](request: Request[A]): Option[User] =
-    request.session.get("amaseng-userId") flatMap { userId =>
+    request.session.get("emaint-userId") flatMap { userId =>
       db.withConnection { implicit conn =>
         userStore.findByUserName(userId)
       }
@@ -45,7 +45,7 @@ class BaseController(mcc: MessagesControllerComponents, db: Database, cache: Syn
   }
 
   implicit def request2Messages(implicit request : play.api.mvc.RequestHeader) : play.api.i18n.Messages = {
-    request.session.get("amaseng-language") match {
+    request.session.get("emaint-language") match {
       case Some(lang) => mcc.messagesApi.preferred(List(play.api.i18n.Lang(lang)))
       case None => mcc.messagesApi.preferred(List(play.api.i18n.Lang("en")))
     }

@@ -1,4 +1,4 @@
-@(workOrderForm: Form[WorkOrder], errors: Array[String], formType: String, itemOptions: Seq[String], userOptions: Seq[String])(implicit flash: Flash, messages: Messages, request: models.RequestWithUser[_])
+@(workOrderForm: Form[WorkOrder], errors: Array[String], formType: String, itemOptions: Seq[(Long,String)], userOptions: Seq[(Long,String)], techOptions: Seq[(Long,String)])(implicit flash: Flash, messages: Messages, request: models.RequestWithUser[_])
 @main("E-Maintenance") {
 
 <div class="col-lg-12">
@@ -8,20 +8,30 @@
     <input type="hidden" id="id " name="id" value='@workOrderForm("id").value'>
     <div>
         <label>Maintenance Item</label>
-        <select id="maintenance_name" name="maintenance_name" class="form-control">
+        <select id="maintenance_id" name="maintenance_id" class="form-control">
             @for(itemOption <- itemOptions){
-            <option @if(workOrderForm("maintenance_name").value.get == "@itemOption"){ selected } value="@itemOption">@itemOption</option>
+            <option @if(workOrderForm("maintenance_id").value.get == "@itemOption._1"){ selected } value="@itemOption._1">@itemOption._2</option>
             }
         </select>
     </div>
     <div>
-        <label>Person In Charge</label>
-        <select id="person_in_charge" name="person_in_charge" class="form-control">
+        <label>Staff In Charge</label>
+        <select id="user_id" name="user_id" class="form-control">
             @for(userOption <- userOptions){
-            <option @if(workOrderForm("person_in_charge").value.get == "@userOption"){ selected } value="@userOption">@userOption</option>
+            <option @if(workOrderForm("user_id").value.get == "@userOption._1"){ selected } value="@userOption._1">@userOption._2</option>
             }
         </select>
     </div>
+
+    <div>
+        <label>Technician</label>
+        <select id="technician_id" name="technician_id" class="form-control">
+            @for(techOption <- techOptions){
+            <option @if(workOrderForm("technician_id").value.get == "@techOption._1"){ selected } value="@techOption._1">@techOption._2</option>
+            }
+        </select>
+    </div>
+
     <div>
         <label>Status</label>
         <select id="status" name="status" class="form-control">
@@ -34,6 +44,11 @@
     <div class='form-group @if(errors.contains("maintenance_date")){ has-error }'>
         <label>Date</label>
         <input id="maintenance_date" name="maintenance_date" value='@workOrderForm("maintenance_date").value' class="form-control" type="date">
+    </div>
+
+    <div class='form-group @if(errors.contains("maintenance_time")){ has-error }'>
+        <label>Time</label>
+        <input id="maintenance_time" name="maintenance_time" value='@workOrderForm("maintenance_time").value' class="form-control" type="time">
     </div>
     <br>
     <button type="submit" class="btn btn-primary ">@formType</button>

@@ -35,48 +35,55 @@ Seq[Any](format.raw/*1.83*/("""
             "serverSide": true,
             "ajax": "/workOrders/list.json",
             columns: [
-                """),format.raw/*11.17*/("""{"""),format.raw/*11.18*/(""" """),format.raw/*11.19*/("""data: 'maintenance_name',
+                """),format.raw/*11.17*/("""{"""),format.raw/*11.18*/(""" """),format.raw/*11.19*/("""data: 'item_name',
                     "render": function(data, type, full, meta)"""),format.raw/*12.63*/("""{"""),format.raw/*12.64*/("""
                         """),format.raw/*13.25*/("""return '<a href="detail/' + full.id + '" class="link">' + data + '</a>';
                     """),format.raw/*14.21*/("""}"""),format.raw/*14.22*/("""
                 """),format.raw/*15.17*/("""}"""),format.raw/*15.18*/(""",
-                """),format.raw/*16.17*/("""{"""),format.raw/*16.18*/(""" """),format.raw/*16.19*/("""data: 'person_in_charge'"""),format.raw/*16.43*/("""}"""),format.raw/*16.44*/(""",
-                """),format.raw/*17.17*/("""{"""),format.raw/*17.18*/(""" """),format.raw/*17.19*/("""data: 'maintenance_date',
-                    "render": function(data, type, full, meta)"""),format.raw/*18.63*/("""{"""),format.raw/*18.64*/("""
-                            """),format.raw/*19.29*/("""return moment(data).format('YYYY-MM-DD');
-                    """),format.raw/*20.21*/("""}"""),format.raw/*20.22*/("""
-                """),format.raw/*21.17*/("""}"""),format.raw/*21.18*/(""",
-                """),format.raw/*22.17*/("""{"""),format.raw/*22.18*/(""" """),format.raw/*22.19*/("""data: 'status'"""),format.raw/*22.33*/("""}"""),format.raw/*22.34*/("""
-            """),format.raw/*23.13*/("""],
+                """),format.raw/*16.17*/("""{"""),format.raw/*16.18*/(""" """),format.raw/*16.19*/("""data: 'user_name'"""),format.raw/*16.36*/("""}"""),format.raw/*16.37*/(""",
+                """),format.raw/*17.17*/("""{"""),format.raw/*17.18*/(""" """),format.raw/*17.19*/("""data: 'technician_name'"""),format.raw/*17.42*/("""}"""),format.raw/*17.43*/(""",
+                """),format.raw/*18.17*/("""{"""),format.raw/*18.18*/(""" """),format.raw/*18.19*/("""data: 'maintenance_date',
+                    "render": function(data, type, full, meta)"""),format.raw/*19.63*/("""{"""),format.raw/*19.64*/("""
+                            """),format.raw/*20.29*/("""return moment(data).format('YYYY-MM-DD');
+                    """),format.raw/*21.21*/("""}"""),format.raw/*21.22*/("""
+                """),format.raw/*22.17*/("""}"""),format.raw/*22.18*/(""",
+                """),format.raw/*23.17*/("""{"""),format.raw/*23.18*/(""" """),format.raw/*23.19*/("""data: 'status'"""),format.raw/*23.33*/("""}"""),format.raw/*23.34*/("""
+            """),format.raw/*24.13*/("""],
             responsive: true
-        """),format.raw/*25.9*/("""}"""),format.raw/*25.10*/(""");
-    """),format.raw/*26.5*/("""}"""),format.raw/*26.6*/(""");
+        """),format.raw/*26.9*/("""}"""),format.raw/*26.10*/(""");
+    """),format.raw/*27.5*/("""}"""),format.raw/*27.6*/(""");
 
-      $(document).ready(function() """),format.raw/*28.36*/("""{"""),format.raw/*28.37*/("""
-      """),format.raw/*29.7*/("""var message = $('#msg')
+      $(document).ready(function() """),format.raw/*29.36*/("""{"""),format.raw/*29.37*/("""
+      """),format.raw/*30.7*/("""var message = $('#msg')
           message.hide()
-          if(""""),_display_(/*31.16*/flash/*31.21*/.get("success")),format.raw/*31.36*/("""" == "successfullyDeleted")"""),format.raw/*31.63*/("""{"""),format.raw/*31.64*/("""
-              """),format.raw/*32.15*/("""message.css('display', 'block').addClass('form-group has-success')
+          if(""""),_display_(/*32.16*/flash/*32.21*/.get("success")),format.raw/*32.36*/("""" == "successfullyDeleted")"""),format.raw/*32.63*/("""{"""),format.raw/*32.64*/("""
+              """),format.raw/*33.15*/("""message.css('display', 'block').addClass('form-group has-success')
               message.find('.control-label').html('User has been deleted.')
-          """),format.raw/*34.11*/("""}"""),format.raw/*34.12*/("""
-      """),format.raw/*35.7*/("""}"""),format.raw/*35.8*/(""");
+          """),format.raw/*35.11*/("""}"""),format.raw/*35.12*/("""
+      """),format.raw/*36.7*/("""}"""),format.raw/*36.8*/(""");
     </script>
 
 <div class="col-lg-12">
     <h1 class="page-header">
         Work Orders
-        <a href=""""),_display_(/*41.19*/routes/*41.25*/.WorkOrders.create),format.raw/*41.43*/("""">
+        <a href=""""),_display_(/*42.19*/routes/*42.25*/.WorkOrders.create),format.raw/*42.43*/("""">
             <button type="button" class="btn btn-primary badge">
                 Create
+            </button>
+        </a>
+        <a href=""""),_display_(/*47.19*/routes/*47.25*/.WorkOrders.historyList),format.raw/*47.48*/("""">
+            <button type="button" class="btn btn-primary badge">
+                History
             </button>
         </a>
     </h1>
     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
         <thead>
         <tr>
-            <th width="25%">Maintenance Item</th>
-            <th width="25%">Person In Charge</th>
-            <th width="25%">Date</th>
+            <th width="20%">Maintenance Item</th>
+            <th width="20%">Staff In Charge</th>
+            <th width="20%">Technician</th>
+            <th width="20%">Date</th>
             <th>Status</th>
         </tr>
         </thead>
@@ -104,9 +111,9 @@ Seq[Any](format.raw/*1.83*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/workOrders/list.scala.html
-                  HASH: 11d2b3f85b31bbe5eab76711288eac9af8f06c15
-                  MATRIX: 802->1|978->82|1008->87|1037->108|1076->110|1104->112|1174->155|1202->156|1238->166|1292->193|1320->194|1361->208|1529->348|1558->349|1587->350|1704->439|1733->440|1787->466|1909->560|1938->561|1984->579|2013->580|2060->599|2089->600|2118->601|2170->625|2199->626|2246->645|2275->646|2304->647|2421->736|2450->737|2508->767|2599->830|2628->831|2674->849|2703->850|2750->869|2779->870|2808->871|2850->885|2879->886|2921->900|2990->942|3019->943|3054->951|3082->952|3151->993|3180->994|3215->1002|3308->1068|3322->1073|3358->1088|3413->1115|3442->1116|3486->1132|3669->1287|3698->1288|3733->1296|3761->1297|3903->1412|3918->1418|3957->1436
-                  LINES: 23->1|28->1|30->3|30->3|30->3|31->4|32->5|32->5|33->6|33->6|33->6|34->7|38->11|38->11|38->11|39->12|39->12|40->13|41->14|41->14|42->15|42->15|43->16|43->16|43->16|43->16|43->16|44->17|44->17|44->17|45->18|45->18|46->19|47->20|47->20|48->21|48->21|49->22|49->22|49->22|49->22|49->22|50->23|52->25|52->25|53->26|53->26|55->28|55->28|56->29|58->31|58->31|58->31|58->31|58->31|59->32|61->34|61->34|62->35|62->35|68->41|68->41|68->41
+                  HASH: 914d03d81a5c8259c4baacaf3184718204e96e99
+                  MATRIX: 802->1|978->82|1008->87|1037->108|1076->110|1104->112|1174->155|1202->156|1238->166|1292->193|1320->194|1361->208|1529->348|1558->349|1587->350|1697->432|1726->433|1780->459|1902->553|1931->554|1977->572|2006->573|2053->592|2082->593|2111->594|2156->611|2185->612|2232->631|2261->632|2290->633|2341->656|2370->657|2417->676|2446->677|2475->678|2592->767|2621->768|2679->798|2770->861|2799->862|2845->880|2874->881|2921->900|2950->901|2979->902|3021->916|3050->917|3092->931|3161->973|3190->974|3225->982|3253->983|3322->1024|3351->1025|3386->1033|3479->1099|3493->1104|3529->1119|3584->1146|3613->1147|3657->1163|3840->1318|3869->1319|3904->1327|3932->1328|4074->1443|4089->1449|4128->1467|4304->1616|4319->1622|4363->1645
+                  LINES: 23->1|28->1|30->3|30->3|30->3|31->4|32->5|32->5|33->6|33->6|33->6|34->7|38->11|38->11|38->11|39->12|39->12|40->13|41->14|41->14|42->15|42->15|43->16|43->16|43->16|43->16|43->16|44->17|44->17|44->17|44->17|44->17|45->18|45->18|45->18|46->19|46->19|47->20|48->21|48->21|49->22|49->22|50->23|50->23|50->23|50->23|50->23|51->24|53->26|53->26|54->27|54->27|56->29|56->29|57->30|59->32|59->32|59->32|59->32|59->32|60->33|62->35|62->35|63->36|63->36|69->42|69->42|69->42|74->47|74->47|74->47
                   -- GENERATED --
               */
           

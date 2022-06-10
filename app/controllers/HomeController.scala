@@ -1,15 +1,17 @@
 package controllers
 
 import anorm.Macro.Placeholder.Parser.success
-import models.{LoginForm, UserRole}
+import models._
 import play.api.cache.SyncCacheApi
 import play.api.data.Form
-import play.api.data.Forms.{mapping, nonEmptyText}
+import play.api.data.Forms.{longNumber, mapping, nonEmptyText}
 import play.api.db.Database
 
 import javax.inject._
 import play.api.mvc.{AnyContent, Flash, MessagesControllerComponents, Request}
 import stores.UserStore
+
+import java.util.Date
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -36,6 +38,7 @@ class HomeController @Inject()(
   }
 
   def login() = Action { implicit request =>
+    if (request.session.get("emaint-userId").isEmpty) {
       val (form, errors) =
         request.flash.get("errors") match {
           case Some(errorsStr) =>
@@ -44,7 +47,10 @@ class HomeController @Inject()(
             (loginDataForm, Array.empty[String])
         }
       Ok(views.html.login(form, errors))
+    }else {
+      Redirect(routes.Users.listUser)
     }
+  }
 
   private val loginDataForm: Form[LoginForm] = Form(
     mapping(
@@ -56,6 +62,8 @@ class HomeController @Inject()(
   def postLoginData = Action { implicit request =>
     loginDataForm.bindFromRequest().fold(
       hasErrors = { form =>
+        println(form.data)
+        println(form.errors)
         Redirect(routes.HomeController.login())
           .flashing(Flash(form.data) +
             ("errors" -> form.errors.map(_.key).mkString(",")))
@@ -68,12 +76,12 @@ class HomeController @Inject()(
                 user.role match {
                   case UserRole.Admin_String =>
                     val userDetail = userStore.findById(user.id.get)
-                    userDetail.headOption match {
+                    userDetail match {
                       case Some(u) =>
                         if(userDetail.size == 1){
-                          Redirect(routes.Users.listUser).withSession("amaseng-userId" -> user.username)
+                          Redirect(routes.Users.listUser).withSession("emaint-userId" -> user.username)
                         }else{
-                          Redirect(routes.Users.listUser).withSession("amaseng-userId" -> user.username)
+                          Redirect(routes.Users.listUser).withSession("emaint-userId" -> user.username)
                         }
                       case None =>
                         Redirect(routes.HomeController.login())
@@ -81,7 +89,8 @@ class HomeController @Inject()(
                             ("errors" -> "userNotFound"))
                     }
                   case _ =>
-                    Redirect(routes.HomeController.index()).withSession("amaseng-userId" -> user.username)
+                    println("case _")
+                    Redirect(routes.HomeController.index()).withSession("emaint-userId" -> user.username)
                 }
               } else {
                 Redirect(routes.HomeController.login())
@@ -95,5 +104,52 @@ class HomeController @Inject()(
           }
         }
       })
+  }
+
+  def logout = Action { implicit request =>
+    Redirect(routes.HomeController.login()).withNewSession
+  }
+
+  def resetPasswords(id: Long) = SecuredAction(UserRole.ADMIN) { implicit request =>
+    val (form, errors) =
+      request.flash.get("errors") match {
+        case Some(errorsStr) =>
+          (resetPasswordForm.bind(request.flash.data), errorsStr.split(","))
+        case None =>
+          (resetPasswordForm.fill(ResetPassword(id, "", "")), Array.empty[String])
+      }
+    Ok(views.html.resetPassword(id, form, errors))
+  }
+
+  private val resetPasswordForm: Form[ResetPassword] = Form(
+    mapping(
+      "id" -> longNumber,
+      "newPassword" -> nonEmptyText,
+      "confirmPassword" -> nonEmptyText
+    )(ResetPassword.apply)(ResetPassword.unapply)
+  )
+
+  def postResetPassword = SecuredAction(UserRole.ADMIN) { implicit request =>
+    resetPasswordForm.bindFromRequest().fold(
+      hasErrors = { form =>
+        val id = form.get.id
+        Redirect(routes.HomeController.resetPasswords(id))
+          .flashing(Flash(form.data) +
+            ("errors" -> form.errors.map(_.key).mkString(",")))
+      },
+      success = { data =>
+        db.withTransaction { implicit conn =>
+          val newpass = data.newPassword
+          if (newpass == data.confirmPassword) {
+            userStore.updatePasswordByEmail(data.id, data.confirmPassword, new Date)
+            Redirect(routes.HomeController.resetPasswords(data.id)).flashing(("errors" -> "successfully changed"))
+          }
+          else {
+            Redirect(routes.HomeController.resetPasswords(data.id)).flashing(("errors" -> "new pass not same as confirm pass"))
+          }
+
+        }
+      }
+    )
   }
 }

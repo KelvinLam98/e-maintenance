@@ -41,9 +41,14 @@
                             Delete
                         </button>
                     </a>
-                    <a id="adminResetUser" href=#>
+                    <a id="resetPassword" href="@routes.HomeController.resetPasswords(user.id.get)">
                         <button type="button" class="btn btn-primary badge">
                             Reset Password
+                        </button>
+                    </a>
+                    <a id="back" href="@routes.Users.listUser">
+                        <button type="button" class="btn btn-primary badge" onclick="">
+                            Back
                         </button>
                     </a>
                 </div>
