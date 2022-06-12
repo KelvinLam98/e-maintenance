@@ -41,8 +41,18 @@ package appcontrollers.javascript {
     def workOrderList: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.workOrderList",
       """
+        function(id0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "api/workOrder/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
+        }
+      """
+    )
+  
+    // @LINE:67
+    def workOrderListHistory: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "appcontrollers.WorkOrders.workOrderListHistory",
+      """
         function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "api/workOrder"})
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "api/workOrderHistory"})
         }
       """
     )

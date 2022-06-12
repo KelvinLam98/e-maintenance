@@ -101,7 +101,8 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """technicians/detail/""" + "$" + """id<[^/]+>/delete""", """controllers.Technicians.delete(id:Long)"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """technicians/create/post""", """controllers.Technicians.postTechniciansDb"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/login""", """appcontrollers.Users.loginApi"""),
-    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrder""", """appcontrollers.WorkOrders.workOrderList"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrder/""" + "$" + """id<[^/]+>""", """appcontrollers.WorkOrders.workOrderList(id:Long)"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrderHistory""", """appcontrollers.WorkOrders.workOrderListHistory"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
     case r @ (_,_,_) => s :+ r.asInstanceOf[(String,String,String)]
@@ -814,17 +815,35 @@ login""",
 
   // @LINE:66
   private[this] lazy val appcontrollers_WorkOrders_workOrderList39_route = Route("GET",
-    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("api/workOrder")))
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("api/workOrder/"), DynamicPart("id", """[^/]+""",true)))
   )
   private[this] lazy val appcontrollers_WorkOrders_workOrderList39_invoker = createInvoker(
-    WorkOrders_4.workOrderList,
+    WorkOrders_4.workOrderList(fakeValue[Long]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "appcontrollers.WorkOrders",
       "workOrderList",
+      Seq(classOf[Long]),
+      "GET",
+      this.prefix + """api/workOrder/""" + "$" + """id<[^/]+>""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:67
+  private[this] lazy val appcontrollers_WorkOrders_workOrderListHistory40_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("api/workOrderHistory")))
+  )
+  private[this] lazy val appcontrollers_WorkOrders_workOrderListHistory40_invoker = createInvoker(
+    WorkOrders_4.workOrderListHistory,
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "appcontrollers.WorkOrders",
+      "workOrderListHistory",
       Nil,
       "GET",
-      this.prefix + """api/workOrder""",
+      this.prefix + """api/workOrderHistory""",
       """""",
       Seq()
     )
@@ -1069,8 +1088,14 @@ login""",
   
     // @LINE:66
     case appcontrollers_WorkOrders_workOrderList39_route(params@_) =>
+      call(params.fromPath[Long]("id", None)) { (id) =>
+        appcontrollers_WorkOrders_workOrderList39_invoker.call(WorkOrders_4.workOrderList(id))
+      }
+  
+    // @LINE:67
+    case appcontrollers_WorkOrders_workOrderListHistory40_route(params@_) =>
       call { 
-        appcontrollers_WorkOrders_workOrderList39_invoker.call(WorkOrders_4.workOrderList)
+        appcontrollers_WorkOrders_workOrderListHistory40_invoker.call(WorkOrders_4.workOrderListHistory)
       }
   }
 }
