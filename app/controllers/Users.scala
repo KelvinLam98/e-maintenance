@@ -98,7 +98,7 @@ class Users @Inject()(
               Redirect(routes.Users.detail(user.id.get))
                 .flashing(("success" -> "successfullyUpdated"))
             case None =>
-              val id: Long = userStore.insert(User(None, data.username, data.password, data.name, data.ic_number, data.contact_number, data.address, data.email, data.role, new Date, new Date))
+              val id: Long = userStore.insert(User(None, data.username, data.contact_number, data.name, data.ic_number, data.contact_number, data.address, data.email, data.role, new Date, new Date))
               Redirect(routes.Users.detail(id))
                 .flashing(("success" -> "successfullyCreated"))
           }

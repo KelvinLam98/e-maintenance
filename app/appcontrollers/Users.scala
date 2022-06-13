@@ -9,6 +9,7 @@ import play.api.cache.SyncCacheApi
 import play.api.db.{Database, NamedDatabase}
 import play.api.libs.json._
 import play.api.libs.mailer.Email
+import play.api.mvc.Results.Ok
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents, Result}
 import stores._
 
@@ -60,6 +61,27 @@ class Users @Inject()(
         "recordsFiltered" -> filtered,
         "data" -> data
       ))
+    }
+  }
+
+  def postUpdateProfile(id: Long): Action[AnyContent] = ApiAction { implicit request =>
+    withConnection { implicit conn =>
+      val json = request.body.asJson.get
+      json.validate[UpdateProfileRequest].fold(
+        valid = { input =>
+          userStore.findById(id) match {
+            case Some(user) =>
+              userStore.update(User(
+                user.id, user.username, user.password, input.name, input.ic_number, input.contact_number, input.address, input.email, user.role, user.created, new Date
+              ))
+              Ok(Json.toJson("Update Successfully"))
+            case None =>
+              Ok("Please contact admin")
+          }
+        }, invalid = { error =>
+          Ok(Json.toJson(ErrorResponse("Invalid JSON: " + error.toString(), 400)))
+        }
+      )
     }
   }
 }
