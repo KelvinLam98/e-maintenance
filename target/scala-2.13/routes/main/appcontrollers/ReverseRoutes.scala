@@ -38,9 +38,15 @@ package appcontrollers {
     }
   
     // @LINE:67
-    def workOrderListHistory: Call = {
+    def workOrderListHistory(id:Long): Call = {
       
-      Call("GET", _prefix + { _defaultPrefix } + "api/workOrderHistory")
+      Call("GET", _prefix + { _defaultPrefix } + "api/workOrderHistory/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)))
+    }
+  
+    // @LINE:68
+    def workOrderDetail(id:Long): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "api/workOrder/detail/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)))
     }
   
   }

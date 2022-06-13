@@ -41,7 +41,28 @@ class WorkOrders @Inject()(
     }
   }
 
-  def workOrderListHistory = ApiAction { implicit request =>
+  def workOrderListHistory(id: Long) = ApiAction { implicit request =>
+    val draw: Int = request.getQueryString("draw").map(_.toInt).getOrElse(0)
+    val searchText = request.getQueryString("searchText").getOrElse("")
+    val limit = LimitClause.fromRequest(request)
+    val orderBy = OrderByClause.fromRequest(request, WorkOrder.sortableCols)
+
+    db.withConnection { implicit conn =>
+      val user = userStore.findById(id)
+      val name = user.get.name
+      val total = workOrderStore.countAll
+      val filtered = workOrderStore.countFiltered(searchText)
+      val data = workOrderStore.searchByIdHistory(name, searchText, limit, orderBy)
+      Ok(Json.obj(
+        "draw" -> draw,
+        "recordsTotal" -> total,
+        "recordsFiltered" -> filtered,
+        "data" -> data
+      ))
+    }
+  }
+
+  def workOrderDetail(id: Long) = ApiAction { implicit request =>
     val draw: Int = request.getQueryString("draw").map(_.toInt).getOrElse(0)
     val searchText = request.getQueryString("searchText").getOrElse("")
     val limit = LimitClause.fromRequest(request)
@@ -50,7 +71,7 @@ class WorkOrders @Inject()(
     db.withConnection { implicit conn =>
       val total = workOrderStore.countAll
       val filtered = workOrderStore.countFiltered(searchText)
-      val data = workOrderStore.searchByIdHistory(searchText, limit, orderBy)
+      val data = workOrderStore.searchViewById(id, searchText, limit, orderBy)
       Ok(Json.obj(
         "draw" -> draw,
         "recordsTotal" -> total,
