@@ -114,17 +114,49 @@ class WorkOrderStore @Inject()() {
     ).executeUpdate()
   }
 
-  def searchById(searchText: String, limit: Option[LimitClause], orderBy: Option[OrderByClause])(implicit conn: Connection): Seq[WorkOrder] = {
+  def searchById(user_name: String, searchText: String, limit: Option[LimitClause], orderBy: Option[OrderByClause])(implicit conn: Connection): Seq[WorkOrderView] = {
     val orderCriteria = orderBy.map(_.value).getOrElse("")
     val searchCriteria =
       if(searchText.isEmpty)
         orderCriteria
       else
-        "where (maintenance_date like {searchText}) " + orderCriteria
+        "and (maintenance_date like {searchText})" + orderCriteria
     val namedParams: Seq[NamedParameter] =
       Vector[NamedParameter](
-        "searchText" -> ("%" + searchText + "%")
+        "searchText" -> ("%" + searchText + "%"),
+        "user_name" -> user_name
       ) ++ limit.map(_.namedParameters).getOrElse(Seq.empty[NamedParameter])
-    SQL("select * from work_order " + searchCriteria + limit.map(_.value).getOrElse("")).on(namedParams: _*).as(parser.*)
+    SQL("select * from work_order_view where (maintenance_date - CURDATE() >= 0 ) and user_name={user_name}" + searchCriteria + limit.map(_.value).getOrElse("")).on(namedParams: _*).as(viewParser.*)
   }
+
+  def searchByIdHistory(user_name: String, searchText: String, limit: Option[LimitClause], orderBy: Option[OrderByClause])(implicit conn: Connection): Seq[WorkOrderView] = {
+    val orderCriteria = orderBy.map(_.value).getOrElse("")
+    val searchCriteria =
+      if(searchText.isEmpty)
+        orderCriteria
+      else
+        "and (maintenance_date like {searchText}) " + orderCriteria
+    val namedParams: Seq[NamedParameter] =
+      Vector[NamedParameter](
+        "searchText" -> ("%" + searchText + "%"),
+        "user_name" -> user_name
+      ) ++ limit.map(_.namedParameters).getOrElse(Seq.empty[NamedParameter])
+    SQL("select * from work_order_view where (maintenance_date - CURDATE() < 0 ) and user_name={user_name}" + searchCriteria + limit.map(_.value).getOrElse("")).on(namedParams: _*).as(viewParser.*)
+  }
+
+  def searchViewById(id: Long, searchText: String, limit: Option[LimitClause], orderBy: Option[OrderByClause])(implicit conn: Connection): Seq[WorkOrderView] = {
+    val orderCriteria = orderBy.map(_.value).getOrElse("")
+    val searchCriteria =
+      if(searchText.isEmpty)
+        orderCriteria
+      else
+        "and (maintenance_date like {searchText})" + orderCriteria
+    val namedParams: Seq[NamedParameter] =
+      Vector[NamedParameter](
+        "searchText" -> ("%" + searchText + "%"),
+        "id" -> id
+      ) ++ limit.map(_.namedParameters).getOrElse(Seq.empty[NamedParameter])
+    SQL("select * from work_order_view where id={id}" + searchCriteria + limit.map(_.value).getOrElse("")).on(namedParams: _*).as(viewParser.*)
+  }
+
 }

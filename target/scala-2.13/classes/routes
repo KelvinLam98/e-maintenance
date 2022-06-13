@@ -63,4 +63,7 @@ POST    /technicians/create/post                      controllers.Technicians.po
 #login
 +nocsrf
 POST     /api/login                                  appcontrollers.Users.loginApi
-GET      /api/workOrder                              appcontrollers.WorkOrders.workOrderList
+GET      /api/workOrder/:id                          appcontrollers.WorkOrders.workOrderList(id: Long)
+GET      /api/workOrderHistory/:id                   appcontrollers.WorkOrders.workOrderListHistory(id: Long)
+GET      /api/workOrder/detail/:id                   appcontrollers.WorkOrders.workOrderDetail(id: Long)
+GET      /api/profile/:id                            appcontrollers.Users.profile(id: Long)
