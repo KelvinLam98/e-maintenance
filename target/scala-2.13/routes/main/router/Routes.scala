@@ -104,6 +104,7 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrder/""" + "$" + """id<[^/]+>""", """appcontrollers.WorkOrders.workOrderList(id:Long)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrderHistory/""" + "$" + """id<[^/]+>""", """appcontrollers.WorkOrders.workOrderListHistory(id:Long)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrder/detail/""" + "$" + """id<[^/]+>""", """appcontrollers.WorkOrders.workOrderDetail(id:Long)"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/profile/""" + "$" + """id<[^/]+>""", """appcontrollers.Users.profile(id:Long)"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
     case r @ (_,_,_) => s :+ r.asInstanceOf[(String,String,String)]
@@ -868,6 +869,24 @@ login""",
     )
   )
 
+  // @LINE:69
+  private[this] lazy val appcontrollers_Users_profile42_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("api/profile/"), DynamicPart("id", """[^/]+""",true)))
+  )
+  private[this] lazy val appcontrollers_Users_profile42_invoker = createInvoker(
+    Users_2.profile(fakeValue[Long]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "appcontrollers.Users",
+      "profile",
+      Seq(classOf[Long]),
+      "GET",
+      this.prefix + """api/profile/""" + "$" + """id<[^/]+>""",
+      """""",
+      Seq()
+    )
+  )
+
 
   def routes: PartialFunction[RequestHeader, Handler] = {
   
@@ -1121,6 +1140,12 @@ login""",
     case appcontrollers_WorkOrders_workOrderDetail41_route(params@_) =>
       call(params.fromPath[Long]("id", None)) { (id) =>
         appcontrollers_WorkOrders_workOrderDetail41_invoker.call(WorkOrders_4.workOrderDetail(id))
+      }
+  
+    // @LINE:69
+    case appcontrollers_Users_profile42_route(params@_) =>
+      call(params.fromPath[Long]("id", None)) { (id) =>
+        appcontrollers_Users_profile42_invoker.call(Users_2.profile(id))
       }
   }
 }

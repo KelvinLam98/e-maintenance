@@ -22,6 +22,12 @@ package appcontrollers {
       Call("POST", _prefix + { _defaultPrefix } + "api/login")
     }
   
+    // @LINE:69
+    def profile(id:Long): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "api/profile/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)))
+    }
+  
   }
 
   // @LINE:66

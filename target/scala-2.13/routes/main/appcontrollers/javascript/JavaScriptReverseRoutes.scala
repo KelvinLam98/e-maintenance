@@ -27,6 +27,16 @@ package appcontrollers.javascript {
       """
     )
   
+    // @LINE:69
+    def profile: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "appcontrollers.Users.profile",
+      """
+        function(id0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "api/profile/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
+        }
+      """
+    )
+  
   }
 
   // @LINE:66

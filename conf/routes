@@ -66,3 +66,4 @@ POST     /api/login                                  appcontrollers.Users.loginA
 GET      /api/workOrder/:id                          appcontrollers.WorkOrders.workOrderList(id: Long)
 GET      /api/workOrderHistory/:id                   appcontrollers.WorkOrders.workOrderListHistory(id: Long)
 GET      /api/workOrder/detail/:id                   appcontrollers.WorkOrders.workOrderDetail(id: Long)
+GET      /api/profile/:id                            appcontrollers.Users.profile(id: Long)

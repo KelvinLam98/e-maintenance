@@ -116,4 +116,19 @@ class UserStore @Inject()() {
     ).executeUpdate()
   }
 
+  def searchProfileById(id: Long, searchText: String, limit: Option[LimitClause], orderBy: Option[OrderByClause])(implicit conn: Connection): Seq[User] = {
+    val orderCriteria = orderBy.map(_.value).getOrElse("")
+    val searchCriteria =
+      if(searchText.isEmpty)
+        orderCriteria
+      else
+        "and (username like {searchText})" + orderCriteria
+    val namedParams: Seq[NamedParameter] =
+      Vector[NamedParameter](
+        "searchText" -> ("%" + searchText + "%"),
+        "id" -> id
+      ) ++ limit.map(_.namedParameters).getOrElse(Seq.empty[NamedParameter])
+    SQL("select * from users where id={id}" + searchCriteria + limit.map(_.value).getOrElse("")).on(namedParams: _*).as(parser.*)
+  }
+
 }
