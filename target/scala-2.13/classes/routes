@@ -67,3 +67,7 @@ GET      /api/workOrder/:id                          appcontrollers.WorkOrders.w
 GET      /api/workOrderHistory/:id                   appcontrollers.WorkOrders.workOrderListHistory(id: Long)
 GET      /api/workOrder/detail/:id                   appcontrollers.WorkOrders.workOrderDetail(id: Long)
 GET      /api/profile/:id                            appcontrollers.Users.profile(id: Long)
++nocsrf
+POST     /api/profile/edit/:id                       appcontrollers.Users.postUpdateProfile(id: Long)
++nocsrf
+POST     /api/workOrder/detail/edit/:id              appcontrollers.WorkOrders.postUpdateWorkOrder(id: Long)

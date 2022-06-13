@@ -1,14 +1,13 @@
 package appcontrollers
 
 import java.util.Date
-
 import javax.inject.{Inject, Singleton}
 import models._
 import play.api.cache.SyncCacheApi
 import play.api.db.{Database, NamedDatabase}
 import play.api.libs.json._
-import play.api.mvc.MessagesControllerComponents
-import stores.{WorkOrderStore, UserStore}
+import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
+import stores.{UserStore, WorkOrderStore}
 
 @Singleton
 class WorkOrders @Inject()(
@@ -78,6 +77,29 @@ class WorkOrders @Inject()(
         "recordsFiltered" -> filtered,
         "data" -> data
       ))
+    }
+  }
+
+  def postUpdateWorkOrder(id: Long): Action[AnyContent] = ApiAction { implicit request =>
+    withConnection { implicit conn =>
+      val json = request.body.asJson.get
+      json.validate[UpdateWorkOrderRequest].fold(
+        valid = { input =>
+          workOrderStore.findById(id) match {
+            case Some(wo) =>
+              println("wo: " + wo)
+              println("input: " + input)
+              workOrderStore.update(WorkOrder(
+                wo.id, wo.maintenance_id, wo.user_id, wo.technician_id, input.maintenance_date, input.maintenance_time, input.status
+              ))
+              Ok(Json.toJson("Update Successfully"))
+            case None =>
+              Ok("Please contact admin")
+          }
+        }, invalid = { error =>
+          Ok(Json.toJson(ErrorResponse("Invalid JSON: " + error.toString(), 400)))
+        }
+      )
     }
   }
 }
