@@ -9,6 +9,7 @@ GET     /                                   controllers.HomeController.index()
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file                       controllers.Assets.versioned(file)
 
+#WEB ROUTES
 #users
 GET     /user/login                          controllers.HomeController.login()
 GET     /user/logout                         controllers.HomeController.logout()
@@ -60,16 +61,22 @@ GET     /technicians/detail/:id/delete                controllers.Technicians.de
 POST    /technicians/create/post                      controllers.Technicians.postTechniciansDb
 
 #APP ROUTES
-#login
+#user
 +nocsrf
 POST     /api/login                                  appcontrollers.Users.loginApi
-GET      /api/workOrder/:id                          appcontrollers.WorkOrders.workOrderList(id: Long)
-GET      /api/workOrderHistory/:id                   appcontrollers.WorkOrders.workOrderListHistory(id: Long)
-GET      /api/workOrder/detail/:id                   appcontrollers.WorkOrders.workOrderDetail(id: Long)
 GET      /api/profile/:id                            appcontrollers.Users.profile(id: Long)
 +nocsrf
 POST     /api/profile/edit/:id                       appcontrollers.Users.postUpdateProfile(id: Long)
 +nocsrf
-POST     /api/workOrder/detail/edit/:id              appcontrollers.WorkOrders.postUpdateWorkOrder(id: Long)
-+nocsrf
 POST     /api/profile/changePassword/:id             appcontrollers.Users.postUpdatePassword(id: Long)
+
+#work order
+GET      /api/workOrder/:id                          appcontrollers.WorkOrders.workOrderList(id: Long)
+GET      /api/workOrderHistory/:id                   appcontrollers.WorkOrders.workOrderListHistory(id: Long)
+GET      /api/workOrder/detail/:id                   appcontrollers.WorkOrders.workOrderDetail(id: Long)
++nocsrf
+POST     /api/workOrder/detail/edit/:id              appcontrollers.WorkOrders.postUpdateWorkOrder(id: Long)
+
+#notification
++ nocsrf
+POST    /api/users/register-firebase-token           appcontrollers.Users.registerFirebaseToken

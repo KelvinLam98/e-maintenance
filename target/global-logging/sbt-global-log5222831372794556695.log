@@ -1,0 +1,7 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(compile, Some(2195485d-cd89-444b-ae74-cffea7ddfce3), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Compile / compile[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 11 Scala sources to C:\Users\hylam\Desktop\Projects\e-maintenance\target\scala-2.13\classes ...[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source and 1 Java source to C:\Users\hylam\Desktop\Projects\e-maintenance\target\scala-2.13\classes ...[0m
+[0m[[0m[32msuccess[0m] [0m[0mTotal time: 30 s, completed Jun 14, 2022, 12:52:18 PM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m

@@ -23,6 +23,7 @@ lazy val root = (project in file("."))
       "org.eclipse.birt.runtime" % "org.eclipse.birt.runtime" % "4.2.2" exclude ("milyn", "flute"),
       "com.github.jwt-scala" %% "jwt-play" % "9.0.2",
       "com.github.jwt-scala" %% "jwt-play-json" % "9.0.2",
+      "com.google.firebase" % "firebase-admin" % "6.14.0"
     ),
     scalacOptions ++= Seq(
       "-feature",

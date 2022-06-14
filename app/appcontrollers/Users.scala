@@ -12,9 +12,16 @@ import play.api.libs.mailer.Email
 import play.api.mvc.Results.Ok
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents, Result}
 import stores._
+import services.ConfigurationService
 
 import java.net.URLEncoder
 import java.sql.Connection
+import scala.concurrent.{ExecutionContext, Future}
+import play.api.libs.ws._
+import akka.stream.scaladsl.{Source, StreamConverters}
+import akka.util.ByteString
+import java.io._
+import javax.imageio.ImageIO
 
 @Singleton
 class Users @Inject()(
@@ -23,7 +30,10 @@ class Users @Inject()(
                        userStore: UserStore,
                        cacheApi: SyncCacheApi,
                        loginHelper: LoginHelper,
-                     ) extends Bases(mcc, db, userStore, cacheApi) {
+                       configurationService: ConfigurationService,
+                       userPushNotifTokenStore: UserPushNotifTokenStore,
+                       ws: WSClient,
+                     )(implicit execCtx: ExecutionContext) extends Bases(mcc, db, userStore, cacheApi) {
 
   def loginApi: Action[AnyContent] = ApiAction { implicit request =>
     withConnection { implicit conn =>
@@ -107,6 +117,87 @@ class Users @Inject()(
           Ok(Json.toJson(ErrorResponse("Invalid JSON: " + error.toString(), 400)))
         }
       )
+    }
+  }
+
+  /* TODO NOTIFICATION */
+  def registerFirebaseToken = SecuredApiAction(UserRole.USER).async { implicit request =>
+    val userId = request.user.id.get
+    logger.error("-----> In registerFirebaseToken API")
+    try {
+      val json = request.body.asJson.get
+      json.validate[FirebaseRegistration].fold(
+        valid = { model =>
+          logger.error("-----> Getting input: " + model)
+
+          if (model.os == "ios") {
+            logger.error("-----> Inside IOS")
+
+            ws.url("https://iid.googleapis.com/iid/v1:batchImport")
+              .withHttpHeaders(
+                "Authorization" -> s"key=${configurationService.firebaseServerKey}",
+                "Content-Type" -> "application/json"
+              )
+              .post(Json.obj(
+                "application" -> configurationService.firebaseBundleId,
+                "sandbox" -> configurationService.firebaseSandbox,
+                "apns_tokens" -> Json.arr(model.token)
+              )).map { response =>
+              try {
+                val results = (response.json \ "results").validate[JsArray].get.value
+                logger.error("-----> Results: " + results)
+
+                if (results.length == 1) {
+                  val head = results.head
+                  val status = (head \ "status").validate[String].get
+                  logger.error("-----> Status: " + status)
+
+                  if (status == "OK") {
+                    val firebaseToken = (head \ "registration_token").validate[String].get
+                    logger.error("-----> Firebase Token: " + firebaseToken)
+
+                    db.withTransaction { implicit conn =>
+                      if (userPushNotifTokenStore.findByUserIdAppNameMiddleWareTokenOs(userId, model.os).isEmpty) {
+                        userPushNotifTokenStore.insert(model.token, model.os, None, userId)
+                        Ok(Json.toJson(UserUpdateFirebaseResponse(true, "Register Successfully")))
+                      } else {
+                        userPushNotifTokenStore.update(firebaseToken, model.os, Some(model.token), userId)
+                        Ok(Json.toJson(UserUpdateFirebaseResponse(true, "userUpdatedSuccessfully")))
+                      }
+                    }
+                  } else
+                    Ok(Json.toJson(ErrorResponse("Expected Firebase server to return only one result with status = OK, but got = " + head, 400)))
+                } else
+                  Ok(Json.toJson(ErrorResponse("Expected Firebase server to return only one result, but got = " + results, 400)))
+              }
+              catch {
+                case t: Throwable =>
+                  t.printStackTrace()
+                  Ok(Json.toJson(ErrorResponse("Failure to process response from Firebase server, t = " + t + ", response: " + response, 400)))
+              }
+            }
+          }
+          else {
+            logger.error("-----> Inside Android OS")
+
+            db.withTransaction { implicit conn =>
+              if (userPushNotifTokenStore.findByUserIdAppNameMiddleWareTokenOs(userId, model.os).isEmpty) {
+                userPushNotifTokenStore.insert(model.token, model.os, Some(model.token), userId)
+                Future.successful(Ok(Json.toJson(UserUpdateFirebaseResponse(true, "Register Successfully"))))
+              } else {
+                userPushNotifTokenStore.update(model.token, model.os, None, userId)
+                Future.successful(Ok(Json.toJson(UserUpdateFirebaseResponse(true, "userUpdatedSuccessfully"))))
+              }
+            }
+          }
+        },
+        invalid = { error =>
+          Future.successful(Ok(Json.toJson(ErrorResponse("Invalid JSON. error = " + error, 400))))
+        }
+      )
+    } catch {
+      case t: Throwable =>
+        Future.successful(Ok(Json.toJson(ErrorResponse("Invalid JSON. t = " + t, 400))))
     }
   }
 }
