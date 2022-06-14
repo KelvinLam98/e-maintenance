@@ -98,7 +98,7 @@ class WorkOrders @Inject()(
           case Some(errorsStr) =>
             (workOrdersForm.bind(request.flash.data), errorsStr.split(","))
           case None =>
-            (workOrdersForm.fill(WorkOrder(None, 0, 0, 0, new Date(), "", "")), Array.empty[String])
+            (workOrdersForm.fill(WorkOrder(None, 0, 0, 0, new Date(), "09:00", "")), Array.empty[String])
         }
       Ok(views.html.workOrders.form(form, errors, "Create", maintenanceItemStore.options, userStore.options, technicianStore.options))
     }
