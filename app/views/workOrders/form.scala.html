@@ -47,8 +47,8 @@
     </div>
 
     <div class='form-group @if(errors.contains("maintenance_time")){ has-error }'>
-        <label>Time</label>
-        <input id="maintenance_time" name="maintenance_time" value='@workOrderForm("maintenance_time").value' class="form-control" type="time">
+        <label>Time (Note: keep minutes as 00)</label>
+        <input id="maintenance_time" name="maintenance_time" value='@workOrderForm("maintenance_time").value' class="form-control" type="time" min="09:00" max="18:00" step="3600">
     </div>
     <br>
     <button type="submit" class="btn btn-primary ">@formType</button>
