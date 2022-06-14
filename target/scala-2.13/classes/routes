@@ -71,3 +71,5 @@ GET      /api/profile/:id                            appcontrollers.Users.profil
 POST     /api/profile/edit/:id                       appcontrollers.Users.postUpdateProfile(id: Long)
 +nocsrf
 POST     /api/workOrder/detail/edit/:id              appcontrollers.WorkOrders.postUpdateWorkOrder(id: Long)
++nocsrf
+POST     /api/profile/changePassword/:id             appcontrollers.Users.postUpdatePassword(id: Long)

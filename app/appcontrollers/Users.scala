@@ -84,4 +84,29 @@ class Users @Inject()(
       )
     }
   }
+
+  def postUpdatePassword(id: Long): Action[AnyContent] = ApiAction { implicit request =>
+    withConnection { implicit conn =>
+      val json = request.body.asJson.get
+      json.validate[UpdatePasswordRequest].fold(
+        valid = { input =>
+          userStore.findById(id) match {
+            case Some(user) =>
+              if (input.oldPassword == user.password) {
+              if (input.password == input.confirmPassword) {
+                userStore.update(User(
+                  user.id, user.username, input.password, user.name, user.ic_number, user.contact_number, user.address, user.email, user.role, user.created, new Date
+                ))
+                Ok(Json.toJson(UpdatePasswordResponse(isChange = true, responseMessage =" Update Successfully")))
+              } else Ok(Json.toJson(UpdatePasswordResponse(isChange = false, responseMessage = "Passwords entered is different")))
+            }else Ok(Json.toJson(UpdatePasswordResponse(isChange = false, responseMessage = "Incorrect Old Password")))
+            case None =>
+              Ok("Please contact admin")
+          }
+        }, invalid = { error =>
+          Ok(Json.toJson(ErrorResponse("Invalid JSON: " + error.toString(), 400)))
+        }
+      )
+    }
+  }
 }

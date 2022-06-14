@@ -47,6 +47,16 @@ package appcontrollers.javascript {
       """
     )
   
+    // @LINE:75
+    def postUpdatePassword: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "appcontrollers.Users.postUpdatePassword",
+      """
+        function(id0) {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "api/profile/changePassword/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
+        }
+      """
+    )
+  
   }
 
   // @LINE:66

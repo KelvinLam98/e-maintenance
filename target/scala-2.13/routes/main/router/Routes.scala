@@ -107,6 +107,7 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/profile/""" + "$" + """id<[^/]+>""", """appcontrollers.Users.profile(id:Long)"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/profile/edit/""" + "$" + """id<[^/]+>""", """appcontrollers.Users.postUpdateProfile(id:Long)"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrder/detail/edit/""" + "$" + """id<[^/]+>""", """appcontrollers.WorkOrders.postUpdateWorkOrder(id:Long)"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/profile/changePassword/""" + "$" + """id<[^/]+>""", """appcontrollers.Users.postUpdatePassword(id:Long)"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
     case r @ (_,_,_) => s :+ r.asInstanceOf[(String,String,String)]
@@ -925,6 +926,24 @@ login""",
     )
   )
 
+  // @LINE:75
+  private[this] lazy val appcontrollers_Users_postUpdatePassword45_route = Route("POST",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("api/profile/changePassword/"), DynamicPart("id", """[^/]+""",true)))
+  )
+  private[this] lazy val appcontrollers_Users_postUpdatePassword45_invoker = createInvoker(
+    Users_2.postUpdatePassword(fakeValue[Long]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "appcontrollers.Users",
+      "postUpdatePassword",
+      Seq(classOf[Long]),
+      "POST",
+      this.prefix + """api/profile/changePassword/""" + "$" + """id<[^/]+>""",
+      """""",
+      Seq("""nocsrf""")
+    )
+  )
+
 
   def routes: PartialFunction[RequestHeader, Handler] = {
   
@@ -1196,6 +1215,12 @@ login""",
     case appcontrollers_WorkOrders_postUpdateWorkOrder44_route(params@_) =>
       call(params.fromPath[Long]("id", None)) { (id) =>
         appcontrollers_WorkOrders_postUpdateWorkOrder44_invoker.call(WorkOrders_4.postUpdateWorkOrder(id))
+      }
+  
+    // @LINE:75
+    case appcontrollers_Users_postUpdatePassword45_route(params@_) =>
+      call(params.fromPath[Long]("id", None)) { (id) =>
+        appcontrollers_Users_postUpdatePassword45_invoker.call(Users_2.postUpdatePassword(id))
       }
   }
 }

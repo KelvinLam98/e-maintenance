@@ -34,6 +34,12 @@ package appcontrollers {
       Call("POST", _prefix + { _defaultPrefix } + "api/profile/edit/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)))
     }
   
+    // @LINE:75
+    def postUpdatePassword(id:Long): Call = {
+      
+      Call("POST", _prefix + { _defaultPrefix } + "api/profile/changePassword/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)))
+    }
+  
   }
 
   // @LINE:66
