@@ -6,10 +6,10 @@ import play.api.routing.JavaScriptReverseRoute
 
 import _root_.controllers.Assets.Asset
 
-// @LINE:65
+// @LINE:66
 package appcontrollers.javascript {
 
-  // @LINE:65
+  // @LINE:66
   class ReverseUsers(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -17,7 +17,17 @@ package appcontrollers.javascript {
     }
 
   
-    // @LINE:65
+    // @LINE:69
+    def postUpdateProfile: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "appcontrollers.Users.postUpdateProfile",
+      """
+        function(id0) {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "api/profile/edit/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
+        }
+      """
+    )
+  
+    // @LINE:66
     def loginApi: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.Users.loginApi",
       """
@@ -27,7 +37,17 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:69
+    // @LINE:82
+    def registerFirebaseToken: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "appcontrollers.Users.registerFirebaseToken",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "api/register-firebase-token"})
+        }
+      """
+    )
+  
+    // @LINE:67
     def profile: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.Users.profile",
       """
@@ -38,18 +58,18 @@ package appcontrollers.javascript {
     )
   
     // @LINE:71
-    def postUpdateProfile: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "appcontrollers.Users.postUpdateProfile",
+    def postUpdatePassword: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "appcontrollers.Users.postUpdatePassword",
       """
         function(id0) {
-          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "api/profile/edit/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "api/profile/changePassword/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
         }
       """
     )
   
   }
 
-  // @LINE:66
+  // @LINE:74
   class ReverseWorkOrders(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -57,7 +77,7 @@ package appcontrollers.javascript {
     }
 
   
-    // @LINE:66
+    // @LINE:74
     def workOrderList: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.workOrderList",
       """
@@ -67,7 +87,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:67
+    // @LINE:75
     def workOrderListHistory: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.workOrderListHistory",
       """
@@ -77,7 +97,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:68
+    // @LINE:76
     def workOrderDetail: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.workOrderDetail",
       """
@@ -87,7 +107,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:73
+    // @LINE:78
     def postUpdateWorkOrder: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.postUpdateWorkOrder",
       """
