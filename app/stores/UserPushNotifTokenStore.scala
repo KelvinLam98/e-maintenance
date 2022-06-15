@@ -28,6 +28,12 @@ class UserPushNotifTokenStore @Inject()(hexBytesHelper: HexBytesHelper) {
     ).as(userParser.*)
   }
 
+  def findByPushTokenById(user_id: Long)(implicit conn: Connection): Seq[UserPushNotifToken] = {
+    SQL("select * from user_push_notif_tokens where push_token is not null and user_id={user_id}").on(
+      "user_id" -> user_id
+    ).as(userParser.*)
+  }
+
   def countAll(implicit conn: Connection): Long = {
     SQL("select count(*) as count from user_push_notif_tokens").as(SqlParser.long("count").single)
   }

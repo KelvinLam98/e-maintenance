@@ -208,20 +208,20 @@ class Users @Inject()(
   def testSendPushNotification(workOrderId: Long) = SecuredApiAction(UserRole.ADMIN).async { implicit request =>
     db.withConnection { implicit conn =>
       workOrderStore.findById(workOrderId) match {
-        case Some(workOrder) =>
+        case Some(workOrder) => {
           val futures: Seq[Future[Any]] =
             userPushNotifTokenStore.findByPushToken.map { user =>
               firebaseHelper.sendNotificationMessage(user.push_token.get, workOrder.status, "Notification", "module", "src", workOrderId.toString).map { messageId =>
                 println("Sent, message ID: " + messageId + user.id)
               }
             }
-
           Future.sequence(futures).map { _ =>
             Ok(Json.toJson(NotificationSentResponse(true, "Notification Sent Successfully")))
           }
+        }
 
         case None =>
-          Future.successful(NotFound("Article ID not found."))
+          Future.successful(NotFound("Work Order ID not found."))
       }
     }
   }

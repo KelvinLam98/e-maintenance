@@ -43,7 +43,7 @@
 
     <div class='form-group @if(errors.contains("maintenance_date")){ has-error }'>
         <label>Date</label>
-        <input id="maintenance_date" name="maintenance_date" value='@workOrderForm("maintenance_date").value' class="form-control" type="date">
+        <input id="maintenance_date" name="maintenance_date" value='@workOrderForm("maintenance_date").value' class="form-control" type="date" placeholder="dd-mm-yyyy">
     </div>
 
     <div class='form-group @if(errors.contains("maintenance_time")){ has-error }'>

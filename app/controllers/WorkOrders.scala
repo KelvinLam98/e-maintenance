@@ -1,5 +1,6 @@
 package controllers
 
+import helpers.FirebaseHelper
 import models._
 import stores._
 import play.api.cache.SyncCacheApi
@@ -14,6 +15,7 @@ import java.text.SimpleDateFormat
 import java.time.LocalTime
 import java.util.Date
 import javax.inject.Inject
+import scala.concurrent.{ExecutionContext, Future}
 
 class WorkOrders @Inject()(
                                   mcc: MessagesControllerComponents,
@@ -22,8 +24,10 @@ class WorkOrders @Inject()(
                                   userStore: UserStore,
                                   workOrderStore: WorkOrderStore,
                                   maintenanceItemStore: MaintenanceItemStore,
-                                  technicianStore: TechnicianStore
-                                ) extends BaseController(mcc, db, cache, userStore) {
+                                  technicianStore: TechnicianStore,
+                                  firebaseHelper: FirebaseHelper,
+                                  userPushNotifTokenStore: UserPushNotifTokenStore
+                                ) (implicit execCtx: ExecutionContext) extends BaseController(mcc, db, cache, userStore) {
 
   def list = SecuredAction(UserRole.USER) { implicit request =>
     Ok(views.html.workOrders.list())
@@ -126,6 +130,14 @@ class WorkOrders @Inject()(
                 .flashing(("success" -> "successfullyUpdated"))
             case None =>
               val id: Long = workOrderStore.insert(WorkOrder(None, data.maintenance_id, data.user_id, data.technician_id, data.maintenance_date, data.maintenance_time, data.status))
+              val date = toDateFormat(data.maintenance_date)
+              println(date)
+              println(date.toString())
+                userPushNotifTokenStore.findByPushTokenById(data.user_id).map { user =>
+                  firebaseHelper.sendNotificationMessage(user.push_token.get, "New Job Assigned", "Date: " + date, "module", "src", id.toString).map { messageId =>
+                    println("Sent, message ID: " + messageId + user.id)
+                  }
+                }
               Redirect(routes.WorkOrders.detail(id))
                 .flashing(("success" -> "successfullyCreated"))
           }
