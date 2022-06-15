@@ -122,7 +122,9 @@ class Users @Inject()(
 
   /* TODO NOTIFICATION */
   def registerFirebaseToken = SecuredApiAction(UserRole.USER).async { implicit request =>
+    println("here in register token")
     val userId = request.user.id.get
+    println(userId)
     logger.error("-----> In registerFirebaseToken API")
     try {
       val json = request.body.asJson.get

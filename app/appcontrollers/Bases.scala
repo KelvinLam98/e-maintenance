@@ -88,12 +88,10 @@ class Bases(mcc: MessagesControllerComponents, db: Database, userStore: UserStor
     def invokeBlock[A](request: Request[A], block: (RequestWithLoginInfo[A]) => Future[Result]): Future[Result] = {
       getUserJWT(request) match {
         case Some(loginInfo) =>
-          /*if (AccessUtil.hasAccess(loginInfo.accessRights, accessRight))
+          println("invoke block case some")
             block(RequestWithLoginInfo(loginInfo, request)).map(_.withHeaders("Access-Control-Allow-Origin" -> accessControlAllowOrigin(request), "Access-Control-Allow-Credentials" -> "true"))(executionContext)
-          else*/
-          Future.successful(Ok("REQUIRE-LOGIN").withHeaders("Access-Control-Allow-Origin" -> accessControlAllowOrigin(request), "Access-Control-Allow-Credentials" -> "true"))
-
         case None =>
+          println("invoke block case none")
           Future.successful(Ok("REQUIRE-LOGIN").withHeaders("Access-Control-Allow-Origin" -> accessControlAllowOrigin(request), "Access-Control-Allow-Credentials" -> "true"))
       }
     }

@@ -31,7 +31,7 @@ package appcontrollers {
     // @LINE:82
     def registerFirebaseToken: Call = {
       
-      Call("POST", _prefix + { _defaultPrefix } + "api/users/register-firebase-token")
+      Call("POST", _prefix + { _defaultPrefix } + "api/register-firebase-token")
     }
   
     // @LINE:67

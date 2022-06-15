@@ -42,7 +42,7 @@ package appcontrollers.javascript {
       "appcontrollers.Users.registerFirebaseToken",
       """
         function() {
-          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "api/users/register-firebase-token"})
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "api/register-firebase-token"})
         }
       """
     )

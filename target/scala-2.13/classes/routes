@@ -78,5 +78,5 @@ GET      /api/workOrder/detail/:id                   appcontrollers.WorkOrders.w
 POST     /api/workOrder/detail/edit/:id              appcontrollers.WorkOrders.postUpdateWorkOrder(id: Long)
 
 #notification
-+ nocsrf
-POST    /api/users/register-firebase-token           appcontrollers.Users.registerFirebaseToken
++nocsrf
+POST    /api/register-firebase-token                 appcontrollers.Users.registerFirebaseToken
