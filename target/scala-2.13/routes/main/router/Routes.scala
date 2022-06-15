@@ -109,6 +109,7 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrder/detail/""" + "$" + """id<[^/]+>""", """appcontrollers.WorkOrders.workOrderDetail(id:Long)"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrder/detail/edit/""" + "$" + """id<[^/]+>""", """appcontrollers.WorkOrders.postUpdateWorkOrder(id:Long)"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/register-firebase-token""", """appcontrollers.Users.registerFirebaseToken"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/test-notification/""" + "$" + """workOrderId<[^/]+>""", """appcontrollers.Users.testSendPushNotification(workOrderId:Long)"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
     case r @ (_,_,_) => s :+ r.asInstanceOf[(String,String,String)]
@@ -964,6 +965,24 @@ user""",
     )
   )
 
+  // @LINE:83
+  private[this] lazy val appcontrollers_Users_testSendPushNotification47_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("api/test-notification/"), DynamicPart("workOrderId", """[^/]+""",true)))
+  )
+  private[this] lazy val appcontrollers_Users_testSendPushNotification47_invoker = createInvoker(
+    Users_2.testSendPushNotification(fakeValue[Long]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "appcontrollers.Users",
+      "testSendPushNotification",
+      Seq(classOf[Long]),
+      "GET",
+      this.prefix + """api/test-notification/""" + "$" + """workOrderId<[^/]+>""",
+      """""",
+      Seq()
+    )
+  )
+
 
   def routes: PartialFunction[RequestHeader, Handler] = {
   
@@ -1247,6 +1266,12 @@ user""",
     case appcontrollers_Users_registerFirebaseToken46_route(params@_) =>
       call { 
         appcontrollers_Users_registerFirebaseToken46_invoker.call(Users_2.registerFirebaseToken)
+      }
+  
+    // @LINE:83
+    case appcontrollers_Users_testSendPushNotification47_route(params@_) =>
+      call(params.fromPath[Long]("workOrderId", None)) { (workOrderId) =>
+        appcontrollers_Users_testSendPushNotification47_invoker.call(Users_2.testSendPushNotification(workOrderId))
       }
   }
 }

@@ -32,7 +32,9 @@ class Users @Inject()(
                        loginHelper: LoginHelper,
                        configurationService: ConfigurationService,
                        userPushNotifTokenStore: UserPushNotifTokenStore,
+                       workOrderStore: WorkOrderStore,
                        ws: WSClient,
+                       firebaseHelper: FirebaseHelper,
                      )(implicit execCtx: ExecutionContext) extends Bases(mcc, db, userStore, cacheApi) {
 
   def loginApi: Action[AnyContent] = ApiAction { implicit request =>
@@ -200,6 +202,27 @@ class Users @Inject()(
     } catch {
       case t: Throwable =>
         Future.successful(Ok(Json.toJson(ErrorResponse("Invalid JSON. t = " + t, 400))))
+    }
+  }
+
+  def testSendPushNotification(workOrderId: Long) = SecuredApiAction(UserRole.ADMIN).async { implicit request =>
+    db.withConnection { implicit conn =>
+      workOrderStore.findById(workOrderId) match {
+        case Some(workOrder) =>
+          val futures: Seq[Future[Any]] =
+            userPushNotifTokenStore.findByPushToken.map { user =>
+              firebaseHelper.sendNotificationMessage(user.push_token.get, workOrder.status, "Notification", "module", "src", workOrderId.toString).map { messageId =>
+                println("Sent, message ID: " + messageId + user.id)
+              }
+            }
+
+          Future.sequence(futures).map { _ =>
+            Ok(Json.toJson(NotificationSentResponse(true, "Notification Sent Successfully")))
+          }
+
+        case None =>
+          Future.successful(NotFound("Article ID not found."))
+      }
     }
   }
 }
