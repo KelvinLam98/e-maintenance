@@ -16,6 +16,8 @@ GET     /user/logout                         controllers.HomeController.logout()
 + nocsrf
 POST    /user/post/login                     controllers.HomeController.postLoginData
 GET     /user/list                           controllers.Users.listUser
+GET     /dashboard                           controllers.Users.dashboard
+GET     /dashboard/list.json                 controllers.Users.dashboardListJson
 GET     /user/list.json                      controllers.Users.listUserJson
 GET     /user/detail/:id                     controllers.Users.detail(id: Long)
 GET     /user/detail/:email/resetPassword    controllers.HomeController.resetPasswords(email: String)

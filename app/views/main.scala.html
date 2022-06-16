@@ -55,6 +55,9 @@
         <div class="sidebar-collapse">
             <ul class="nav" id="main-menu">
                 <li>
+                    <a id="dashboard" href="@routes.Users.dashboard"><i class="fa fa-Dashboard"></i>Dashboard</a>
+                </li>
+                <li>
                     <a id="users" href="@routes.Users.listUser"><i class="fa fa-group"></i>Users</a>
                 </li>
                 <li>
@@ -76,13 +79,6 @@
     <!-- Side Menu  -->
     <div id="page-wrapper" >
         <div id="page-inner">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2>ADMIN DASHBOARD</h2>
-                </div>
-            </div>
-            <!-- row  -->
-            <hr />
             <div class="row">
                 <div class="col-lg-12">
                     @content

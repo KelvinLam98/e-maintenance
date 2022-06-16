@@ -48,7 +48,7 @@ class HomeController @Inject()(
         }
       Ok(views.html.login(form, errors))
     }else {
-      Redirect(routes.Users.listUser)
+      Redirect(routes.Users.dashboard)
     }
   }
 
@@ -77,11 +77,9 @@ class HomeController @Inject()(
                     userDetail match {
                       case Some(u) =>
                         if(userDetail.size == 1){
-                          println("case match if")
-                          Redirect(routes.Users.listUser).withSession("emaint-userId" -> user.username)
+                          Redirect(routes.Users.dashboard).withSession("emaint-userId" -> user.username)
                         }else{
-                          println("case match else")
-                          Redirect(routes.Users.listUser).withSession("emaint-userId" -> user.username)
+                          Redirect(routes.Users.dashboard).withSession("emaint-userId" -> user.username)
                         }
                       case None =>
                         Redirect(routes.HomeController.login())
@@ -89,7 +87,6 @@ class HomeController @Inject()(
                             ("errors" -> "userNotFound"))
                     }
                   case _ =>
-                    println("case _")
                     Redirect(routes.HomeController.login())
                       .flashing(Flash(loginDataForm.fill(data).data) +
                         ("errors" -> "notAuthorized"))
