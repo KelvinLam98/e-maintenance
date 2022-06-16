@@ -29,7 +29,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:43
+  // @LINE:21
   class ReverseWorkOrders(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -37,7 +37,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:51
+    // @LINE:53
     def delete: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.WorkOrders.delete",
       """
@@ -47,21 +47,21 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:47
+    // @LINE:21
     def detail: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.WorkOrders.detail",
       """
         function(id0) {
         
           if (true) {
-            return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "workOrders/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
+            return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "dashboard/pending/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
           }
         
         }
       """
     )
   
-    // @LINE:49
+    // @LINE:51
     def create: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.WorkOrders.create",
       """
@@ -71,7 +71,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:46
+    // @LINE:48
     def historyListWorkOrderJson: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.WorkOrders.historyListWorkOrderJson",
       """
@@ -81,7 +81,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:53
+    // @LINE:55
     def postWorkOrdersDb: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.WorkOrders.postWorkOrdersDb",
       """
@@ -91,7 +91,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:50
+    // @LINE:52
     def update: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.WorkOrders.update",
       """
@@ -101,7 +101,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:44
+    // @LINE:46
     def historyList: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.WorkOrders.historyList",
       """
@@ -111,7 +111,17 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:43
+    // @LINE:22
+    def updatePending: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.WorkOrders.updatePending",
+      """
+        function(id0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "dashboard/pending/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0)) + "/update"})
+        }
+      """
+    )
+  
+    // @LINE:45
     def list: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.WorkOrders.list",
       """
@@ -121,7 +131,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:45
+    // @LINE:47
     def listWorkOrderJson: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.WorkOrders.listWorkOrderJson",
       """
@@ -141,7 +151,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:28
+    // @LINE:30
     def delete: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Users.delete",
       """
@@ -151,7 +161,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:21
+    // @LINE:23
     def listUserJson: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Users.listUserJson",
       """
@@ -161,7 +171,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:22
+    // @LINE:24
     def detail: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Users.detail",
       """
@@ -171,7 +181,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:26
+    // @LINE:28
     def create: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Users.create",
       """
@@ -201,7 +211,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:27
+    // @LINE:29
     def update: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Users.update",
       """
@@ -211,7 +221,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:30
+    // @LINE:32
     def postUserDb: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Users.postUserDb",
       """
@@ -261,7 +271,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:25
+    // @LINE:27
     def postResetPassword: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.postResetPassword",
       """
@@ -271,7 +281,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:23
+    // @LINE:25
     def resetPasswords: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.resetPasswords",
       """
@@ -303,7 +313,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:33
+  // @LINE:35
   class ReverseMaintenanceItems(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -311,7 +321,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:38
+    // @LINE:40
     def delete: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.MaintenanceItems.delete",
       """
@@ -321,7 +331,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:35
+    // @LINE:37
     def detail: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.MaintenanceItems.detail",
       """
@@ -331,7 +341,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:36
+    // @LINE:38
     def create: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.MaintenanceItems.create",
       """
@@ -341,7 +351,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:37
+    // @LINE:39
     def update: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.MaintenanceItems.update",
       """
@@ -351,7 +361,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:33
+    // @LINE:35
     def list: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.MaintenanceItems.list",
       """
@@ -361,7 +371,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:40
+    // @LINE:42
     def postMaintenanceItemsDb: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.MaintenanceItems.postMaintenanceItemsDb",
       """
@@ -371,7 +381,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:34
+    // @LINE:36
     def listMaintenanceItemsJson: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.MaintenanceItems.listMaintenanceItemsJson",
       """
@@ -383,7 +393,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:56
+  // @LINE:58
   class ReverseWorkOrderSamples(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -391,7 +401,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:62
+    // @LINE:64
     def delete: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.WorkOrderSamples.delete",
       """
@@ -401,7 +411,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:58
+    // @LINE:60
     def detail: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.WorkOrderSamples.detail",
       """
@@ -411,7 +421,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:57
+    // @LINE:59
     def listWorkOrderSampleJson: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.WorkOrderSamples.listWorkOrderSampleJson",
       """
@@ -421,7 +431,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:59
+    // @LINE:61
     def create: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.WorkOrderSamples.create",
       """
@@ -431,7 +441,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:64
+    // @LINE:66
     def postWorkOrderSamplesDb: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.WorkOrderSamples.postWorkOrderSamplesDb",
       """
@@ -441,7 +451,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:61
+    // @LINE:63
     def update: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.WorkOrderSamples.update",
       """
@@ -451,7 +461,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:60
+    // @LINE:62
     def createWorkOrder: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.WorkOrderSamples.createWorkOrder",
       """
@@ -461,7 +471,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:56
+    // @LINE:58
     def list: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.WorkOrderSamples.list",
       """
@@ -473,7 +483,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:67
+  // @LINE:69
   class ReverseTechnicians(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -481,7 +491,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:68
+    // @LINE:70
     def listTechniciansJson: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Technicians.listTechniciansJson",
       """
@@ -491,7 +501,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:72
+    // @LINE:74
     def delete: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Technicians.delete",
       """
@@ -501,7 +511,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:69
+    // @LINE:71
     def detail: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Technicians.detail",
       """
@@ -511,7 +521,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:70
+    // @LINE:72
     def create: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Technicians.create",
       """
@@ -521,7 +531,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:71
+    // @LINE:73
     def update: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Technicians.update",
       """
@@ -531,7 +541,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:67
+    // @LINE:69
     def list: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Technicians.list",
       """
@@ -541,7 +551,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:74
+    // @LINE:76
     def postTechniciansDb: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Technicians.postTechniciansDb",
       """

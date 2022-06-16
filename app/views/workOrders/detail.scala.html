@@ -10,6 +10,23 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
+                @if(workOrder.status == "Pending"){
+                <a id="updatePending" href="@routes.WorkOrders.updatePending(workOrder.id.get)">
+                    <button type="button" class="btn btn-primary badge">
+                        Set Status
+                    </button>
+                </a>
+                <a id="reject" href="@routes.WorkOrders.delete(workOrder.id.get)">
+                    <button type="button" class="btn btn-danger badge" onclick="return confirm('Are you sure you want to reject and delete this item?');">
+                        Reject
+                    </button>
+                </a>
+                <a id="backToDashboard" href="@routes.Users.dashboard">
+                    <button type="button" class="btn btn-primary badge">
+                        Back
+                    </button>
+                </a>
+                } else {
                 <a id="update" href="@routes.WorkOrders.update(workOrder.id.get)">
                     <button type="button" class="btn btn-primary badge">
                         Update
@@ -25,6 +42,7 @@
                         Back
                     </button>
                 </a>
+                }
             </div>
             <div class="panel-body">
                 <div class="table-responsive">

@@ -37,61 +37,79 @@ Seq[Any](format.raw/*1.107*/("""
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <a id="update" href=""""),_display_(/*13.39*/routes/*13.45*/.WorkOrders.update(workOrder.id.get)),format.raw/*13.81*/("""">
+                """),_display_(/*13.18*/if(workOrder.status == "Pending")/*13.51*/{_display_(Seq[Any](format.raw/*13.52*/("""
+                """),format.raw/*14.17*/("""<a id="updatePending" href=""""),_display_(/*14.46*/routes/*14.52*/.WorkOrders.updatePending(workOrder.id.get)),format.raw/*14.95*/("""">
                     <button type="button" class="btn btn-primary badge">
-                        Update
+                        Set Status
                     </button>
                 </a>
-                <a id="delete" href=""""),_display_(/*18.39*/routes/*18.45*/.WorkOrders.delete(workOrder.id.get)),format.raw/*18.81*/("""">
-                    <button type="button" class="btn btn-danger badge" onclick="return confirm('Are you sure you want to delete this item?');">
-                        Delete
+                <a id="reject" href=""""),_display_(/*19.39*/routes/*19.45*/.WorkOrders.delete(workOrder.id.get)),format.raw/*19.81*/("""">
+                    <button type="button" class="btn btn-danger badge" onclick="return confirm('Are you sure you want to reject and delete this item?');">
+                        Reject
                     </button>
                 </a>
-                <a id="back" href=""""),_display_(/*23.37*/routes/*23.43*/.WorkOrders.list),format.raw/*23.59*/("""">
+                <a id="backToDashboard" href=""""),_display_(/*24.48*/routes/*24.54*/.Users.dashboard),format.raw/*24.70*/("""">
                     <button type="button" class="btn btn-primary badge">
                         Back
                     </button>
                 </a>
-            </div>
+                """)))}/*29.19*/else/*29.24*/{_display_(Seq[Any](format.raw/*29.25*/("""
+                """),format.raw/*30.17*/("""<a id="update" href=""""),_display_(/*30.39*/routes/*30.45*/.WorkOrders.update(workOrder.id.get)),format.raw/*30.81*/("""">
+                    <button type="button" class="btn btn-primary badge">
+                        Update
+                    </button>
+                </a>
+                <a id="delete" href=""""),_display_(/*35.39*/routes/*35.45*/.WorkOrders.delete(workOrder.id.get)),format.raw/*35.81*/("""">
+                    <button type="button" class="btn btn-danger badge" onclick="return confirm('Are you sure you want to delete this item?');">
+                        Delete
+                    </button>
+                </a>
+                <a id="back" href=""""),_display_(/*40.37*/routes/*40.43*/.WorkOrders.list),format.raw/*40.59*/("""">
+                    <button type="button" class="btn btn-primary badge">
+                        Back
+                    </button>
+                </a>
+                """)))}),format.raw/*45.18*/("""
+            """),format.raw/*46.13*/("""</div>
             <div class="panel-body">
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped">
                         <tbody>
                         <tr>
                             <th style="width:20%">Maintenance Code</th>
-                            <td>"""),_display_(/*35.34*/workOrder/*35.43*/.item_code),format.raw/*35.53*/("""</td>
+                            <td>"""),_display_(/*53.34*/workOrder/*53.43*/.item_code),format.raw/*53.53*/("""</td>
                         </tr>
                         <tr>
                             <th style="width:20%">Maintenance Item</th>
-                            <td>"""),_display_(/*39.34*/workOrder/*39.43*/.item_name),format.raw/*39.53*/("""</td>
+                            <td>"""),_display_(/*57.34*/workOrder/*57.43*/.item_name),format.raw/*57.53*/("""</td>
                         </tr>
                         <tr>
                             <th>Staff In Charge</th>
-                            <td>"""),_display_(/*43.34*/workOrder/*43.43*/.user_name),format.raw/*43.53*/("""</td>
+                            <td>"""),_display_(/*61.34*/workOrder/*61.43*/.user_name),format.raw/*61.53*/("""</td>
                         </tr>
                         <tr>
                             <th>Staff In Charge Contact</th>
-                            <td>"""),_display_(/*47.34*/workOrder/*47.43*/.user_contact),format.raw/*47.56*/("""</td>
+                            <td>"""),_display_(/*65.34*/workOrder/*65.43*/.user_contact),format.raw/*65.56*/("""</td>
                         </tr>
                         <tr>
                             <th>Technician</th>
-                            <td>"""),_display_(/*51.34*/workOrder/*51.43*/.technician_name),format.raw/*51.59*/("""</td>
+                            <td>"""),_display_(/*69.34*/workOrder/*69.43*/.technician_name),format.raw/*69.59*/("""</td>
                         </tr>
                         <tr>
                             <th>Technician Contact</th>
-                            <td>"""),_display_(/*55.34*/workOrder/*55.43*/.technician_contact),format.raw/*55.62*/("""</td>
+                            <td>"""),_display_(/*73.34*/workOrder/*73.43*/.technician_contact),format.raw/*73.62*/("""</td>
                         </tr>
                         <tr>
                             <th>Maintenance Date</th>
-                            <td>"""),_display_(/*59.34*/workOrder/*59.43*/.maintenance_date),format.raw/*59.60*/("""</td>
+                            <td>"""),_display_(/*77.34*/workOrder/*77.43*/.maintenance_date),format.raw/*77.60*/("""</td>
                         </tr>
                         <tr>
                             <th>Maintenance Time</th>
-                            <td>"""),_display_(/*63.34*/workOrder/*63.43*/.maintenance_time),format.raw/*63.60*/("""</td>
+                            <td>"""),_display_(/*81.34*/workOrder/*81.43*/.maintenance_time),format.raw/*81.60*/("""</td>
                         </tr>
                         <tr>
                             <th>Status</th>
-                            <td>"""),_display_(/*67.34*/workOrder/*67.43*/.status),format.raw/*67.50*/("""</td>
+                            <td>"""),_display_(/*85.34*/workOrder/*85.43*/.status),format.raw/*85.50*/("""</td>
                         </tbody>
                     </table>
                 </div>
@@ -120,9 +138,9 @@ Seq[Any](format.raw/*1.107*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/workOrders/detail.scala.html
-                  HASH: 5a669f4eae7ea5fb01faacc633b887bff5bfdf36
-                  MATRIX: 818->1|1019->106|1047->109|1076->130|1115->132|1143->134|1522->486|1537->492|1594->528|1822->729|1837->735|1894->771|2191->1041|2206->1047|2243->1063|2778->1571|2796->1580|2827->1590|3028->1764|3046->1773|3077->1783|3259->1938|3277->1947|3308->1957|3498->2120|3516->2129|3550->2142|3727->2292|3745->2301|3782->2317|3967->2475|3985->2484|4025->2503|4208->2659|4226->2668|4264->2685|4447->2841|4465->2850|4503->2867|4676->3013|4694->3022|4722->3029
-                  LINES: 23->1|28->1|29->2|29->2|29->2|30->3|40->13|40->13|40->13|45->18|45->18|45->18|50->23|50->23|50->23|62->35|62->35|62->35|66->39|66->39|66->39|70->43|70->43|70->43|74->47|74->47|74->47|78->51|78->51|78->51|82->55|82->55|82->55|86->59|86->59|86->59|90->63|90->63|90->63|94->67|94->67|94->67
+                  HASH: 9341589b1d31e3bf3dad955dc69c1902af361403
+                  MATRIX: 818->1|1019->106|1047->109|1076->130|1115->132|1143->134|1501->465|1543->498|1582->499|1628->517|1684->546|1699->552|1763->595|1995->800|2010->806|2067->842|2386->1134|2401->1140|2438->1156|2635->1335|2648->1340|2687->1341|2733->1359|2782->1381|2797->1387|2854->1423|3082->1624|3097->1630|3154->1666|3451->1936|3466->1942|3503->1958|3712->2136|3754->2150|4116->2485|4134->2494|4165->2504|4366->2678|4384->2687|4415->2697|4597->2852|4615->2861|4646->2871|4836->3034|4854->3043|4888->3056|5065->3206|5083->3215|5120->3231|5305->3389|5323->3398|5363->3417|5546->3573|5564->3582|5602->3599|5785->3755|5803->3764|5841->3781|6014->3927|6032->3936|6060->3943
+                  LINES: 23->1|28->1|29->2|29->2|29->2|30->3|40->13|40->13|40->13|41->14|41->14|41->14|41->14|46->19|46->19|46->19|51->24|51->24|51->24|56->29|56->29|56->29|57->30|57->30|57->30|57->30|62->35|62->35|62->35|67->40|67->40|67->40|72->45|73->46|80->53|80->53|80->53|84->57|84->57|84->57|88->61|88->61|88->61|92->65|92->65|92->65|96->69|96->69|96->69|100->73|100->73|100->73|104->77|104->77|104->77|108->81|108->81|108->81|112->85|112->85|112->85
                   -- GENERATED --
               */
           

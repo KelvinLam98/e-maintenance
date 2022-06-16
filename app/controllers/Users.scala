@@ -190,16 +190,17 @@ class Users @Inject()(
     val searchText = request.getQueryString("search[value]").getOrElse("")
 
     db.withConnection { implicit conn =>
-      val total = workOrderStore.countAll
-      val filtered = workOrderStore.countFiltered(searchText)
-      val data = workOrderStore.search(start, length, searchText)
+      val total = workOrderStore.countAllForPending
+      val filtered = workOrderStore.countFilteredForPending(searchText)
+      val data = workOrderStore.searchForPending(start, length, searchText)
       Ok(Json.obj(
         "draw" -> draw,
         "recordsTotal" -> total,
         "recordsFiltered" -> filtered,
         "data" -> data
       ))
-    }  }
+    }
+  }
 
   /* do not edit below this line */
 }

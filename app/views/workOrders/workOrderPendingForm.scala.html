@@ -1,0 +1,28 @@
+@(workOrderForm: Form[WorkOrder], errors: Array[String], formType: String, itemOptions: Seq[(Long,String)], userOptions: Seq[(Long,String)], techOptions: Seq[(Long,String)])(implicit flash: Flash, messages: Messages, request: models.RequestWithUser[_])
+@main("E-Maintenance") {
+
+<div class="col-lg-12">
+    <h1 class="page-header">Work Order - @formType</h1>
+</div>
+<form action="@routes.WorkOrders.postWorkOrdersDb" method="post">
+    <input type="hidden" id="id " name="id" value='@workOrderForm("id").value'>
+    <input type="hidden" id="maintenance_id " name="maintenance_id" value='@workOrderForm("maintenance_id").value'>
+    <input type="hidden" id="user_id " name="user_id" value='@workOrderForm("user_id").value'>
+    <input type="hidden" id="technician_id " name="technician_id" value='@workOrderForm("technician_id").value'>
+    <input type="hidden" id="maintenance_date " name="maintenance_date" value='@workOrderForm("maintenance_date").value'>
+    <input type="hidden" id="maintenance_time " name="maintenance_time" value='@workOrderForm("maintenance_time").value'>
+
+    <div>
+        <label>Status</label>
+        <select id="status" name="status" class="form-control">
+            <option @if(workOrderForm("status").value.get == "Pending"){ selected } value="Pending">Pending</option>
+            <option @if(workOrderForm("status").value.get == "Created"){ selected } value="Created">Created</option>
+            <option @if(workOrderForm("status").value.get == "In Progress"){ selected } value="In Progress">In Progress</option>
+            <option @if(workOrderForm("status").value.get == "Completed"){ selected } value="Completed">Completed</option>
+        </select>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary ">@formType</button>
+</form>
+
+}
