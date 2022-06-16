@@ -6,10 +6,10 @@ import play.api.routing.JavaScriptReverseRoute
 
 import _root_.controllers.Assets.Asset
 
-// @LINE:81
+// @LINE:82
 package appcontrollers.javascript {
 
-  // @LINE:81
+  // @LINE:82
   class ReverseUsers(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -17,7 +17,7 @@ package appcontrollers.javascript {
     }
 
   
-    // @LINE:84
+    // @LINE:85
     def postUpdateProfile: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.Users.postUpdateProfile",
       """
@@ -27,7 +27,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:81
+    // @LINE:82
     def loginApi: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.Users.loginApi",
       """
@@ -37,7 +37,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:97
+    // @LINE:98
     def registerFirebaseToken: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.Users.registerFirebaseToken",
       """
@@ -47,7 +47,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:98
+    // @LINE:99
     def testSendPushNotification: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.Users.testSendPushNotification",
       """
@@ -57,7 +57,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:82
+    // @LINE:83
     def profile: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.Users.profile",
       """
@@ -67,7 +67,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:86
+    // @LINE:87
     def postUpdatePassword: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.Users.postUpdatePassword",
       """
@@ -79,7 +79,7 @@ package appcontrollers.javascript {
   
   }
 
-  // @LINE:89
+  // @LINE:90
   class ReverseWorkOrders(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -87,7 +87,7 @@ package appcontrollers.javascript {
     }
 
   
-    // @LINE:89
+    // @LINE:90
     def workOrderList: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.workOrderList",
       """
@@ -97,7 +97,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:90
+    // @LINE:91
     def workOrderListHistory: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.workOrderListHistory",
       """
@@ -107,7 +107,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:91
+    // @LINE:92
     def workOrderDetail: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.workOrderDetail",
       """
@@ -117,7 +117,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:93
+    // @LINE:94
     def postUpdateWorkOrder: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.postUpdateWorkOrder",
       """

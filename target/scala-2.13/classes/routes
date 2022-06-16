@@ -18,6 +18,7 @@ POST    /user/post/login                     controllers.HomeController.postLogi
 GET     /user/list                           controllers.Users.listUser
 GET     /dashboard                           controllers.Users.dashboard
 GET     /dashboard/list.json                 controllers.Users.dashboardListJson
+GET     /dashboard/listAll.json              controllers.WorkOrders.listWorkOrderJson
 GET     /dashboard/pending/:id               controllers.WorkOrders.detail(id: Long)
 GET     /dashboard/pending/:id/update        controllers.WorkOrders.updatePending(id: Long)
 GET     /user/list.json                      controllers.Users.listUserJson
