@@ -47,6 +47,16 @@ package appcontrollers.javascript {
       """
     )
   
+    // @LINE:83
+    def testSendPushNotification: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "appcontrollers.Users.testSendPushNotification",
+      """
+        function(workOrderId0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "api/test-notification/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("workOrderId", workOrderId0))})
+        }
+      """
+    )
+  
     // @LINE:67
     def profile: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.Users.profile",

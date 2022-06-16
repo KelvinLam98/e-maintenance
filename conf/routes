@@ -80,3 +80,4 @@ POST     /api/workOrder/detail/edit/:id              appcontrollers.WorkOrders.p
 #notification
 +nocsrf
 POST    /api/register-firebase-token                 appcontrollers.Users.registerFirebaseToken
+GET     /api/test-notification/:workOrderId          appcontrollers.Users.testSendPushNotification(workOrderId: Long)

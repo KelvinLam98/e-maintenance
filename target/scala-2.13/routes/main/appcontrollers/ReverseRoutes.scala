@@ -34,6 +34,12 @@ package appcontrollers {
       Call("POST", _prefix + { _defaultPrefix } + "api/register-firebase-token")
     }
   
+    // @LINE:83
+    def testSendPushNotification(workOrderId:Long): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "api/test-notification/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("workOrderId", workOrderId)))
+    }
+  
     // @LINE:67
     def profile(id:Long): Call = {
       
