@@ -112,13 +112,12 @@ class WorkOrders @Inject()(
     workOrdersForm.bindFromRequest().fold(
       hasErrors = { form =>
         val id = form.data.getOrElse("id", "")
-        println("debuging: " + form.errors)
         if (id == "") {
           Redirect(routes.WorkOrders.create)
             .flashing(Flash(form.data) +
               ("errors" -> form.errors.map(_.key).mkString(",")))
         } else {
-          Redirect(routes.WorkOrders.create).flashing(Flash(form.data) +
+          Redirect(routes.WorkOrders.update(id.toLong)).flashing(Flash(form.data) +
             ("errors" -> "invalidData")) }
       },
       success = { data =>
@@ -130,11 +129,8 @@ class WorkOrders @Inject()(
                 .flashing(("success" -> "successfullyUpdated"))
             case None =>
               val id: Long = workOrderStore.insert(WorkOrder(None, data.maintenance_id, data.user_id, data.technician_id, data.maintenance_date, data.maintenance_time, data.status))
-              val date = toDateFormat(data.maintenance_date)
-              println(date)
-              println(date.toString())
                 userPushNotifTokenStore.findByPushTokenById(data.user_id).map { user =>
-                  firebaseHelper.sendNotificationMessage(user.push_token.get, "New Job Assigned", "Date: " + date, "module", "src", id.toString).map { messageId =>
+                  firebaseHelper.sendNotificationMessage(user.push_token.get, "New Job Assigned", "Please take note", "module", "src", id.toString).map { messageId =>
                     println("Sent, message ID: " + messageId + user.id)
                   }
                 }

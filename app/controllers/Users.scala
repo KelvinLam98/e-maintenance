@@ -72,7 +72,7 @@ class Users @Inject()(
           case Some(errorsStr) =>
             (userForm.bind(request.flash.data), errorsStr.split(","))
           case None =>
-            (userForm.fill(UserForm(None, "-", "-", "-", "-", "-", "-", "-", "user")), Array.empty[String])
+            (userForm.fill(UserForm(None, "-", "-", "", "", "", "", "", "user")), Array.empty[String])
         }
       Ok(views.html.users.form(form, errors, "Create"))
     }
@@ -81,26 +81,74 @@ class Users @Inject()(
   def postUserDb = SecuredAction(UserRole.ADMIN) { implicit request =>
     userForm.bindFromRequest().fold(
       hasErrors = { form =>
+        println(form.errors)
         val id = form.data.getOrElse("id", "")
         if (id == "") {
           Redirect(routes.Users.create)
             .flashing(Flash(form.data) +
               ("errors" -> form.errors.map(_.key).mkString(",")))
         } else {
-          Redirect(routes.Users.create).flashing(Flash(form.data) +
-          ("errors" -> "invalidData")) }
+          Redirect(routes.Users.update(id.toLong)).flashing(Flash(form.data) +
+          ("errors" -> form.errors.map(_.key).mkString(","))) }
       },
       success = { data =>
         db.withTransaction { implicit conn =>
           userStore.findById(data.id.getOrElse(-1)) match {
             case Some(user) =>
-              userStore.update(User(data.id, data.username, data.password, data.name, data.ic_number, data.contact_number, data.address, data.email, data.role, user.created, new Date))
-              Redirect(routes.Users.detail(user.id.get))
+              if (data.name == user.name) {
+                if (data.email == user.email){
+                  userStore.update(User(data.id, data.name, user.password, data.name, data.ic_number, data.contact_number, data.address, data.email, data.role, user.created, new Date))
+                  Redirect(routes.Users.detail(user.id.get))
                 .flashing(("success" -> "successfullyUpdated"))
+                } else userStore.findByEmail(data.email) match {
+                case Some(email) =>
+                  Redirect(routes.Users.update(user.id.get))
+                    .flashing(Flash(userForm.fill(data).data) +
+                      ("errors" -> "emailIsAlreadyExists"))
+                case None =>
+                  userStore.update(User(data.id, data.name, user.password, data.name, data.ic_number, data.contact_number, data.address, data.email, data.role, user.created, new Date))
+                  Redirect(routes.Users.detail(user.id.get))
+                    .flashing(("success" -> "successfullyUpdated"))
+              }}else {
+                userStore.findByUserName(data.name) match {
+                  case Some(username) =>
+                    Redirect(routes.Users.update(user.id.get))
+                      .flashing(Flash(userForm.fill(data).data) +
+                        ("errors" -> "userIsAlreadyExists"))
+                  case None =>
+                    if (data.email == user.email) {
+                      userStore.update(User(data.id, data.name, user.password, data.name, data.ic_number, data.contact_number, data.address, data.email, data.role, user.created, new Date))
+                      Redirect(routes.Users.detail(user.id.get))
+                        .flashing(("success" -> "successfullyUpdated"))
+                    }
+                    else {
+                      userStore.findByEmail(data.email) match {
+                        case Some(email) =>
+                          Redirect(routes.Users.update(user.id.get))
+                            .flashing(Flash(userForm.fill(data).data) +
+                              ("errors" -> "emailIsAlreadyExists"))
+                        case None =>
+                          userStore.update(User(data.id, data.name, user.password, data.name, data.ic_number, data.contact_number, data.address, data.email, data.role, user.created, new Date))
+                          Redirect(routes.Users.detail(user.id.get))
+                            .flashing(("success" -> "successfullyUpdated"))
+                      }
+                    }
+                }
+              }
             case None =>
-              val id: Long = userStore.insert(User(None, data.username, data.contact_number, data.name, data.ic_number, data.contact_number, data.address, data.email, data.role, new Date, new Date))
-              Redirect(routes.Users.detail(id))
-                .flashing(("success" -> "successfullyCreated"))
+              if (userStore.findByEmail(data.email).isDefined) {
+                Redirect(routes.Users.create)
+                  .flashing(Flash(userForm.fill(data).data) +
+                    ("errors" -> "emailIsAlreadyExists"))
+              } else if (userStore.findByUserName(data.name).isDefined) {
+              Redirect(routes.Users.create)
+                .flashing(Flash(userForm.fill(data).data) +
+                  ("errors" -> "userIsAlreadyExists"))
+            } else {
+                val id: Long = userStore.insert(User(None, data.name, data.contact_number, data.name, data.ic_number, data.contact_number, data.address, data.email, data.role, new Date, new Date))
+                Redirect(routes.Users.detail(id))
+                  .flashing(("success" -> "successfullyCreated"))
+              }
           }
         }
       }

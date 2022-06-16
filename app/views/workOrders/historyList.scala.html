@@ -20,7 +20,14 @@
                             return moment(data).format('YYYY-MM-DD');
                     }
                 },
-                { data: 'status'}
+                { data: 'status',
+                    "render": function(data, type, full, meta){
+                        if (data != "Completed")
+                            return '<text style="color: red">' + data + '</text>'
+                        else
+                            return data;
+                    }
+                }
             ],
             responsive: true
         });

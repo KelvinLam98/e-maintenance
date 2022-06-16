@@ -37,14 +37,14 @@
                                 <label class="control-label">User Not Found</label>
                             </div>
                             }
-                            @if(errors.contains("post-forgot-password-data-success")){
-                            <div class="form-group has-success">
-                                <label class="control-label">Reset Password Requested. Please Check Your Email</label>
+                            @if(errors.contains("notAuthorized")){
+                            <div class="form-group has-error">
+                                <label class="control-label">You are not authorized to access</label>
                             </div>
                             }
-                            @if(errors.contains("successfully reset")){
+                            @if(errors.contains("invalidData")){
                             <div class="form-group has-success">
-                                <label class="control-label">Password Reset Successfully</label>
+                                <label class="control-label">Please enter valid data for username and password</label>
                             </div>
                             }
                             <div class="form-group" @if(errors.contains("username")){ has-error }">

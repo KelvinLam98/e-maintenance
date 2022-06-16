@@ -255,8 +255,8 @@ package controllers.javascript {
     def resetPasswords: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.resetPasswords",
       """
-        function(id0) {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0)) + "/resetPassword"})
+        function(email0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("email", email0)) + "/resetPassword"})
         }
       """
     )
@@ -364,6 +364,96 @@ package controllers.javascript {
   }
 
   // @LINE:54
+  class ReverseWorkOrderSamples(_prefix: => String) {
+
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:60
+    def delete: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.WorkOrderSamples.delete",
+      """
+        function(id0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "workOrderSamples/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0)) + "/delete"})
+        }
+      """
+    )
+  
+    // @LINE:56
+    def detail: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.WorkOrderSamples.detail",
+      """
+        function(id0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "workOrderSamples/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
+        }
+      """
+    )
+  
+    // @LINE:55
+    def listWorkOrderSampleJson: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.WorkOrderSamples.listWorkOrderSampleJson",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "workOrderSamples/list.json"})
+        }
+      """
+    )
+  
+    // @LINE:57
+    def create: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.WorkOrderSamples.create",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "workOrderSamples/create"})
+        }
+      """
+    )
+  
+    // @LINE:62
+    def postWorkOrderSamplesDb: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.WorkOrderSamples.postWorkOrderSamplesDb",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "workOrderSamples/create/post"})
+        }
+      """
+    )
+  
+    // @LINE:59
+    def update: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.WorkOrderSamples.update",
+      """
+        function(id0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "workOrderSamples/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0)) + "/update"})
+        }
+      """
+    )
+  
+    // @LINE:58
+    def createWorkOrder: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.WorkOrderSamples.createWorkOrder",
+      """
+        function(id0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "workOrderSamples/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0)) + "/createWorkOrder"})
+        }
+      """
+    )
+  
+    // @LINE:54
+    def list: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.WorkOrderSamples.list",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "workOrderSamples/list"})
+        }
+      """
+    )
+  
+  }
+
+  // @LINE:65
   class ReverseTechnicians(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -371,7 +461,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:55
+    // @LINE:66
     def listTechniciansJson: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Technicians.listTechniciansJson",
       """
@@ -381,7 +471,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:59
+    // @LINE:70
     def delete: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Technicians.delete",
       """
@@ -391,7 +481,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:56
+    // @LINE:67
     def detail: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Technicians.detail",
       """
@@ -401,7 +491,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:57
+    // @LINE:68
     def create: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Technicians.create",
       """
@@ -411,7 +501,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:58
+    // @LINE:69
     def update: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Technicians.update",
       """
@@ -421,7 +511,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:54
+    // @LINE:65
     def list: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Technicians.list",
       """
@@ -431,7 +521,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:61
+    // @LINE:72
     def postTechniciansDb: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Technicians.postTechniciansDb",
       """

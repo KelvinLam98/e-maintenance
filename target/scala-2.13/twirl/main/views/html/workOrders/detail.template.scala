@@ -37,18 +37,18 @@ Seq[Any](format.raw/*1.107*/("""
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <a id="updateUser" href=""""),_display_(/*13.43*/routes/*13.49*/.WorkOrders.update(workOrder.id.get)),format.raw/*13.85*/("""">
+                <a id="update" href=""""),_display_(/*13.39*/routes/*13.45*/.WorkOrders.update(workOrder.id.get)),format.raw/*13.81*/("""">
                     <button type="button" class="btn btn-primary badge">
                         Update
                     </button>
                 </a>
-                <a id="deleteUser" href=""""),_display_(/*18.43*/routes/*18.49*/.WorkOrders.delete(workOrder.id.get)),format.raw/*18.85*/("""">
-                    <button type="button" class="btn btn-danger badge" onclick="">
+                <a id="delete" href=""""),_display_(/*18.39*/routes/*18.45*/.WorkOrders.delete(workOrder.id.get)),format.raw/*18.81*/("""">
+                    <button type="button" class="btn btn-danger badge" onclick="return confirm('Are you sure you want to delete this item?');">
                         Delete
                     </button>
                 </a>
                 <a id="back" href=""""),_display_(/*23.37*/routes/*23.43*/.WorkOrders.list),format.raw/*23.59*/("""">
-                    <button type="button" class="btn btn-primary badge" onclick="">
+                    <button type="button" class="btn btn-primary badge">
                         Back
                     </button>
                 </a>
@@ -120,8 +120,8 @@ Seq[Any](format.raw/*1.107*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/workOrders/detail.scala.html
-                  HASH: 7c17c934d4c3f2cd23f21cc479c6d188fc3a36c4
-                  MATRIX: 818->1|1019->106|1047->109|1076->130|1115->132|1143->134|1526->490|1541->496|1598->532|1830->737|1845->743|1902->779|2138->988|2153->994|2190->1010|2736->1529|2754->1538|2785->1548|2986->1722|3004->1731|3035->1741|3217->1896|3235->1905|3266->1915|3456->2078|3474->2087|3508->2100|3685->2250|3703->2259|3740->2275|3925->2433|3943->2442|3983->2461|4166->2617|4184->2626|4222->2643|4405->2799|4423->2808|4461->2825|4634->2971|4652->2980|4680->2987
+                  HASH: 5a669f4eae7ea5fb01faacc633b887bff5bfdf36
+                  MATRIX: 818->1|1019->106|1047->109|1076->130|1115->132|1143->134|1522->486|1537->492|1594->528|1822->729|1837->735|1894->771|2191->1041|2206->1047|2243->1063|2778->1571|2796->1580|2827->1590|3028->1764|3046->1773|3077->1783|3259->1938|3277->1947|3308->1957|3498->2120|3516->2129|3550->2142|3727->2292|3745->2301|3782->2317|3967->2475|3985->2484|4025->2503|4208->2659|4226->2668|4264->2685|4447->2841|4465->2850|4503->2867|4676->3013|4694->3022|4722->3029
                   LINES: 23->1|28->1|29->2|29->2|29->2|30->3|40->13|40->13|40->13|45->18|45->18|45->18|50->23|50->23|50->23|62->35|62->35|62->35|66->39|66->39|66->39|70->43|70->43|70->43|74->47|74->47|74->47|78->51|78->51|78->51|82->55|82->55|82->55|86->59|86->59|86->59|90->63|90->63|90->63|94->67|94->67|94->67
                   -- GENERATED --
               */

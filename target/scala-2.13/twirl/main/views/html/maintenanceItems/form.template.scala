@@ -37,28 +37,49 @@ Seq[Any](format.raw/*1.151*/("""
             $canfocus.eq(index).focus();
         """),format.raw/*11.9*/("""}"""),format.raw/*11.10*/("""
     """),format.raw/*12.5*/("""}"""),format.raw/*12.6*/(""");
+
+    $(document).ready(function() """),format.raw/*14.34*/("""{"""),format.raw/*14.35*/("""
+        """),format.raw/*15.9*/("""var message = $('#msg')
+        message.hide()
+        if(""""),_display_(/*17.14*/flash/*17.19*/.get("errors")),format.raw/*17.33*/("""" == "itemIsAlreadyExists")"""),format.raw/*17.60*/("""{"""),format.raw/*17.61*/("""
+            """),format.raw/*18.13*/("""message.css('display', 'block').addClass('form-group has-error')
+            message.find('.control-label').html('There is an Existing Maintenance Item, Please Change')
+        """),format.raw/*20.9*/("""}"""),format.raw/*20.10*/("""
+    """),format.raw/*21.5*/("""}"""),format.raw/*21.6*/(""");
 </script>
 
 <div class="col-lg-12">
-    <h1 class="page-header">Maintenance Item - """),_display_(/*16.49*/formType),format.raw/*16.57*/("""</h1>
+    <h1 class="page-header">Maintenance Item - """),_display_(/*25.49*/formType),format.raw/*25.57*/("""</h1>
 </div>
-<form action=""""),_display_(/*18.16*/routes/*18.22*/.MaintenanceItems.postMaintenanceItemsDb),format.raw/*18.62*/("""" method="post">
-    <input type="hidden" id="id " name="id" value='"""),_display_(/*19.53*/form("id")/*19.63*/.value),format.raw/*19.69*/("""' class="form-control" placeholder="Required">
-
-    <div class='form-group """),_display_(/*21.29*/if(errors.contains("item_code"))/*21.61*/{_display_(Seq[Any](format.raw/*21.62*/(""" """),format.raw/*21.63*/("""has-error """)))}),format.raw/*21.74*/("""'>
+<form action=""""),_display_(/*27.16*/routes/*27.22*/.MaintenanceItems.postMaintenanceItemsDb),format.raw/*27.62*/("""" method="post">
+    <input type="hidden" id="id " name="id" value='"""),_display_(/*28.53*/form("id")/*28.63*/.value),format.raw/*28.69*/("""' class="form-control" placeholder="Required">
+    <div id="msg">
+        <label class="control-label"></label>
+    </div>
+    <div class='form-group """),_display_(/*32.29*/if(errors.contains("item_code"))/*32.61*/{_display_(Seq[Any](format.raw/*32.62*/(""" """),format.raw/*32.63*/("""has-error """)))}),format.raw/*32.74*/("""'>
         <label>Code</label>
-        <input id="item_code" name="item_code" value='"""),_display_(/*23.56*/form("item_code")/*23.73*/.value),format.raw/*23.79*/("""' class="form-control" placeholder="Required">
+        <input id="item_code" name="item_code" value='"""),_display_(/*34.56*/form("item_code")/*34.73*/.value),format.raw/*34.79*/("""' class="form-control" placeholder="Required" maxlength="5">
     </div>
+    """),_display_(/*36.6*/if(errors.contains("item_code"))/*36.38*/{_display_(Seq[Any](format.raw/*36.39*/("""
+    """),format.raw/*37.5*/("""<div class="form-group has-error">
+        <label class="control-label">Please enter valid data for code.</label>
+    </div>
+    """)))}),format.raw/*40.6*/("""
 
-    <div class='form-group """),_display_(/*26.29*/if(errors.contains("item_name"))/*26.61*/{_display_(Seq[Any](format.raw/*26.62*/(""" """),format.raw/*26.63*/("""has-error """)))}),format.raw/*26.74*/("""'>
+    """),format.raw/*42.5*/("""<div class='form-group """),_display_(/*42.29*/if(errors.contains("item_name"))/*42.61*/{_display_(Seq[Any](format.raw/*42.62*/(""" """),format.raw/*42.63*/("""has-error """)))}),format.raw/*42.74*/("""'>
         <label>Name</label>
-        <input id="item_name" name="item_name" value='"""),_display_(/*28.56*/form("item_name")/*28.73*/.value),format.raw/*28.79*/("""' class="form-control" placeholder="Required">
+        <input id="item_name" name="item_name" value='"""),_display_(/*44.56*/form("item_name")/*44.73*/.value),format.raw/*44.79*/("""' class="form-control" placeholder="Required">
     </div>
-    <br>
-    <button type="submit" class="btn btn-primary ">"""),_display_(/*31.53*/formType),format.raw/*31.61*/("""</button>
+    """),_display_(/*46.6*/if(errors.contains("item_name"))/*46.38*/{_display_(Seq[Any](format.raw/*46.39*/("""
+    """),format.raw/*47.5*/("""<div class="form-group has-error">
+        <label class="control-label">Please enter valid data for name.</label>
+    </div>
+    """)))}),format.raw/*50.6*/("""
+    """),format.raw/*51.5*/("""<br>
+    <button type="submit" class="btn btn-primary ">"""),_display_(/*52.53*/formType),format.raw/*52.61*/("""</button>
 </form>
 
-""")))}),format.raw/*34.2*/("""
+""")))}),format.raw/*55.2*/("""
 """))
       }
     }
@@ -80,9 +101,9 @@ Seq[Any](format.raw/*1.151*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/maintenanceItems/form.scala.html
-                  HASH: ab02810f47d168688ccca1cae1b19e62d59d0211
-                  MATRIX: 851->1|1096->150|1124->153|1153->174|1192->176|1220->178|1317->248|1345->249|1381->259|1427->278|1455->279|1496->293|1747->517|1776->518|1809->524|1837->525|1954->615|1983->623|2040->653|2055->659|2116->699|2213->769|2232->779|2259->785|2364->863|2405->895|2444->896|2473->897|2515->908|2630->996|2656->1013|2683->1019|2800->1109|2841->1141|2880->1142|2909->1143|2951->1154|3066->1242|3092->1259|3119->1265|3268->1387|3297->1395|3350->1418
-                  LINES: 23->1|28->1|29->2|29->2|29->2|30->3|31->4|31->4|32->5|32->5|32->5|33->6|38->11|38->11|39->12|39->12|43->16|43->16|45->18|45->18|45->18|46->19|46->19|46->19|48->21|48->21|48->21|48->21|48->21|50->23|50->23|50->23|53->26|53->26|53->26|53->26|53->26|55->28|55->28|55->28|58->31|58->31|61->34
+                  HASH: dc3bd8ab38fbe6f43aa2a2f4d67901cde08f0a40
+                  MATRIX: 851->1|1096->150|1124->153|1153->174|1192->176|1220->178|1317->248|1345->249|1381->259|1427->278|1455->279|1496->293|1747->517|1776->518|1809->524|1837->525|1904->564|1933->565|1970->575|2059->637|2073->642|2108->656|2163->683|2192->684|2234->698|2440->877|2469->878|2502->884|2530->885|2647->975|2676->983|2733->1013|2748->1019|2809->1059|2906->1129|2925->1139|2952->1145|3134->1300|3175->1332|3214->1333|3243->1334|3285->1345|3400->1433|3426->1450|3453->1456|3558->1535|3599->1567|3638->1568|3671->1574|3834->1707|3869->1715|3920->1739|3961->1771|4000->1772|4029->1773|4071->1784|4186->1872|4212->1889|4239->1895|4330->1960|4371->1992|4410->1993|4443->1999|4606->2132|4639->2138|4724->2196|4753->2204|4806->2227
+                  LINES: 23->1|28->1|29->2|29->2|29->2|30->3|31->4|31->4|32->5|32->5|32->5|33->6|38->11|38->11|39->12|39->12|41->14|41->14|42->15|44->17|44->17|44->17|44->17|44->17|45->18|47->20|47->20|48->21|48->21|52->25|52->25|54->27|54->27|54->27|55->28|55->28|55->28|59->32|59->32|59->32|59->32|59->32|61->34|61->34|61->34|63->36|63->36|63->36|64->37|67->40|69->42|69->42|69->42|69->42|69->42|69->42|71->44|71->44|71->44|73->46|73->46|73->46|74->47|77->50|78->51|79->52|79->52|82->55
                   -- GENERATED --
               */
           

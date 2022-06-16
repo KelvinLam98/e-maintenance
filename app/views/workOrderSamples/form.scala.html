@@ -1,0 +1,45 @@
+@(workOrderSampleForm: Form[WorkOrderSample], errors: Array[String], formType: String, itemOptions: Seq[(Long,String)], userOptions: Seq[(Long,String)], techOptions: Seq[(Long,String)])(implicit flash: Flash, messages: Messages, request: models.RequestWithUser[_])
+@main("E-Maintenance") {
+
+<div class="col-lg-12">
+    <h1 class="page-header">Work Order - @formType</h1>
+</div>
+<form action="@routes.WorkOrderSamples.postWorkOrderSamplesDb" method="post">
+    <input type="hidden" id="id " name="id" value='@workOrderSampleForm("id").value'>
+    <div>
+        <label>Maintenance Item</label>
+        <select id="maintenance_id" name="maintenance_id" class="form-control">
+            @for(itemOption <- itemOptions){
+            <option @if(workOrderSampleForm("maintenance_id").value.get == "@itemOption._1"){ selected } value="@itemOption._1">@itemOption._2</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label>Staff In Charge</label>
+        <select id="user_id" name="user_id" class="form-control">
+            @for(userOption <- userOptions){
+            <option @if(workOrderSampleForm("user_id").value.get == "@userOption._1"){ selected } value="@userOption._1">@userOption._2</option>
+            }
+        </select>
+    </div>
+
+    <div>
+        <label>Technician</label>
+        <select id="technician_id" name="technician_id" class="form-control">
+            @for(techOption <- techOptions){
+            <option @if(workOrderSampleForm("technician_id").value.get == "@techOption._1"){ selected } value="@techOption._1">@techOption._2</option>
+            }
+        </select>
+    </div>
+
+    <div>
+        <label>Status</label>
+        <select id="status" name="status" class="form-control">
+            <option @if(workOrderSampleForm("status").value.get == "Pending"){ selected } value="Pending">Pending</option>
+        </select>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary ">@formType</button>
+</form>
+
+}
