@@ -172,9 +172,9 @@ package controllers {
     }
   
     // @LINE:21
-    def resetPasswords(id:Long): Call = {
+    def resetPasswords(email:String): Call = {
       
-      Call("GET", _prefix + { _defaultPrefix } + "user/detail/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)) + "/resetPassword")
+      Call("GET", _prefix + { _defaultPrefix } + "user/detail/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("email", email)) + "/resetPassword")
     }
   
     // @LINE:7

@@ -1,4 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\e-maintenance\app\controllers\WorkOrders.scala:133:48: method toLocaleString in class Date is deprecated[0m
-[0m[[0m[31merror[0m] [0m[0m              val date = data.maintenance_date.toLocaleString[0m
-[0m[[0m[31merror[0m] [0m[0m                                               ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\e-maintenance\app\views\users\detail.scala.html:44:98: value get is not a member of String[0m
+[0m[[0m[31merror[0m] [0m[0m                    <a id="resetPassword" href="@routes.HomeController.resetPasswords(user.email.get)">[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                                 ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m

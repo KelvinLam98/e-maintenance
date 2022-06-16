@@ -1,7 +1,7 @@
 package models
 
 case class ResetPassword(
-                                   id: Long,
+                                   email: String,
                                    newPassword: String,
                                    confirmPassword: String
                                  )

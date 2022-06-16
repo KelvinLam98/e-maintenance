@@ -67,7 +67,7 @@ class MaintenanceItems @Inject()(
           case Some(errorsStr) =>
             (maintenanceItemsForm.bind(request.flash.data), errorsStr.split(","))
           case None =>
-            (maintenanceItemsForm.fill(MaintenanceItem(None, "-", "-")), Array.empty[String])
+            (maintenanceItemsForm.fill(MaintenanceItem(None, "", "")), Array.empty[String])
         }
       Ok(views.html.maintenanceItems.form(form, errors, "Create"))
     }
@@ -82,8 +82,9 @@ class MaintenanceItems @Inject()(
             .flashing(Flash(form.data) +
               ("errors" -> form.errors.map(_.key).mkString(",")))
         } else {
-          Redirect(routes.MaintenanceItems.create).flashing(Flash(form.data) +
-            ("errors" -> "invalidData")) }
+          Redirect(routes.MaintenanceItems.update(id.toLong)).flashing(Flash(form.data) +
+            ("errors" -> form.errors.map(_.key).mkString(",")))
+        }
       },
       success = { data =>
         db.withTransaction { implicit conn =>

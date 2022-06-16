@@ -62,11 +62,9 @@ class HomeController @Inject()(
   def postLoginData = Action { implicit request =>
     loginDataForm.bindFromRequest().fold(
       hasErrors = { form =>
-        println(form.data)
-        println(form.errors)
         Redirect(routes.HomeController.login())
           .flashing(Flash(form.data) +
-            ("errors" -> form.errors.map(_.key).mkString(",")))
+            ("errors" -> "invalidData"))
       },
       success = { data =>
         db.withConnection { implicit conn =>
@@ -79,8 +77,10 @@ class HomeController @Inject()(
                     userDetail match {
                       case Some(u) =>
                         if(userDetail.size == 1){
+                          println("case match if")
                           Redirect(routes.Users.listUser).withSession("emaint-userId" -> user.username)
                         }else{
+                          println("case match else")
                           Redirect(routes.Users.listUser).withSession("emaint-userId" -> user.username)
                         }
                       case None =>
@@ -90,9 +90,12 @@ class HomeController @Inject()(
                     }
                   case _ =>
                     println("case _")
-                    Redirect(routes.HomeController.index()).withSession("emaint-userId" -> user.username)
+                    Redirect(routes.HomeController.login())
+                      .flashing(Flash(loginDataForm.fill(data).data) +
+                        ("errors" -> "notAuthorized"))
                 }
               } else {
+                println("case else")
                 Redirect(routes.HomeController.login())
                   .flashing(Flash(loginDataForm.fill(data).data) +
                     ("errors" -> "incorrectPasswordOrUsername"))
@@ -110,20 +113,20 @@ class HomeController @Inject()(
     Redirect(routes.HomeController.login()).withNewSession
   }
 
-  def resetPasswords(id: Long) = SecuredAction(UserRole.ADMIN) { implicit request =>
+  def resetPasswords(email: String) = SecuredAction(UserRole.ADMIN) { implicit request =>
     val (form, errors) =
       request.flash.get("errors") match {
         case Some(errorsStr) =>
           (resetPasswordForm.bind(request.flash.data), errorsStr.split(","))
         case None =>
-          (resetPasswordForm.fill(ResetPassword(id, "", "")), Array.empty[String])
+          (resetPasswordForm.fill(ResetPassword(email, "", "")), Array.empty[String])
       }
-    Ok(views.html.resetPassword(id, form, errors))
+    Ok(views.html.resetPassword(email, form, errors))
   }
 
   private val resetPasswordForm: Form[ResetPassword] = Form(
     mapping(
-      "id" -> longNumber,
+      "email" -> nonEmptyText,
       "newPassword" -> nonEmptyText,
       "confirmPassword" -> nonEmptyText
     )(ResetPassword.apply)(ResetPassword.unapply)
@@ -132,8 +135,7 @@ class HomeController @Inject()(
   def postResetPassword = SecuredAction(UserRole.ADMIN) { implicit request =>
     resetPasswordForm.bindFromRequest().fold(
       hasErrors = { form =>
-        val id = form.get.id
-        Redirect(routes.HomeController.resetPasswords(id))
+        Redirect(routes.HomeController.resetPasswords("email"))
           .flashing(Flash(form.data) +
             ("errors" -> form.errors.map(_.key).mkString(",")))
       },
@@ -141,11 +143,11 @@ class HomeController @Inject()(
         db.withTransaction { implicit conn =>
           val newpass = data.newPassword
           if (newpass == data.confirmPassword) {
-            userStore.updatePasswordByEmail(data.id, data.confirmPassword, new Date)
-            Redirect(routes.HomeController.resetPasswords(data.id)).flashing(("errors" -> "successfully changed"))
+            userStore.updatePasswordByEmail(data.email, data.confirmPassword, new Date)
+            Redirect(routes.HomeController.resetPasswords(data.email)).flashing(("errors" -> "successfully changed"))
           }
           else {
-            Redirect(routes.HomeController.resetPasswords(data.id)).flashing(("errors" -> "new pass not same as confirm pass"))
+            Redirect(routes.HomeController.resetPasswords(data.email)).flashing(("errors" -> "new pass not same as confirm pass"))
           }
 
         }

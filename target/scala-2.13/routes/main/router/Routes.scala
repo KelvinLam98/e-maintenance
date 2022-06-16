@@ -70,7 +70,7 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/list""", """controllers.Users.listUser"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/list.json""", """controllers.Users.listUserJson"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/detail/""" + "$" + """id<[^/]+>""", """controllers.Users.detail(id:Long)"""),
-    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/detail/""" + "$" + """id<[^/]+>/resetPassword""", """controllers.HomeController.resetPasswords(id:Long)"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/detail/""" + "$" + """email<[^/]+>/resetPassword""", """controllers.HomeController.resetPasswords(email:String)"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/detail/resetPassword/post""", """controllers.HomeController.postResetPassword"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/create""", """controllers.Users.create"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/detail/""" + "$" + """id<[^/]+>/update""", """controllers.Users.update(id:Long)"""),
@@ -264,17 +264,17 @@ users""",
 
   // @LINE:21
   private[this] lazy val controllers_HomeController_resetPasswords8_route = Route("GET",
-    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("user/detail/"), DynamicPart("id", """[^/]+""",true), StaticPart("/resetPassword")))
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("user/detail/"), DynamicPart("email", """[^/]+""",true), StaticPart("/resetPassword")))
   )
   private[this] lazy val controllers_HomeController_resetPasswords8_invoker = createInvoker(
-    HomeController_7.resetPasswords(fakeValue[Long]),
+    HomeController_7.resetPasswords(fakeValue[String]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.HomeController",
       "resetPasswords",
-      Seq(classOf[Long]),
+      Seq(classOf[String]),
       "GET",
-      this.prefix + """user/detail/""" + "$" + """id<[^/]+>/resetPassword""",
+      this.prefix + """user/detail/""" + "$" + """email<[^/]+>/resetPassword""",
       """""",
       Seq()
     )
@@ -1036,8 +1036,8 @@ user""",
   
     // @LINE:21
     case controllers_HomeController_resetPasswords8_route(params@_) =>
-      call(params.fromPath[Long]("id", None)) { (id) =>
-        controllers_HomeController_resetPasswords8_invoker.call(HomeController_7.resetPasswords(id))
+      call(params.fromPath[String]("email", None)) { (email) =>
+        controllers_HomeController_resetPasswords8_invoker.call(HomeController_7.resetPasswords(email))
       }
   
     // @LINE:23

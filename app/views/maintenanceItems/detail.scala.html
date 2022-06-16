@@ -34,7 +34,7 @@
                         Update
                     </button>
                 </a>
-                <a id="deleteUser" href="@routes.MaintenanceItems.delete(maintenanceItem.id.get)">
+                <a id="deleteUser" href="@routes.MaintenanceItems.delete(maintenanceItem.id.get)" onclick="return confirm('Are you sure you want to delete this item?');">
                     <button type="button" class="btn btn-danger badge" onclick="">
                         Delete
                     </button>

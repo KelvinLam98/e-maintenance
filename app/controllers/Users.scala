@@ -72,7 +72,7 @@ class Users @Inject()(
           case Some(errorsStr) =>
             (userForm.bind(request.flash.data), errorsStr.split(","))
           case None =>
-            (userForm.fill(UserForm(None, "-", "-", "-", "-", "-", "-", "-", "user")), Array.empty[String])
+            (userForm.fill(UserForm(None, "-", "-", "", "", "", "", "", "user")), Array.empty[String])
         }
       Ok(views.html.users.form(form, errors, "Create"))
     }
@@ -81,6 +81,7 @@ class Users @Inject()(
   def postUserDb = SecuredAction(UserRole.ADMIN) { implicit request =>
     userForm.bindFromRequest().fold(
       hasErrors = { form =>
+        println(form.errors)
         val id = form.data.getOrElse("id", "")
         if (id == "") {
           Redirect(routes.Users.create)
@@ -94,11 +95,11 @@ class Users @Inject()(
         db.withTransaction { implicit conn =>
           userStore.findById(data.id.getOrElse(-1)) match {
             case Some(user) =>
-              userStore.update(User(data.id, data.username, data.password, data.name, data.ic_number, data.contact_number, data.address, data.email, data.role, user.created, new Date))
+              userStore.update(User(data.id, data.name, data.password, data.name, data.ic_number, data.contact_number, data.address, data.email, data.role, user.created, new Date))
               Redirect(routes.Users.detail(user.id.get))
                 .flashing(("success" -> "successfullyUpdated"))
             case None =>
-              val id: Long = userStore.insert(User(None, data.username, data.contact_number, data.name, data.ic_number, data.contact_number, data.address, data.email, data.role, new Date, new Date))
+              val id: Long = userStore.insert(User(None, data.name, data.contact_number, data.name, data.ic_number, data.contact_number, data.address, data.email, data.role, new Date, new Date))
               Redirect(routes.Users.detail(id))
                 .flashing(("success" -> "successfullyCreated"))
           }
