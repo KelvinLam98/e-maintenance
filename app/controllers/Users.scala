@@ -95,13 +95,60 @@ class Users @Inject()(
         db.withTransaction { implicit conn =>
           userStore.findById(data.id.getOrElse(-1)) match {
             case Some(user) =>
-              userStore.update(User(data.id, data.name, data.password, data.name, data.ic_number, data.contact_number, data.address, data.email, data.role, user.created, new Date))
-              Redirect(routes.Users.detail(user.id.get))
+              if (data.name == user.name) {
+                if (data.email == user.email){
+                  userStore.update(User(data.id, data.name, user.password, data.name, data.ic_number, data.contact_number, data.address, data.email, data.role, user.created, new Date))
+                  Redirect(routes.Users.detail(user.id.get))
                 .flashing(("success" -> "successfullyUpdated"))
+                } else userStore.findByEmail(data.email) match {
+                case Some(user) =>
+                  Redirect(routes.Users.update(user.id.get))
+                    .flashing(Flash(userForm.fill(data).data) +
+                      ("errors" -> "emailIsAlreadyExists"))
+                case None =>
+                  userStore.update(User(data.id, data.name, user.password, data.name, data.ic_number, data.contact_number, data.address, data.email, data.role, user.created, new Date))
+                  Redirect(routes.Users.detail(user.id.get))
+                    .flashing(("success" -> "successfullyUpdated"))
+              }}else {
+                userStore.findByUserName(data.name) match {
+                  case Some(user) =>
+                    Redirect(routes.Users.update(user.id.get))
+                      .flashing(Flash(userForm.fill(data).data) +
+                        ("errors" -> "userIsAlreadyExists"))
+                  case None =>
+                    if (data.email == user.email) {
+                      userStore.update(User(data.id, data.name, user.password, data.name, data.ic_number, data.contact_number, data.address, data.email, data.role, user.created, new Date))
+                      Redirect(routes.Users.detail(user.id.get))
+                        .flashing(("success" -> "successfullyUpdated"))
+                    }
+                    else {
+                      userStore.findByEmail(data.email) match {
+                        case Some(user) =>
+                          Redirect(routes.Users.update(user.id.get))
+                            .flashing(Flash(userForm.fill(data).data) +
+                              ("errors" -> "emailIsAlreadyExists"))
+                        case None =>
+                          userStore.update(User(data.id, data.name, user.password, data.name, data.ic_number, data.contact_number, data.address, data.email, data.role, user.created, new Date))
+                          Redirect(routes.Users.detail(user.id.get))
+                            .flashing(("success" -> "successfullyUpdated"))
+                      }
+                    }
+                }
+              }
             case None =>
-              val id: Long = userStore.insert(User(None, data.name, data.contact_number, data.name, data.ic_number, data.contact_number, data.address, data.email, data.role, new Date, new Date))
-              Redirect(routes.Users.detail(id))
-                .flashing(("success" -> "successfullyCreated"))
+              if (userStore.findByEmail(data.email).isDefined) {
+                Redirect(routes.Users.create)
+                  .flashing(Flash(userForm.fill(data).data) +
+                    ("errors" -> "emailIsAlreadyExists"))
+              } else if (userStore.findByUserName(data.name).isDefined) {
+              Redirect(routes.Users.create)
+                .flashing(Flash(userForm.fill(data).data) +
+                  ("errors" -> "userIsAlreadyExists"))
+            } else {
+                val id: Long = userStore.insert(User(None, data.name, data.contact_number, data.name, data.ic_number, data.contact_number, data.address, data.email, data.role, new Date, new Date))
+                Redirect(routes.Users.detail(id))
+                  .flashing(("success" -> "successfullyCreated"))
+              }
           }
         }
       }
