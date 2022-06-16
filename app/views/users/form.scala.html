@@ -6,11 +6,11 @@
         message.hide()
         if("@flash.get("errors")" == "userIsAlreadyExists"){
             message.css('display', 'block').addClass('form-group has-error')
-            message.find('.control-label').html('The User is already exists.')
+            message.find('.control-label').html('There is existing user, change another name')
         }
         if("@flash.get("errors")" == "emailIsAlreadyExists"){
             message.css('display', 'block').addClass('form-group has-error')
-            message.find('.control-label').html('The Email is already exists. Please use a different Email.')
+            message.find('.control-label').html('There is existing email, change another one')
         }
     });
 

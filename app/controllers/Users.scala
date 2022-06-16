@@ -101,7 +101,7 @@ class Users @Inject()(
                   Redirect(routes.Users.detail(user.id.get))
                 .flashing(("success" -> "successfullyUpdated"))
                 } else userStore.findByEmail(data.email) match {
-                case Some(user) =>
+                case Some(email) =>
                   Redirect(routes.Users.update(user.id.get))
                     .flashing(Flash(userForm.fill(data).data) +
                       ("errors" -> "emailIsAlreadyExists"))
@@ -111,7 +111,7 @@ class Users @Inject()(
                     .flashing(("success" -> "successfullyUpdated"))
               }}else {
                 userStore.findByUserName(data.name) match {
-                  case Some(user) =>
+                  case Some(username) =>
                     Redirect(routes.Users.update(user.id.get))
                       .flashing(Flash(userForm.fill(data).data) +
                         ("errors" -> "userIsAlreadyExists"))
@@ -123,7 +123,7 @@ class Users @Inject()(
                     }
                     else {
                       userStore.findByEmail(data.email) match {
-                        case Some(user) =>
+                        case Some(email) =>
                           Redirect(routes.Users.update(user.id.get))
                             .flashing(Flash(userForm.fill(data).data) +
                               ("errors" -> "emailIsAlreadyExists"))

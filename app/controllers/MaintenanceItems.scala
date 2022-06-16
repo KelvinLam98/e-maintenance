@@ -90,13 +90,31 @@ class MaintenanceItems @Inject()(
         db.withTransaction { implicit conn =>
           maintenanceItemStore.findById(data.id.getOrElse(-1)) match {
             case Some(item) =>
-              maintenanceItemStore.update(MaintenanceItem(data.id, data.item_code, data.item_name))
-              Redirect(routes.MaintenanceItems.detail(item.id.get))
-                .flashing(("success" -> "successfullyUpdated"))
+              if (item.item_name == data.item_name) {
+                maintenanceItemStore.update(MaintenanceItem(data.id, data.item_code, data.item_name))
+                Redirect(routes.MaintenanceItems.detail(item.id.get))
+                  .flashing(("success" -> "successfullyUpdated"))
+              }
+              else maintenanceItemStore.findByItemName(data.item_name) match {
+                case Some(itemName) =>
+                  Redirect(routes.MaintenanceItems.update(item.id.get))
+                    .flashing(Flash(maintenanceItemsForm.fill(data).data) +
+                      ("errors" -> "itemIsAlreadyExists"))
+                case None =>
+                  maintenanceItemStore.update(MaintenanceItem(data.id, data.item_code, data.item_name))
+                  Redirect(routes.MaintenanceItems.detail(item.id.get))
+                    .flashing(("success" -> "successfullyUpdated"))
+              }
             case None =>
-              val id: Long = maintenanceItemStore.insert(MaintenanceItem(None, data.item_code, data.item_name))
-              Redirect(routes.MaintenanceItems.detail(id))
-                .flashing(("success" -> "successfullyCreated"))
+              if (maintenanceItemStore.findByItemName(data.item_name).isDefined) {
+                Redirect(routes.MaintenanceItems.create)
+                  .flashing(Flash(maintenanceItemsForm.fill(data).data) +
+                    ("errors" -> "itemIsAlreadyExists"))
+              } else {
+                val id: Long = maintenanceItemStore.insert(MaintenanceItem(None, data.item_code, data.item_name))
+                Redirect(routes.MaintenanceItems.detail(id))
+                  .flashing(("success" -> "successfullyCreated"))
+              }
           }
         }
       }

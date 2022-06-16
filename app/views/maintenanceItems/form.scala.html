@@ -10,6 +10,15 @@
             $canfocus.eq(index).focus();
         }
     });
+
+    $(document).ready(function() {
+        var message = $('#msg')
+        message.hide()
+        if("@flash.get("errors")" == "itemIsAlreadyExists"){
+            message.css('display', 'block').addClass('form-group has-error')
+            message.find('.control-label').html('There is an Existing Maintenance Item, Please Change')
+        }
+    });
 </script>
 
 <div class="col-lg-12">
@@ -17,7 +26,9 @@
 </div>
 <form action="@routes.MaintenanceItems.postMaintenanceItemsDb" method="post">
     <input type="hidden" id="id " name="id" value='@form("id").value' class="form-control" placeholder="Required">
-
+    <div id="msg">
+        <label class="control-label"></label>
+    </div>
     <div class='form-group @if(errors.contains("item_code")){ has-error }'>
         <label>Code</label>
         <input id="item_code" name="item_code" value='@form("item_code").value' class="form-control" placeholder="Required" maxlength="5">

@@ -53,6 +53,12 @@ class MaintenanceItemStore @Inject()() {
     ).as(parser.singleOpt)
   }
 
+  def findByItemName(item_name: String)(implicit conn: Connection): Option[MaintenanceItem] = {
+    SQL("select * from maintenance_item where item_name = {item_name}").on(
+      "item_name" -> item_name
+    ).as(parser.singleOpt)
+  }
+
   def delete(id: Long)(implicit conn: Connection): Int = {
     SQL("delete from maintenance_item where id = {id}").on(
       "id" -> id
