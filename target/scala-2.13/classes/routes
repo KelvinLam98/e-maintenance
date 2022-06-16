@@ -55,6 +55,7 @@ GET     /workOrderSamples/list                             controllers.WorkOrder
 GET     /workOrderSamples/list.json                        controllers.WorkOrderSamples.listWorkOrderSampleJson
 GET     /workOrderSamples/detail/:id                       controllers.WorkOrderSamples.detail(id: Long)
 GET     /workOrderSamples/create                           controllers.WorkOrderSamples.create
+GET     /workOrderSamples/detail/:id/createWorkOrder       controllers.WorkOrderSamples.createWorkOrder(id: Long)
 GET     /workOrderSamples/detail/:id/update                controllers.WorkOrderSamples.update(id:Long)
 GET     /workOrderSamples/detail/:id/delete                controllers.WorkOrderSamples.delete(id: Long)
 + nocsrf

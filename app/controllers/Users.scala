@@ -88,8 +88,8 @@ class Users @Inject()(
             .flashing(Flash(form.data) +
               ("errors" -> form.errors.map(_.key).mkString(",")))
         } else {
-          Redirect(routes.Users.create).flashing(Flash(form.data) +
-          ("errors" -> "invalidData")) }
+          Redirect(routes.Users.update(id.toLong)).flashing(Flash(form.data) +
+          ("errors" -> form.errors.map(_.key).mkString(","))) }
       },
       success = { data =>
         db.withTransaction { implicit conn =>

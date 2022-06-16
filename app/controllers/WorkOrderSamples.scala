@@ -93,8 +93,8 @@ class WorkOrderSamples @Inject()(
             .flashing(Flash(form.data) +
               ("errors" -> form.errors.map(_.key).mkString(",")))
         } else {
-          Redirect(routes.WorkOrderSamples.create).flashing(Flash(form.data) +
-            ("errors" -> "invalidData")) }
+          Redirect(routes.WorkOrderSamples.update(id.toLong)).flashing(Flash(form.data) +
+            ("errors" -> form.errors.map(_.key).mkString(","))) }
       },
       success = { data =>
         db.withTransaction { implicit conn =>
@@ -136,7 +136,34 @@ class WorkOrderSamples @Inject()(
         .flashing(("success" -> "successfullyDeleted"))
     }
   }
-  /* TODO */
+
+  private val workOrdersForm: Form[WorkOrder] = Form(
+    mapping(
+      "id" -> optional(longNumber),
+      "maintenance_id" -> longNumber,
+      "user_id" -> longNumber,
+      "technician_id" -> longNumber,
+      "maintenance_date" -> date,
+      "maintenance_time" -> nonEmptyText,
+      "status" -> nonEmptyText,
+    )(WorkOrder.apply)(WorkOrder.unapply)
+  )
+
+  def createWorkOrder(id: Long)= SecuredAction(UserRole.ADMIN) { implicit request =>
+    db.withConnection { implicit conn =>
+      workOrderSampleStore.findById(id).map { wos =>
+        val (form, errors) = {
+          request.flash.get("errors") match {
+            case Some(errorsStr) =>
+              (workOrdersForm.bind(request.flash.data), errorsStr.split(","))
+            case None =>
+              (workOrdersForm.fill(WorkOrder(None, wos.maintenance_id, wos.user_id, wos.technician_id, new Date(), "09:00", "Created")), Array.empty[String])
+          }
+        }
+        Ok(views.html.workOrderSamples.workOrderForm(form, errors, "Create", maintenanceItemStore.options, userStore.options, technicianStore.options))
+      }.getOrElse(NotFound)
+    }
+  }
 
   /* do not edit below this line */
 }

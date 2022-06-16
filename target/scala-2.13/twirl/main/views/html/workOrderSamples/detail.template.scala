@@ -42,12 +42,17 @@ Seq[Any](format.raw/*1.119*/("""
                         Update
                     </button>
                 </a>
-                <a id="delete" href=""""),_display_(/*18.39*/routes/*18.45*/.WorkOrderSamples.delete(workOrderSample.id.get)),format.raw/*18.93*/("""" onclick="return confirm('Are you sure you want to delete this item?');">
+                <a id="create" href=""""),_display_(/*18.39*/routes/*18.45*/.WorkOrderSamples.createWorkOrder(workOrderSample.id.get)),format.raw/*18.102*/("""">
+                    <button type="button" class="btn btn-primary badge">
+                        Create Work Order
+                    </button>
+                </a>
+                <a id="delete" href=""""),_display_(/*23.39*/routes/*23.45*/.WorkOrderSamples.delete(workOrderSample.id.get)),format.raw/*23.93*/("""" onclick="return confirm('Are you sure you want to delete this item?');">
                     <button type="button" class="btn btn-danger badge" onclick="">
                         Delete
                     </button>
                 </a>
-                <a id="back" href=""""),_display_(/*23.37*/routes/*23.43*/.WorkOrderSamples.list),format.raw/*23.65*/("""">
+                <a id="back" href=""""),_display_(/*28.37*/routes/*28.43*/.WorkOrderSamples.list),format.raw/*28.65*/("""">
                     <button type="button" class="btn btn-primary badge" onclick="">
                         Back
                     </button>
@@ -59,30 +64,30 @@ Seq[Any](format.raw/*1.119*/("""
                         <tbody>
                         <tr>
                             <th style="width:20%">Maintenance Code</th>
-                            <td>"""),_display_(/*35.34*/workOrderSample/*35.49*/.item_code),format.raw/*35.59*/("""</td>
+                            <td>"""),_display_(/*40.34*/workOrderSample/*40.49*/.item_code),format.raw/*40.59*/("""</td>
                         </tr>
                         <tr>
                             <th style="width:20%">Maintenance Item</th>
-                            <td>"""),_display_(/*39.34*/workOrderSample/*39.49*/.item_name),format.raw/*39.59*/("""</td>
+                            <td>"""),_display_(/*44.34*/workOrderSample/*44.49*/.item_name),format.raw/*44.59*/("""</td>
                         </tr>
                         <tr>
                             <th>Staff In Charge</th>
-                            <td>"""),_display_(/*43.34*/workOrderSample/*43.49*/.user_name),format.raw/*43.59*/("""</td>
+                            <td>"""),_display_(/*48.34*/workOrderSample/*48.49*/.user_name),format.raw/*48.59*/("""</td>
                         </tr>
                         <tr>
                             <th>Staff In Charge Contact</th>
-                            <td>"""),_display_(/*47.34*/workOrderSample/*47.49*/.user_contact),format.raw/*47.62*/("""</td>
+                            <td>"""),_display_(/*52.34*/workOrderSample/*52.49*/.user_contact),format.raw/*52.62*/("""</td>
                         </tr>
                         <tr>
                             <th>Technician</th>
-                            <td>"""),_display_(/*51.34*/workOrderSample/*51.49*/.technician_name),format.raw/*51.65*/("""</td>
+                            <td>"""),_display_(/*56.34*/workOrderSample/*56.49*/.technician_name),format.raw/*56.65*/("""</td>
                         </tr>
                         <tr>
                             <th>Technician Contact</th>
-                            <td>"""),_display_(/*55.34*/workOrderSample/*55.49*/.technician_contact),format.raw/*55.68*/("""</td>
+                            <td>"""),_display_(/*60.34*/workOrderSample/*60.49*/.technician_contact),format.raw/*60.68*/("""</td>
                         <tr>
                             <th>Status</th>
-                            <td>"""),_display_(/*58.34*/workOrderSample/*58.49*/.status),format.raw/*58.56*/("""</td>
+                            <td>"""),_display_(/*63.34*/workOrderSample/*63.49*/.status),format.raw/*63.56*/("""</td>
                         </tbody>
                     </table>
                 </div>
@@ -111,9 +116,9 @@ Seq[Any](format.raw/*1.119*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/workOrderSamples/detail.scala.html
-                  HASH: 4b7166a2a28faf1254b0ec8527a5516b135e6465
-                  MATRIX: 830->1|1043->118|1071->121|1100->142|1139->144|1167->146|1553->505|1568->511|1637->559|1865->760|1880->766|1949->814|2257->1095|2272->1101|2315->1123|2861->1642|2885->1657|2916->1667|3117->1841|3141->1856|3172->1866|3354->2021|3378->2036|3409->2046|3599->2209|3623->2224|3657->2237|3834->2387|3858->2402|3895->2418|4080->2576|4104->2591|4144->2610|4286->2725|4310->2740|4338->2747
-                  LINES: 23->1|28->1|29->2|29->2|29->2|30->3|40->13|40->13|40->13|45->18|45->18|45->18|50->23|50->23|50->23|62->35|62->35|62->35|66->39|66->39|66->39|70->43|70->43|70->43|74->47|74->47|74->47|78->51|78->51|78->51|82->55|82->55|82->55|85->58|85->58|85->58
+                  HASH: da9ffa118d2349a45262e03a9eba6baa63fbca32
+                  MATRIX: 830->1|1043->118|1071->121|1100->142|1139->144|1167->146|1553->505|1568->511|1637->559|1865->760|1880->766|1959->823|2198->1035|2213->1041|2282->1089|2590->1370|2605->1376|2648->1398|3194->1917|3218->1932|3249->1942|3450->2116|3474->2131|3505->2141|3687->2296|3711->2311|3742->2321|3932->2484|3956->2499|3990->2512|4167->2662|4191->2677|4228->2693|4413->2851|4437->2866|4477->2885|4619->3000|4643->3015|4671->3022
+                  LINES: 23->1|28->1|29->2|29->2|29->2|30->3|40->13|40->13|40->13|45->18|45->18|45->18|50->23|50->23|50->23|55->28|55->28|55->28|67->40|67->40|67->40|71->44|71->44|71->44|75->48|75->48|75->48|79->52|79->52|79->52|83->56|83->56|83->56|87->60|87->60|87->60|90->63|90->63|90->63
                   -- GENERATED --
               */
           

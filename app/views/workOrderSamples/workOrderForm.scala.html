@@ -6,31 +6,9 @@
 </div>
 <form action="@routes.WorkOrders.postWorkOrdersDb" method="post">
     <input type="hidden" id="id " name="id" value='@workOrderForm("id").value'>
-    <div>
-        <label>Maintenance Item</label>
-        <select id="maintenance_id" name="maintenance_id" class="form-control">
-            @for(itemOption <- itemOptions){
-            <option @if(workOrderForm("maintenance_id").value.get == "@itemOption._1"){ selected } value="@itemOption._1">@itemOption._2</option>
-            }
-        </select>
-    </div>
-    <div>
-        <label>Staff In Charge</label>
-        <select id="user_id" name="user_id" class="form-control">
-            @for(userOption <- userOptions){
-            <option @if(workOrderForm("user_id").value.get == "@userOption._1"){ selected } value="@userOption._1">@userOption._2</option>
-            }
-        </select>
-    </div>
-
-    <div>
-        <label>Technician</label>
-        <select id="technician_id" name="technician_id" class="form-control">
-            @for(techOption <- techOptions){
-            <option @if(workOrderForm("technician_id").value.get == "@techOption._1"){ selected } value="@techOption._1">@techOption._2</option>
-            }
-        </select>
-    </div>
+    <input type="hidden" id="maintenance_id " name="maintenance_id" value='@workOrderForm("maintenance_id").value'>
+    <input type="hidden" id="user_id " name="user_id" value='@workOrderForm("user_id").value'>
+    <input type="hidden" id="technician_id " name="technician_id" value='@workOrderForm("technician_id").value'>
 
     <div>
         <label>Status</label>

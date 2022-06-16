@@ -1,6 +1,11 @@
-[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\e-maintenance\app\controllers\WorkOrderSamples.scala:50:19: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : Seq[models.WorkOrderSampleView][0m
-[0m[[0m[31merror[0m] [0m[0m required: play.api.libs.json.Json.JsValueWrapper[0m
-[0m[[0m[31merror[0m] [0m[0m        "data" -> data[0m
-[0m[[0m[31merror[0m] [0m[0m                  ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\e-maintenance\app\controllers\WorkOrderSamples.scala:163:39: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : Any[0m
+[0m[[0m[31merror[0m] [0m[0m required: play.api.data.Form[models.WorkOrder][0m
+[0m[[0m[31merror[0m] [0m[0m        Ok(views.html.workOrders.form(form, errors, "Create", maintenanceItemStore.options, userStore.options, technicianStore.options))[0m
+[0m[[0m[31merror[0m] [0m[0m                                      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\e-maintenance\app\controllers\WorkOrderSamples.scala:163:45: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : Any[0m
+[0m[[0m[31merror[0m] [0m[0m required: Array[String][0m
+[0m[[0m[31merror[0m] [0m[0m        Ok(views.html.workOrders.form(form, errors, "Create", maintenanceItemStore.options, userStore.options, technicianStore.options))[0m
+[0m[[0m[31merror[0m] [0m[0m                                            ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m

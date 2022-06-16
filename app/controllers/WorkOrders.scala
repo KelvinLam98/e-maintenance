@@ -112,13 +112,12 @@ class WorkOrders @Inject()(
     workOrdersForm.bindFromRequest().fold(
       hasErrors = { form =>
         val id = form.data.getOrElse("id", "")
-        println("debuging: " + form.errors)
         if (id == "") {
           Redirect(routes.WorkOrders.create)
             .flashing(Flash(form.data) +
               ("errors" -> form.errors.map(_.key).mkString(",")))
         } else {
-          Redirect(routes.WorkOrders.create).flashing(Flash(form.data) +
+          Redirect(routes.WorkOrders.update(id.toLong)).flashing(Flash(form.data) +
             ("errors" -> "invalidData")) }
       },
       success = { data =>
