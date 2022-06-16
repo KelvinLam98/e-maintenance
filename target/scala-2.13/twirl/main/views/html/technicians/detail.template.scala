@@ -37,12 +37,12 @@ Seq[Any](format.raw/*1.105*/("""
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <a id="updateUser" href=""""),_display_(/*13.43*/routes/*13.49*/.Technicians.update(technician.id.get)),format.raw/*13.87*/("""">
+                <a id="update" href=""""),_display_(/*13.39*/routes/*13.45*/.Technicians.update(technician.id.get)),format.raw/*13.83*/("""">
                     <button type="button" class="btn btn-primary badge">
                         Update
                     </button>
                 </a>
-                <a id="deleteUser" href=""""),_display_(/*18.43*/routes/*18.49*/.Technicians.delete(technician.id.get)),format.raw/*18.87*/("""">
+                <a id="delete" href=""""),_display_(/*18.39*/routes/*18.45*/.Technicians.delete(technician.id.get)),format.raw/*18.83*/("""">
                     <button type="button" class="btn btn-danger badge" onclick="return confirm('Are you sure you want to delete this item?');">
                         Delete
                     </button>
@@ -92,8 +92,8 @@ Seq[Any](format.raw/*1.105*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/technicians/detail.scala.html
-                  HASH: 5097dc19b337713a7fc9d07a777b35db49407bb8
-                  MATRIX: 816->1|1015->104|1043->107|1072->128|1111->130|1139->132|1522->488|1537->494|1596->532|1828->737|1843->743|1902->781|2199->1051|2214->1057|2252->1074|2775->1570|2794->1580|2820->1585|3001->1739|3020->1749|3056->1764
+                  HASH: d26c2aac593bb7bbb377f7ecacd8f9d2364c738f
+                  MATRIX: 816->1|1015->104|1043->107|1072->128|1111->130|1139->132|1518->484|1533->490|1592->528|1820->729|1835->735|1894->773|2191->1043|2206->1049|2244->1066|2767->1562|2786->1572|2812->1577|2993->1731|3012->1741|3048->1756
                   LINES: 23->1|28->1|29->2|29->2|29->2|30->3|40->13|40->13|40->13|45->18|45->18|45->18|50->23|50->23|50->23|62->35|62->35|62->35|66->39|66->39|66->39
                   -- GENERATED --
               */

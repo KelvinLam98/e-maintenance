@@ -50,6 +50,16 @@ GET     /workOrders/detail/:id/delete                controllers.WorkOrders.dele
 + nocsrf
 POST    /workOrders/create/post                      controllers.WorkOrders.postWorkOrdersDb
 
+#work orders sample
+GET     /workOrderSamples/list                             controllers.WorkOrderSamples.list
+GET     /workOrderSamples/list.json                        controllers.WorkOrderSamples.listWorkOrderSampleJson
+GET     /workOrderSamples/detail/:id                       controllers.WorkOrderSamples.detail(id: Long)
+GET     /workOrderSamples/create                           controllers.WorkOrderSamples.create
+GET     /workOrderSamples/detail/:id/update                controllers.WorkOrderSamples.update(id:Long)
+GET     /workOrderSamples/detail/:id/delete                controllers.WorkOrderSamples.delete(id: Long)
++ nocsrf
+POST    /workOrderSamples/create/post                      controllers.WorkOrderSamples.postWorkOrderSamplesDb
+
 #technicians
 GET     /technicians/list                             controllers.Technicians.list
 GET     /technicians/list.json                        controllers.Technicians.listTechniciansJson

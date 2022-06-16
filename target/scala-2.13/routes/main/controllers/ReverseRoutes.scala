@@ -243,49 +243,100 @@ package controllers {
   }
 
   // @LINE:54
+  class ReverseWorkOrderSamples(_prefix: => String) {
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:59
+    def delete(id:Long): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "workOrderSamples/detail/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)) + "/delete")
+    }
+  
+    // @LINE:56
+    def detail(id:Long): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "workOrderSamples/detail/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)))
+    }
+  
+    // @LINE:55
+    def listWorkOrderSampleJson: Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "workOrderSamples/list.json")
+    }
+  
+    // @LINE:57
+    def create: Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "workOrderSamples/create")
+    }
+  
+    // @LINE:61
+    def postWorkOrderSamplesDb: Call = {
+      
+      Call("POST", _prefix + { _defaultPrefix } + "workOrderSamples/create/post")
+    }
+  
+    // @LINE:58
+    def update(id:Long): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "workOrderSamples/detail/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)) + "/update")
+    }
+  
+    // @LINE:54
+    def list: Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "workOrderSamples/list")
+    }
+  
+  }
+
+  // @LINE:64
   class ReverseTechnicians(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:55
+    // @LINE:65
     def listTechniciansJson: Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "technicians/list.json")
     }
   
-    // @LINE:59
+    // @LINE:69
     def delete(id:Long): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "technicians/detail/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)) + "/delete")
     }
   
-    // @LINE:56
+    // @LINE:66
     def detail(id:Long): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "technicians/detail/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)))
     }
   
-    // @LINE:57
+    // @LINE:67
     def create: Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "technicians/create")
     }
   
-    // @LINE:58
+    // @LINE:68
     def update(id:Long): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "technicians/detail/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)) + "/update")
     }
   
-    // @LINE:54
+    // @LINE:64
     def list: Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "technicians/list")
     }
   
-    // @LINE:61
+    // @LINE:71
     def postTechniciansDb: Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "technicians/create/post")
