@@ -122,11 +122,11 @@ class Routes(
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/profile/edit/""" + "$" + """id<[^/]+>""", """appcontrollers.Users.postUpdateProfile(id:Long)"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/profile/changePassword/""" + "$" + """id<[^/]+>""", """appcontrollers.Users.postUpdatePassword(id:Long)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrder/""" + "$" + """id<[^/]+>""", """appcontrollers.WorkOrders.workOrderList(id:Long)"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrder/detail/""" + "$" + """id<[^/]+>""", """appcontrollers.WorkOrders.workOrderDetail(id:Long)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrder/""" + "$" + """id<[^/]+>/""" + "$" + """status<[^/]+>""", """appcontrollers.WorkOrders.workOrderDetailByStatus(id:Long, status:String)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrderSample/""" + "$" + """id<[^/]+>""", """appcontrollers.WorkOrders.workOrderSampleList(id:Long)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrderSample/detail/""" + "$" + """id<[^/]+>""", """appcontrollers.WorkOrders.workOrderSampleDetailList(id:Long)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrderHistory/""" + "$" + """id<[^/]+>""", """appcontrollers.WorkOrders.workOrderListHistory(id:Long)"""),
-    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrder/detail/""" + "$" + """id<[^/]+>""", """appcontrollers.WorkOrders.workOrderDetail(id:Long)"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrder/detail/edit/""" + "$" + """id<[^/]+>""", """appcontrollers.WorkOrders.postUpdateWorkOrder(id:Long)"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrderSample/detail/create/""" + "$" + """id<[^/]+>""", """appcontrollers.WorkOrders.postCreateWorkOrderWithSample(id:Long)"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/register-firebase-token""", """appcontrollers.Users.registerFirebaseToken"""),
@@ -1149,10 +1149,28 @@ user""",
   )
 
   // @LINE:91
-  private[this] lazy val appcontrollers_WorkOrders_workOrderDetailByStatus56_route = Route("GET",
+  private[this] lazy val appcontrollers_WorkOrders_workOrderDetail56_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("api/workOrder/detail/"), DynamicPart("id", """[^/]+""",true)))
+  )
+  private[this] lazy val appcontrollers_WorkOrders_workOrderDetail56_invoker = createInvoker(
+    WorkOrders_5.workOrderDetail(fakeValue[Long]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "appcontrollers.WorkOrders",
+      "workOrderDetail",
+      Seq(classOf[Long]),
+      "GET",
+      this.prefix + """api/workOrder/detail/""" + "$" + """id<[^/]+>""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:92
+  private[this] lazy val appcontrollers_WorkOrders_workOrderDetailByStatus57_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("api/workOrder/"), DynamicPart("id", """[^/]+""",true), StaticPart("/"), DynamicPart("status", """[^/]+""",true)))
   )
-  private[this] lazy val appcontrollers_WorkOrders_workOrderDetailByStatus56_invoker = createInvoker(
+  private[this] lazy val appcontrollers_WorkOrders_workOrderDetailByStatus57_invoker = createInvoker(
     WorkOrders_5.workOrderDetailByStatus(fakeValue[Long], fakeValue[String]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -1166,11 +1184,11 @@ user""",
     )
   )
 
-  // @LINE:92
-  private[this] lazy val appcontrollers_WorkOrders_workOrderSampleList57_route = Route("GET",
+  // @LINE:93
+  private[this] lazy val appcontrollers_WorkOrders_workOrderSampleList58_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("api/workOrderSample/"), DynamicPart("id", """[^/]+""",true)))
   )
-  private[this] lazy val appcontrollers_WorkOrders_workOrderSampleList57_invoker = createInvoker(
+  private[this] lazy val appcontrollers_WorkOrders_workOrderSampleList58_invoker = createInvoker(
     WorkOrders_5.workOrderSampleList(fakeValue[Long]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -1184,11 +1202,11 @@ user""",
     )
   )
 
-  // @LINE:93
-  private[this] lazy val appcontrollers_WorkOrders_workOrderSampleDetailList58_route = Route("GET",
+  // @LINE:94
+  private[this] lazy val appcontrollers_WorkOrders_workOrderSampleDetailList59_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("api/workOrderSample/detail/"), DynamicPart("id", """[^/]+""",true)))
   )
-  private[this] lazy val appcontrollers_WorkOrders_workOrderSampleDetailList58_invoker = createInvoker(
+  private[this] lazy val appcontrollers_WorkOrders_workOrderSampleDetailList59_invoker = createInvoker(
     WorkOrders_5.workOrderSampleDetailList(fakeValue[Long]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -1202,11 +1220,11 @@ user""",
     )
   )
 
-  // @LINE:94
-  private[this] lazy val appcontrollers_WorkOrders_workOrderListHistory59_route = Route("GET",
+  // @LINE:95
+  private[this] lazy val appcontrollers_WorkOrders_workOrderListHistory60_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("api/workOrderHistory/"), DynamicPart("id", """[^/]+""",true)))
   )
-  private[this] lazy val appcontrollers_WorkOrders_workOrderListHistory59_invoker = createInvoker(
+  private[this] lazy val appcontrollers_WorkOrders_workOrderListHistory60_invoker = createInvoker(
     WorkOrders_5.workOrderListHistory(fakeValue[Long]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -1215,24 +1233,6 @@ user""",
       Seq(classOf[Long]),
       "GET",
       this.prefix + """api/workOrderHistory/""" + "$" + """id<[^/]+>""",
-      """""",
-      Seq()
-    )
-  )
-
-  // @LINE:95
-  private[this] lazy val appcontrollers_WorkOrders_workOrderDetail60_route = Route("GET",
-    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("api/workOrder/detail/"), DynamicPart("id", """[^/]+""",true)))
-  )
-  private[this] lazy val appcontrollers_WorkOrders_workOrderDetail60_invoker = createInvoker(
-    WorkOrders_5.workOrderDetail(fakeValue[Long]),
-    play.api.routing.HandlerDef(this.getClass.getClassLoader,
-      "router",
-      "appcontrollers.WorkOrders",
-      "workOrderDetail",
-      Seq(classOf[Long]),
-      "GET",
-      this.prefix + """api/workOrder/detail/""" + "$" + """id<[^/]+>""",
       """""",
       Seq()
     )
@@ -1650,33 +1650,33 @@ user""",
       }
   
     // @LINE:91
-    case appcontrollers_WorkOrders_workOrderDetailByStatus56_route(params@_) =>
-      call(params.fromPath[Long]("id", None), params.fromPath[String]("status", None)) { (id, status) =>
-        appcontrollers_WorkOrders_workOrderDetailByStatus56_invoker.call(WorkOrders_5.workOrderDetailByStatus(id, status))
+    case appcontrollers_WorkOrders_workOrderDetail56_route(params@_) =>
+      call(params.fromPath[Long]("id", None)) { (id) =>
+        appcontrollers_WorkOrders_workOrderDetail56_invoker.call(WorkOrders_5.workOrderDetail(id))
       }
   
     // @LINE:92
-    case appcontrollers_WorkOrders_workOrderSampleList57_route(params@_) =>
-      call(params.fromPath[Long]("id", None)) { (id) =>
-        appcontrollers_WorkOrders_workOrderSampleList57_invoker.call(WorkOrders_5.workOrderSampleList(id))
+    case appcontrollers_WorkOrders_workOrderDetailByStatus57_route(params@_) =>
+      call(params.fromPath[Long]("id", None), params.fromPath[String]("status", None)) { (id, status) =>
+        appcontrollers_WorkOrders_workOrderDetailByStatus57_invoker.call(WorkOrders_5.workOrderDetailByStatus(id, status))
       }
   
     // @LINE:93
-    case appcontrollers_WorkOrders_workOrderSampleDetailList58_route(params@_) =>
+    case appcontrollers_WorkOrders_workOrderSampleList58_route(params@_) =>
       call(params.fromPath[Long]("id", None)) { (id) =>
-        appcontrollers_WorkOrders_workOrderSampleDetailList58_invoker.call(WorkOrders_5.workOrderSampleDetailList(id))
+        appcontrollers_WorkOrders_workOrderSampleList58_invoker.call(WorkOrders_5.workOrderSampleList(id))
       }
   
     // @LINE:94
-    case appcontrollers_WorkOrders_workOrderListHistory59_route(params@_) =>
+    case appcontrollers_WorkOrders_workOrderSampleDetailList59_route(params@_) =>
       call(params.fromPath[Long]("id", None)) { (id) =>
-        appcontrollers_WorkOrders_workOrderListHistory59_invoker.call(WorkOrders_5.workOrderListHistory(id))
+        appcontrollers_WorkOrders_workOrderSampleDetailList59_invoker.call(WorkOrders_5.workOrderSampleDetailList(id))
       }
   
     // @LINE:95
-    case appcontrollers_WorkOrders_workOrderDetail60_route(params@_) =>
+    case appcontrollers_WorkOrders_workOrderListHistory60_route(params@_) =>
       call(params.fromPath[Long]("id", None)) { (id) =>
-        appcontrollers_WorkOrders_workOrderDetail60_invoker.call(WorkOrders_5.workOrderDetail(id))
+        appcontrollers_WorkOrders_workOrderListHistory60_invoker.call(WorkOrders_5.workOrderListHistory(id))
       }
   
     // @LINE:97

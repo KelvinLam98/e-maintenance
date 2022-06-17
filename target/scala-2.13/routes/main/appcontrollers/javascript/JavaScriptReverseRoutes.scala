@@ -87,7 +87,7 @@ package appcontrollers.javascript {
     }
 
   
-    // @LINE:91
+    // @LINE:92
     def workOrderDetailByStatus: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.workOrderDetailByStatus",
       """
@@ -97,7 +97,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:95
+    // @LINE:91
     def workOrderDetail: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.workOrderDetail",
       """
@@ -117,7 +117,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:94
+    // @LINE:95
     def workOrderListHistory: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.workOrderListHistory",
       """
@@ -147,7 +147,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:93
+    // @LINE:94
     def workOrderSampleDetailList: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.workOrderSampleDetailList",
       """
@@ -157,7 +157,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:92
+    // @LINE:93
     def workOrderSampleList: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.workOrderSampleList",
       """
