@@ -37,7 +37,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:101
+    // @LINE:103
     def registerFirebaseToken: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.Users.registerFirebaseToken",
       """
@@ -47,7 +47,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:102
+    // @LINE:104
     def testSendPushNotification: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.Users.testSendPushNotification",
       """
@@ -123,6 +123,16 @@ package appcontrollers.javascript {
       """
         function(id0) {
           return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "api/workOrderHistory/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
+        }
+      """
+    )
+  
+    // @LINE:99
+    def postCreateWorkOrderWithSample: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "appcontrollers.WorkOrders.postCreateWorkOrderWithSample",
+      """
+        function(id0) {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "api/workOrderSample/detail/create/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
         }
       """
     )

@@ -28,13 +28,13 @@ package appcontrollers {
       Call("POST", _prefix + { _defaultPrefix } + "api/login")
     }
   
-    // @LINE:101
+    // @LINE:103
     def registerFirebaseToken: Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "api/register-firebase-token")
     }
   
-    // @LINE:102
+    // @LINE:104
     def testSendPushNotification(workOrderId:Long): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "api/test-notification/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("workOrderId", workOrderId)))
@@ -83,6 +83,12 @@ package appcontrollers {
     def workOrderListHistory(id:Long): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "api/workOrderHistory/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)))
+    }
+  
+    // @LINE:99
+    def postCreateWorkOrderWithSample(id:Long): Call = {
+      
+      Call("POST", _prefix + { _defaultPrefix } + "api/workOrderSample/detail/create/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)))
     }
   
     // @LINE:97

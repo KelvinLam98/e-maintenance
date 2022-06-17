@@ -95,6 +95,8 @@ GET      /api/workOrderHistory/:id                   appcontrollers.WorkOrders.w
 GET      /api/workOrder/detail/:id                   appcontrollers.WorkOrders.workOrderDetail(id: Long)
 +nocsrf
 POST     /api/workOrder/detail/edit/:id              appcontrollers.WorkOrders.postUpdateWorkOrder(id: Long)
++nocsrf
+POST     /api/workOrderSample/detail/create/:id      appcontrollers.WorkOrders.postCreateWorkOrderWithSample(id: Long)
 
 #notification
 +nocsrf

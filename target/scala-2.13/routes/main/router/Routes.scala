@@ -128,6 +128,7 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrderHistory/""" + "$" + """id<[^/]+>""", """appcontrollers.WorkOrders.workOrderListHistory(id:Long)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrder/detail/""" + "$" + """id<[^/]+>""", """appcontrollers.WorkOrders.workOrderDetail(id:Long)"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrder/detail/edit/""" + "$" + """id<[^/]+>""", """appcontrollers.WorkOrders.postUpdateWorkOrder(id:Long)"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrderSample/detail/create/""" + "$" + """id<[^/]+>""", """appcontrollers.WorkOrders.postCreateWorkOrderWithSample(id:Long)"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/register-firebase-token""", """appcontrollers.Users.registerFirebaseToken"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/test-notification/""" + "$" + """workOrderId<[^/]+>""", """appcontrollers.Users.testSendPushNotification(workOrderId:Long)"""),
     Nil
@@ -1255,11 +1256,29 @@ user""",
     )
   )
 
-  // @LINE:101
-  private[this] lazy val appcontrollers_Users_registerFirebaseToken62_route = Route("POST",
+  // @LINE:99
+  private[this] lazy val appcontrollers_WorkOrders_postCreateWorkOrderWithSample62_route = Route("POST",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("api/workOrderSample/detail/create/"), DynamicPart("id", """[^/]+""",true)))
+  )
+  private[this] lazy val appcontrollers_WorkOrders_postCreateWorkOrderWithSample62_invoker = createInvoker(
+    WorkOrders_5.postCreateWorkOrderWithSample(fakeValue[Long]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "appcontrollers.WorkOrders",
+      "postCreateWorkOrderWithSample",
+      Seq(classOf[Long]),
+      "POST",
+      this.prefix + """api/workOrderSample/detail/create/""" + "$" + """id<[^/]+>""",
+      """""",
+      Seq("""nocsrf""")
+    )
+  )
+
+  // @LINE:103
+  private[this] lazy val appcontrollers_Users_registerFirebaseToken63_route = Route("POST",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("api/register-firebase-token")))
   )
-  private[this] lazy val appcontrollers_Users_registerFirebaseToken62_invoker = createInvoker(
+  private[this] lazy val appcontrollers_Users_registerFirebaseToken63_invoker = createInvoker(
     Users_3.registerFirebaseToken,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -1273,11 +1292,11 @@ user""",
     )
   )
 
-  // @LINE:102
-  private[this] lazy val appcontrollers_Users_testSendPushNotification63_route = Route("GET",
+  // @LINE:104
+  private[this] lazy val appcontrollers_Users_testSendPushNotification64_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("api/test-notification/"), DynamicPart("workOrderId", """[^/]+""",true)))
   )
-  private[this] lazy val appcontrollers_Users_testSendPushNotification63_invoker = createInvoker(
+  private[this] lazy val appcontrollers_Users_testSendPushNotification64_invoker = createInvoker(
     Users_3.testSendPushNotification(fakeValue[Long]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -1666,16 +1685,22 @@ user""",
         appcontrollers_WorkOrders_postUpdateWorkOrder61_invoker.call(WorkOrders_5.postUpdateWorkOrder(id))
       }
   
-    // @LINE:101
-    case appcontrollers_Users_registerFirebaseToken62_route(params@_) =>
-      call { 
-        appcontrollers_Users_registerFirebaseToken62_invoker.call(Users_3.registerFirebaseToken)
+    // @LINE:99
+    case appcontrollers_WorkOrders_postCreateWorkOrderWithSample62_route(params@_) =>
+      call(params.fromPath[Long]("id", None)) { (id) =>
+        appcontrollers_WorkOrders_postCreateWorkOrderWithSample62_invoker.call(WorkOrders_5.postCreateWorkOrderWithSample(id))
       }
   
-    // @LINE:102
-    case appcontrollers_Users_testSendPushNotification63_route(params@_) =>
+    // @LINE:103
+    case appcontrollers_Users_registerFirebaseToken63_route(params@_) =>
+      call { 
+        appcontrollers_Users_registerFirebaseToken63_invoker.call(Users_3.registerFirebaseToken)
+      }
+  
+    // @LINE:104
+    case appcontrollers_Users_testSendPushNotification64_route(params@_) =>
       call(params.fromPath[Long]("workOrderId", None)) { (workOrderId) =>
-        appcontrollers_Users_testSendPushNotification63_invoker.call(Users_3.testSendPushNotification(workOrderId))
+        appcontrollers_Users_testSendPushNotification64_invoker.call(Users_3.testSendPushNotification(workOrderId))
       }
   }
 }
