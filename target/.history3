@@ -496,3 +496,13 @@
 1655436041949:exit
 1655436057175:run
 1655436428879:exit
+1655453546813:;set _root_.scala.collection.Seq(historyPath := None,shellPrompt := { _ => "" },SettingKey[_root_.scala.Option[_root_.sbt.File]]("sbtStructureOutputFile") in _root_.sbt.Global := _root_.scala.Some(_root_.sbt.file("C:/Users/hylam/AppData/Local/Temp/sbt-structure.xml")),SettingKey[_root_.java.lang.String]("sbtStructureOptions") in _root_.sbt.Global := "download, resolveClassifiers");apply -cp "C:/Users/hylam/AppData/Roaming/JetBrains/IdeaIC2021.2/plugins/Scala/repo/org/jetbrains/scala/sbt-structure-extractor_2.12_1.0/2021.1.1/sbt-structure-extractor-2021.1.1.jar" org.jetbrains.sbt.CreateTasks;*/*:dumpStructure
+1655453926188:clean
+1655453926860:compile
+1655453980141:run
+1655454210751:compile
+1655454214486:run
+1655455223018:exit
+1655455237222:compile
+1655455261965:run
+1655455755362:exit

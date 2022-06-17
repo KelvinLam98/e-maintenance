@@ -15,11 +15,9 @@
     <div>
         <label>Status</label>
         <select id="status" name="status" class="form-control">
-            <option @if(workOrderForm("status").value.get == "Pending"){ selected } value="Pending">Pending</option>
             <option @if(workOrderForm("status").value.get == "Created"){ selected } value="Created">Created</option>
-            <option @if(workOrderForm("status").value.get == "In Progress"){ selected } value="In Progress">In Progress</option>
-            <option @if(workOrderForm("status").value.get == "Completed"){ selected } value="Completed">Completed</option>
-        </select>
+            <option @if(workOrderForm("status").value.get == "Rejected"){ selected } value="Rejected">Rejected</option>
+            <option @if(workOrderForm("status").value.get == "Accepted"){ selected } value="Accepted">Accepted</option>        </select>
     </div>
     <br>
     <button type="submit" class="btn btn-primary ">@formType</button>

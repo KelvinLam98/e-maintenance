@@ -87,7 +87,7 @@ package appcontrollers.javascript {
     }
 
   
-    // @LINE:91
+    // @LINE:92
     def workOrderDetailByStatus: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.workOrderDetailByStatus",
       """
@@ -97,7 +97,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:95
+    // @LINE:91
     def workOrderDetail: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.workOrderDetail",
       """
@@ -117,17 +117,17 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:94
-    def workOrderListHistory: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "appcontrollers.WorkOrders.workOrderListHistory",
+    // @LINE:98
+    def postCreateWorkOrderWithSample: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "appcontrollers.WorkOrders.postCreateWorkOrderWithSample",
       """
         function(id0) {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "api/workOrderHistory/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "api/workOrderSample/detail/create/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
         }
       """
     )
   
-    // @LINE:97
+    // @LINE:96
     def postUpdateWorkOrder: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.postUpdateWorkOrder",
       """
@@ -137,7 +137,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:93
+    // @LINE:94
     def workOrderSampleDetailList: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.workOrderSampleDetailList",
       """
@@ -147,7 +147,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:92
+    // @LINE:93
     def workOrderSampleList: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.workOrderSampleList",
       """
