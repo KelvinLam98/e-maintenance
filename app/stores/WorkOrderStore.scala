@@ -10,6 +10,7 @@ class WorkOrderStore @Inject()() {
 
   val parser: RowParser[WorkOrder] = Macro.namedParser[WorkOrder]
   val viewParser: RowParser[WorkOrderView] = Macro.namedParser[WorkOrderView]
+  val viewSampleParser: RowParser[WorkOrderSampleView] = Macro.namedParser[WorkOrderSampleView]
 
   def findAll(implicit conn: Connection): Seq[WorkOrder] = {
     SQL("select * from work_order").on().as(parser.*)
@@ -144,6 +145,7 @@ class WorkOrderStore @Inject()() {
 
   def searchById(user_name: String, searchText: String, limit: Option[LimitClause], orderBy: Option[OrderByClause])(implicit conn: Connection): Seq[WorkOrderView] = {
     val orderCriteria = orderBy.map(_.value).getOrElse("")
+    println("orderCriteria: " + orderCriteria)
     val searchCriteria =
       if(searchText.isEmpty)
         orderCriteria
@@ -185,6 +187,22 @@ class WorkOrderStore @Inject()() {
         "id" -> id
       ) ++ limit.map(_.namedParameters).getOrElse(Seq.empty[NamedParameter])
     SQL("select * from work_order_view where id={id}" + searchCriteria + limit.map(_.value).getOrElse("")).on(namedParams: _*).as(viewParser.*)
+  }
+
+  def searchSampleById(user_name: String, searchText: String, limit: Option[LimitClause], orderBy: Option[OrderByClause])(implicit conn: Connection): Seq[WorkOrderSampleView] = {
+    val orderCriteria = orderBy.map(_.value).getOrElse("")
+    println("orderCriteria: " + orderCriteria)
+    val searchCriteria =
+      if(searchText.isEmpty)
+        orderCriteria
+      else
+        "and (item_name like {searchText})" + orderCriteria
+    val namedParams: Seq[NamedParameter] =
+      Vector[NamedParameter](
+        "searchText" -> ("%" + searchText + "%"),
+        "user_name" -> user_name
+      ) ++ limit.map(_.namedParameters).getOrElse(Seq.empty[NamedParameter])
+    SQL("select * from work_order_sample_view where user_name = {user_name}" + searchCriteria + limit.map(_.value).getOrElse("")).on(namedParams: _*).as(viewSampleParser.*)
   }
 
 }

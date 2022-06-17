@@ -88,6 +88,7 @@ POST     /api/profile/changePassword/:id             appcontrollers.Users.postUp
 
 #work order
 GET      /api/workOrder/:id                          appcontrollers.WorkOrders.workOrderList(id: Long)
+GET      /api/workOrderSample/:id                    appcontrollers.WorkOrders.workOrderSampleList(id: Long)
 GET      /api/workOrderHistory/:id                   appcontrollers.WorkOrders.workOrderListHistory(id: Long)
 GET      /api/workOrder/detail/:id                   appcontrollers.WorkOrders.workOrderDetail(id: Long)
 +nocsrf

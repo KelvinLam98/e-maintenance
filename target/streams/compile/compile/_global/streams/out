@@ -1,10 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\e-maintenance\app\views\workOrders\detail.scala.html:13:49: unclosed character literal (or use " for string literal "Pending")[0m
-[0m[[0m[31merror[0m] [0m[0m                @if(workOrder.status == 'Pending'){[0m
-[0m[[0m[31merror[0m] [0m[0m                                                ^[0m
-[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\e-maintenance\app\views\workOrders\detail.scala.html:93:2: ')' expected but '}' found.[0m
-[0m[[0m[31merror[0m] [0m[0m}[0m
-[0m[[0m[31merror[0m] [0m[0m ^[0m
-[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\e-maintenance\app\views\workOrders\detail.scala.html:13:41: symbol literal is deprecated; use Symbol("Pending") instead[0m
-[0m[[0m[31merror[0m] [0m[0m                @if(workOrder.status == 'Pending'){[0m
-[0m[[0m[31merror[0m] [0m[0m                                        ^[0m
-[0m[[0m[31merror[0m] [0m[0mthree errors found[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\Projects\e-maintenance\app\views\workOrders\form.scala.html:21:119: value get is not a member of Long[0m
+[0m[[0m[31merror[0m] [0m[0m            <option @if(workOrderForm("user_id").value.get == "@userOption._1.get"){ selected } value="@userOption._1.get">@userOption._2</option>[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                                                      ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

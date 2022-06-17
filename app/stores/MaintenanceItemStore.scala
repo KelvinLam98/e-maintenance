@@ -83,7 +83,7 @@ class MaintenanceItemStore @Inject()() {
   }
 
   def findAll()(implicit conn: Connection): Seq[MaintenanceItem] = {
-    SQL("select * from maintenance_item").as(parser.*)
+    SQL("select * from maintenance_item order by item_name").as(parser.*)
   }
 
   def options(implicit conn: Connection): Seq[(Long,String)] = {

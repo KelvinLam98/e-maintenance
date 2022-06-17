@@ -77,7 +77,7 @@ class TechnicianStore @Inject()() {
   }
 
   def findAll()(implicit conn: Connection): Seq[Technician] = {
-    SQL("select * from technician").as(parser.*)
+    SQL("select * from technician order by name").as(parser.*)
   }
 
   def options(implicit conn: Connection): Seq[(Long, String)] = {

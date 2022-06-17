@@ -37,7 +37,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:98
+    // @LINE:99
     def registerFirebaseToken: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.Users.registerFirebaseToken",
       """
@@ -47,7 +47,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:99
+    // @LINE:100
     def testSendPushNotification: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.Users.testSendPushNotification",
       """
@@ -87,6 +87,16 @@ package appcontrollers.javascript {
     }
 
   
+    // @LINE:93
+    def workOrderDetail: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "appcontrollers.WorkOrders.workOrderDetail",
+      """
+        function(id0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "api/workOrder/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
+        }
+      """
+    )
+  
     // @LINE:90
     def workOrderList: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.workOrderList",
@@ -97,7 +107,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:91
+    // @LINE:92
     def workOrderListHistory: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.workOrderListHistory",
       """
@@ -107,22 +117,22 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:92
-    def workOrderDetail: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "appcontrollers.WorkOrders.workOrderDetail",
-      """
-        function(id0) {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "api/workOrder/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
-        }
-      """
-    )
-  
-    // @LINE:94
+    // @LINE:95
     def postUpdateWorkOrder: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.postUpdateWorkOrder",
       """
         function(id0) {
           return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "api/workOrder/detail/edit/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
+        }
+      """
+    )
+  
+    // @LINE:91
+    def workOrderSampleList: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "appcontrollers.WorkOrders.workOrderSampleList",
+      """
+        function(id0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "api/workOrderSample/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
         }
       """
     )
