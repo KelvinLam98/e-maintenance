@@ -150,13 +150,13 @@ class WorkOrderStore @Inject()() {
       if(searchText.isEmpty)
         orderCriteria
       else
-        "and (maintenance_date like {searchText})" + orderCriteria
+        "and (maintenance_date like {searchText} || status like {searchText} || item_code like {searchText})" + orderCriteria
     val namedParams: Seq[NamedParameter] =
       Vector[NamedParameter](
         "searchText" -> ("%" + searchText + "%"),
         "user_name" -> user_name
       ) ++ limit.map(_.namedParameters).getOrElse(Seq.empty[NamedParameter])
-    SQL("select * from work_order_view where (maintenance_date - CURDATE() >= 0 ) and user_name={user_name}" + searchCriteria + limit.map(_.value).getOrElse("")).on(namedParams: _*).as(viewParser.*)
+    SQL("select * from work_order_view where user_name={user_name}" + searchCriteria + limit.map(_.value).getOrElse("")).on(namedParams: _*).as(viewParser.*)
   }
 
   def searchByIdHistory(user_name: String, searchText: String, limit: Option[LimitClause], orderBy: Option[OrderByClause])(implicit conn: Connection): Seq[WorkOrderView] = {
