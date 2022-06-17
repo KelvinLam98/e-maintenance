@@ -37,7 +37,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:99
+    // @LINE:101
     def registerFirebaseToken: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.Users.registerFirebaseToken",
       """
@@ -47,7 +47,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:100
+    // @LINE:102
     def testSendPushNotification: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.Users.testSendPushNotification",
       """
@@ -87,7 +87,17 @@ package appcontrollers.javascript {
     }
 
   
-    // @LINE:93
+    // @LINE:91
+    def workOrderDetailByStatus: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "appcontrollers.WorkOrders.workOrderDetailByStatus",
+      """
+        function(id0,status1) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "api/workOrder/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0)) + "/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("status", status1))})
+        }
+      """
+    )
+  
+    // @LINE:95
     def workOrderDetail: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.workOrderDetail",
       """
@@ -107,7 +117,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:92
+    // @LINE:94
     def workOrderListHistory: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.workOrderListHistory",
       """
@@ -117,7 +127,7 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:95
+    // @LINE:97
     def postUpdateWorkOrder: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.postUpdateWorkOrder",
       """
@@ -127,7 +137,17 @@ package appcontrollers.javascript {
       """
     )
   
-    // @LINE:91
+    // @LINE:93
+    def workOrderSampleDetailList: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "appcontrollers.WorkOrders.workOrderSampleDetailList",
+      """
+        function(id0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "api/workOrderSample/detail/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
+        }
+      """
+    )
+  
+    // @LINE:92
     def workOrderSampleList: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.workOrderSampleList",
       """

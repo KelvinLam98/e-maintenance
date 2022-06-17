@@ -28,13 +28,13 @@ package appcontrollers {
       Call("POST", _prefix + { _defaultPrefix } + "api/login")
     }
   
-    // @LINE:99
+    // @LINE:101
     def registerFirebaseToken: Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "api/register-firebase-token")
     }
   
-    // @LINE:100
+    // @LINE:102
     def testSendPushNotification(workOrderId:Long): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "api/test-notification/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("workOrderId", workOrderId)))
@@ -61,7 +61,13 @@ package appcontrollers {
     }
 
   
-    // @LINE:93
+    // @LINE:91
+    def workOrderDetailByStatus(id:Long, status:String): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "api/workOrder/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)) + "/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("status", status)))
+    }
+  
+    // @LINE:95
     def workOrderDetail(id:Long): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "api/workOrder/detail/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)))
@@ -73,19 +79,25 @@ package appcontrollers {
       Call("GET", _prefix + { _defaultPrefix } + "api/workOrder/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)))
     }
   
-    // @LINE:92
+    // @LINE:94
     def workOrderListHistory(id:Long): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "api/workOrderHistory/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)))
     }
   
-    // @LINE:95
+    // @LINE:97
     def postUpdateWorkOrder(id:Long): Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "api/workOrder/detail/edit/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)))
     }
   
-    // @LINE:91
+    // @LINE:93
+    def workOrderSampleDetailList(id:Long): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "api/workOrderSample/detail/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)))
+    }
+  
+    // @LINE:92
     def workOrderSampleList(id:Long): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "api/workOrderSample/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind("id", id)))
