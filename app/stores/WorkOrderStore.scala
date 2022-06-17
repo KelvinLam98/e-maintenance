@@ -10,6 +10,7 @@ class WorkOrderStore @Inject()() {
 
   val parser: RowParser[WorkOrder] = Macro.namedParser[WorkOrder]
   val viewParser: RowParser[WorkOrderView] = Macro.namedParser[WorkOrderView]
+  val viewSampleParser: RowParser[WorkOrderSampleView] = Macro.namedParser[WorkOrderSampleView]
 
   def findAll(implicit conn: Connection): Seq[WorkOrder] = {
     SQL("select * from work_order").on().as(parser.*)
@@ -37,6 +38,34 @@ class WorkOrderStore @Inject()() {
       else
         "and (maintenance_date like {searchText} or user_name like {searchText} or item_name like {searchText})"
     SQL("select * from work_order_view where (maintenance_date - CURDATE() >= 0 )" + searchCriteria + " order by maintenance_date Asc limit {start}, {count}").on(
+      "start" -> start,
+      "count" -> count,
+      "searchText" -> ("%" + searchText + "%")
+    ).as(viewParser.*)
+  }
+
+  def countAllForPending(implicit conn: Connection): Long = {
+    SQL("select count(*) as count from work_order_view where (status = 'Pending')").as(SqlParser.long("count").single)
+  }
+
+  def countFilteredForPending(searchText: String)(implicit conn: Connection): Long = {
+    val searchCriteria =
+      if (searchText.isEmpty)
+        ""
+      else
+        "and (maintenance_date like {searchText} or user_name like {searchText} or item_name like {searchText})"
+    SQL("select count(*) as count from work_order_view where (status = 'Pending')" + searchCriteria ).on(
+      "searchText" -> ("%" + searchText + "%")
+    ).as(SqlParser.long("count").single)
+  }
+
+  def searchForPending(start: Long, count: Long, searchText: String)(implicit conn: Connection): Seq[WorkOrderView] = {
+    val searchCriteria =
+      if (searchText.isEmpty)
+        ""
+      else
+        "and (maintenance_date like {searchText} or user_name like {searchText} or item_name like {searchText})"
+    SQL("select * from work_order_view where (status = 'Pending')" + searchCriteria + " order by maintenance_date Asc limit {start}, {count}").on(
       "start" -> start,
       "count" -> count,
       "searchText" -> ("%" + searchText + "%")
@@ -116,6 +145,7 @@ class WorkOrderStore @Inject()() {
 
   def searchById(user_name: String, searchText: String, limit: Option[LimitClause], orderBy: Option[OrderByClause])(implicit conn: Connection): Seq[WorkOrderView] = {
     val orderCriteria = orderBy.map(_.value).getOrElse("")
+    println("orderCriteria: " + orderCriteria)
     val searchCriteria =
       if(searchText.isEmpty)
         orderCriteria
@@ -157,6 +187,54 @@ class WorkOrderStore @Inject()() {
         "id" -> id
       ) ++ limit.map(_.namedParameters).getOrElse(Seq.empty[NamedParameter])
     SQL("select * from work_order_view where id={id}" + searchCriteria + limit.map(_.value).getOrElse("")).on(namedParams: _*).as(viewParser.*)
+  }
+
+  def searchSampleById(user_name: String, searchText: String, limit: Option[LimitClause], orderBy: Option[OrderByClause])(implicit conn: Connection): Seq[WorkOrderSampleView] = {
+    val orderCriteria = orderBy.map(_.value).getOrElse("")
+    println("orderCriteria: " + orderCriteria)
+    val searchCriteria =
+      if(searchText.isEmpty)
+        orderCriteria
+      else
+        "and (item_name like {searchText})" + orderCriteria
+    val namedParams: Seq[NamedParameter] =
+      Vector[NamedParameter](
+        "searchText" -> ("%" + searchText + "%"),
+        "user_name" -> user_name
+      ) ++ limit.map(_.namedParameters).getOrElse(Seq.empty[NamedParameter])
+    SQL("select * from work_order_sample_view where user_name = {user_name}" + searchCriteria + limit.map(_.value).getOrElse("")).on(namedParams: _*).as(viewSampleParser.*)
+  }
+
+  def searchByIdAndStatus(user_name: String, status: String, searchText: String, limit: Option[LimitClause], orderBy: Option[OrderByClause])(implicit conn: Connection): Seq[WorkOrderView] = {
+    val orderCriteria = orderBy.map(_.value).getOrElse("")
+    println("orderCriteria: " + orderCriteria)
+    val searchCriteria =
+      if(searchText.isEmpty)
+        orderCriteria
+      else
+        "and (maintenance_date like {searchText})" + orderCriteria
+    val namedParams: Seq[NamedParameter] =
+      Vector[NamedParameter](
+        "searchText" -> ("%" + searchText + "%"),
+        "user_name" -> user_name,
+        "status" -> status,
+      ) ++ limit.map(_.namedParameters).getOrElse(Seq.empty[NamedParameter])
+    SQL("select * from work_order_view where user_name={user_name} and status={status}" + searchCriteria + limit.map(_.value).getOrElse("")).on(namedParams: _*).as(viewParser.*)
+  }
+
+  def searchSampleDetailById(id: Long, searchText: String, limit: Option[LimitClause], orderBy: Option[OrderByClause])(implicit conn: Connection): Seq[WorkOrderSampleView] = {
+    val orderCriteria = orderBy.map(_.value).getOrElse("")
+    val searchCriteria =
+      if(searchText.isEmpty)
+        orderCriteria
+      else
+        "and (item_name like {searchText})" + orderCriteria
+    val namedParams: Seq[NamedParameter] =
+      Vector[NamedParameter](
+        "searchText" -> ("%" + searchText + "%"),
+        "id" -> id
+      ) ++ limit.map(_.namedParameters).getOrElse(Seq.empty[NamedParameter])
+    SQL("select * from work_order_sample_view where id = {id}" + searchCriteria + limit.map(_.value).getOrElse("")).on(namedParams: _*).as(viewSampleParser.*)
   }
 
 }

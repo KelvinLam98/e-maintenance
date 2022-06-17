@@ -99,7 +99,7 @@ class UserStore @Inject()() {
   }
 
   def findAll()(implicit conn: Connection): Seq[User] = {
-    SQL("select * from users where role = {role}").on(
+    SQL("select * from users where role = {role} order by name").on(
       "role" -> "user"
     ).as(parser.*)
   }

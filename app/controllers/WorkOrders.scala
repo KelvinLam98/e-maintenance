@@ -170,6 +170,23 @@ class WorkOrders @Inject()(
         .flashing(("success" -> "successfullyDeleted"))
     }
   }
+
+  def updatePending(id: Long) = SecuredAction(UserRole.ADMIN) { implicit request =>
+    db.withConnection { implicit conn =>
+      workOrderStore.findById(id).map { wos =>
+        val (form, errors) = {
+          request.flash.get("errors") match {
+            case Some(errorsStr) =>
+              (workOrdersForm.bind(request.flash.data), errorsStr.split(","))
+            case None =>
+              println(wos)
+              (workOrdersForm.fill(WorkOrder(wos.id, wos.maintenance_id, wos.user_id, wos.technician_id, toDateFormat(wos.maintenance_date), wos.maintenance_time, "Pending")), Array.empty[String])
+          }
+        }
+        Ok(views.html.workOrders.workOrderPendingForm(form, errors, "Update", maintenanceItemStore.options, userStore.options, technicianStore.options))
+      }.getOrElse(NotFound)
+    }
+  }
   /* TODO */
 
   /* do not edit below this line */

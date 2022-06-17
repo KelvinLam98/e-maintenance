@@ -17,7 +17,8 @@ class Users @Inject()(
                        mcc: MessagesControllerComponents,
                        db: Database,
                        cache: SyncCacheApi,
-                       userStore: UserStore
+                       userStore: UserStore,
+                       workOrderStore: WorkOrderStore,
                      ) extends BaseController(mcc, db, cache, userStore) {
 
   def listUser = SecuredAction(UserRole.USER) { implicit request =>
@@ -177,7 +178,29 @@ class Users @Inject()(
         .flashing(("success" -> "successfullyDeleted"))
     }
   }
-  /* TODO */
+
+  def dashboard = SecuredAction(UserRole.ADMIN) { implicit request =>
+    Ok(views.html.dashboard())
+  }
+
+  def dashboardListJson = SecuredAction(UserRole.ADMIN) { implicit request =>
+    val start = request.getQueryString("start").map(_.toLong).getOrElse(0L)
+    val length = request.getQueryString("length").map(_.toLong).getOrElse(10L)
+    val draw: Int = request.getQueryString("draw").map(_.toInt).getOrElse(0)
+    val searchText = request.getQueryString("search[value]").getOrElse("")
+
+    db.withConnection { implicit conn =>
+      val total = workOrderStore.countAllForPending
+      val filtered = workOrderStore.countFilteredForPending(searchText)
+      val data = workOrderStore.searchForPending(start, length, searchText)
+      Ok(Json.obj(
+        "draw" -> draw,
+        "recordsTotal" -> total,
+        "recordsFiltered" -> filtered,
+        "data" -> data
+      ))
+    }
+  }
 
   /* do not edit below this line */
 }
