@@ -33,14 +33,14 @@ class FirebaseActor @Inject()(
   }
 
   def receive: Receive = {
-    case FirebaseMessage(deviceToken, title, body, module, src, article_id) =>
+    case FirebaseMessage(deviceToken, title, body, module, src, workOrderId) =>
       val message = Message.builder()
         .setNotification(
           Notification.builder().setTitle(title).setBody(body).build()
         )
         .putData("module", module)
         .putData("src", src)
-        .putData("article_id", article_id)
+        .putData("workOrderId", workOrderId)
         .setToken(deviceToken)
         .build()
       val response = FirebaseMessaging.getInstance(app).send(message)

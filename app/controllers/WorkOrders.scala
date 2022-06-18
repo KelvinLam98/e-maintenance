@@ -125,14 +125,26 @@ class WorkOrders @Inject()(
         db.withTransaction { implicit conn =>
           workOrderStore.findById(data.id.getOrElse(-1)) match {
             case Some(wo) =>
+              if (wo.user_id == data.user_id) {
+                userPushNotifTokenStore.findByPushTokenById(data.user_id).map { user =>
+                  firebaseHelper.sendNotificationMessage(user.push_token.get, "Modified Work Order", "Check Your Work Order at " + data.status, "module", "src", data.id.toString).map { messageId =>
+                    println("Sent, message ID: " + messageId + user.id)
+                  }
+                }
+              } else {
+                userPushNotifTokenStore.findByPushTokenById(data.user_id).map { user =>
+                  firebaseHelper.sendNotificationMessage(user.push_token.get, "New Work Order", "Check Your Work Order at " + data.status, "module", "src", data.id.toString).map { messageId =>
+                    println("Sent, message ID: " + messageId + user.id)
+                  }
+                }
+              }
               workOrderStore.update(WorkOrder(data.id, data.maintenance_id, data.user_id, data.technician_id, data.maintenance_date, data.maintenance_time, data.status))
               Redirect(routes.WorkOrders.detail(wo.id.get))
                 .flashing(("success" -> "successfullyUpdated"))
             case None =>
               val id: Long = workOrderStore.insert(WorkOrder(None, data.maintenance_id, data.user_id, data.technician_id, data.maintenance_date, data.maintenance_time, data.status))
                 userPushNotifTokenStore.findByPushTokenById(data.user_id).map { user =>
-                  println(user)
-                  firebaseHelper.sendNotificationMessage(user.push_token.get, "New Work Order", "Check Under Work Order Todo ", "module", "src", id.toString).map { messageId =>
+                  firebaseHelper.sendNotificationMessage(user.push_token.get, "New Work Order", "Check Your Work Order at " + data.status, "module", "src", id.toString).map { messageId =>
                     println("Sent, message ID: " + messageId + user.id)
                   }
                 }
