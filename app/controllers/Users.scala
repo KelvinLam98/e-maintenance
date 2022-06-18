@@ -221,5 +221,24 @@ class Users @Inject()(
     }
   }
 
+  def dashboardListTodoJson = SecuredAction(UserRole.USER) { implicit request =>
+    val start = request.getQueryString("start").map(_.toLong).getOrElse(0L)
+    val length = request.getQueryString("length").map(_.toLong).getOrElse(10L)
+    val draw: Int = request.getQueryString("draw").map(_.toInt).getOrElse(0)
+    val searchText = request.getQueryString("search[value]").getOrElse("")
+
+    db.withConnection { implicit conn =>
+      val total = workOrderStore.countAllForTodo
+      val filtered = workOrderStore.countFilteredForTodo(searchText)
+      val data = workOrderStore.searchForTodo(start, length, searchText)
+      Ok(Json.obj(
+        "draw" -> draw,
+        "recordsTotal" -> total,
+        "recordsFiltered" -> filtered,
+        "data" -> data
+      ))
+    }
+  }
+
   /* do not edit below this line */
 }

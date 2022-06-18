@@ -73,7 +73,7 @@ class WorkOrderStore @Inject()() {
   }
 
   def countAllForInProgress(implicit conn: Connection): Long = {
-    SQL("select count(*) as count from work_order_view where (status = 'In Progress')").as(SqlParser.long("count").single)
+    SQL("select count(*) as count from work_order_view where (status != 'Rejected') and (maintenance_date = CURDATE())").as(SqlParser.long("count").single)
   }
 
   def countFilteredForInProgress(searchText: String)(implicit conn: Connection): Long = {
@@ -82,7 +82,7 @@ class WorkOrderStore @Inject()() {
         ""
       else
         "and (maintenance_date like {searchText} or user_name like {searchText} or item_name like {searchText})"
-    SQL("select count(*) as count from work_order_view where (status = 'In Progress')" + searchCriteria ).on(
+    SQL("select count(*) as count from work_order_view where (status != 'Rejected') and (maintenance_date = CURDATE())" + searchCriteria ).on(
       "searchText" -> ("%" + searchText + "%")
     ).as(SqlParser.long("count").single)
   }
@@ -93,7 +93,35 @@ class WorkOrderStore @Inject()() {
         ""
       else
         "and (maintenance_date like {searchText} or user_name like {searchText} or item_name like {searchText})"
-    SQL("select * from work_order_view where (status = 'In Progress')" + searchCriteria + " order by maintenance_date Asc limit {start}, {count}").on(
+    SQL("select * from work_order_view where (status != 'Rejected') and (maintenance_date = CURDATE())" + searchCriteria + " order by maintenance_date Asc limit {start}, {count}").on(
+      "start" -> start,
+      "count" -> count,
+      "searchText" -> ("%" + searchText + "%")
+    ).as(viewParser.*)
+  }
+
+  def countAllForTodo(implicit conn: Connection): Long = {
+    SQL("select count(*) as count from work_order_view where (status = 'Todo')").as(SqlParser.long("count").single)
+  }
+
+  def countFilteredForTodo(searchText: String)(implicit conn: Connection): Long = {
+    val searchCriteria =
+      if (searchText.isEmpty)
+        ""
+      else
+        "and (maintenance_date like {searchText} or user_name like {searchText} or item_name like {searchText})"
+    SQL("select count(*) as count from work_order_view where (status = 'Todo')" + searchCriteria ).on(
+      "searchText" -> ("%" + searchText + "%")
+    ).as(SqlParser.long("count").single)
+  }
+
+  def searchForTodo(start: Long, count: Long, searchText: String)(implicit conn: Connection): Seq[WorkOrderView] = {
+    val searchCriteria =
+      if (searchText.isEmpty)
+        ""
+      else
+        "and (maintenance_date like {searchText} or user_name like {searchText} or item_name like {searchText})"
+    SQL("select * from work_order_view where (status = 'Todo')" + searchCriteria + " order by maintenance_date Asc limit {start}, {count}").on(
       "start" -> start,
       "count" -> count,
       "searchText" -> ("%" + searchText + "%")

@@ -19,7 +19,9 @@ GET     /user/list                           controllers.Users.listUser
 GET     /dashboard                           controllers.Users.dashboard
 GET     /dashboard/list.json                 controllers.Users.dashboardListJson
 GET     /dashboard/inProgress.json           controllers.Users.dashboardListInProgressJson
+GET     /dashboard/todoList.json             controllers.Users.dashboardListTodoJson
 GET     /dashboard/pending/:id               controllers.WorkOrders.detail(id: Long)
+GET     /dashboard/today/:id                 controllers.WorkOrders.detail(id: Long)
 GET     /dashboard/pending/:id/update        controllers.WorkOrders.updatePending(id: Long)
 GET     /user/list.json                      controllers.Users.listUserJson
 GET     /user/detail/:id                     controllers.Users.detail(id: Long)
