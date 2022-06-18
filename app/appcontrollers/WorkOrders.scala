@@ -97,7 +97,7 @@ class WorkOrders @Inject()(
               workOrderStore.insert(WorkOrder(
                 None, wo.maintenance_id, input.user_id, wo.technician_id, input.maintenance_date, input.maintenance_time, wo.status
               ))
-              Ok(Json.toJson("Update Successfully"))
+              Ok(Json.toJson("Create Successfully"))
             case None =>
               Ok("Please contact admin")
           }

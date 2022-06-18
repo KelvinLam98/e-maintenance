@@ -2,21 +2,25 @@
 @main("E-Maintenance") {
 <script>
     $(document).ready(function() {
+        $('#dataTables').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": "/maintenanceItems/detail/@maintenanceItem.id/list.json",
+            columns: [
+                { data: 'item_name'},
+                { data: 'user_name'},
+                { data: 'technician_name'},
+                { data: 'maintenance_date',
+                    "render": function(data, type, full, meta){
+                            return moment(data).format('YYYY-MM-DD');
+                    }
+                },
+                { data: 'status'}
+            ],
+            responsive: true
+        });
+    });
 
-      var message = $('#msg')
-          message.hide()
-          if("@flash.get("success")" == "successfullyUpdated"){
-              message.css('display', 'block').addClass('form-group has-success')
-              message.find('.control-label').html('The User has been successfully updated.')
-          }
-          if("@flash.get("success")" == "successfullyCreated"){
-              message.css('display', 'block').addClass('form-group has-success')
-              message.find('.control-label').html('The User has been successfully created.')
-          }
-           if("@flash.get("success")" == "accessmentSuccessfullyUpdated"){
-              message.css('display', 'block').addClass('form-group has-success')
-              message.find('.control-label').html('User accessment has been updated successfully.')
-          }}
     </script>
 
 <div class="row">
@@ -59,7 +63,23 @@
                         </tbody>
                     </table>
                 </div>
+
             </div>
+        </div>
+        <hr>
+        <h1 class="page-header">In Coming Work Order</h1>
+        <div class="table-responsive">
+            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
+                <thead>
+                <tr>
+                    <th width="20%">Maintenance Item</th>
+                    <th width="20%">Staff In Charge</th>
+                    <th width="20%">Technician</th>
+                    <th width="20%">Date</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+            </table>
         </div>
     </div>
 </div>
