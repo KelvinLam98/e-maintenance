@@ -230,20 +230,19 @@ class WorkOrderStore @Inject()() {
     SQL("select * from work_order_view where id={id}" + searchCriteria + limit.map(_.value).getOrElse("")).on(namedParams: _*).as(viewParser.*)
   }
 
-  def searchSampleById(user_name: String, searchText: String, limit: Option[LimitClause], orderBy: Option[OrderByClause])(implicit conn: Connection): Seq[WorkOrderSampleView] = {
+  def searchSampleById(searchText: String, limit: Option[LimitClause], orderBy: Option[OrderByClause])(implicit conn: Connection): Seq[WorkOrderSampleView] = {
     val orderCriteria = orderBy.map(_.value).getOrElse("")
     println("orderCriteria: " + orderCriteria)
     val searchCriteria =
       if(searchText.isEmpty)
         orderCriteria
       else
-        "and (item_name like {searchText})" + orderCriteria
+        "where (item_name like {searchText})" + orderCriteria
     val namedParams: Seq[NamedParameter] =
       Vector[NamedParameter](
-        "searchText" -> ("%" + searchText + "%"),
-        "user_name" -> user_name
+        "searchText" -> ("%" + searchText + "%")
       ) ++ limit.map(_.namedParameters).getOrElse(Seq.empty[NamedParameter])
-    SQL("select * from work_order_sample_view where user_name = {user_name}" + searchCriteria + limit.map(_.value).getOrElse("")).on(namedParams: _*).as(viewSampleParser.*)
+    SQL("select * from work_order_sample_view " + searchCriteria + limit.map(_.value).getOrElse("")).on(namedParams: _*).as(viewSampleParser.*)
   }
 
   def searchByIdAndStatus(user_name: String, status: String, searchText: String, limit: Option[LimitClause], orderBy: Option[OrderByClause])(implicit conn: Connection): Seq[WorkOrderView] = {

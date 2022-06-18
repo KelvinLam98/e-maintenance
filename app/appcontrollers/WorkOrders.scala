@@ -108,7 +108,7 @@ class WorkOrders @Inject()(
     }
   }
 
-  def workOrderSampleList(id: Long) = ApiAction { implicit request =>
+  def workOrderSampleList = ApiAction { implicit request =>
     println("request: " + request)
     val draw: Int = request.getQueryString("draw").map(_.toInt).getOrElse(0)
     val searchText = request.getQueryString("searchText").getOrElse("")
@@ -116,11 +116,9 @@ class WorkOrders @Inject()(
     val orderBy = OrderByClause.fromRequest(request, WorkOrder.sortableCols)
 
     db.withConnection { implicit conn =>
-      val user = userStore.findById(id)
-      val name = user.get.name
       val total = workOrderStore.countAll
       val filtered = workOrderStore.countFiltered(searchText)
-      val data = workOrderStore.searchSampleById(name, searchText, limit, orderBy)
+      val data = workOrderStore.searchSampleById(searchText, limit, orderBy)
       Ok(Json.obj(
         "draw" -> draw,
         "recordsTotal" -> total,
