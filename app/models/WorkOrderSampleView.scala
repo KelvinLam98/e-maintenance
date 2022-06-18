@@ -11,8 +11,6 @@ case class WorkOrderSampleView(
                           technician_contact: String,
                           item_code: String,
                           item_name: String,
-                          user_name: String,
-                          user_contact: String
                         )
 
 object WorkOrderSampleView {

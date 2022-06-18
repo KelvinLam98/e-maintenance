@@ -64,7 +64,6 @@ class WorkOrderSamples @Inject()(
     mapping(
       "id" -> optional(longNumber),
       "maintenance_id" -> longNumber,
-      "user_id" -> longNumber,
       "technician_id" -> longNumber,
       "status" -> nonEmptyText,
     )(WorkOrderSample.apply)(WorkOrderSample.unapply)
@@ -77,9 +76,9 @@ class WorkOrderSamples @Inject()(
           case Some(errorsStr) =>
             (workOrderSamplesForm.bind(request.flash.data), errorsStr.split(","))
           case None =>
-            (workOrderSamplesForm.fill(WorkOrderSample(None, 0, 0, 0, "")), Array.empty[String])
+            (workOrderSamplesForm.fill(WorkOrderSample(None, 0, 0, "")), Array.empty[String])
         }
-      Ok(views.html.workOrderSamples.form(form, errors, "Create", maintenanceItemStore.options, userStore.options, technicianStore.options))
+      Ok(views.html.workOrderSamples.form(form, errors, "Create", maintenanceItemStore.options, technicianStore.options))
     }
   }
 
@@ -100,11 +99,11 @@ class WorkOrderSamples @Inject()(
         db.withTransaction { implicit conn =>
           workOrderSampleStore.findById(data.id.getOrElse(-1)) match {
             case Some(wo) =>
-              workOrderSampleStore.update(WorkOrderSample(data.id, data.maintenance_id, data.user_id, data.technician_id, data.status))
+              workOrderSampleStore.update(WorkOrderSample(data.id, data.maintenance_id, data.technician_id, data.status))
               Redirect(routes.WorkOrderSamples.detail(wo.id.get))
                 .flashing(("success" -> "successfullyUpdated"))
             case None =>
-              val id: Long = workOrderSampleStore.insert(WorkOrderSample(None, data.maintenance_id, data.user_id, data.technician_id, data.status))
+              val id: Long = workOrderSampleStore.insert(WorkOrderSample(None, data.maintenance_id, data.technician_id, data.status))
               Redirect(routes.WorkOrderSamples.detail(id))
                 .flashing(("success" -> "successfullyCreated"))
           }
@@ -121,10 +120,10 @@ class WorkOrderSamples @Inject()(
             case Some(errorsStr) =>
               (workOrderSamplesForm.bind(request.flash.data), errorsStr.split(","))
             case None =>
-              (workOrderSamplesForm.fill(WorkOrderSample(wo.id, wo.maintenance_id, wo.user_id, wo.technician_id, wo.status)), Array.empty[String])
+              (workOrderSamplesForm.fill(WorkOrderSample(wo.id, wo.maintenance_id, wo.technician_id, wo.status)), Array.empty[String])
           }
         }
-        Ok(views.html.workOrderSamples.form(form, errors, "Update", maintenanceItemStore.options, userStore.options, technicianStore.options))
+        Ok(views.html.workOrderSamples.form(form, errors, "Update", maintenanceItemStore.options, technicianStore.options))
       }.getOrElse(NotFound)
     }
   }
@@ -157,7 +156,7 @@ class WorkOrderSamples @Inject()(
             case Some(errorsStr) =>
               (workOrdersForm.bind(request.flash.data), errorsStr.split(","))
             case None =>
-              (workOrdersForm.fill(WorkOrder(None, wos.maintenance_id, wos.user_id, wos.technician_id, new Date(), "09:00", "Created")), Array.empty[String])
+              (workOrdersForm.fill(WorkOrder(None, wos.maintenance_id, 0, wos.technician_id, new Date(), "09:00", "Todo")), Array.empty[String])
           }
         }
         Ok(views.html.workOrderSamples.workOrderForm(form, errors, "Create", maintenanceItemStore.options, userStore.options, technicianStore.options))

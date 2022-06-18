@@ -95,7 +95,7 @@ class WorkOrders @Inject()(
               println("wo: " + wo)
               println("input: " + input)
               workOrderStore.insert(WorkOrder(
-                None, wo.maintenance_id, wo.user_id, wo.technician_id, input.maintenance_date, input.maintenance_time, wo.status
+                None, wo.maintenance_id, input.user_id, wo.technician_id, input.maintenance_date, input.maintenance_time, wo.status
               ))
               Ok(Json.toJson("Update Successfully"))
             case None =>

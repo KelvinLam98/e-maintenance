@@ -111,6 +111,7 @@ class WorkOrders @Inject()(
   def postWorkOrdersDb = SecuredAction(UserRole.ADMIN) { implicit request =>
     workOrdersForm.bindFromRequest().fold(
       hasErrors = { form =>
+        println(form.errors)
         val id = form.data.getOrElse("id", "")
         if (id == "") {
           Redirect(routes.WorkOrders.create)

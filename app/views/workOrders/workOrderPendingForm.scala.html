@@ -15,7 +15,7 @@
     <div>
         <label>Status</label>
         <select id="status" name="status" class="form-control">
-            <option @if(workOrderForm("status").value.get == "Todo"){ selected } value="Todo">Accepted</option>
+            <option @if(workOrderForm("status").value.get == "Todo"){ selected } value="Todo">Accepted - @workOrderForm("maintenance_time").value</option>
             <option @if(workOrderForm("status").value.get == "Rejected"){ selected } value="Rejected">Rejected</option>
         </select>
     </div>

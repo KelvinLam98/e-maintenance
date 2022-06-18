@@ -5,6 +5,7 @@ import play.api.libs.json.Json
 import java.util.Date
 
 case class CreateWorkOrderRequest(
+                                   user_id: Long,
                                    maintenance_date: Date,
                                    maintenance_time: String,
                                  )
