@@ -131,7 +131,8 @@ class WorkOrders @Inject()(
             case None =>
               val id: Long = workOrderStore.insert(WorkOrder(None, data.maintenance_id, data.user_id, data.technician_id, data.maintenance_date, data.maintenance_time, data.status))
                 userPushNotifTokenStore.findByPushTokenById(data.user_id).map { user =>
-                  firebaseHelper.sendNotificationMessage(user.push_token.get, "New Job Assigned", "Please take note", "module", "src", id.toString).map { messageId =>
+                  println(user)
+                  firebaseHelper.sendNotificationMessage(user.push_token.get, "New Work Order", "Check Under Work Order Todo ", "module", "src", id.toString).map { messageId =>
                     println("Sent, message ID: " + messageId + user.id)
                   }
                 }

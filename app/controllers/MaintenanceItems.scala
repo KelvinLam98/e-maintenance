@@ -18,7 +18,8 @@ class MaintenanceItems @Inject()(
                        db: Database,
                        cache: SyncCacheApi,
                        userStore: UserStore,
-                       maintenanceItemStore: MaintenanceItemStore
+                       maintenanceItemStore: MaintenanceItemStore,
+                       workOrderStore: WorkOrderStore
                      ) extends BaseController(mcc, db, cache, userStore) {
 
   def list = SecuredAction(UserRole.USER) { implicit request =>
@@ -141,6 +142,29 @@ class MaintenanceItems @Inject()(
       maintenanceItemStore.delete(id)
       Redirect(routes.MaintenanceItems.list)
         .flashing(("success" -> "successfullyDeleted"))
+    }
+  }
+
+  def detailWorkOrder(item_id: Long) = SecuredAction(UserRole.USER) { implicit request =>
+    val start = request.getQueryString("start").map(_.toLong).getOrElse(0L)
+    val length = request.getQueryString("length").map(_.toLong).getOrElse(10L)
+    val draw: Int = request.getQueryString("draw").map(_.toInt).getOrElse(0)
+    val searchText = request.getQueryString("search[value]").getOrElse("")
+
+    db.withConnection { implicit conn =>
+      println("here-=====")
+      val item = maintenanceItemStore.findById(item_id)
+      val item_name = item.get.item_name
+      println(item_name)
+      val total = workOrderStore.countAllByItem(item_name)
+      val filtered = workOrderStore.countFilteredByItem(item_name, searchText)
+      val data = workOrderStore.searchByItem(item_name, start, length, searchText)
+      Ok(Json.obj(
+        "draw" -> draw,
+        "recordsTotal" -> total,
+        "recordsFiltered" -> filtered,
+        "data" -> data
+      ))
     }
   }
   /* TODO */

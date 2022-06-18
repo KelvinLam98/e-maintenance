@@ -34,6 +34,9 @@
             "processing": true,
             "serverSide": true,
             "ajax": "/dashboard/inProgress.json",
+            "language": {
+              "emptyTable": "No Work Order Today ! "
+            },
             columns: [
                 { data: 'item_name',
                     "render": function(data, type, full, meta){
@@ -67,6 +70,9 @@
             "processing": true,
             "serverSide": true,
             "ajax": "/dashboard/todoList.json",
+            "language": {
+              "emptyTable": "No In Coming Work Order, Please Check Your Work Order "
+            },
             columns: [
                 { data: 'item_name'},
                 { data: 'user_name'},

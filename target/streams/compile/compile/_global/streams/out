@@ -1,5 +1,15 @@
-[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\e-maintenance\app\appcontrollers\WorkOrders.scala:121:49: not enough arguments for method searchSampleById: (user_name: String, searchText: String, limit: Option[models.LimitClause], orderBy: Option[models.OrderByClause])(implicit conn: java.sql.Connection): Seq[models.WorkOrderSampleView].[0m
-[0m[[0m[31merror[0m] [0m[0mUnspecified value parameter orderBy.[0m
-[0m[[0m[31merror[0m] [0m[0m      val data = workOrderStore.searchSampleById(searchText, limit, orderBy)[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\e-maintenance\app\controllers\MaintenanceItems.scala:155:49: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : Long[0m
+[0m[[0m[31merror[0m] [0m[0m required: String[0m
+[0m[[0m[31merror[0m] [0m[0m      val total = workOrderStore.countAllByItem(item_id)[0m
 [0m[[0m[31merror[0m] [0m[0m                                                ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\e-maintenance\app\controllers\MaintenanceItems.scala:156:37: value countFilteredByItem is not a member of stores.WorkOrderStore[0m
+[0m[[0m[31merror[0m] [0m[0mdid you mean countFilteredlByItem?[0m
+[0m[[0m[31merror[0m] [0m[0m      val filtered = workOrderStore.countFilteredByItem(item_id, searchText)[0m
+[0m[[0m[31merror[0m] [0m[0m                                    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\e-maintenance\app\controllers\MaintenanceItems.scala:157:46: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : Long[0m
+[0m[[0m[31merror[0m] [0m[0m required: String[0m
+[0m[[0m[31merror[0m] [0m[0m      val data = workOrderStore.searchByItem(item_id, start, length, searchText)[0m
+[0m[[0m[31merror[0m] [0m[0m                                             ^[0m
+[0m[[0m[31merror[0m] [0m[0mthree errors found[0m
