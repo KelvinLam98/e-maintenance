@@ -37,7 +37,7 @@ Seq[Any](format.raw/*1.253*/("""
         <label>Maintenance Item</label>
         <select id="maintenance_id" name="maintenance_id" class="form-control">
             """),_display_(/*12.14*/for(itemOption <- itemOptions) yield /*12.44*/{_display_(Seq[Any](format.raw/*12.45*/("""
-            """),format.raw/*13.13*/("""<option """),_display_(/*13.22*/if(workOrderForm("maintenance_id").value.get == "@itemOption._1")/*13.87*/{_display_(Seq[Any](format.raw/*13.88*/(""" """),format.raw/*13.89*/("""selected """)))}),format.raw/*13.99*/(""" """),format.raw/*13.100*/("""value=""""),_display_(/*13.108*/itemOption/*13.118*/._1),format.raw/*13.121*/("""">"""),_display_(/*13.124*/itemOption/*13.134*/._2),format.raw/*13.137*/("""</option>
+            """),format.raw/*13.13*/("""<option """),_display_(/*13.22*/if(workOrderForm("maintenance_id").value.get == itemOption._1.toString)/*13.93*/{_display_(Seq[Any](format.raw/*13.94*/(""" """),format.raw/*13.95*/("""selected """)))}),format.raw/*13.105*/(""" """),format.raw/*13.106*/("""value=""""),_display_(/*13.114*/itemOption/*13.124*/._1),format.raw/*13.127*/("""">"""),_display_(/*13.130*/itemOption/*13.140*/._2),format.raw/*13.143*/("""</option>
             """)))}),format.raw/*14.14*/("""
         """),format.raw/*15.9*/("""</select>
     </div>
@@ -45,7 +45,7 @@ Seq[Any](format.raw/*1.253*/("""
         <label>Staff In Charge</label>
         <select id="user_id" name="user_id" class="form-control">
             """),_display_(/*20.14*/for(userOption <- userOptions) yield /*20.44*/{_display_(Seq[Any](format.raw/*20.45*/("""
-            """),format.raw/*21.13*/("""<option """),_display_(/*21.22*/if(workOrderForm("user_id").value.get == "@userOption._1")/*21.80*/{_display_(Seq[Any](format.raw/*21.81*/(""" """),format.raw/*21.82*/("""selected """)))}),format.raw/*21.92*/(""" """),format.raw/*21.93*/("""value=""""),_display_(/*21.101*/userOption/*21.111*/._1),format.raw/*21.114*/("""">"""),_display_(/*21.117*/userOption/*21.127*/._2),format.raw/*21.130*/("""</option>
+            """),format.raw/*21.13*/("""<option """),_display_(/*21.22*/if(workOrderForm("user_id").value.get == userOption._1.toString)/*21.86*/{_display_(Seq[Any](format.raw/*21.87*/(""" """),format.raw/*21.88*/("""selected """)))}),format.raw/*21.98*/(""" """),format.raw/*21.99*/("""value=""""),_display_(/*21.107*/userOption/*21.117*/._1),format.raw/*21.120*/("""">"""),_display_(/*21.123*/userOption/*21.133*/._2),format.raw/*21.136*/("""</option>
             """)))}),format.raw/*22.14*/("""
         """),format.raw/*23.9*/("""</select>
     </div>
@@ -54,7 +54,7 @@ Seq[Any](format.raw/*1.253*/("""
         <label>Technician</label>
         <select id="technician_id" name="technician_id" class="form-control">
             """),_display_(/*29.14*/for(techOption <- techOptions) yield /*29.44*/{_display_(Seq[Any](format.raw/*29.45*/("""
-            """),format.raw/*30.13*/("""<option """),_display_(/*30.22*/if(workOrderForm("technician_id").value.get == "@techOption._1")/*30.86*/{_display_(Seq[Any](format.raw/*30.87*/(""" """),format.raw/*30.88*/("""selected """)))}),format.raw/*30.98*/(""" """),format.raw/*30.99*/("""value=""""),_display_(/*30.107*/techOption/*30.117*/._1),format.raw/*30.120*/("""">"""),_display_(/*30.123*/techOption/*30.133*/._2),format.raw/*30.136*/("""</option>
+            """),format.raw/*30.13*/("""<option """),_display_(/*30.22*/if(workOrderForm("technician_id").value.get == techOption._1.toString)/*30.92*/{_display_(Seq[Any](format.raw/*30.93*/(""" """),format.raw/*30.94*/("""selected """)))}),format.raw/*30.104*/(""" """),format.raw/*30.105*/("""value=""""),_display_(/*30.113*/techOption/*30.123*/._1),format.raw/*30.126*/("""">"""),_display_(/*30.129*/techOption/*30.139*/._2),format.raw/*30.142*/("""</option>
             """)))}),format.raw/*31.14*/("""
         """),format.raw/*32.9*/("""</select>
     </div>
@@ -62,8 +62,8 @@ Seq[Any](format.raw/*1.253*/("""
     <div>
         <label>Status</label>
         <select id="status" name="status" class="form-control">
-            <option """),_display_(/*38.22*/if(workOrderForm("status").value.get == "Pending")/*38.72*/{_display_(Seq[Any](format.raw/*38.73*/(""" """),format.raw/*38.74*/("""selected """)))}),format.raw/*38.84*/(""" """),format.raw/*38.85*/("""value="Pending">Pending</option>
-            <option """),_display_(/*39.22*/if(workOrderForm("status").value.get == "Created")/*39.72*/{_display_(Seq[Any](format.raw/*39.73*/(""" """),format.raw/*39.74*/("""selected """)))}),format.raw/*39.84*/(""" """),format.raw/*39.85*/("""value="Created">Created</option>
+            <option """),_display_(/*38.22*/if(workOrderForm("status").value.get == "Todo")/*38.69*/{_display_(Seq[Any](format.raw/*38.70*/(""" """),format.raw/*38.71*/("""selected """)))}),format.raw/*38.81*/(""" """),format.raw/*38.82*/("""value="Todo">Todo</option>
+            <option """),_display_(/*39.22*/if(workOrderForm("status").value.get == "Pending")/*39.72*/{_display_(Seq[Any](format.raw/*39.73*/(""" """),format.raw/*39.74*/("""selected """)))}),format.raw/*39.84*/(""" """),format.raw/*39.85*/("""value="Pending">Pending</option>
             <option """),_display_(/*40.22*/if(workOrderForm("status").value.get == "In Progress")/*40.76*/{_display_(Seq[Any](format.raw/*40.77*/(""" """),format.raw/*40.78*/("""selected """)))}),format.raw/*40.88*/(""" """),format.raw/*40.89*/("""value="In Progress">In Progress</option>
             <option """),_display_(/*41.22*/if(workOrderForm("status").value.get == "Completed")/*41.74*/{_display_(Seq[Any](format.raw/*41.75*/(""" """),format.raw/*41.76*/("""selected """)))}),format.raw/*41.86*/(""" """),format.raw/*41.87*/("""value="Completed">Completed</option>
         </select>
@@ -104,8 +104,8 @@ Seq[Any](format.raw/*1.253*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/workOrders/form.scala.html
-                  HASH: 9345b487bd4ef1807ab7f1ec14a9b07715ebb5b4
-                  MATRIX: 935->1|1282->252|1310->255|1339->276|1378->278|1408->282|1501->349|1529->357|1585->387|1599->393|1647->421|1743->491|1770->510|1796->516|1973->666|2019->696|2058->697|2100->711|2136->720|2210->785|2249->786|2278->787|2319->797|2349->798|2385->806|2405->816|2430->819|2461->822|2481->832|2506->835|2561->859|2598->869|2779->1023|2825->1053|2864->1054|2906->1068|2942->1077|3009->1135|3048->1136|3077->1137|3118->1147|3147->1148|3183->1156|3203->1166|3228->1169|3259->1172|3279->1182|3304->1185|3359->1209|3396->1219|3586->1382|3632->1412|3671->1413|3713->1427|3749->1436|3822->1500|3861->1501|3890->1502|3931->1512|3960->1513|3996->1521|4016->1531|4041->1534|4072->1537|4092->1547|4117->1550|4172->1574|4209->1584|4389->1737|4448->1787|4487->1788|4516->1789|4557->1799|4586->1800|4668->1855|4727->1905|4766->1906|4795->1907|4836->1917|4865->1918|4947->1973|5010->2027|5049->2028|5078->2029|5119->2039|5148->2040|5238->2103|5299->2155|5338->2156|5367->2157|5408->2167|5437->2168|5563->2267|5611->2306|5650->2307|5679->2308|5721->2319|5850->2421|5893->2454|5921->2460|6052->2564|6100->2603|6139->2604|6168->2605|6210->2616|6366->2745|6409->2778|6437->2784|6611->2931|6640->2939|6693->2962
+                  HASH: 3a376d7e3a95ab1b3af8835934eb9f3c6a61680b
+                  MATRIX: 935->1|1282->252|1310->255|1339->276|1378->278|1408->282|1501->349|1529->357|1585->387|1599->393|1647->421|1743->491|1770->510|1796->516|1973->666|2019->696|2058->697|2100->711|2136->720|2216->791|2255->792|2284->793|2326->803|2356->804|2392->812|2412->822|2437->825|2468->828|2488->838|2513->841|2568->865|2605->875|2786->1029|2832->1059|2871->1060|2913->1074|2949->1083|3022->1147|3061->1148|3090->1149|3131->1159|3160->1160|3196->1168|3216->1178|3241->1181|3272->1184|3292->1194|3317->1197|3372->1221|3409->1231|3599->1394|3645->1424|3684->1425|3726->1439|3762->1448|3841->1518|3880->1519|3909->1520|3951->1530|3981->1531|4017->1539|4037->1549|4062->1552|4093->1555|4113->1565|4138->1568|4193->1592|4230->1602|4410->1755|4466->1802|4505->1803|4534->1804|4575->1814|4604->1815|4680->1864|4739->1914|4778->1915|4807->1916|4848->1926|4877->1927|4959->1982|5022->2036|5061->2037|5090->2038|5131->2048|5160->2049|5250->2112|5311->2164|5350->2165|5379->2166|5420->2176|5449->2177|5575->2276|5623->2315|5662->2316|5691->2317|5733->2328|5862->2430|5905->2463|5933->2469|6064->2573|6112->2612|6151->2613|6180->2614|6222->2625|6378->2754|6421->2787|6449->2793|6623->2940|6652->2948|6705->2971
                   LINES: 23->1|28->1|29->2|29->2|29->2|31->4|32->5|32->5|34->7|34->7|34->7|35->8|35->8|35->8|39->12|39->12|39->12|40->13|40->13|40->13|40->13|40->13|40->13|40->13|40->13|40->13|40->13|40->13|40->13|40->13|41->14|42->15|47->20|47->20|47->20|48->21|48->21|48->21|48->21|48->21|48->21|48->21|48->21|48->21|48->21|48->21|48->21|48->21|49->22|50->23|56->29|56->29|56->29|57->30|57->30|57->30|57->30|57->30|57->30|57->30|57->30|57->30|57->30|57->30|57->30|57->30|58->31|59->32|65->38|65->38|65->38|65->38|65->38|65->38|66->39|66->39|66->39|66->39|66->39|66->39|67->40|67->40|67->40|67->40|67->40|67->40|68->41|68->41|68->41|68->41|68->41|68->41|72->45|72->45|72->45|72->45|72->45|74->47|74->47|74->47|77->50|77->50|77->50|77->50|77->50|79->52|79->52|79->52|82->55|82->55|85->58
                   -- GENERATED --
               */

@@ -12,7 +12,6 @@ import java.time.LocalTime
 case class WorkOrderSample(
                       id : Option[Long],
                       maintenance_id: Long,
-                      user_id: Long,
                       technician_id: Long,
                       status: String
                     )

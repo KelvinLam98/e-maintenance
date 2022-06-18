@@ -1,4 +1,4 @@
-@(workOrderSampleForm: Form[WorkOrderSample], errors: Array[String], formType: String, itemOptions: Seq[(Long,String)], userOptions: Seq[(Long,String)], techOptions: Seq[(Long,String)])(implicit flash: Flash, messages: Messages, request: models.RequestWithUser[_])
+@(workOrderSampleForm: Form[WorkOrderSample], errors: Array[String], formType: String, itemOptions: Seq[(Long,String)], techOptions: Seq[(Long,String)])(implicit flash: Flash, messages: Messages, request: models.RequestWithUser[_])
 @main("E-Maintenance") {
 
 <div class="col-lg-12">
@@ -10,15 +10,7 @@
         <label>Maintenance Item</label>
         <select id="maintenance_id" name="maintenance_id" class="form-control">
             @for(itemOption <- itemOptions){
-            <option @if(workOrderSampleForm("maintenance_id").value.get == "@itemOption._1"){ selected } value="@itemOption._1">@itemOption._2</option>
-            }
-        </select>
-    </div>
-    <div>
-        <label>Staff In Charge</label>
-        <select id="user_id" name="user_id" class="form-control">
-            @for(userOption <- userOptions){
-            <option @if(workOrderSampleForm("user_id").value.get == "@userOption._1"){ selected } value="@userOption._1">@userOption._2</option>
+            <option @if(workOrderSampleForm("maintenance_id").value.get == itemOption._1.toString){ selected } value="@itemOption._1">@itemOption._2</option>
             }
         </select>
     </div>
@@ -27,7 +19,7 @@
         <label>Technician</label>
         <select id="technician_id" name="technician_id" class="form-control">
             @for(techOption <- techOptions){
-            <option @if(workOrderSampleForm("technician_id").value.get == "@techOption._1"){ selected } value="@techOption._1">@techOption._2</option>
+            <option @if(workOrderSampleForm("technician_id").value.get == techOption._1.toString){ selected } value="@techOption._1">@techOption._2</option>
             }
         </select>
     </div>

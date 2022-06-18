@@ -72,6 +72,62 @@ class WorkOrderStore @Inject()() {
     ).as(viewParser.*)
   }
 
+  def countAllForInProgress(implicit conn: Connection): Long = {
+    SQL("select count(*) as count from work_order_view where (status != 'Rejected') and (maintenance_date = CURDATE())").as(SqlParser.long("count").single)
+  }
+
+  def countFilteredForInProgress(searchText: String)(implicit conn: Connection): Long = {
+    val searchCriteria =
+      if (searchText.isEmpty)
+        ""
+      else
+        "and (maintenance_date like {searchText} or user_name like {searchText} or item_name like {searchText})"
+    SQL("select count(*) as count from work_order_view where (status != 'Rejected') and (maintenance_date = CURDATE())" + searchCriteria ).on(
+      "searchText" -> ("%" + searchText + "%")
+    ).as(SqlParser.long("count").single)
+  }
+
+  def searchForInProgress(start: Long, count: Long, searchText: String)(implicit conn: Connection): Seq[WorkOrderView] = {
+    val searchCriteria =
+      if (searchText.isEmpty)
+        ""
+      else
+        "and (maintenance_date like {searchText} or user_name like {searchText} or item_name like {searchText})"
+    SQL("select * from work_order_view where (status != 'Rejected') and (maintenance_date = CURDATE())" + searchCriteria + " order by maintenance_date Asc limit {start}, {count}").on(
+      "start" -> start,
+      "count" -> count,
+      "searchText" -> ("%" + searchText + "%")
+    ).as(viewParser.*)
+  }
+
+  def countAllForTodo(implicit conn: Connection): Long = {
+    SQL("select count(*) as count from work_order_view where (status = 'Todo')").as(SqlParser.long("count").single)
+  }
+
+  def countFilteredForTodo(searchText: String)(implicit conn: Connection): Long = {
+    val searchCriteria =
+      if (searchText.isEmpty)
+        ""
+      else
+        "and (maintenance_date like {searchText} or user_name like {searchText} or item_name like {searchText})"
+    SQL("select count(*) as count from work_order_view where (status = 'Todo')" + searchCriteria ).on(
+      "searchText" -> ("%" + searchText + "%")
+    ).as(SqlParser.long("count").single)
+  }
+
+  def searchForTodo(start: Long, count: Long, searchText: String)(implicit conn: Connection): Seq[WorkOrderView] = {
+    val searchCriteria =
+      if (searchText.isEmpty)
+        ""
+      else
+        "and (maintenance_date like {searchText} or user_name like {searchText} or item_name like {searchText})"
+    SQL("select * from work_order_view where (status = 'Todo')" + searchCriteria + " order by maintenance_date Asc limit {start}, {count}").on(
+      "start" -> start,
+      "count" -> count,
+      "searchText" -> ("%" + searchText + "%")
+    ).as(viewParser.*)
+  }
+
   def countAllHistory(implicit conn: Connection): Long = {
     SQL("select count(*) as count from work_order_view where (maintenance_date - CURDATE() < 0 )").as(SqlParser.long("count").single)
   }
@@ -150,28 +206,13 @@ class WorkOrderStore @Inject()() {
       if(searchText.isEmpty)
         orderCriteria
       else
-        "and (maintenance_date like {searchText})" + orderCriteria
+        "and (maintenance_date like {searchText} || status like {searchText} || item_code like {searchText})" + orderCriteria
     val namedParams: Seq[NamedParameter] =
       Vector[NamedParameter](
         "searchText" -> ("%" + searchText + "%"),
         "user_name" -> user_name
       ) ++ limit.map(_.namedParameters).getOrElse(Seq.empty[NamedParameter])
-    SQL("select * from work_order_view where (maintenance_date - CURDATE() >= 0 ) and user_name={user_name}" + searchCriteria + limit.map(_.value).getOrElse("")).on(namedParams: _*).as(viewParser.*)
-  }
-
-  def searchByIdHistory(user_name: String, searchText: String, limit: Option[LimitClause], orderBy: Option[OrderByClause])(implicit conn: Connection): Seq[WorkOrderView] = {
-    val orderCriteria = orderBy.map(_.value).getOrElse("")
-    val searchCriteria =
-      if(searchText.isEmpty)
-        orderCriteria
-      else
-        "and (maintenance_date like {searchText}) " + orderCriteria
-    val namedParams: Seq[NamedParameter] =
-      Vector[NamedParameter](
-        "searchText" -> ("%" + searchText + "%"),
-        "user_name" -> user_name
-      ) ++ limit.map(_.namedParameters).getOrElse(Seq.empty[NamedParameter])
-    SQL("select * from work_order_view where (maintenance_date - CURDATE() < 0 ) and user_name={user_name}" + searchCriteria + limit.map(_.value).getOrElse("")).on(namedParams: _*).as(viewParser.*)
+    SQL("select * from work_order_view where user_name={user_name}" + searchCriteria + limit.map(_.value).getOrElse("")).on(namedParams: _*).as(viewParser.*)
   }
 
   def searchViewById(id: Long, searchText: String, limit: Option[LimitClause], orderBy: Option[OrderByClause])(implicit conn: Connection): Seq[WorkOrderView] = {

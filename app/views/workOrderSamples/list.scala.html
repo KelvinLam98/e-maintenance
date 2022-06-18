@@ -8,14 +8,14 @@
             "serverSide": true,
             "ajax": "/workOrderSamples/list.json",
             columns: [
-                { data: 'item_name',
+                { data: 'item_code',
                     "render": function(data, type, full, meta){
                         return '<a href="detail/' + full.id + '" class="link">' + data + '</a>';
                     }
                 },
-                { data: 'user_name'},
+                { data: 'item_name'},
                 { data: 'technician_name'},
-                { data: 'status'}
+                { data: 'technician_contact'}
             ],
             responsive: true
         });
@@ -43,10 +43,10 @@
     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
         <thead>
         <tr>
+            <th width="25%">Code</th>
             <th width="25%">Maintenance Item</th>
-            <th width="25%">Staff In Charge</th>
             <th width="25%">Technician</th>
-            <th>Status</th>
+            <th width="25%">Technician Contact</th>
         </tr>
         </thead>
     </table>

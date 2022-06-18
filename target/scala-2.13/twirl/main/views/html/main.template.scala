@@ -60,6 +60,7 @@ Seq[Any](format.raw/*7.77*/("""
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <script>
     </script>
+
 </head>
 <body>
 <div id="wrapper">
@@ -67,12 +68,12 @@ Seq[Any](format.raw/*7.77*/("""
         <div class="adjust-nav">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">
-                    <img src='"""),_display_(/*44.32*/routes/*44.38*/.Assets.versioned("img/logo2.png")),format.raw/*44.72*/("""' />
+                    <img src='"""),_display_(/*45.32*/routes/*45.38*/.Assets.versioned("img/logo2.png")),format.raw/*45.72*/("""' />
                 </a>
             </div>
             <span class="navbar-brand"><h2 style="color: white">E-Maintenance</h2></span>
             <span class="logout-spn" >
-                  <a href=""""),_display_(/*49.29*/routes/*49.35*/.HomeController.logout()),format.raw/*49.59*/("""" style="color:#fff;">LOGOUT</a>
+                  <a href=""""),_display_(/*50.29*/routes/*50.35*/.HomeController.logout()),format.raw/*50.59*/("""" style="color:#fff;">LOGOUT</a>
             </span>
         </div>
     </div>
@@ -81,22 +82,22 @@ Seq[Any](format.raw/*7.77*/("""
         <div class="sidebar-collapse">
             <ul class="nav" id="main-menu">
                 <li>
-                    <a id="dashboard" href=""""),_display_(/*58.46*/routes/*58.52*/.Users.dashboard),format.raw/*58.68*/(""""><i class="fa fa-dashboard"></i>Dashboard</a>
+                    <a id="dashboard" href=""""),_display_(/*59.46*/routes/*59.52*/.Users.dashboard),format.raw/*59.68*/(""""><i class="fa fa-dashboard"></i>Dashboard</a>
                 </li>
                 <li>
-                    <a id="users" href=""""),_display_(/*61.42*/routes/*61.48*/.Users.listUser),format.raw/*61.63*/(""""><i class="fa fa-group"></i>Users</a>
+                    <a id="users" href=""""),_display_(/*62.42*/routes/*62.48*/.Users.listUser),format.raw/*62.63*/(""""><i class="fa fa-group"></i>Users</a>
                 </li>
                 <li>
-                    <a id="maintenance" href=""""),_display_(/*64.48*/routes/*64.54*/.MaintenanceItems.list),format.raw/*64.76*/(""""><i class="fa fa-wrench"></i>Maintenance Items</a>
+                    <a id="maintenance" href=""""),_display_(/*65.48*/routes/*65.54*/.MaintenanceItems.list),format.raw/*65.76*/(""""><i class="fa fa-wrench"></i>Maintenance Items</a>
                 </li>
                 <li>
-                    <a id="technicians" href=""""),_display_(/*67.48*/routes/*67.54*/.Technicians.list),format.raw/*67.71*/(""""><i class="fa fa-user"></i>Technicians</a>
+                    <a id="technicians" href=""""),_display_(/*68.48*/routes/*68.54*/.Technicians.list),format.raw/*68.71*/(""""><i class="fa fa-user"></i>Technicians</a>
                 </li>
                 <li>
-                    <a id="work_orders" href=""""),_display_(/*70.48*/routes/*70.54*/.WorkOrders.list),format.raw/*70.70*/(""""><i class="fa fa-briefcase"></i>Work Orders</a>
+                    <a id="work_orders" href=""""),_display_(/*71.48*/routes/*71.54*/.WorkOrders.list),format.raw/*71.70*/(""""><i class="fa fa-briefcase"></i>Work Orders</a>
                 </li>
                 <li>
-                    <a id="work_order_samples" href=""""),_display_(/*73.55*/routes/*73.61*/.WorkOrderSamples.list),format.raw/*73.83*/(""""><i class="fa fa-suitcase"></i>Work Orders Sample</a>
+                    <a id="work_order_samples" href=""""),_display_(/*74.55*/routes/*74.61*/.WorkOrderSamples.list),format.raw/*74.83*/(""""><i class="fa fa-suitcase"></i>Work Orders Sample</a>
                 </li>
             </ul>
         </div>
@@ -107,8 +108,8 @@ Seq[Any](format.raw/*7.77*/("""
         <div id="page-inner">
             <div class="row">
                 <div class="col-lg-12">
-                    """),_display_(/*84.22*/content),format.raw/*84.29*/("""
-                """),format.raw/*85.17*/("""</div>
+                    """),_display_(/*85.22*/content),format.raw/*85.29*/("""
+                """),format.raw/*86.17*/("""</div>
             </div>
             <!-- row  -->
         </div>
@@ -142,9 +143,9 @@ Seq[Any](format.raw/*7.77*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/main.scala.html
-                  HASH: bcd1c0c17637657e65a17b197b3a58e813c3f58c
-                  MATRIX: 1047->266|1217->341|1247->345|1535->606|1550->612|1609->650|1708->722|1723->728|1785->769|1879->836|1894->842|1950->877|2039->939|2054->945|2116->986|2210->1053|2225->1059|2305->1118|2363->1149|2378->1155|2466->1222|2524->1253|2539->1259|2627->1326|2708->1380|2723->1386|2790->1432|2876->1491|2891->1497|2983->1568|3088->1646|3103->1652|3199->1727|3657->2158|3672->2164|3727->2198|3961->2405|3976->2411|4021->2435|4376->2763|4391->2769|4428->2785|4589->2919|4604->2925|4640->2940|4799->3072|4814->3078|4857->3100|5029->3245|5044->3251|5082->3268|5246->3405|5261->3411|5298->3427|5474->3576|5489->3582|5532->3604|5866->3911|5894->3918|5940->3936
-                  LINES: 28->7|33->7|35->9|43->17|43->17|43->17|45->19|45->19|45->19|47->21|47->21|47->21|49->23|49->23|49->23|51->25|51->25|51->25|52->26|52->26|52->26|53->27|53->27|53->27|54->28|54->28|54->28|56->30|56->30|56->30|58->32|58->32|58->32|70->44|70->44|70->44|75->49|75->49|75->49|84->58|84->58|84->58|87->61|87->61|87->61|90->64|90->64|90->64|93->67|93->67|93->67|96->70|96->70|96->70|99->73|99->73|99->73|110->84|110->84|111->85
+                  HASH: 81132e7788eccc7045dd406bccd9ee09d69e288b
+                  MATRIX: 1047->266|1217->341|1247->345|1535->606|1550->612|1609->650|1708->722|1723->728|1785->769|1879->836|1894->842|1950->877|2039->939|2054->945|2116->986|2210->1053|2225->1059|2305->1118|2363->1149|2378->1155|2466->1222|2524->1253|2539->1259|2627->1326|2708->1380|2723->1386|2790->1432|2876->1491|2891->1497|2983->1568|3088->1646|3103->1652|3199->1727|3659->2160|3674->2166|3729->2200|3963->2407|3978->2413|4023->2437|4378->2765|4393->2771|4430->2787|4591->2921|4606->2927|4642->2942|4801->3074|4816->3080|4859->3102|5031->3247|5046->3253|5084->3270|5248->3407|5263->3413|5300->3429|5476->3578|5491->3584|5534->3606|5868->3913|5896->3920|5942->3938
+                  LINES: 28->7|33->7|35->9|43->17|43->17|43->17|45->19|45->19|45->19|47->21|47->21|47->21|49->23|49->23|49->23|51->25|51->25|51->25|52->26|52->26|52->26|53->27|53->27|53->27|54->28|54->28|54->28|56->30|56->30|56->30|58->32|58->32|58->32|71->45|71->45|71->45|76->50|76->50|76->50|85->59|85->59|85->59|88->62|88->62|88->62|91->65|91->65|91->65|94->68|94->68|94->68|97->71|97->71|97->71|100->74|100->74|100->74|111->85|111->85|112->86
                   -- GENERATED --
               */
           

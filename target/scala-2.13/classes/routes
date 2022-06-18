@@ -18,8 +18,10 @@ POST    /user/post/login                     controllers.HomeController.postLogi
 GET     /user/list                           controllers.Users.listUser
 GET     /dashboard                           controllers.Users.dashboard
 GET     /dashboard/list.json                 controllers.Users.dashboardListJson
-GET     /dashboard/listAll.json              controllers.WorkOrders.listWorkOrderJson
+GET     /dashboard/inProgress.json           controllers.Users.dashboardListInProgressJson
+GET     /dashboard/todoList.json             controllers.Users.dashboardListTodoJson
 GET     /dashboard/pending/:id               controllers.WorkOrders.detail(id: Long)
+GET     /dashboard/today/:id                 controllers.WorkOrders.detail(id: Long)
 GET     /dashboard/pending/:id/update        controllers.WorkOrders.updatePending(id: Long)
 GET     /user/list.json                      controllers.Users.listUserJson
 GET     /user/detail/:id                     controllers.Users.detail(id: Long)
@@ -88,14 +90,14 @@ POST     /api/profile/changePassword/:id             appcontrollers.Users.postUp
 
 #work order
 GET      /api/workOrder/:id                          appcontrollers.WorkOrders.workOrderList(id: Long)
+GET      /api/workOrder/detail/:id                   appcontrollers.WorkOrders.workOrderDetail(id: Long)
 GET      /api/workOrder/:id/:status                  appcontrollers.WorkOrders.workOrderDetailByStatus(id: Long, status: String)
 GET      /api/workOrderSample/:id                    appcontrollers.WorkOrders.workOrderSampleList(id: Long)
 GET      /api/workOrderSample/detail/:id             appcontrollers.WorkOrders.workOrderSampleDetailList(id: Long)
-GET      /api/workOrderHistory/:id                   appcontrollers.WorkOrders.workOrderListHistory(id: Long)
-GET      /api/workOrder/detail/:id                   appcontrollers.WorkOrders.workOrderDetail(id: Long)
 +nocsrf
 POST     /api/workOrder/detail/edit/:id              appcontrollers.WorkOrders.postUpdateWorkOrder(id: Long)
-
++nocsrf
+POST     /api/workOrderSample/detail/create/:id      appcontrollers.WorkOrders.postCreateWorkOrderWithSample(id: Long)
 #notification
 +nocsrf
 POST    /api/register-firebase-token                 appcontrollers.Users.registerFirebaseToken

@@ -11,10 +11,19 @@
     <input type="hidden" id="technician_id " name="technician_id" value='@workOrderForm("technician_id").value'>
 
     <div>
+        <label>Staff In Charge</label>
+        <select id="user_id" name="user_id" class="form-control">
+            @for(userOption <- userOptions){
+            <option @if(workOrderForm("user_id").value.get == userOption._1.toString){ selected } value="@userOption._1">@userOption._2</option>
+            }
+        </select>
+    </div>
+
+    <div>
         <label>Status</label>
         <select id="status" name="status" class="form-control">
             <option @if(workOrderForm("status").value.get == "Pending"){ selected } value="Pending">Pending</option>
-            <option @if(workOrderForm("status").value.get == "Created"){ selected } value="Created">Created</option>
+            <option @if(workOrderForm("status").value.get == "Todo"){ selected } value="Todo">Todo</option>
             <option @if(workOrderForm("status").value.get == "In Progress"){ selected } value="In Progress">In Progress</option>
             <option @if(workOrderForm("status").value.get == "Completed"){ selected } value="Completed">Completed</option>
         </select>

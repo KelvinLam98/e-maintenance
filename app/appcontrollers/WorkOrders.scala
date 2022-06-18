@@ -7,7 +7,9 @@ import play.api.cache.SyncCacheApi
 import play.api.db.{Database, NamedDatabase}
 import play.api.libs.json._
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import stores.{UserStore, WorkOrderStore}
+import stores.{UserStore, WorkOrderSampleStore, WorkOrderStore}
+
+import java.text.SimpleDateFormat
 
 @Singleton
 class WorkOrders @Inject()(
@@ -16,6 +18,7 @@ class WorkOrders @Inject()(
                             userStore: UserStore,
                             workOrderStore: WorkOrderStore,
                             cacheApi: SyncCacheApi,
+                            workOrderSampleStore: WorkOrderSampleStore,
                           ) extends Bases(mcc, db, userStore, cacheApi) {
 
   def workOrderList(id: Long) = ApiAction { implicit request =>
@@ -31,27 +34,6 @@ class WorkOrders @Inject()(
       val total = workOrderStore.countAll
       val filtered = workOrderStore.countFiltered(searchText)
       val data = workOrderStore.searchById(name, searchText, limit, orderBy)
-      Ok(Json.obj(
-        "draw" -> draw,
-        "recordsTotal" -> total,
-        "recordsFiltered" -> filtered,
-        "data" -> data
-      ))
-    }
-  }
-
-  def workOrderListHistory(id: Long) = ApiAction { implicit request =>
-    val draw: Int = request.getQueryString("draw").map(_.toInt).getOrElse(0)
-    val searchText = request.getQueryString("searchText").getOrElse("")
-    val limit = LimitClause.fromRequest(request)
-    val orderBy = OrderByClause.fromRequest(request, WorkOrder.sortableCols)
-
-    db.withConnection { implicit conn =>
-      val user = userStore.findById(id)
-      val name = user.get.name
-      val total = workOrderStore.countAll
-      val filtered = workOrderStore.countFiltered(searchText)
-      val data = workOrderStore.searchByIdHistory(name, searchText, limit, orderBy)
       Ok(Json.obj(
         "draw" -> draw,
         "recordsTotal" -> total,
@@ -88,9 +70,32 @@ class WorkOrders @Inject()(
           workOrderStore.findById(id) match {
             case Some(wo) =>
               println("wo: " + wo)
-              println("input: " + input)
+              println("input: " + input.maintenance_date)
               workOrderStore.update(WorkOrder(
                 wo.id, wo.maintenance_id, wo.user_id, wo.technician_id, input.maintenance_date, input.maintenance_time, input.status
+              ))
+              Ok(Json.toJson("Update Successfully"))
+            case None =>
+              Ok("Please contact admin")
+          }
+        }, invalid = { error =>
+          Ok(Json.toJson(ErrorResponse("Invalid JSON: " + error.toString(), 400)))
+        }
+      )
+    }
+  }
+
+  def postCreateWorkOrderWithSample(id: Long): Action[AnyContent] = ApiAction { implicit request =>
+    withConnection { implicit conn =>
+      val json = request.body.asJson.get
+      json.validate[CreateWorkOrderRequest].fold(
+        valid = { input =>
+          workOrderSampleStore.findById(id) match {
+            case Some(wo) =>
+              println("wo: " + wo)
+              println("input: " + input)
+              workOrderStore.insert(WorkOrder(
+                None, wo.maintenance_id, input.user_id, wo.technician_id, input.maintenance_date, input.maintenance_time, wo.status
               ))
               Ok(Json.toJson("Update Successfully"))
             case None =>

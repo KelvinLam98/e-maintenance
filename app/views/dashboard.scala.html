@@ -33,7 +33,40 @@
         $('#dataTablesListAll').DataTable({
             "processing": true,
             "serverSide": true,
-            "ajax": "/dashboard/listAll.json",
+            "ajax": "/dashboard/inProgress.json",
+            columns: [
+                { data: 'item_name',
+                    "render": function(data, type, full, meta){
+                        return '<a href="dashboard/today/' + full.id + ' " class="link">' + data + '</a>';
+                        }
+                },
+                { data: 'user_name'},
+                { data: 'technician_name'},
+                { data: 'maintenance_date',
+                    "render": function(data, type, full, meta){
+                            return moment(data).format('YYYY-MM-DD');
+                    }
+                },
+                { data: 'status',
+                    "render": function(data, type, full, meta){
+                        if (data == "Completed")
+                            return '<text style="color: green">' + data + '</text>';
+                        else if (data != "In Progress")
+                            return '<text style="color: red">' + data + '</text>';
+                        else
+                            return data;
+                    }
+                }
+            ],
+            responsive: true
+        });
+    });
+
+    $(document).ready(function() {
+        $('#dataTablesListTodo').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": "/dashboard/todoList.json",
             columns: [
                 { data: 'item_name'},
                 { data: 'user_name'},
@@ -67,8 +100,22 @@
         </thead>
     </table>
     <hr>
-    <h3>On Going Work Order</h3>
+    <h3>Work Order For Today</h3>
     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTablesListAll">
+        <thead>
+        <tr>
+            <th width="20%">Maintenance Item</th>
+            <th width="20%">Staff In Charge</th>
+            <th width="20%">Technician</th>
+            <th width="20%">Date</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+    </table>
+
+    <hr>
+    <h3>In Coming Work Order</h3>
+    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTablesListTodo">
         <thead>
         <tr>
             <th width="20%">Maintenance Item</th>

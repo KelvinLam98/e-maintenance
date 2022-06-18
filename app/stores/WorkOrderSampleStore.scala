@@ -34,21 +34,19 @@ class WorkOrderSampleStore @Inject()() {
   }
 
   def insert(workOrderSample: WorkOrderSample)(implicit conn: Connection): Long = {
-    SQL("insert into work_order_sample (maintenance_id, user_id, technician_id, status) " +
-      "values ({maintenance_id}, {user_id}, {technician_id}, {status})").on(
+    SQL("insert into work_order_sample (maintenance_id, technician_id, status) " +
+      "values ({maintenance_id}, {technician_id}, {status})").on(
       "maintenance_id" -> workOrderSample.maintenance_id,
-      "user_id" -> workOrderSample.user_id,
       "technician_id" -> workOrderSample.technician_id,
       "status" -> workOrderSample.status,
     ).executeInsert().get
   }
 
   def update(workOrderSample: WorkOrderSample)(implicit conn: Connection) = {
-    SQL("update work_order_sample set maintenance_id={maintenance_id}, user_id={user_id}, technician_id={technician_id}, status = {status}" +
+    SQL("update work_order_sample set maintenance_id={maintenance_id}, technician_id={technician_id}, status = {status}" +
       "where id={id}").on(
       "id" -> workOrderSample.id,
       "maintenance_id" -> workOrderSample.maintenance_id,
-      "user_id" -> workOrderSample.user_id,
       "technician_id" -> workOrderSample.technician_id,
       "status" -> workOrderSample.status,
     ).executeUpdate()
