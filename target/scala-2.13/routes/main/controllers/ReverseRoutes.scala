@@ -24,7 +24,7 @@ package controllers {
   
   }
 
-  // @LINE:21
+  // @LINE:22
   class ReverseWorkOrders(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
@@ -93,18 +93,10 @@ package controllers {
       Call("GET", _prefix + { _defaultPrefix } + "workOrders/list")
     }
   
-    // @LINE:21
+    // @LINE:48
     def listWorkOrderJson: Call = {
-    
-      () match {
       
-        // @LINE:21
-        case ()  =>
-          
-          Call("GET", _prefix + { _defaultPrefix } + "dashboard/listAll.json")
-      
-      }
-    
+      Call("GET", _prefix + { _defaultPrefix } + "workOrders/list.json")
     }
   
   }
@@ -138,6 +130,12 @@ package controllers {
     def create: Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "user/create")
+    }
+  
+    // @LINE:21
+    def dashboardListInProgressJson: Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "dashboard/inProgress.json")
     }
   
     // @LINE:19

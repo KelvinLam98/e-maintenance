@@ -7,7 +7,9 @@ import play.api.cache.SyncCacheApi
 import play.api.db.{Database, NamedDatabase}
 import play.api.libs.json._
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import stores.{UserStore, WorkOrderStore, WorkOrderSampleStore}
+import stores.{UserStore, WorkOrderSampleStore, WorkOrderStore}
+
+import java.text.SimpleDateFormat
 
 @Singleton
 class WorkOrders @Inject()(
@@ -68,7 +70,7 @@ class WorkOrders @Inject()(
           workOrderStore.findById(id) match {
             case Some(wo) =>
               println("wo: " + wo)
-              println("input: " + input)
+              println("input: " + input.maintenance_date)
               workOrderStore.update(WorkOrder(
                 wo.id, wo.maintenance_id, wo.user_id, wo.technician_id, input.maintenance_date, input.maintenance_time, input.status
               ))

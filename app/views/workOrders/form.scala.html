@@ -35,8 +35,8 @@
     <div>
         <label>Status</label>
         <select id="status" name="status" class="form-control">
+            <option @if(workOrderForm("status").value.get == "Todo"){ selected } value="Todo">Todo</option>
             <option @if(workOrderForm("status").value.get == "Pending"){ selected } value="Pending">Pending</option>
-            <option @if(workOrderForm("status").value.get == "Created"){ selected } value="Created">Created</option>
             <option @if(workOrderForm("status").value.get == "In Progress"){ selected } value="In Progress">In Progress</option>
             <option @if(workOrderForm("status").value.get == "Completed"){ selected } value="Completed">Completed</option>
         </select>

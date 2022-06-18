@@ -29,7 +29,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:21
+  // @LINE:22
   class ReverseWorkOrders(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -131,16 +131,12 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:21
+    // @LINE:48
     def listWorkOrderJson: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.WorkOrders.listWorkOrderJson",
       """
         function() {
-        
-          if (true) {
-            return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "dashboard/listAll.json"})
-          }
-        
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "workOrders/list.json"})
         }
       """
     )
@@ -191,6 +187,16 @@ package controllers.javascript {
       """
         function() {
           return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user/create"})
+        }
+      """
+    )
+  
+    // @LINE:21
+    def dashboardListInProgressJson: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Users.dashboardListInProgressJson",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "dashboard/inProgress.json"})
         }
       """
     )

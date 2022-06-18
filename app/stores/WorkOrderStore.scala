@@ -72,6 +72,34 @@ class WorkOrderStore @Inject()() {
     ).as(viewParser.*)
   }
 
+  def countAllForInProgress(implicit conn: Connection): Long = {
+    SQL("select count(*) as count from work_order_view where (status = 'In Progress')").as(SqlParser.long("count").single)
+  }
+
+  def countFilteredForInProgress(searchText: String)(implicit conn: Connection): Long = {
+    val searchCriteria =
+      if (searchText.isEmpty)
+        ""
+      else
+        "and (maintenance_date like {searchText} or user_name like {searchText} or item_name like {searchText})"
+    SQL("select count(*) as count from work_order_view where (status = 'In Progress')" + searchCriteria ).on(
+      "searchText" -> ("%" + searchText + "%")
+    ).as(SqlParser.long("count").single)
+  }
+
+  def searchForInProgress(start: Long, count: Long, searchText: String)(implicit conn: Connection): Seq[WorkOrderView] = {
+    val searchCriteria =
+      if (searchText.isEmpty)
+        ""
+      else
+        "and (maintenance_date like {searchText} or user_name like {searchText} or item_name like {searchText})"
+    SQL("select * from work_order_view where (status = 'In Progress')" + searchCriteria + " order by maintenance_date Asc limit {start}, {count}").on(
+      "start" -> start,
+      "count" -> count,
+      "searchText" -> ("%" + searchText + "%")
+    ).as(viewParser.*)
+  }
+
   def countAllHistory(implicit conn: Connection): Long = {
     SQL("select count(*) as count from work_order_view where (maintenance_date - CURDATE() < 0 )").as(SqlParser.long("count").single)
   }

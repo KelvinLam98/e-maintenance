@@ -18,7 +18,7 @@ class Routes(
   Assets_7: controllers.Assets,
   // @LINE:18
   Users_0: controllers.Users,
-  // @LINE:21
+  // @LINE:22
   WorkOrders_2: controllers.WorkOrders,
   // @LINE:36
   MaintenanceItems_6: controllers.MaintenanceItems,
@@ -41,7 +41,7 @@ class Routes(
     Assets_7: controllers.Assets,
     // @LINE:18
     Users_0: controllers.Users,
-    // @LINE:21
+    // @LINE:22
     WorkOrders_2: controllers.WorkOrders,
     // @LINE:36
     MaintenanceItems_6: controllers.MaintenanceItems,
@@ -74,7 +74,7 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/list""", """controllers.Users.listUser"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """dashboard""", """controllers.Users.dashboard"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """dashboard/list.json""", """controllers.Users.dashboardListJson"""),
-    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """dashboard/listAll.json""", """controllers.WorkOrders.listWorkOrderJson"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """dashboard/inProgress.json""", """controllers.Users.dashboardListInProgressJson"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """dashboard/pending/""" + "$" + """id<[^/]+>""", """controllers.WorkOrders.detail(id:Long)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """dashboard/pending/""" + "$" + """id<[^/]+>/update""", """controllers.WorkOrders.updatePending(id:Long)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/list.json""", """controllers.Users.listUserJson"""),
@@ -283,18 +283,18 @@ users""",
   )
 
   // @LINE:21
-  private[this] lazy val controllers_WorkOrders_listWorkOrderJson8_route = Route("GET",
-    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("dashboard/listAll.json")))
+  private[this] lazy val controllers_Users_dashboardListInProgressJson8_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("dashboard/inProgress.json")))
   )
-  private[this] lazy val controllers_WorkOrders_listWorkOrderJson8_invoker = createInvoker(
-    WorkOrders_2.listWorkOrderJson,
+  private[this] lazy val controllers_Users_dashboardListInProgressJson8_invoker = createInvoker(
+    Users_0.dashboardListInProgressJson,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
-      "controllers.WorkOrders",
-      "listWorkOrderJson",
+      "controllers.Users",
+      "dashboardListInProgressJson",
       Nil,
       "GET",
-      this.prefix + """dashboard/listAll.json""",
+      this.prefix + """dashboard/inProgress.json""",
       """""",
       Seq()
     )
@@ -1343,9 +1343,9 @@ user""",
       }
   
     // @LINE:21
-    case controllers_WorkOrders_listWorkOrderJson8_route(params@_) =>
+    case controllers_Users_dashboardListInProgressJson8_route(params@_) =>
       call { 
-        controllers_WorkOrders_listWorkOrderJson8_invoker.call(WorkOrders_2.listWorkOrderJson)
+        controllers_Users_dashboardListInProgressJson8_invoker.call(Users_0.dashboardListInProgressJson)
       }
   
     // @LINE:22
