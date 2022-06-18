@@ -151,8 +151,8 @@ package appcontrollers.javascript {
     def workOrderSampleList: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "appcontrollers.WorkOrders.workOrderSampleList",
       """
-        function(id0) {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "api/workOrderSample/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + """)("id", id0))})
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "api/workOrderSample"})
         }
       """
     )

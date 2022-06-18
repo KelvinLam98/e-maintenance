@@ -126,7 +126,7 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrder/""" + "$" + """id<[^/]+>""", """appcontrollers.WorkOrders.workOrderList(id:Long)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrder/detail/""" + "$" + """id<[^/]+>""", """appcontrollers.WorkOrders.workOrderDetail(id:Long)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrder/""" + "$" + """id<[^/]+>/""" + "$" + """status<[^/]+>""", """appcontrollers.WorkOrders.workOrderDetailByStatus(id:Long, status:String)"""),
-    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrderSample/""" + "$" + """id<[^/]+>""", """appcontrollers.WorkOrders.workOrderSampleList(id:Long)"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrderSample""", """appcontrollers.WorkOrders.workOrderSampleList"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrderSample/detail/""" + "$" + """id<[^/]+>""", """appcontrollers.WorkOrders.workOrderSampleDetailList(id:Long)"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrder/detail/edit/""" + "$" + """id<[^/]+>""", """appcontrollers.WorkOrders.postUpdateWorkOrder(id:Long)"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """api/workOrderSample/detail/create/""" + "$" + """id<[^/]+>""", """appcontrollers.WorkOrders.postCreateWorkOrderWithSample(id:Long)"""),
@@ -1223,17 +1223,17 @@ user""",
 
   // @LINE:95
   private[this] lazy val appcontrollers_WorkOrders_workOrderSampleList60_route = Route("GET",
-    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("api/workOrderSample/"), DynamicPart("id", """[^/]+""",true)))
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("api/workOrderSample")))
   )
   private[this] lazy val appcontrollers_WorkOrders_workOrderSampleList60_invoker = createInvoker(
-    WorkOrders_5.workOrderSampleList(fakeValue[Long]),
+    WorkOrders_5.workOrderSampleList,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "appcontrollers.WorkOrders",
       "workOrderSampleList",
-      Seq(classOf[Long]),
+      Nil,
       "GET",
-      this.prefix + """api/workOrderSample/""" + "$" + """id<[^/]+>""",
+      this.prefix + """api/workOrderSample""",
       """""",
       Seq()
     )
@@ -1694,8 +1694,8 @@ user""",
   
     // @LINE:95
     case appcontrollers_WorkOrders_workOrderSampleList60_route(params@_) =>
-      call(params.fromPath[Long]("id", None)) { (id) =>
-        appcontrollers_WorkOrders_workOrderSampleList60_invoker.call(WorkOrders_5.workOrderSampleList(id))
+      call { 
+        appcontrollers_WorkOrders_workOrderSampleList60_invoker.call(WorkOrders_5.workOrderSampleList)
       }
   
     // @LINE:96

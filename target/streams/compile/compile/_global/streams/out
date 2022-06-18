@@ -1,7 +1,5 @@
-[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\e-maintenance\app\stores\WorkOrderSampleStore.scala:51:36: value user_id is not a member of models.WorkOrderSample[0m
-[0m[[0m[31merror[0m] [0m[0m      "user_id" -> workOrderSample.user_id,[0m
-[0m[[0m[31merror[0m] [0m[0m                                   ^[0m
-[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\e-maintenance\app\stores\WorkOrderSampleStore.scala:40:36: value user_id is not a member of models.WorkOrderSample[0m
-[0m[[0m[31merror[0m] [0m[0m      "user_id" -> workOrderSample.user_id,[0m
-[0m[[0m[31merror[0m] [0m[0m                                   ^[0m
-[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\hylam\Desktop\e-maintenance\app\appcontrollers\WorkOrders.scala:121:49: not enough arguments for method searchSampleById: (user_name: String, searchText: String, limit: Option[models.LimitClause], orderBy: Option[models.OrderByClause])(implicit conn: java.sql.Connection): Seq[models.WorkOrderSampleView].[0m
+[0m[[0m[31merror[0m] [0m[0mUnspecified value parameter orderBy.[0m
+[0m[[0m[31merror[0m] [0m[0m      val data = workOrderStore.searchSampleById(searchText, limit, orderBy)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
