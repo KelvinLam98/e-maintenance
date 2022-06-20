@@ -128,11 +128,13 @@ class WorkOrders @Inject()(
               if (wo.user_id == data.user_id) {
                 userPushNotifTokenStore.findByPushTokenById(data.user_id).map { user =>
                   firebaseHelper.sendNotificationMessage(user.push_token.get, "Modified Work Order", "Check Your Work Order at " + data.status, "module", "src", data.id.toString).map { messageId =>
+                    println("Sent, message ID: " + messageId + user.id)
                   }
                 }
               } else {
                 userPushNotifTokenStore.findByPushTokenById(data.user_id).map { user =>
                   firebaseHelper.sendNotificationMessage(user.push_token.get, "New Work Order", "Check Your Work Order at " + data.status, "module", "src", data.id.toString).map { messageId =>
+                    println("Sent, message ID: " + messageId + user.id)
                   }
                 }
               }
